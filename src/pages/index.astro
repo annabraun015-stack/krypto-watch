@@ -1,0 +1,556 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CryptoTicker from '../components/CryptoTicker.astro';
+import BlogCard from '../components/BlogCard.astro';
+import MarketData from '../components/MarketData.astro';
+import FAQ from '../components/FAQ.astro';
+import { t } from '../i18n';
+import { getCollection } from 'astro:content';
+import { cryptoCategories, siteConfig } from '../config/site';
+
+const locale = 'de';
+const tr = t(locale);
+
+const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
+const sorted = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const latestPosts = sorted.slice(0, 6);
+const featuredPosts = allPosts.filter((p) => p.data.featured).slice(0, 3);
+
+const homepageSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: tr.seo.homeTitle,
+    description: tr.seo.homeDesc,
+    url: siteConfig.url,
+    isPartOf: { '@type': 'WebSite', url: siteConfig.url, name: 'KryptoWatch' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: tr.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={tr.seo.homeTitle}
+  description={tr.seo.homeDesc}
+  locale="de"
+  schema={homepageSchema}
+>
+  <!-- Ticker -->
+  <CryptoTicker />
+
+  <!-- ══ HERO ══ -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="hero-bg-gradient" aria-hidden="true"></div>
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-content animate-fade-in-up">
+        <div class="badge badge-brand hero-badge">{tr.hero.badge}</div>
+
+        <h1 id="hero-title" class="hero-title">
+          {tr.hero.title}<br />
+          <span class="text-gradient-brand">{tr.hero.titleHighlight}</span>
+        </h1>
+
+        <p class="hero-subtitle">{tr.hero.subtitle}</p>
+
+        <div class="hero-cta-row">
+          <a href="/blog/" class="btn btn-primary hero-btn">
+            {tr.hero.ctaPrimary}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </a>
+          <a href="/about-us/" class="btn btn-outline hero-btn">{tr.hero.ctaSecondary}</a>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="hero-trust">
+          <div class="trust-item">
+            <span class="trust-num">50K+</span>
+            <span class="trust-label">Monatliche Leser</span>
+          </div>
+          <div class="trust-divider" aria-hidden="true"></div>
+          <div class="trust-item">
+            <span class="trust-num">500+</span>
+            <span class="trust-label">Analysen</span>
+          </div>
+          <div class="trust-divider" aria-hidden="true"></div>
+          <div class="trust-item">
+            <span class="trust-num">10+</span>
+            <span class="trust-label">Experten</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual -->
+      <div class="hero-visual animate-float" aria-hidden="true">
+        <div class="hero-chart-card">
+          <div class="chart-header">
+            <span class="chart-coin">₿ Bitcoin</span>
+            <span class="chart-price">$98,432</span>
+            <span class="chart-change pos">+2.4%</span>
+          </div>
+          <div class="chart-bars">
+            {[40, 60, 45, 80, 55, 90, 70, 100, 85, 95].map((h) => (
+              <div class="chart-bar" style={`height: ${h}%`}></div>
+            ))}
+          </div>
+          <div class="chart-footer">
+            <span>24h</span>
+            <span class="chart-vol">Vol: $142B</span>
+          </div>
+        </div>
+
+        <div class="hero-stat-card" style="top: -1rem; right: -2rem;">
+          <span class="stat-emoji">📈</span>
+          <div>
+            <div class="stat-num">+127%</div>
+            <div class="stat-label">YTD Return</div>
+          </div>
+        </div>
+
+        <div class="hero-stat-card" style="bottom: 2rem; left: -2.5rem;">
+          <span class="stat-emoji">🔗</span>
+          <div>
+            <div class="stat-num">$98.5B</div>
+            <div class="stat-label">DeFi TVL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MARKET DATA ══ -->
+  <section class="section market-section" aria-labelledby="market-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" aria-hidden="true">📊 Live Daten</p>
+        <h2 id="market-heading" class="section-title">{tr.sections.marketData}</h2>
+        <p class="section-subtitle">{tr.sections.marketDataSubtitle}</p>
+      </div>
+      <MarketData locale={locale} />
+    </div>
+  </section>
+
+  <!-- ══ LATEST NEWS ══ -->
+  {latestPosts.length > 0 && (
+    <section class="section" aria-labelledby="latest-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label" aria-hidden="true">🔥 Aktuell</p>
+          <h2 id="latest-heading" class="section-title">{tr.sections.latestNews}</h2>
+          <p class="section-subtitle">{tr.sections.latestNewsSubtitle}</p>
+        </div>
+        <div class="blog-grid" role="list" aria-label="Neueste Artikel">
+          {latestPosts.map((post) => (
+            <div role="listitem">
+              <BlogCard post={post} locale={locale} />
+            </div>
+          ))}
+        </div>
+        <div class="view-all-wrap">
+          <a href="/blog/" class="btn btn-outline">
+            {tr.sections.viewAll}
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ══ FEATURED ANALYSIS ══ -->
+  {featuredPosts.length > 0 && (
+    <section class="section featured-section" aria-labelledby="featured-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label" aria-hidden="true">⭐ Featured</p>
+          <h2 id="featured-heading" class="section-title">{tr.sections.featuredAnalysis}</h2>
+          <p class="section-subtitle">{tr.sections.featuredAnalysisSubtitle}</p>
+        </div>
+        <div class="blog-grid-featured" role="list">
+          {featuredPosts.map((post) => (
+            <div role="listitem">
+              <BlogCard post={post} locale={locale} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ══ MARKET CATEGORIES ══ -->
+  <section class="section" aria-labelledby="cats-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" aria-hidden="true">🪙 Kategorien</p>
+        <h2 id="cats-heading" class="section-title">{tr.sections.marketCategories}</h2>
+        <p class="section-subtitle">{tr.sections.marketCategoriesSubtitle}</p>
+      </div>
+      <div class="categories-grid" role="list">
+        {cryptoCategories.map((cat) => (
+          <a
+            href={`/blog/?cat=${cat.slug}`}
+            class="category-card"
+            role="listitem"
+            aria-label={`${tr.categories[cat.slug as keyof typeof tr.categories] ?? cat.slug} Artikel anzeigen`}
+            style={`--cat-color: ${cat.color}`}
+          >
+            <span class="cat-emoji" aria-hidden="true">{cat.emoji}</span>
+            <span class="cat-name">{tr.categories[cat.slug as keyof typeof tr.categories] ?? cat.slug}</span>
+            <span class="cat-arrow" aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <section class="section how-section" aria-labelledby="how-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" aria-hidden="true">🧠 Prozess</p>
+        <h2 id="how-heading" class="section-title">{tr.sections.howItWorks}</h2>
+        <p class="section-subtitle">{tr.sections.howItWorksSubtitle}</p>
+      </div>
+      <div class="how-grid" role="list">
+        {tr.howItWorks.map((step) => (
+          <div class="how-card" role="listitem">
+            <div class="how-step-num" aria-hidden="true">{step.step}</div>
+            <h3 class="how-title">{step.title}</h3>
+            <p class="how-desc">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label" aria-hidden="true">❓ FAQ</p>
+        <h2 id="faq-heading" class="section-title">{tr.sections.faq}</h2>
+        <p class="section-subtitle">{tr.sections.faqSubtitle}</p>
+      </div>
+      <FAQ faqs={tr.faq} locale={locale} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero-section {
+    position: relative;
+    padding-block: 5rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 80% 60% at 50% -10%,
+      oklch(45% 0.22 250 / 0.18) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(oklch(35% 0.05 250 / 0.1) 1px, transparent 1px),
+      linear-gradient(to right, oklch(35% 0.05 250 / 0.1) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .hero-section { padding-block: 6rem 5rem; }
+  }
+
+  .hero-badge { margin-bottom: 1.5rem; font-size: 0.875rem; }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btn { padding: 0.75rem 1.75rem; font-size: 1rem; }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-item { display: flex; flex-direction: column; }
+  .trust-num {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+  .trust-label { font-size: 0.8rem; color: var(--color-text-muted); }
+  .trust-divider { width: 1px; height: 2rem; background: oklch(30% 0.05 250); }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    height: 320px;
+    display: none;
+  }
+
+  @media (min-width: 1024px) { .hero-visual { display: block; } }
+
+  .hero-chart-card {
+    background: linear-gradient(135deg, oklch(17% 0.05 250), oklch(12% 0.04 250));
+    border: 1px solid oklch(30% 0.06 250 / 0.5);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 20px 60px -10px oklch(5% 0.05 250);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .chart-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .chart-coin {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .chart-price {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+    margin-left: auto;
+  }
+
+  .chart-change.pos { color: oklch(72% 0.2 145); font-weight: 700; font-size: 0.875rem; }
+  .chart-change.neg { color: oklch(65% 0.25 25); font-weight: 700; font-size: 0.875rem; }
+
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 120px;
+    flex: 1;
+  }
+
+  .chart-bar {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(180deg, var(--color-brand-400), var(--color-brand-700));
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .chart-bar:last-child { opacity: 1; background: linear-gradient(180deg, var(--color-accent-400), var(--color-brand-500)); }
+
+  .chart-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .hero-stat-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: oklch(14% 0.04 250 / 0.9);
+    border: 1px solid oklch(30% 0.06 250 / 0.5);
+    border-radius: 0.875rem;
+    padding: 0.75rem 1rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 30px -5px oklch(5% 0.05 250);
+  }
+
+  .stat-emoji { font-size: 1.5rem; }
+  .stat-num { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--color-text-primary); }
+  .stat-label { font-size: 0.75rem; color: var(--color-text-muted); }
+
+  /* Market section */
+  .market-section { background: oklch(10% 0.025 250); }
+
+  /* Blog grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .blog-grid-featured {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) { .blog-grid-featured { grid-template-columns: repeat(3, 1fr); } }
+
+  .view-all-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  /* Featured section bg */
+  .featured-section {
+    background: linear-gradient(180deg, transparent, oklch(10% 0.025 250) 50%, transparent);
+  }
+
+  /* Categories */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
+  }
+
+  @media (min-width: 480px) { .categories-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(5, 1fr); } }
+  @media (min-width: 1024px) { .categories-grid { grid-template-columns: repeat(10, 1fr); } }
+
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0.75rem;
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    border-radius: 0.875rem;
+    text-decoration: none;
+    transition: all 0.25s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--cat-color, var(--color-brand-500));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .category-card:hover {
+    border-color: color-mix(in oklch, var(--cat-color) 50%, transparent);
+    background: oklch(18% 0.05 250 / 0.7);
+    transform: translateY(-3px);
+  }
+
+  .category-card:hover::before { opacity: 1; }
+
+  .cat-emoji { font-size: 1.75rem; line-height: 1; }
+  .cat-name { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary); }
+  .cat-arrow { font-size: 0.75rem; color: var(--color-text-muted); transition: transform 0.2s; }
+  .category-card:hover .cat-arrow { transform: translateX(3px); }
+
+  /* How it works */
+  .how-section { background: oklch(10% 0.025 250); }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .how-card {
+    background: linear-gradient(135deg, oklch(17% 0.04 250 / 0.6), oklch(12% 0.03 250 / 0.4));
+    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .how-card:hover {
+    border-color: oklch(45% 0.2 250 / 0.4);
+    transform: translateY(-3px);
+  }
+
+  .how-step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: oklch(45% 0.2 250 / 0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+
+  .how-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .how-desc { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.7; }
+</style>

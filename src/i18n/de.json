@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "blog": "Blog",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "sitemap": "Sitemap"
+  },
+  "hero": {
+    "badge": "🔥 Krypto-Intelligence-Plattform",
+    "title": "Krypto-Nachrichten die Sie",
+    "titleHighlight": "wirklich voranbringen",
+    "subtitle": "Tiefgehende Analysen, Marktdaten und Krypto-Intelligence für Bitcoin, Ethereum, DeFi und mehr – für informierte Anlageentscheidungen.",
+    "ctaPrimary": "Zum Blog",
+    "ctaSecondary": "Über uns"
+  },
+  "sections": {
+    "latestNews": "Neueste Nachrichten",
+    "latestNewsSubtitle": "Aktuelle Entwicklungen aus der Kryptowelt",
+    "featuredAnalysis": "Featured Analysen",
+    "featuredAnalysisSubtitle": "Exklusive Einblicke von unseren Experten",
+    "marketCategories": "Marktbereiche",
+    "marketCategoriesSubtitle": "Erkunden Sie alle Segmente der Kryptowelt",
+    "howItWorks": "So funktioniert es",
+    "howItWorksSubtitle": "Unsere Plattform bringt Ihnen professionelle Krypto-Intelligence",
+    "marketData": "Marktdaten im Überblick",
+    "marketDataSubtitle": "Live-Indikatoren und Trendanalysen",
+    "faq": "Häufige Fragen",
+    "faqSubtitle": "Alles was Sie über Krypto-Intelligence wissen müssen",
+    "readMore": "Weiterlesen",
+    "viewAll": "Alle ansehen",
+    "minRead": "Min. Lesezeit",
+    "publishedOn": "Veröffentlicht am"
+  },
+  "blog": {
+    "title": "Krypto Blog",
+    "subtitle": "Analysen, Nachrichten und Markteinblicke",
+    "filterBy": "Filtern nach",
+    "allCategories": "Alle Kategorien",
+    "searchPlaceholder": "Artikel suchen...",
+    "noResults": "Keine Artikel gefunden",
+    "newerPosts": "Neuere Artikel",
+    "olderPosts": "Ältere Artikel",
+    "page": "Seite",
+    "of": "von",
+    "relatedPosts": "Verwandte Artikel",
+    "sameCategory": "Weitere Artikel in dieser Kategorie",
+    "coinRelated": "Weitere Artikel zu"
+  },
+  "about": {
+    "title": "Über KryptoWatch",
+    "subtitle": "Ihre vertrauenswürdige Quelle für Krypto-Intelligence",
+    "mission": "Unsere Mission",
+    "missionText": "KryptoWatch wurde gegründet, um privaten und institutionellen Anlegern gleichermaßen Zugang zu professioneller Krypto-Intelligence zu verschaffen. Wir kombinieren tiefgehende Marktanalyse mit verständlicher Aufbereitung – für fundierte Entscheidungen in einem volatilen Markt.",
+    "values": "Unsere Werte",
+    "team": "Unser Team"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Schreiben Sie uns",
+    "name": "Ihr Name",
+    "email": "E-Mail-Adresse",
+    "message": "Ihre Nachricht",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "successTitle": "Nachricht gesendet!",
+    "successText": "Wir melden uns so bald wie möglich bei Ihnen.",
+    "errorText": "Fehler beim Senden. Bitte versuchen Sie es erneut.",
+    "fallbackEmail": "Alternativ können Sie uns direkt schreiben an:"
+  },
+  "faq": [
+    {
+      "q": "Was ist KryptoWatch?",
+      "a": "KryptoWatch ist eine Krypto-Intelligence-Plattform, die tiefgehende Analysen, Marktdaten und aktuelle Nachrichten zu Bitcoin, Ethereum, DeFi und dem gesamten Krypto-Ökosystem bietet."
+    },
+    {
+      "q": "Für wen ist KryptoWatch geeignet?",
+      "a": "Unsere Plattform richtet sich an private Anleger, institutionelle Investoren, Entwickler und alle, die fundierte Entscheidungen im Kryptomarkt treffen möchten."
+    },
+    {
+      "q": "Wie oft werden die Inhalte aktualisiert?",
+      "a": "Unser Redaktionsteam veröffentlicht täglich neue Analysen und Nachrichten. Marktdaten werden in Echtzeit aktualisiert."
+    },
+    {
+      "q": "Sind die Inhalte kostenlos?",
+      "a": "Der Großteil unserer Inhalte ist kostenlos zugänglich. Premium-Analysen und exklusive Marktberichte sind für registrierte Nutzer verfügbar."
+    },
+    {
+      "q": "Gibt es eine mobile App?",
+      "a": "Unsere Plattform ist vollständig für mobile Endgeräte optimiert. Eine native App ist in Entwicklung."
+    },
+    {
+      "q": "Wie kann ich Krypto-Nachrichten abonnieren?",
+      "a": "Sie können unseren Newsletter abonnieren und erhalten täglich die wichtigsten Krypto-Informationen direkt in Ihr Postfach."
+    }
+  ],
+  "categories": {
+    "bitcoin": "Bitcoin",
+    "ethereum": "Ethereum",
+    "defi": "DeFi",
+    "nfts": "NFTs",
+    "layer1": "Layer 1",
+    "layer2": "Layer 2",
+    "altcoins": "Altcoins",
+    "regulation": "Regulierung",
+    "exchanges": "Börsen",
+    "web3": "Web3"
+  },
+  "howItWorks": [
+    {
+      "step": "01",
+      "title": "Quellen überwachen",
+      "desc": "Wir aggregieren Daten aus Tausenden von Quellen – On-Chain-Daten, Nachrichten, Social Media und institutionelle Reports."
+    },
+    {
+      "step": "02",
+      "title": "KI-Analyse",
+      "desc": "Unser System analysiert Trends, Sentimente und Marktbewegungen in Echtzeit für Sie auf."
+    },
+    {
+      "step": "03",
+      "title": "Intelligence liefern",
+      "desc": "Sie erhalten präzise, umsetzbare Einblicke von unseren Experten – klar und verständlich aufbereitet."
+    }
+  ],
+  "footer": {
+    "description": "KryptoWatch ist Ihre führende Plattform für Krypto-Intelligence. Professionelle Analysen, aktuelle Nachrichten und Marktdaten für fundierte Anlageentscheidungen.",
+    "copyright": "© 2025 KryptoWatch. Alle Rechte vorbehalten.",
+    "disclaimer": "Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informationszwecken."
+  },
+  "seo": {
+    "homeTitle": "KryptoWatch – Krypto-Intelligence & Marktanalysen",
+    "homeDesc": "Tiefgehende Krypto-Analysen, Marktdaten und Nachrichten zu Bitcoin, Ethereum, DeFi und mehr. Ihre professionelle Quelle für Krypto-Intelligence.",
+    "blogTitle": "Krypto Blog – Analysen & Markteinblicke | KryptoWatch",
+    "blogDesc": "Aktuelle Krypto-Artikel, Bitcoin-Analysen, DeFi-Nachrichten und Marktkommentare von erfahrenen Analysten.",
+    "aboutTitle": "Über KryptoWatch – Krypto-Intelligence-Plattform",
+    "aboutDesc": "Erfahren Sie mehr über KryptoWatch, unsere Mission, unser Team und wie wir Krypto-Intelligence für jeden zugänglich machen.",
+    "contactTitle": "Kontakt – KryptoWatch",
+    "contactDesc": "Nehmen Sie Kontakt mit dem KryptoWatch-Team auf. Wir freuen uns auf Ihre Nachricht.",
+    "privacyTitle": "Datenschutzerklärung – KryptoWatch",
+    "termsTitle": "Allgemeine Geschäftsbedingungen – KryptoWatch"
+  }
+}

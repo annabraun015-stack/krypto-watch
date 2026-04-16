@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About Us",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms",
+    "sitemap": "Sitemap"
+  },
+  "hero": {
+    "badge": "🔥 Crypto Intelligence Platform",
+    "title": "Crypto News That",
+    "titleHighlight": "Actually Move You Forward",
+    "subtitle": "In-depth analysis, market data and crypto intelligence for Bitcoin, Ethereum, DeFi and more – for informed investment decisions.",
+    "ctaPrimary": "Read the Blog",
+    "ctaSecondary": "About Us"
+  },
+  "sections": {
+    "latestNews": "Latest News",
+    "latestNewsSubtitle": "Current developments from the crypto world",
+    "featuredAnalysis": "Featured Analysis",
+    "featuredAnalysisSubtitle": "Exclusive insights from our experts",
+    "marketCategories": "Market Categories",
+    "marketCategoriesSubtitle": "Explore all segments of the crypto ecosystem",
+    "howItWorks": "How It Works",
+    "howItWorksSubtitle": "Our platform delivers professional crypto intelligence",
+    "marketData": "Market Overview",
+    "marketDataSubtitle": "Live indicators and trend analysis",
+    "faq": "Frequently Asked Questions",
+    "faqSubtitle": "Everything you need to know about crypto intelligence",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "minRead": "min read",
+    "publishedOn": "Published on"
+  },
+  "blog": {
+    "title": "Crypto Blog",
+    "subtitle": "Analysis, News and Market Insights",
+    "filterBy": "Filter by",
+    "allCategories": "All Categories",
+    "searchPlaceholder": "Search articles...",
+    "noResults": "No articles found",
+    "newerPosts": "Newer Posts",
+    "olderPosts": "Older Posts",
+    "page": "Page",
+    "of": "of",
+    "relatedPosts": "Related Posts",
+    "sameCategory": "More in this Category",
+    "coinRelated": "More Articles on"
+  },
+  "about": {
+    "title": "About KryptoWatch",
+    "subtitle": "Your Trusted Source for Crypto Intelligence",
+    "mission": "Our Mission",
+    "missionText": "KryptoWatch was founded to give retail and institutional investors alike access to professional crypto intelligence. We combine deep market analysis with clear presentation – for informed decisions in a volatile market.",
+    "values": "Our Values",
+    "team": "Our Team"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in Touch",
+    "name": "Your Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "successTitle": "Message Sent!",
+    "successText": "We will get back to you as soon as possible.",
+    "errorText": "Error sending message. Please try again.",
+    "fallbackEmail": "Alternatively, you can email us directly at:"
+  },
+  "faq": [
+    {
+      "q": "What is KryptoWatch?",
+      "a": "KryptoWatch is a crypto intelligence platform offering in-depth analysis, market data, and breaking news on Bitcoin, Ethereum, DeFi, and the broader crypto ecosystem."
+    },
+    {
+      "q": "Who is KryptoWatch for?",
+      "a": "Our platform is aimed at retail investors, institutional players, developers, and anyone who wants to make informed decisions in the crypto market."
+    },
+    {
+      "q": "How often is content updated?",
+      "a": "Our editorial team publishes new analyses and news daily. Market data is updated in real time."
+    },
+    {
+      "q": "Is the content free?",
+      "a": "Most of our content is freely accessible. Premium analyses and exclusive market reports are available for registered users."
+    },
+    {
+      "q": "Is there a mobile app?",
+      "a": "Our platform is fully optimized for mobile devices. A native app is in development."
+    },
+    {
+      "q": "How can I subscribe to crypto news?",
+      "a": "You can subscribe to our newsletter and receive the most important crypto information directly in your inbox every day."
+    }
+  ],
+  "categories": {
+    "bitcoin": "Bitcoin",
+    "ethereum": "Ethereum",
+    "defi": "DeFi",
+    "nfts": "NFTs",
+    "layer1": "Layer 1",
+    "layer2": "Layer 2",
+    "altcoins": "Altcoins",
+    "regulation": "Regulation",
+    "exchanges": "Exchanges",
+    "web3": "Web3"
+  },
+  "howItWorks": [
+    {
+      "step": "01",
+      "title": "Monitor Sources",
+      "desc": "We aggregate data from thousands of sources – on-chain data, news, social media, and institutional reports."
+    },
+    {
+      "step": "02",
+      "title": "AI Analysis",
+      "desc": "Our system analyzes trends, sentiments, and market movements in real time on your behalf."
+    },
+    {
+      "step": "03",
+      "title": "Deliver Intelligence",
+      "desc": "You receive precise, actionable insights from our experts – clearly and understandably presented."
+    }
+  ],
+  "footer": {
+    "description": "KryptoWatch is your leading platform for crypto intelligence. Professional analysis, breaking news and market data for informed investment decisions.",
+    "copyright": "© 2025 KryptoWatch. All rights reserved.",
+    "disclaimer": "Not investment advice. All content is for informational purposes only."
+  },
+  "seo": {
+    "homeTitle": "KryptoWatch – Crypto Intelligence & Market Analysis",
+    "homeDesc": "In-depth crypto analysis, market data and news on Bitcoin, Ethereum, DeFi and more. Your professional source for crypto intelligence.",
+    "blogTitle": "Crypto Blog – Analysis & Market Insights | KryptoWatch",
+    "blogDesc": "Current crypto articles, Bitcoin analysis, DeFi news and market commentary from experienced analysts.",
+    "aboutTitle": "About KryptoWatch – Crypto Intelligence Platform",
+    "aboutDesc": "Learn more about KryptoWatch, our mission, our team and how we make crypto intelligence accessible to everyone.",
+    "contactTitle": "Contact – KryptoWatch",
+    "contactDesc": "Get in touch with the KryptoWatch team. We look forward to hearing from you.",
+    "privacyTitle": "Privacy Policy – KryptoWatch",
+    "termsTitle": "Terms and Conditions – KryptoWatch"
+  }
+}

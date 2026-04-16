@@ -1,0 +1,532 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand Colors ── */
+  --color-brand-50: oklch(97% 0.02 250);
+  --color-brand-100: oklch(92% 0.05 250);
+  --color-brand-200: oklch(84% 0.1 250);
+  --color-brand-300: oklch(74% 0.16 250);
+  --color-brand-400: oklch(63% 0.22 250);
+  --color-brand-500: oklch(53% 0.26 250);
+  --color-brand-600: oklch(45% 0.24 250);
+  --color-brand-700: oklch(37% 0.2 250);
+  --color-brand-800: oklch(30% 0.16 250);
+  --color-brand-900: oklch(22% 0.12 250);
+
+  /* ── Accent / Gold ── */
+  --color-accent-400: oklch(80% 0.18 75);
+  --color-accent-500: oklch(72% 0.22 75);
+  --color-accent-600: oklch(64% 0.2 75);
+
+  /* ── Crypto Coin Colors ── */
+  --color-bitcoin: oklch(75% 0.18 60);
+  --color-ethereum: oklch(68% 0.14 280);
+  --color-defi: oklch(72% 0.2 165);
+
+  /* ── Neutral Palette (dark-first) ── */
+  --color-surface-950: oklch(8% 0.02 250);
+  --color-surface-900: oklch(12% 0.03 250);
+  --color-surface-800: oklch(17% 0.04 250);
+  --color-surface-700: oklch(24% 0.05 250);
+  --color-surface-600: oklch(35% 0.04 250);
+
+  --color-text-primary: oklch(97% 0.005 250);
+  --color-text-secondary: oklch(72% 0.04 250);
+  --color-text-muted: oklch(55% 0.03 250);
+
+  /* ── Typography ── */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Outfit", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Spacing scale additions ── */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+
+  /* ── Border radius ── */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 4px 24px -4px oklch(5% 0.05 250 / 0.5);
+  --shadow-glow-brand: 0 0 40px -8px var(--color-brand-500);
+  --shadow-glow-gold: 0 0 40px -8px var(--color-accent-500);
+}
+
+/* ── Base Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface-950);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: var(--color-brand-500);
+  color: white;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface-900); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-600);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-500); }
+
+/* ── Focus visible ── */
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Typography Utilities ── */
+.font-display { font-family: var(--font-display); }
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--color-brand-300), var(--color-accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-accent-400), oklch(88% 0.12 70));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glassmorphism Cards ── */
+.card-glass {
+  background: linear-gradient(
+    135deg,
+    oklch(17% 0.04 250 / 0.7),
+    oklch(12% 0.03 250 / 0.5)
+  );
+  border: 1px solid oklch(35% 0.05 250 / 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-glass:hover {
+  border-color: oklch(53% 0.26 250 / 0.4);
+  box-shadow: var(--shadow-card), var(--shadow-glow-brand);
+  transform: translateY(-2px);
+}
+
+/* ── Gradient backgrounds ── */
+.bg-gradient-radial-brand {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% -10%,
+    oklch(53% 0.26 250 / 0.15) 0%,
+    transparent 60%
+  );
+}
+
+.bg-hero-grid {
+  background-image:
+    linear-gradient(oklch(35% 0.05 250 / 0.15) 1px, transparent 1px),
+    linear-gradient(to right, oklch(35% 0.05 250 / 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Noise texture overlay ── */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Tag / Badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.badge-brand {
+  background: oklch(53% 0.26 250 / 0.15);
+  color: var(--color-brand-300);
+  border: 1px solid oklch(53% 0.26 250 / 0.25);
+}
+
+.badge-gold {
+  background: oklch(72% 0.22 75 / 0.15);
+  color: var(--color-accent-400);
+  border: 1px solid oklch(72% 0.22 75 / 0.25);
+}
+
+.badge-bitcoin {
+  background: oklch(75% 0.18 60 / 0.15);
+  color: var(--color-bitcoin);
+  border: 1px solid oklch(75% 0.18 60 / 0.25);
+}
+
+.badge-defi {
+  background: oklch(72% 0.2 165 / 0.15);
+  color: var(--color-defi);
+  border: 1px solid oklch(72% 0.2 165 / 0.25);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.375rem;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.btn:hover::before { opacity: 0.06; }
+.btn:active { transform: scale(0.98); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600));
+  color: white;
+  box-shadow: 0 4px 16px -4px var(--color-brand-500);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 24px -4px var(--color-brand-500);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid oklch(35% 0.05 250 / 0.5);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-brand-400);
+  color: var(--color-brand-300);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.btn-ghost:hover {
+  background: oklch(17% 0.04 250 / 0.6);
+  color: var(--color-text-primary);
+}
+
+/* ── Section container ── */
+.section {
+  padding-block: 5rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container { padding-inline: 2rem; }
+}
+
+@media (min-width: 1024px) {
+  .container { padding-inline: 2.5rem; }
+}
+
+/* ── Section header ── */
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-400);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin-inline: auto;
+  line-height: 1.65;
+}
+
+/* ── Dividers ── */
+.divider {
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-brand-500), transparent);
+  border-radius: 2px;
+  margin: 1rem auto;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseBrand {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(53% 0.26 250 / 0.3); }
+  50% { box-shadow: 0 0 0 12px oklch(53% 0.26 250 / 0); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to { background-position: 200% center; }
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-float {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+.animate-pulse-brand {
+  animation: pulseBrand 2.5s ease-in-out infinite;
+}
+
+/* ── Ticker ── */
+.ticker-wrap {
+  overflow: hidden;
+  background: oklch(12% 0.03 250);
+  border-bottom: 1px solid oklch(25% 0.05 250 / 0.5);
+  padding-block: 0.5rem;
+}
+.ticker-inner {
+  display: flex;
+  gap: 3rem;
+  animation: tickerScroll 30s linear infinite;
+  width: max-content;
+}
+.ticker-wrap:hover .ticker-inner {
+  animation-play-state: paused;
+}
+
+/* ── Blog post content styling ── */
+.prose-crypto {
+  color: var(--color-text-secondary);
+  max-width: 72ch;
+}
+.prose-crypto h2 {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid oklch(35% 0.05 250 / 0.3);
+}
+.prose-crypto h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+.prose-crypto p { margin-bottom: 1.25rem; line-height: 1.8; }
+.prose-crypto strong { color: var(--color-text-primary); font-weight: 600; }
+.prose-crypto a { color: var(--color-brand-400); text-decoration: underline; text-underline-offset: 3px; }
+.prose-crypto a:hover { color: var(--color-brand-300); }
+.prose-crypto ul, .prose-crypto ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.prose-crypto li { margin-bottom: 0.5rem; }
+.prose-crypto blockquote {
+  border-left: 3px solid var(--color-brand-500);
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+.prose-crypto code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: oklch(17% 0.04 250);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  color: var(--color-brand-300);
+}
+.prose-crypto pre {
+  background: oklch(12% 0.03 250);
+  border: 1px solid oklch(25% 0.05 250 / 0.5);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+}
+.prose-crypto pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+.prose-crypto table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+}
+.prose-crypto th {
+  background: oklch(17% 0.04 250);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid oklch(25% 0.05 250 / 0.5);
+}
+.prose-crypto td {
+  padding: 0.75rem 1rem;
+  border: 1px solid oklch(25% 0.05 250 / 0.3);
+}
+.prose-crypto tr:nth-child(even) td { background: oklch(14% 0.03 250 / 0.5); }
+.prose-crypto img {
+  width: 100%;
+  border-radius: 0.75rem;
+  margin: 2rem 0;
+}
+
+/* ── Price Card ── */
+.price-card {
+  background: linear-gradient(135deg, oklch(17% 0.04 250), oklch(12% 0.03 250));
+  border: 1px solid oklch(25% 0.05 250 / 0.5);
+  border-radius: 0.875rem;
+  padding: 1.25rem 1.5rem;
+  transition: all 0.3s;
+}
+.price-card:hover {
+  border-color: oklch(45% 0.2 250 / 0.5);
+  box-shadow: var(--shadow-glow-brand);
+}
+.price-card .coin-name { font-size: 0.875rem; color: var(--color-text-muted); font-weight: 500; }
+.price-card .coin-price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.price-card .coin-change-pos { color: oklch(72% 0.2 145); font-weight: 600; }
+.price-card .coin-change-neg { color: oklch(65% 0.25 25); font-weight: 600; }
+
+/* ── Form ── */
+.form-input {
+  width: 100%;
+  background: oklch(17% 0.04 250);
+  border: 1px solid oklch(30% 0.05 250 / 0.5);
+  border-radius: 0.625rem;
+  padding: 0.75rem 1rem;
+  color: var(--color-text-primary);
+  font-size: 0.9375rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  font-family: var(--font-sans);
+}
+.form-input::placeholder { color: var(--color-text-muted); }
+.form-input:focus {
+  border-color: var(--color-brand-400);
+  box-shadow: 0 0 0 3px oklch(53% 0.26 250 / 0.12);
+}
+
+/* ── Mobile menu backdrop ── */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: oklch(5% 0.02 250 / 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.menu-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Skip to content ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--color-brand-500);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 9999;
+  transition: top 0.2s;
+  font-weight: 600;
+}
+.skip-link:focus { top: 0; }

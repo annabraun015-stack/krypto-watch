@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { t } from '../../../i18n';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../../../config/site';
+
+const locale = 'en';
+const tr = t(locale);
+
+const page = Number(Astro.url.searchParams.get('page') ?? '1');
+const catFilter = Astro.url.searchParams.get('cat') ?? '';
+const PER_PAGE = siteConfig.postsPerPage;
+
+let allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
+allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+if (catFilter) {
+  allPosts = allPosts.filter((p) => p.data.category === catFilter);
+}
+
+const totalPages = Math.ceil(allPosts.length / PER_PAGE);
+const posts = allPosts.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+
+const allEnPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
+const categories = [...new Set(allEnPosts.map((p) => p.data.category))].sort();
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'KryptoWatch Blog',
+  url: `${siteConfig.url}/en/blog/`,
+  description: tr.seo.blogDesc,
+  inLanguage: 'en-US',
+};
+---
+
+<BaseLayout
+  title={tr.seo.blogTitle}
+  description={tr.seo.blogDesc}
+  locale="en"
+  schema={blogSchema}
+  canonical={`${siteConfig.url}/en/blog/`}
+  breadcrumbs={[
+    { name: 'KryptoWatch', url: siteConfig.url },
+    { name: 'Blog', url: `${siteConfig.url}/en/blog/` },
+  ]}
+>
+  <section class="blog-hero" aria-labelledby="blog-en-title">
+    <div class="container">
+      <div class="badge badge-brand" style="margin-bottom: 1rem;">📰 {tr.blog.title}</div>
+      <h1 id="blog-en-title" class="blog-page-title">{tr.blog.title}</h1>
+      <p class="blog-page-subtitle">{tr.blog.subtitle}</p>
+    </div>
+  </section>
+
+  <section class="blog-filters-section" aria-label="Blog Filters">
+    <div class="container">
+      <div class="filters-row" role="group" aria-label="Category Filter">
+        <a href="/en/blog/" class={`filter-pill ${!catFilter ? 'filter-pill--active' : ''}`}>
+          {tr.blog.allCategories}
+        </a>
+        {categories.map((cat) => (
+          <a
+            href={`/en/blog/?cat=${cat}`}
+            class={`filter-pill ${catFilter === cat ? 'filter-pill--active' : ''}`}
+          >
+            {tr.categories[cat as keyof typeof tr.categories] ?? cat}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section blog-listing" aria-label="Articles">
+    <div class="container">
+      {posts.length > 0 ? (
+        <>
+          <div class="blog-grid" role="list">
+            {posts.map((post) => (
+              <div role="listitem"><BlogCard post={post} locale={locale} /></div>
+            ))}
+          </div>
+          {totalPages > 1 && (
+            <nav class="pagination" aria-label="Page navigation">
+              {page > 1 && (
+                <a href={`/en/blog/?page=${page - 1}${catFilter ? `&cat=${catFilter}` : ''}`} class="pagination-btn">
+                  ← {tr.blog.olderPosts}
+                </a>
+              )}
+              <span class="pagination-info" aria-live="polite">
+                {tr.blog.page} {page} {tr.blog.of} {totalPages}
+              </span>
+              {page < totalPages && (
+                <a href={`/en/blog/?page=${page + 1}${catFilter ? `&cat=${catFilter}` : ''}`} class="pagination-btn">
+                  {tr.blog.newerPosts} →
+                </a>
+              )}
+            </nav>
+          )}
+        </>
+      ) : (
+        <div class="no-results" role="alert">
+          <span>🔍</span>
+          <p>{tr.blog.noResults}</p>
+          <a href="/en/blog/" class="btn btn-outline" style="margin-top: 1rem;">{tr.blog.allCategories}</a>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-hero { padding-block: 4rem 2rem; text-align: center; background: radial-gradient(ellipse 70% 50% at 50% -10%, oklch(45% 0.22 250 / 0.12) 0%, transparent 60%); }
+  .blog-page-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; color: var(--color-text-primary); margin-bottom: 1rem; letter-spacing: -0.03em; }
+  .blog-page-subtitle { font-size: 1.0625rem; color: var(--color-text-secondary); max-width: 540px; margin-inline: auto; }
+  .blog-filters-section { padding-block: 1.5rem; border-bottom: 1px solid oklch(20% 0.04 250 / 0.4); background: oklch(10% 0.025 250 / 0.5); position: sticky; top: 4rem; z-index: 10; backdrop-filter: blur(8px); }
+  .filters-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .filter-pill { padding: 0.375rem 0.875rem; border-radius: 999px; font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary); text-decoration: none; border: 1px solid oklch(28% 0.05 250 / 0.4); background: oklch(15% 0.04 250 / 0.5); transition: all 0.2s; white-space: nowrap; }
+  .filter-pill:hover { border-color: oklch(45% 0.2 250 / 0.5); color: var(--color-brand-300); }
+  .filter-pill--active { background: oklch(45% 0.2 250 / 0.15); border-color: oklch(45% 0.2 250 / 0.4); color: var(--color-brand-300); }
+  .blog-listing { padding-top: 3rem; }
+  .blog-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 640px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+  .pagination { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid oklch(22% 0.04 250 / 0.4); flex-wrap: wrap; }
+  .pagination-btn { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.625rem 1.25rem; background: oklch(17% 0.04 250); border: 1px solid oklch(28% 0.05 250 / 0.5); border-radius: 0.625rem; color: var(--color-text-secondary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+  .pagination-btn:hover { border-color: var(--color-brand-400); color: var(--color-brand-300); }
+  .pagination-info { font-size: 0.875rem; color: var(--color-text-muted); }
+  .no-results { text-align: center; padding: 5rem 2rem; color: var(--color-text-muted); display: flex; flex-direction: column; align-items: center; gap: 0.75rem; font-size: 1.0625rem; }
+  .no-results span { font-size: 3rem; }
+</style>

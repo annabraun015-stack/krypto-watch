@@ -1,0 +1,60 @@
+---
+// Static crypto ticker – API-ready structure
+const coins = [
+  { symbol: 'BTC', name: 'Bitcoin', price: '$98,432', change: '+2.4%', pos: true },
+  { symbol: 'ETH', name: 'Ethereum', price: '$3,218', change: '+1.8%', pos: true },
+  { symbol: 'SOL', name: 'Solana', price: '$182', change: '-0.7%', pos: false },
+  { symbol: 'BNB', name: 'BNB', price: '$412', change: '+0.9%', pos: true },
+  { symbol: 'XRP', name: 'XRP', price: '$0.62', change: '+3.2%', pos: true },
+  { symbol: 'ADA', name: 'Cardano', price: '$0.48', change: '-1.1%', pos: false },
+  { symbol: 'AVAX', name: 'Avalanche', price: '$38', change: '+4.6%', pos: true },
+  { symbol: 'LINK', name: 'Chainlink', price: '$14.2', change: '+2.1%', pos: true },
+];
+
+// Doubled for seamless loop
+const allCoins = [...coins, ...coins];
+---
+
+<div class="ticker-wrap" role="region" aria-label="Crypto Marktpreise" aria-live="polite">
+  <div class="ticker-inner" aria-hidden="true">
+    {allCoins.map((coin) => (
+      <div class="ticker-item">
+        <span class="ticker-symbol">{coin.symbol}</span>
+        <span class="ticker-price">{coin.price}</span>
+        <span class={`ticker-change ${coin.pos ? 'pos' : 'neg'}`}>{coin.change}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .ticker-symbol {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--color-text-primary);
+    letter-spacing: 0.03em;
+  }
+
+  .ticker-price {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ticker-change {
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ticker-change.pos { color: oklch(72% 0.2 145); }
+  .ticker-change.neg { color: oklch(65% 0.25 25); }
+</style>

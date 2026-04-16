@@ -1,0 +1,448 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { siteConfig } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
+  return posts.map((post) => {
+    const slug = post.id.replace(/^de\//, '').replace(/\.mdx?$/, '');
+    return { params: { slug }, props: { post } };
+  });
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, author, category, tags, image, imageAlt, readingTime, coinSymbols } = post.data;
+const { Content } = await render(post);
+
+const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
+
+const postUrl = `${siteConfig.url}/blog/${Astro.params.slug}/`;
+
+const blogPostSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  url: postUrl,
+  datePublished: new Date(date).toISOString(),
+  dateModified: new Date(date).toISOString(),
+  author: {
+    '@type': 'Person',
+    name: author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'KryptoWatch',
+    logo: { '@type': 'ImageObject', url: `${siteConfig.url}/logo.svg` },
+  },
+  image: image ? `${siteConfig.url}${image}` : `${siteConfig.url}${siteConfig.ogImage}`,
+  keywords: [...(tags ?? []), ...(coinSymbols ?? [])].join(', '),
+  articleSection: category,
+  inLanguage: 'de-DE',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+};
+
+const formattedDate = new Intl.DateTimeFormat('de-DE', {
+  year: 'numeric', month: 'long', day: 'numeric',
+}).format(new Date(date));
+---
+
+<BaseLayout
+  title={`${title} | KryptoWatch`}
+  description={description}
+  locale="de"
+  schema={blogPostSchema}
+  ogImage={image ?? siteConfig.ogImage}
+  breadcrumbs={[
+    { name: 'KryptoWatch', url: siteConfig.url },
+    { name: 'Blog', url: `${siteConfig.url}/blog/` },
+    { name: title, url: postUrl },
+  ]}
+>
+  <article class="post-page" itemscope itemtype="https://schema.org/BlogPosting">
+
+    <!-- Breadcrumb visual -->
+    <div class="post-breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <nav>
+          <a href="/">KryptoWatch</a>
+          <span aria-hidden="true">/</span>
+          <a href="/blog/">Blog</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{title}</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Post header -->
+    <header class="post-header">
+      <div class="container post-header-inner">
+        <div class="post-meta-top">
+          <a href={`/blog/?cat=${category}`} class="badge badge-brand post-category">{category}</a>
+          {coinSymbols?.map((s) => (
+            <a href={`/blog/?cat=${category}`} class="badge badge-bitcoin post-coin" aria-label={`${s} Artikel`}>{s}</a>
+          ))}
+          {readingTime && (
+            <span class="post-reading-time">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm0 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 2a.75.75 0 0 1 .75.75v3.5l2.25 1.3a.75.75 0 1 1-.75 1.299l-2.625-1.5A.75.75 0 0 1 7.25 8.75v-4A.75.75 0 0 1 8 4z"/>
+              </svg>
+              {readingTime} Min. Lesezeit
+            </span>
+          )}
+        </div>
+
+        <h1 class="post-title" itemprop="headline">{title}</h1>
+        <p class="post-description">{description}</p>
+
+        <div class="post-author-row">
+          <div class="post-author-avatar" aria-hidden="true">{author.charAt(0)}</div>
+          <div>
+            <span class="post-author-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+              <span itemprop="name">{author}</span>
+            </span>
+            <time class="post-date" datetime={new Date(date).toISOString()} itemprop="datePublished">
+              {formattedDate}
+            </time>
+          </div>
+          <!-- Social share -->
+          <div class="post-share" aria-label="Artikel teilen">
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Auf Twitter teilen">
+              𝕏
+            </a>
+            <a href={`https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(title)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Auf Telegram teilen">
+              ✈
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Featured image -->
+    {image && (
+      <div class="post-featured-image" role="img" aria-label={imageAlt ?? title}>
+        <div class="container">
+          <img
+            src={image}
+            alt={imageAlt ?? title}
+            width="1200"
+            height="630"
+            class="featured-img"
+            itemprop="image"
+          />
+        </div>
+      </div>
+    )}
+
+    <!-- Post body -->
+    <div class="post-body">
+      <div class="container post-layout">
+        <!-- Main content -->
+        <div class="post-content prose-crypto" itemprop="articleBody">
+          <Content />
+
+          <!-- Disclaimer -->
+          <div class="post-disclaimer" role="note">
+            <strong>⚠️ Disclaimer:</strong> Dieser Artikel stellt keine Anlageberatung dar. Kryptowährungen sind hochvolatile Anlagen mit erheblichem Verlustrisiko.
+          </div>
+
+          <!-- Tags -->
+          {tags && tags.length > 0 && (
+            <div class="post-tags" aria-label="Tags">
+              {tags.map((tag) => (
+                <a href={`/blog/?tag=${tag}`} class="tag-chip">#{tag}</a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="post-sidebar" aria-label="Sidebar">
+          <!-- TOC placeholder -->
+          <div class="sidebar-card sidebar-toc">
+            <h3 class="sidebar-card-title">Inhaltsverzeichnis</h3>
+            <p class="sidebar-toc-hint" style="font-size: 0.85rem; color: var(--color-text-muted);">Navigieren Sie durch den Artikel über die Überschriften.</p>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="sidebar-card sidebar-newsletter">
+            <div class="newsletter-icon" aria-hidden="true">📬</div>
+            <h3 class="sidebar-card-title">Krypto-Newsletter</h3>
+            <p class="sidebar-newsletter-desc">Täglich die wichtigsten Krypto-Nachrichten in Ihr Postfach.</p>
+            <form class="sidebar-newsletter-form" id="sidebar-nl" aria-label="Newsletter Anmeldung">
+              <input type="email" placeholder="ihre@email.de" class="form-input" required aria-label="E-Mail" />
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Abonnieren</button>
+            </form>
+          </div>
+
+          <!-- Coin chips if present -->
+          {coinSymbols && coinSymbols.length > 0 && (
+            <div class="sidebar-card">
+              <h3 class="sidebar-card-title">Behandelte Coins</h3>
+              <div class="sidebar-coins">
+                {coinSymbols.map((s) => (
+                  <a href={`/blog/?coin=${s}`} class="sidebar-coin-chip">{s}</a>
+                ))}
+              </div>
+            </div>
+          )}
+        </aside>
+      </div>
+
+      <!-- Related posts -->
+      <div class="container">
+        <RelatedPosts currentPost={post} allPosts={allPosts} locale="de" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb */
+  .post-breadcrumb {
+    padding-block: 1rem;
+    border-bottom: 1px solid oklch(22% 0.04 250 / 0.3);
+    background: oklch(10% 0.025 250);
+  }
+
+  .post-breadcrumb nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+
+  .post-breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .post-breadcrumb a:hover { color: var(--color-brand-300); }
+  .post-breadcrumb [aria-current='page'] { color: var(--color-text-secondary); }
+
+  /* Post header */
+  .post-header {
+    padding-block: 3rem 2rem;
+    background: radial-gradient(ellipse 70% 50% at 50% -15%, oklch(45% 0.22 250 / 0.1) 0%, transparent 70%);
+  }
+
+  .post-header-inner { max-width: 860px; }
+
+  .post-meta-top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-category, .post-coin { text-decoration: none; }
+
+  .post-reading-time {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    margin-bottom: 1.125rem;
+  }
+
+  .post-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+    max-width: 700px;
+  }
+
+  .post-author-row {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+  }
+
+  .post-author-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .post-author-name {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .post-date {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .post-share {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .share-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: oklch(17% 0.04 250);
+    border: 1px solid oklch(28% 0.05 250 / 0.5);
+    border-radius: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+  }
+
+  .share-btn:hover { border-color: var(--color-brand-400); color: var(--color-brand-300); }
+
+  /* Featured image */
+  .post-featured-image { padding-block: 1.5rem; }
+
+  .featured-img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+  }
+
+  /* Body layout */
+  .post-body { padding-bottom: 5rem; }
+
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 2.5rem;
+    max-width: 1100px;
+  }
+
+  @media (min-width: 1024px) {
+    .post-layout { grid-template-columns: 1fr 300px; }
+  }
+
+  /* Disclaimer */
+  .post-disclaimer {
+    margin-top: 2.5rem;
+    padding: 1rem 1.25rem;
+    background: oklch(72% 0.22 75 / 0.07);
+    border: 1px solid oklch(72% 0.22 75 / 0.2);
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Tags */
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .tag-chip {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    background: oklch(17% 0.04 250);
+    border: 1px solid oklch(28% 0.05 250 / 0.4);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .tag-chip:hover { border-color: var(--color-brand-400); color: var(--color-brand-300); }
+
+  /* Sidebar */
+  .post-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .sidebar-card {
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    border-radius: 0.875rem;
+    padding: 1.25rem;
+  }
+
+  .sidebar-card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.875rem;
+  }
+
+  .newsletter-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+  .sidebar-newsletter-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-coins { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .sidebar-coin-chip {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.5rem;
+    background: oklch(45% 0.2 250 / 0.1);
+    border: 1px solid oklch(45% 0.2 250 / 0.25);
+    color: var(--color-brand-300);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .sidebar-coin-chip:hover { background: oklch(45% 0.2 250 / 0.2); }
+</style>
+
+<script>
+  const form = document.getElementById('sidebar-nl') as HTMLFormElement;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button')!;
+      btn.textContent = '✓ Abonniert!';
+      btn.disabled = true;
+    });
+  }
+</script>

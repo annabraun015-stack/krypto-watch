@@ -1,0 +1,130 @@
+---
+// Static market data cards – API-ready structure
+const marketData = [
+  {
+    label: 'Bitcoin Dominanz',
+    labelEn: 'Bitcoin Dominance',
+    value: '52.4%',
+    trend: '+0.8%',
+    pos: true,
+    icon: '₿',
+    desc: 'BTC Marktanteil',
+    descEn: 'BTC Market Share',
+  },
+  {
+    label: 'Gesamt-Marktkapitalisierung',
+    labelEn: 'Total Market Cap',
+    value: '$2.18T',
+    trend: '+3.2%',
+    pos: true,
+    icon: '📊',
+    desc: '24h Veränderung',
+    descEn: '24h Change',
+  },
+  {
+    label: 'Fear & Greed Index',
+    labelEn: 'Fear & Greed Index',
+    value: '72',
+    trend: 'Gier',
+    pos: true,
+    icon: '🎯',
+    desc: 'Greed',
+    descEn: 'Greed',
+  },
+  {
+    label: 'DeFi TVL',
+    labelEn: 'DeFi TVL',
+    value: '$98.5B',
+    trend: '+1.4%',
+    pos: true,
+    icon: '🔗',
+    desc: '24h Veränderung',
+    descEn: '24h Change',
+  },
+  {
+    label: '24h Volumen',
+    labelEn: '24h Volume',
+    value: '$142B',
+    trend: '-5.1%',
+    pos: false,
+    icon: '💱',
+    desc: 'Globales Handelsvolumen',
+    descEn: 'Global Trading Volume',
+  },
+  {
+    label: 'ETH Gas Preis',
+    labelEn: 'ETH Gas Price',
+    value: '12 Gwei',
+    trend: '-18%',
+    pos: true,
+    icon: '⛽',
+    desc: '24h Durchschnitt',
+    descEn: '24h Average',
+  },
+];
+
+interface Props {
+  locale?: 'de' | 'en';
+}
+const { locale = 'de' } = Astro.props;
+---
+
+<div class="market-grid" role="list" aria-label={locale === 'de' ? 'Marktdaten' : 'Market Data'}>
+  {marketData.map((item) => (
+    <div class="price-card" role="listitem">
+      <div class="market-card-top">
+        <span class="market-icon" aria-hidden="true">{item.icon}</span>
+        <span class={`trend-pill ${item.pos ? 'trend-pos' : 'trend-neg'}`}>
+          {item.pos ? '▲' : '▼'} {item.trend}
+        </span>
+      </div>
+      <div class="coin-price">{item.value}</div>
+      <div class="coin-name">{locale === 'de' ? item.label : (item.labelEn ?? item.label)}</div>
+      <div class="market-desc">{locale === 'de' ? item.desc : (item.descEn ?? item.desc)}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) { .market-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .market-grid { grid-template-columns: repeat(6, 1fr); } }
+
+  .market-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .market-icon { font-size: 1.5rem; line-height: 1; }
+
+  .trend-pill {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .trend-pos {
+    background: oklch(72% 0.2 145 / 0.15);
+    color: oklch(72% 0.2 145);
+  }
+
+  .trend-neg {
+    background: oklch(65% 0.25 25 / 0.15);
+    color: oklch(65% 0.25 25);
+  }
+
+  .market-desc {
+    font-size: 0.6875rem;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+  }
+</style>

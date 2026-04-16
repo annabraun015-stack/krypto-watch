@@ -1,0 +1,147 @@
+---
+interface FAQ {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  faqs: FAQ[];
+  locale?: 'de' | 'en';
+}
+
+const { faqs, locale = 'de' } = Astro.props;
+---
+
+<div class="faq-list" role="list">
+  {faqs.map((item, idx) => (
+    <div class="faq-item" role="listitem">
+      <button
+        class="faq-question"
+        id={`faq-btn-${idx}`}
+        aria-controls={`faq-answer-${idx}`}
+        aria-expanded="false"
+        type="button"
+      >
+        <span class="faq-q-text">{item.q}</span>
+        <span class="faq-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div
+        class="faq-answer"
+        id={`faq-answer-${idx}`}
+        role="region"
+        aria-labelledby={`faq-btn-${idx}`}
+        hidden
+      >
+        <div class="faq-answer-inner">
+          {item.a}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .faq-item {
+    background: oklch(14% 0.04 250 / 0.6);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 0.875rem;
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+
+  .faq-item:has(.faq-question[aria-expanded="true"]) {
+    border-color: oklch(45% 0.2 250 / 0.4);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.125rem 1.375rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: var(--color-text-primary);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--color-brand-300); }
+
+  .faq-q-text { flex: 1; }
+
+  .faq-icon {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+  }
+
+  .faq-question[aria-expanded="true"] .faq-icon {
+    transform: rotate(180deg);
+    color: var(--color-brand-400);
+  }
+
+  .faq-answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-answer:not([hidden]) {
+    max-height: 400px;
+  }
+
+  .faq-answer[hidden] { display: block !important; max-height: 0; }
+
+  .faq-answer-inner {
+    padding: 0 1.375rem 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    border-top: 1px solid oklch(25% 0.05 250 / 0.3);
+    padding-top: 1rem;
+  }
+</style>
+
+<script>
+  const questions = document.querySelectorAll<HTMLButtonElement>('.faq-question');
+
+  questions.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const answerId = btn.getAttribute('aria-controls')!;
+      const answer = document.getElementById(answerId)!;
+
+      // Close all others
+      questions.forEach((other) => {
+        if (other !== btn) {
+          other.setAttribute('aria-expanded', 'false');
+          const otherId = other.getAttribute('aria-controls')!;
+          const otherAnswer = document.getElementById(otherId)!;
+          otherAnswer.hidden = true;
+        }
+      });
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      answer.hidden = expanded;
+    });
+  });
+</script>

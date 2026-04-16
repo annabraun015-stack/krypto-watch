@@ -1,0 +1,189 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Locale } from '../i18n';
+
+interface Props {
+  currentPost: CollectionEntry<'blog'>;
+  allPosts: CollectionEntry<'blog'>[];
+  locale: Locale;
+}
+
+const { currentPost, allPosts, locale } = Astro.props;
+
+// Score relevance: same category > shared coin symbols > shared tags
+function score(post: CollectionEntry<'blog'>): number {
+  let s = 0;
+  if (post.data.category === currentPost.data.category) s += 5;
+  const sharedCoins = (post.data.coinSymbols ?? []).filter((c) =>
+    (currentPost.data.coinSymbols ?? []).includes(c)
+  );
+  s += sharedCoins.length * 3;
+  const sharedTags = (post.data.tags ?? []).filter((tag) =>
+    (currentPost.data.tags ?? []).includes(tag)
+  );
+  s += sharedTags.length;
+  return s;
+}
+
+const related = allPosts
+  .filter((p) => p.id !== currentPost.id && p.data.locale === currentPost.data.locale)
+  .map((p) => ({ post: p, score: score(p) }))
+  .sort((a, b) => b.score - a.score || new Date(b.post.data.date).getTime() - new Date(a.post.data.date).getTime())
+  .slice(0, 3)
+  .map((p) => p.post);
+
+function postUrl(post: CollectionEntry<'blog'>): string {
+  const slugPath = post.id.replace(/^(de|en)\//, '').replace(/\.mdx?$/, '');
+  return locale === 'de' ? `/blog/${slugPath}/` : `/en/blog/${slugPath}/`;
+}
+---
+
+{related.length > 0 && (
+  <aside class="related-posts" aria-labelledby="related-heading">
+    <h2 id="related-heading" class="related-title">
+      {locale === 'de' ? 'Verwandte Artikel' : 'Related Posts'}
+    </h2>
+    <ul class="related-list" role="list">
+      {related.map((post) => {
+        const formattedDate = new Intl.DateTimeFormat(locale === 'de' ? 'de-DE' : 'en-US', {
+          year: 'numeric', month: 'short', day: 'numeric',
+        }).format(new Date(post.data.date));
+
+        return (
+          <li class="related-item" role="listitem">
+            <a href={postUrl(post)} class="related-link">
+              <div class="related-content">
+                <div class="related-meta">
+                  <span class="related-category">{post.data.category}</span>
+                  {post.data.coinSymbols?.map((s) => (
+                    <span class="related-coin">{s}</span>
+                  ))}
+                </div>
+                <h3 class="related-post-title">{post.data.title}</h3>
+                <div class="related-footer">
+                  <time datetime={new Date(post.data.date).toISOString()} class="related-date">
+                    {formattedDate}
+                  </time>
+                  {post.data.readingTime && (
+                    <span class="related-read-time">{post.data.readingTime} min</span>
+                  )}
+                </div>
+              </div>
+              <svg class="related-arrow" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </aside>
+)}
+
+<style>
+  .related-posts {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid oklch(25% 0.05 250 / 0.4);
+  }
+
+  .related-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .related-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .related-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .related-link:hover {
+    border-color: oklch(45% 0.2 250 / 0.5);
+    background: oklch(17% 0.04 250 / 0.7);
+    transform: translateX(4px);
+  }
+
+  .related-content { flex: 1; min-width: 0; }
+
+  .related-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .related-category {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-brand-400);
+    background: oklch(45% 0.2 250 / 0.1);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .related-coin {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background: oklch(20% 0.04 250);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+  }
+
+  .related-post-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.35;
+    margin: 0 0 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .related-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .related-date, .related-read-time {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .related-arrow {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .related-link:hover .related-arrow {
+    color: var(--color-brand-400);
+    transform: translateX(3px);
+  }
+</style>
