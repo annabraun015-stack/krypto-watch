@@ -1,0 +1,97 @@
+---
+title: "Was sind Bitcoin-Bestätigungen? So funktioniert die Transaktionssicherheit"
+description: "Erfahren Sie, was Bitcoin-Bestätigungen sind, wie viele Sie für eine sichere Transaktion benötigen und warum die erste Bestätigung ~10 Minuten dauert."
+date: 2026-04-17
+author: "KryptoWatch Redaktion"
+category: "bitcoin"
+tags: ["bitcoin bestätigungen", "btc", "transaktion", "blockchain", "double spend", "sicherheit"]
+image: "/images/blog/bitcoin-transaction.png"
+imageAlt: "Bitcoin Bestätigungen — Transaktion fließt durch Blockchain-Blöcke"
+coinSymbols: ["BTC"]
+readingTime: 9
+featured: false
+locale: "de"
+---
+
+## Inhaltsverzeichnis
+
+1. [Was ist eine Bitcoin-Bestätigung?](#definition)
+2. [Wie der Bestätigungsprozess funktioniert](#process)
+3. [Wie viele Bestätigungen benötigen Sie?](#how-many)
+4. [Blockzeit: Warum dauert es ~10 Minuten?](#block-time)
+5. [Null-Bestätigung (Unbestätigte) Transaktionen](#zero-conf)
+6. [Die Double-Spend-Attacke erklärt](#double-spend)
+7. [Transaktion steckt fest? So beschleunigen Sie sie](#stuck)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
+
+---
+
+## Was ist eine Bitcoin-Bestätigung? {#definition}
+
+Eine **Bitcoin-Bestätigung** ist ein Maß dafür, wie tief eine Transaktion in der Blockchain verankert ist. Jedes Mal, wenn ein neuer Block auf den Block gemined wird, der Ihre Transaktion enthält, erhöht sich die Anzahl der Bestätigungen um 1.
+
+- **0 Bestätigungen**: Transaktion wurde gesendet, aber noch nicht in einen Block aufgenommen (befindet sich im Mempool).
+- **1 Bestätigung**: Transaktion ist in einem Block enthalten.
+- **3 Bestätigungen**: Zwei weitere Blöcke wurden darauf gemined – sehr sicher für die meisten Transaktionen.
+- **6 Bestätigungen**: Der Goldstandard – wird von den meisten Börsen für große Beträge verlangt.
+
+> **Featured Snippet Antwort:** Eine Bitcoin-Bestätigung entspricht jedem Block, der nach Ihrer Transaktion gemined wurde. Eine Bestätigung bedeutet, dass die Transaktion in der Blockchain ist. Jede weitere Bestätigung macht das Rückgängigmachen der Transaktion exponentiell schwieriger. Sechs Bestätigungen gelten als Goldstandard für absolute Sicherheit (ca. 1 Stunde Wartezeit).
+
+---
+
+## Wie der Bestätigungsprozess funktioniert {#process}
+
+1. Sie senden eine Transaktion.
+2. Sie landet im **Mempool** (0 Bestätigungen).
+3. Ein [Miner](/blog/bitcoin-mining-erklaert/) nimmt sie in Block N auf (**1 Bestätigung**).
+4. Der nächste Block N+1 wird gemined (**2 Bestätigungen**).
+5. Dieser Prozess setzt sich mit jedem neuen Block fort.
+
+Jeder weitere Block macht es für einen Angreifer teurer, die Transaktion rückgängig zu machen, da er die gesamte Rechenleistung (Proof of Work) für alle darauf folgenden Blöcke erneut aufbringen müsste.
+
+---
+
+## Wie viele Bestätigungen benötigen Sie? {#how-many}
+
+| Wert der Transaktion | Empfohlene Bestätigungen | Zeit (~10 Min/Block) |
+|-------|--------------------------|----------------------|
+| < 10 € | 0–1 (unbestätigt oft akzeptabel) | 0–10 Min |
+| 10 € – 1.000 € | 1–3 | 10–30 Min |
+| 1.000 € – 10.000 € | 3–6 | 30–60 Min |
+| > 10.000 € | 6 | ~1 Stunde |
+| > 1.000.000 € | 12–20+ | 2–3,5 Stunden |
+
+---
+
+## Blockzeit: Warum dauert es ~10 Minuten? {#block-time}
+
+Bitcoin ist so programmiert, dass im Durchschnitt alle **10 Minuten** ein Block gefunden wird. Dies wird durch die [Schwierigkeitsanpassung](/blog/bitcoin-mining-erklaert/) gesteuert. 10 Minuten sind ein Kompromiss zwischen Schnelligkeit und der Zeit, die das Netzwerk benötigt, um weltweit synchron zu bleiben.
+
+---
+
+## Null-Bestätigung (0-conf) Transaktionen {#zero-conf}
+
+Eine Transaktion mit 0 Bestätigungen ist riskant, da sie theoretisch noch durch eine [Double-Spend-Attacke](#double-spend) ersetzt werden könnte. Für kleine Zahlungen (wie einen Kaffee) ist das Risiko oft vernachlässigbar, für größere Beträge sollten Sie immer mindestens eine Bestätigung abwarten.
+
+Das [Lightning Network](/blog/lightning-network/) löst dieses Problem für kleine Zahlungen komplett, da dort Zahlungen sofort und final abgeschlossen werden.
+
+---
+
+## Transaktion steckt fest? {#stuck}
+
+Wenn Ihre Transaktion auch nach Stunden nicht bestätigt wurde, liegt das meist an einer zu niedrigen [Transaktionsgebühr](/blog/bitcoin-transaktionsgebuehren/).
+- **RBF (Replace-By-Fee)**: Erlaubt es, die Gebühr nachträglich zu erhöhen.
+- **CPFP (Child Pays for Parent)**: Eine neue Transaktion mit hoher Gebühr "zieht" die alte Transaktion mit.
+
+---
+
+## Indexierungssignale
+
+**Slug:** `/blog/bitcoin-bestaetigungen/`
+**Sitemap Priorität:** 0.8
+**Interne Verlinkungsempfehlungen:**
+- [Bitcoin senden und empfangen](/blog/bitcoin-senden-empfangen/)
+- [Bitcoin Transaktionsgebühren](/blog/bitcoin-transaktionsgebuehren/)
+- [Bitcoin Mining erklärt](/blog/bitcoin-mining-erklaert/)
+- [Wie sicher ist Bitcoin?](/blog/wie-sicher-ist-bitcoin/)
+- [Lightning Network](/blog/lightning-network/)
