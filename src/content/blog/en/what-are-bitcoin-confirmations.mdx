@@ -1,0 +1,222 @@
+---
+title: "What Are Bitcoin Confirmations? How Transaction Security Works"
+description: "Learn what Bitcoin confirmations are, how many you need for a secure transaction, why the first confirmation takes ~10 minutes, and how block depth protects against double-spend attacks."
+date: 2026-04-17
+author: "James Hoffman"
+category: "bitcoin"
+tags: ["bitcoin confirmations", "btc", "transaction", "blockchain", "double spend", "security"]
+image: "/images/blog/bitcoin-transaction.png"
+imageAlt: "Bitcoin confirmations — transaction flowing through blockchain blocks"
+coinSymbols: ["BTC"]
+readingTime: 9
+featured: false
+locale: "en"
+---
+
+## Table of Contents
+
+1. [What Is a Bitcoin Confirmation?](#definition)
+2. [How the Confirmation Process Works](#process)
+3. [How Many Confirmations Do You Need?](#how-many)
+4. [Block Time and Why It's ~10 Minutes](#block-time)
+5. [Zero-Confirmation (Unconfirmed) Transactions](#zero-conf)
+6. [The Double-Spend Attack Explained](#double-spend)
+7. [Transaction Stuck? How to Speed It Up](#stuck)
+8. [Confirmations by Transaction Size](#by-size)
+9. [FAQs](#faqs)
+
+---
+
+## What Is a Bitcoin Confirmation? {#definition}
+
+A **Bitcoin confirmation** is a metric that indicates how deeply a transaction has been embedded in the blockchain. Each time a new block is mined on top of the block containing your transaction, your confirmation count increases by 1.
+
+- **0 confirmations** = Transaction has been broadcast but not yet included in a block (in the mempool)
+- **1 confirmation** = Transaction included in one block
+- **3 confirmations** = Two more blocks mined on top — very secure for most transactions
+- **6 confirmations** = Gold standard — used by most exchanges for large amounts
+
+> **Featured Snippet Answer:** A Bitcoin confirmation is each block that is mined on top of the block containing your transaction. One confirmation means the transaction is in the blockchain. Each additional confirmation makes reversing the transaction exponentially harder. Most exchanges require 3–6 confirmations before crediting funds. Six confirmations is the traditional gold standard, representing approximately one hour of elapsed time.
+
+Understanding confirmations is key to [sending and receiving Bitcoin](/en/blog/how-to-send-receive-bitcoin/) safely.
+
+---
+
+## How the Confirmation Process Works {#process}
+
+```
+Bitcoin Transaction Life Cycle:
+
+1. You broadcast transaction from wallet
+          ↓
+2. Transaction enters the MEMPOOL
+   (visible on block explorers, 0 confirmations)
+          ↓
+3. Miner picks up transaction (prioritizes by fee)
+          ↓
+4. Miner finds a valid block hash (Proof of Work)
+   → Transaction included in Block N
+   → 1 CONFIRMATION ✓
+          ↓
+5. Next miner builds on Block N
+   → Block N+1 mined
+   → 2 CONFIRMATIONS ✓
+          ↓
+6. Next miner builds on Block N+1
+   → Block N+2 mined
+   → 3 CONFIRMATIONS ✓
+          ↓
+...continues indefinitely
+```
+
+Each additional block mined on top of your transaction makes reversing it exponentially more expensive because an attacker would need to redo all that Proof of Work.
+
+---
+
+## How Many Confirmations Do You Need? {#how-many}
+
+The required number of confirmations depends on the **transaction value** and **risk tolerance**:
+
+| Value | Recommended Confirmations | Time (~10 min/block) |
+|-------|--------------------------|----------------------|
+| < $10 | 0–1 (unconfirmed acceptable for small amounts) | 0–10 min |
+| $10 – $1,000 | 1–3 | 10–30 min |
+| $1,000 – $10,000 | 3–6 | 30–60 min |
+| $10,000 – $1,000,000 | 6 | ~1 hour |
+| $1,000,000+ | 12–20+ | 2–3.5 hours |
+
+**Why 6 confirmations as the "gold standard"?**
+
+Satoshi Nakamoto calculated in the Bitcoin whitepaper that 6 confirmations provides a security level where a 51% attacker with 10% of total hash rate would have only a 0.1% chance of successfully reversing the transaction. With today's massive hash rate (~600 EH/s), 6 confirmations is extraordinarily secure for any practically-sized transaction.
+
+---
+
+## Block Time and Why It's ~10 Minutes {#block-time}
+
+Bitcoin's protocol targets **one block every 10 minutes** on average. This is enforced through the **difficulty adjustment** mechanism — every 2,016 blocks (~2 weeks), mining difficulty automatically adjusts based on how fast blocks are being found.
+
+**Why 10 minutes specifically?**
+
+Satoshi chose 10 minutes as a balance between:
+- **Security** (enough time for the network to reach consensus before next block)
+- **Speed** (fast enough for most practical transactions)
+- **Resistance to orphan blocks** (blocks mined nearly simultaneously that get rejected)
+
+### Block Time Variability
+
+Importantly, 10 minutes is an *average* — individual block times vary significantly:
+
+| Block Time | Probability |
+|------------|-------------|
+| < 1 minute | ~9% |
+| 1–5 minutes | ~23% |
+| 5–10 minutes | ~23% |
+| 10–20 minutes | ~23% |
+| 20–30 minutes | ~13% |
+| > 30 minutes | ~9% |
+
+This explains why sometimes your first confirmation arrives in 3 minutes, other times 25 minutes.
+
+Learn more about [Bitcoin mining and block production](/en/blog/bitcoin-mining/).
+
+---
+
+## Zero-Confirmation (Unconfirmed) Transactions {#zero-conf}
+
+A **zero-confirmation transaction** (0-conf) is one that has been broadcast to the network but hasn't been included in a block yet. It exists only in the mempool.
+
+**Should you trust 0-conf transactions?**
+
+For **very small amounts** (coffee, micropayments), 0-conf is generally acceptable in practice because:
+- Double-spend attacks require significant cost and are easily detected
+- Merchants can use tools to detect double-spend attempts
+- Lightning Network payments eliminate this concern entirely
+
+For **significant amounts**, always wait for at least 1 confirmation.
+
+The [Lightning Network](/en/blog/lightning-network/) bypasses the confirmation issue entirely for micropayments — enabling instant, final payments with zero confirmation required.
+
+---
+
+## The Double-Spend Attack Explained {#double-spend}
+
+A **double-spend attack** is when someone attempts to spend the same Bitcoin twice — sending it to a merchant, then attempting to reverse the transaction and redirect those funds elsewhere.
+
+```
+Double-Spend Attack Scenario:
+1. Attacker sends 1 BTC to merchant (waits for goods)
+2. Simultaneously, attacker mines a secret chain where
+   those 1 BTC are sent back to their own wallet
+3. If attacker can make their secret chain longer,
+   the honest chain reorganizes → merchant's payment undone
+4. Attacker gets goods + keeps 1 BTC
+
+Defense: More confirmations = exponentially harder attack
+```
+
+To successfully double-spend a 6-confirmation transaction, an attacker would need:
+- More than 50% of Bitcoin's total hash rate
+- Sustained control for ~1 hour
+- Cost: Hundreds of millions in hardware + electricity
+- Risk: Bitcoin price collapses if attack detected, making the attack unprofitable
+
+This is why [Bitcoin is considered extremely secure](/en/blog/how-secure-is-bitcoin/).
+
+---
+
+## Transaction Stuck? How to Speed It Up {#stuck}
+
+Transactions can get "stuck" in the mempool when you set a fee too low for current network conditions. Solutions:
+
+### RBF (Replace-By-Fee)
+If your wallet supports RBF, you can broadcast a new version of the transaction with a higher fee. The higher-fee version will be mined preferentially.
+
+### CPFP (Child Pays for Parent)
+Create a new transaction spending the unconfirmed output, paying a high-enough fee that miners are incentivized to confirm both (the "parent" and the "child" transaction).
+
+### Check Mempool Conditions First
+Before sending, check [mempool.space](https://mempool.space) for current fee rates required for the next 1, 3, or 6 blocks.
+
+Learn more about [Bitcoin transaction fees](/en/blog/bitcoin-transaction-fees/) and how to set the right fee for your needs.
+
+---
+
+## Common Confirmation Mistakes
+
+❌ **Waiting for confirmations on Lightning payments** — Lightning payments are instant. Confirmations only apply to on-chain transactions.
+
+❌ **Sending large amounts with 0-confirmation** — Always wait for at least 1 confirmation for significant value transfers.
+
+❌ **Confusing exchange credits with network confirmations** — Exchanges may credit your account before their internal threshold and before the block explorer shows 6 confirmations.
+
+---
+
+## Frequently Asked Questions {#faqs}
+
+### How long does 1 Bitcoin confirmation take?
+On average, ~10 minutes. But due to probability, actual times range from under 1 minute to over 30 minutes. During high network congestion, finding a block still takes 10 minutes — but getting *your* transaction picked up can take longer if fees are too low.
+
+### Why do some exchanges require 3 confirmations and others 6?
+Risk tolerance and transaction size thresholds vary by exchange policy. Some exchanges use 3 confirmations for standard deposits and 6 for very large amounts. 3 confirmations is generally sufficient for amounts under $10,000.
+
+### Can a confirmed Bitcoin transaction be reversed?
+Once confirmed, a transaction is extremely difficult to reverse. After 6 confirmations, reversal requires a 51% attack on the entire network — economically catastrophic for the attacker. For all practical purposes, 6+ confirmations means permanent and irreversible settlement.
+
+### Why is my transaction showing in mempool but not confirmed?
+Your fee is likely too low for current network conditions. Miners prioritize transactions with higher fees per byte. Visit mempool.space to check current fee rates and use RBF to bump your fee if your wallet supports it.
+
+---
+
+## Indexing Signals
+
+**Slug:** `/en/blog/what-are-bitcoin-confirmations/`
+**Sitemap Priority:** 0.8
+**Content Type:** Supporting — Transactions Cluster
+
+**Suggested Internal Links:**
+- [How to Send and Receive Bitcoin](/en/blog/how-to-send-receive-bitcoin/) — "sending transactions"
+- [Bitcoin Transaction Fees](/en/blog/bitcoin-transaction-fees/) — "setting fees"
+- [Bitcoin Mining](/en/blog/bitcoin-mining/) — "how blocks are produced"
+- [How Secure is Bitcoin?](/en/blog/how-secure-is-bitcoin/) — "51% attacks"
+- [Lightning Network](/en/blog/lightning-network/) — "instant payments"
+- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) — "network consensus"

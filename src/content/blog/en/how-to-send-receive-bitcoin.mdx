@@ -1,0 +1,281 @@
+---
+title: "How to Send and Receive Bitcoin: A Step-by-Step Guide"
+description: "Learn exactly how to send and receive Bitcoin safely — from generating addresses to understanding UTXOs, fee selection, and transaction confirmation. A complete practical guide for all levels."
+date: 2026-04-17
+author: "James Hoffman"
+category: "bitcoin"
+tags: ["send bitcoin", "receive bitcoin", "btc", "transaction", "wallet address", "utxo"]
+image: "/images/blog/bitcoin-transaction.png"
+imageAlt: "How to send and receive Bitcoin — transaction flow visualization"
+coinSymbols: ["BTC"]
+readingTime: 10
+featured: false
+locale: "en"
+---
+
+## Table of Contents
+
+1. [Before You Start: Prerequisites](#prerequisites)
+2. [How to Receive Bitcoin](#receive)
+3. [How to Send Bitcoin](#send)
+4. [Understanding UTXOs](#utxos)
+5. [Choosing the Right Fee](#fees)
+6. [Verifying Your Transaction](#verify)
+7. [Bitcoin on Lightning Network](#lightning)
+8. [Common Transaction Mistakes](#mistakes)
+9. [FAQs](#faqs)
+
+---
+
+## Before You Start: Prerequisites {#prerequisites}
+
+Before sending or receiving Bitcoin, ensure you have:
+
+1. **A Bitcoin wallet** — hardware (Ledger, Trezor), software (Electrum, Sparrow), or mobile (Blue Wallet, Muun). See our [best Bitcoin wallets guide](/en/blog/best-bitcoin-wallets/).
+
+2. **Your private keys secured** — Your seed phrase must be backed up offline. Never stored digitally. Learn about [public vs private keys](/en/blog/public-private-keys/).
+
+3. **Some BTC** — You need BTC to send. To receive for the first time, you just need a wallet address.
+
+4. **Basic fee awareness** — Check [mempool.space](https://mempool.space) for current network conditions before large transactions. Learn about [Bitcoin fees](/en/blog/bitcoin-transaction-fees/).
+
+> **Featured Snippet Answer:** To send Bitcoin: open your wallet, enter the recipient's Bitcoin address, enter the amount, select a fee rate (in sat/vbyte) based on urgency, review all details carefully, and confirm. To receive Bitcoin: open your wallet, find "Receive," generate a Bitcoin address, and share it with the sender. After sending, wait for 1–6 confirmations depending on the transaction value.
+
+---
+
+## How to Receive Bitcoin {#receive}
+
+Receiving Bitcoin is simple — you just need to share your wallet address.
+
+### Step-by-Step: Receiving BTC
+
+```
+Receive Bitcoin Flow:
+1. Open your Bitcoin wallet app
+        ↓
+2. Navigate to "Receive" or "Receive BTC"
+        ↓
+3. Wallet generates a Bitcoin address (e.g., bc1q...)
+        ↓
+4. Share this address with the sender:
+   - Copy-paste the text address
+   - OR share the QR code (for in-person transactions)
+        ↓
+5. Wait for sender to initiate transaction
+        ↓
+6. See "0 confirmations" appear in your wallet
+        ↓
+7. After 3–6 confirmations, funds are fully secured
+```
+
+### Important Rules for Receiving
+
+**✅ Generate a new address for each transaction** — Most modern wallets do this automatically (HD wallets — Hierarchical Deterministic). This is a Bitcoin privacy best practice. Even though reusing addresses works technically, it links transactions together on the public blockchain.
+
+**✅ Verify the address before sharing** — If your device might be compromised with malware, specially verify the address shown on your hardware wallet's screen.
+
+**✅ Double-check the address starting characters** — At minimum, verify the first 4 and last 4 characters match between what you generated and what the sender sees. Clipboard hijackers replace addresses mid-copy.
+
+### Address Formats
+
+| Format | Example | Notes |
+|--------|---------|-------|
+| Legacy (P2PKH) | 1A1zP1eP5QGefis... | Oldest; highest fees |
+| P2SH | 3J98t1WpEZ73CNm... | SegWit compatible |
+| Native SegWit | bc1q09vm5lfy0j5... | Recommended — lower fees |
+| Taproot | bc1p5d7rjq7g6rdk... | Newest; best for privacy |
+
+---
+
+## How to Send Bitcoin {#send}
+
+Sending Bitcoin requires careful attention — transactions are **irreversible**. There is no undo button.
+
+### Step-by-Step: Sending BTC
+
+```
+Send Bitcoin Flow:
+1. Open your Bitcoin wallet
+        ↓
+2. Navigate to "Send" or "Send BTC"
+        ↓
+3. PASTE the recipient's Bitcoin address
+   (Never manually type — paste and verify)
+        ↓
+4. Enter the amount:
+   - Specific BTC amount
+   - Or specific fiat amount (wallet estimates BTC equivalent)
+   - Or "Send Max" (sends entire wallet balance minus fee)
+        ↓
+5. Select fee rate (sat/vbyte):
+   - Low: Slow confirmation (hours to days)
+   - Medium: Normal confirmation (~30 min)
+   - High: Fast confirmation (~10 min)
+        ↓
+6. VERIFY EVERYTHING before confirming:
+   ✓ Recipient address (first + last 4 chars minimum)
+   ✓ Amount correct?
+   ✓ Fee acceptable?
+        ↓
+7. Confirm/Sign transaction
+   (Hardware wallet: physically confirm on device)
+        ↓
+8. Transaction broadcast to network
+        ↓
+9. Wait for confirmations
+```
+
+### Critical Safety: Always Verify Address Twice
+
+The number one cause of lost Bitcoin is sending to the wrong address — whether through typos, clipboard hijackers, or phishing. **Always verify:**
+
+1. Copy the address
+2. Paste it in your wallet's "Send to" field
+3. Verify the first 4 characters AND last 4 characters match the original
+4. On hardware wallets: verify the address shown on the wallet screen
+5. Only then proceed
+
+---
+
+## Understanding UTXOs {#utxos}
+
+Bitcoin doesn't work like a bank account with a running balance. Instead, Bitcoin uses a **UTXO** (Unspent Transaction Output) model.
+
+```
+UTXO Model Example:
+Alice receives:
+  - 0.5 BTC from Bob (UTXO #1)
+  - 0.3 BTC from Carol (UTXO #2)
+  - 0.2 BTC from Dave (UTXO #3)
+
+Alice's "balance" = 3 UTXOs: 0.5 + 0.3 + 0.2 = 1.0 BTC
+
+Alice sends 0.6 BTC to Eve:
+  - Wallet automatically selects UTXO #1 (0.5) + UTXO #2 (0.3) = 0.8 BTC
+  - Input: 0.8 BTC
+  - Output #1: 0.6 BTC → Eve
+  - Output #2: 0.19 BTC → Alice (change, back to her own wallet)
+  - Fee: 0.01 BTC → Miner
+```
+
+**Practical implications of UTXOs:**
+
+1. **Coin selection matters** — Advanced wallets (Sparrow, Electrum) let you manually select which UTXOs to use, improving privacy and fee efficiency.
+
+2. **More inputs = bigger transaction = higher fee** — If you have many small UTXOs, consider consolidating during low-fee periods.
+
+3. **Change addresses are normal** — Seeing two outputs in your transaction (recipient + yourself) is completely normal. Your wallet automatically handles change.
+
+---
+
+## Choosing the Right Fee {#fees}
+
+Fee selection is one of the most important decisions when sending Bitcoin. Check [current fee rates](/en/blog/bitcoin-transaction-fees/) at mempool.space before every significant transaction.
+
+| Scenario | Fee Recommendation |
+|----------|-------------------|
+| Paying for coffee (Lightning preferred) | Use Lightning instead |
+| Non-urgent personal transfer | Low priority (1–5 sat/vbyte) |
+| Business payment (1-2 hour window) | Medium priority (~10-30 sat/vbyte) |
+| Time-sensitive (need next block) | High priority (see mempool.space) |
+| Large exchange deposit | Medium-high (check exchange min confirmations) |
+| During a congestion event | High priority or wait |
+
+---
+
+## Verifying Your Transaction {#verify}
+
+After sending, anyone can verify your transaction status on the public blockchain using a **block explorer**.
+
+### Block Explorers
+
+| Explorer | URL | Features |
+|---------|-----|---------|
+| Mempool.space | mempool.space | Best UX, mempool visualization |
+| Blockstream.info | blockstream.info | Privacy-focused |
+| Blockchain.com | blockchain.com/explorer | Popular, good for beginners |
+
+**To verify a transaction:**
+1. Copy your **Transaction ID (TXID)** from your wallet
+2. Paste it into a block explorer search bar
+3. See: status (pending/confirmed), confirmations, inputs, outputs, fee paid
+
+Learn about [Bitcoin confirmations](/en/blog/what-are-bitcoin-confirmations/) to understand what different confirmation counts mean.
+
+---
+
+## Bitcoin on Lightning Network {#lightning}
+
+For instant payments, many users now use the [Lightning Network](/en/blog/lightning-network/) instead of on-chain Bitcoin.
+
+```
+Lightning Send vs. On-Chain Send:
+Lightning: Near-instant, near-free, private
+On-Chain: 10+ min, variable fee, public blockchain record
+
+Use Lightning for:
+✅ Small everyday payments (<$500)
+✅ When instant settlement is needed
+✅ Micropayments/streaming money
+✅ Recurring small payments
+
+Use On-Chain for:
+✅ Large transfers ($1,000+)
+✅ Long-term storage moves
+✅ Exchange deposits/withdrawals
+✅ When the recipient only accepts on-chain
+```
+
+Lightning addresses look like: `username@domain.com` (LNURL)
+Or as a **Lightning Invoice**: `lnbc50u1p3...` (expires after set time)
+
+---
+
+## Common Transaction Mistakes {#mistakes}
+
+❌ **Sending to the wrong address** — Irreversible. Always verify first + last 4 characters.
+
+❌ **Sending to an Ethereum address instead of Bitcoin** — These are incompatible networks. Always use correct Bitcoin addresses for Bitcoin transactions.
+
+❌ **Using too low a fee** — Transaction may take days or never confirm. Use RBF if stuck.
+
+❌ **Forgetting about exchange minimum confirmations** — Exchanges typically require 3–6 confirmations before crediting your deposit. Account for this in time estimates.
+
+❌ **Not testing with a small amount first** — For new recipients or first use of a new wallet, always send a small test amount and verify receipt before the main transfer.
+
+❌ **Sharing your receiving address publicly** — While technically safe, publicly linking an address to your identity connects blockchain analytics to your real identity.
+
+---
+
+## Frequently Asked Questions {#faqs}
+
+### How long does a Bitcoin transfer take?
+The first confirmation takes ~10 minutes on average (but varies widely from 1–60+ min). For most purposes, 3 confirmations (~30 min average) is sufficient. For large amounts or exchange deposits, wait for 6 confirmations (~1 hour average).
+
+### Can I cancel a Bitcoin transaction?
+Once broadcast to the network, you can't cancel a Bitcoin transaction — but if it's unconfirmed (still in mempool), you may be able to use RBF (Replace-By-Fee) to replace it with a higher-fee version to the same or different address.
+
+### What if I send Bitcoin to the wrong address?
+Unfortunately, Bitcoin transactions are irreversible. If the address belongs to someone else, they can choose to send it back but aren't required to. This is why verifying addresses is critically important. If the address doesn't exist or is invalid, many wallets will reject the transaction before broadcasting.
+
+### Do I need to be online to receive Bitcoin?
+No — Bitcoin can be sent to your address whether you're online or not. Your wallet simply syncs when it reconnects to see new transactions addressed to you.
+
+### What is a Bitcoin address QR code?
+A QR code is a visual representation of your Bitcoin address that can be scanned by a sender's wallet camera for convenience and to avoid typos. They're widely used for in-person Bitcoin payments.
+
+---
+
+## Indexing Signals
+
+**Slug:** `/en/blog/how-to-send-receive-bitcoin/`
+**Sitemap Priority:** 0.8
+**Content Type:** Supporting — Transactions Cluster
+
+**Suggested Internal Links:**
+- [Bitcoin Transaction Fees](/en/blog/bitcoin-transaction-fees/) — "setting the right fee"
+- [Bitcoin Confirmations](/en/blog/what-are-bitcoin-confirmations/) — "confirmation count"
+- [Best Bitcoin Wallets](/en/blog/best-bitcoin-wallets/) — "wallet choice"
+- [Public vs Private Keys](/en/blog/public-private-keys/) — "address security"
+- [Lightning Network](/en/blog/lightning-network/) — "instant payments"
+- [Is Bitcoin Anonymous?](/en/blog/is-bitcoin-anonymous/) — "address privacy"
