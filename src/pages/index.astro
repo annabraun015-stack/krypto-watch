@@ -12,8 +12,11 @@ const locale = 'de';
 const tr = t(locale);
 
 const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
+console.log(`[DEBUG DE] Total German posts found: ${allPosts.length}`);
 const sorted = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const latestPosts = sorted.slice(0, 6);
+console.log(`[DEBUG DE] Latest posts count: ${latestPosts.length}`);
+latestPosts.forEach(p => console.log(`- ${p.data.title} (${p.id})`));
 const featuredPosts = allPosts.filter((p) => p.data.featured).slice(0, 3);
 
 const homepageSchema = [

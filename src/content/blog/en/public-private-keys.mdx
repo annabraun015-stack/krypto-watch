@@ -28,7 +28,7 @@ locale: "en"
 
 ---
 
-## The Core Concept: Your Keys = Your Bitcoin {#core-concept}
+<h2 id="core-concept">The Core Concept: Your Keys = Your Bitcoin</h2>
 
 Bitcoin's most important maxim is: **"Not your keys, not your coins."**
 
@@ -40,7 +40,7 @@ This is foundational to understanding [how to store Bitcoin safely](/en/blog/how
 
 ---
 
-## What Is a Private Key? {#private-key}
+<h2 id="private-key">What Is a Private Key?</h2>
 
 A **private key** is a randomly generated 256-bit number. That's a number between 1 and 2²⁵⁶ — more possibilities than there are atoms in the observable universe.
 
@@ -63,7 +63,7 @@ The number space is `2^256 = 10^77`. If every computer on Earth tried to guess a
 
 ---
 
-## What Is a Public Key? {#public-key}
+<h2 id="public-key">What Is a Public Key?</h2>
 
 A **public key** is derived from the private key using **Elliptic Curve Cryptography (ECC)** — specifically the **secp256k1** curve. This is a mathematical one-way function: you can easily compute the public key from the private key, but **not the reverse**.
 
@@ -90,7 +90,7 @@ The public key can be safely shared. It's used by the network to verify that a t
 
 ---
 
-## Bitcoin Address: Derived from Public Key {#address}
+<h2 id="address">Bitcoin Address: Derived from Public Key</h2>
 
 A **Bitcoin address** is a compressed, encoded version of the public key. It's what you share when someone wants to send you BTC.
 
@@ -109,7 +109,7 @@ Learn how [transactions use addresses](/en/blog/how-to-send-receive-bitcoin/) an
 
 ---
 
-## How a Bitcoin Transaction Uses Keys {#transaction}
+<h2 id="transaction">How a Bitcoin Transaction Uses Keys</h2>
 
 ```
 Sending Bitcoin Flow:
@@ -133,7 +133,7 @@ The **digital signature** proves you authorized the transaction without revealin
 
 ---
 
-## Seed Phrases: The Master Key {#seed-phrase}
+<h2 id="seed-phrase">Seed Phrases: The Master Key</h2>
 
 Modern wallets don't ask you to memorize a 256-bit number. Instead, they generate a **seed phrase** (BIP-39 standard) — 12 or 24 common English words that encode your master private key.
 
@@ -162,7 +162,7 @@ witch collapse practice feed shame open despair creek road again ice least
 
 ---
 
-## Key Security Best Practices {#security}
+<h2 id="security">Key Security Best Practices</h2>
 
 **🔒 Generate keys offline:** Use a hardware wallet (Ledger, Trezor) or an air-gapped computer.
 
@@ -178,7 +178,7 @@ See our complete guide to [Bitcoin wallet security](/en/blog/best-bitcoin-wallet
 
 ---
 
-## Key Cryptography: The Math Explained Simply {#cryptography}
+<h2 id="cryptography">Key Cryptography: The Math Explained Simply</h2>
 
 Bitcoin uses **Elliptic Curve Digital Signature Algorithm (ECDSA)** for signing transactions, and from 2021, also **Schnorr signatures** (via Taproot).
 
@@ -193,7 +193,7 @@ The mathematical properties of elliptic curves make it trivial to verify signatu
 
 ---
 
-## Common Key-Related Mistakes {#mistakes}
+<h2 id="mistakes">Common Key-Related Mistakes</h2>
 
 ❌ **Storing seed phrase in cloud** — Google Drive, Dropbox, or iCloud are hackable. Never.
 
@@ -211,7 +211,7 @@ The mathematical properties of elliptic curves make it trivial to verify signatu
 
 ---
 
-## Frequently Asked Questions {#faqs}
+<h2 id="faqs">Frequently Asked Questions</h2>
 
 ### What happens if I lose my private key?
 Your Bitcoin is permanently inaccessible. There is no password reset, no customer support, no recovery mechanism. The only recourse is finding your seed phrase backup.

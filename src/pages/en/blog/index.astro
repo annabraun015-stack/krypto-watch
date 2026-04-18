@@ -85,7 +85,7 @@ const blogSchema = {
             <nav class="pagination" aria-label="Page navigation">
               {page > 1 && (
                 <a href={`/en/blog/?page=${page - 1}${catFilter ? `&cat=${catFilter}` : ''}`} class="pagination-btn">
-                  ← {tr.blog.olderPosts}
+                  ← {tr.blog.newerPosts}
                 </a>
               )}
               <span class="pagination-info" aria-live="polite">
@@ -93,7 +93,7 @@ const blogSchema = {
               </span>
               {page < totalPages && (
                 <a href={`/en/blog/?page=${page + 1}${catFilter ? `&cat=${catFilter}` : ''}`} class="pagination-btn">
-                  {tr.blog.newerPosts} →
+                  {tr.blog.olderPosts} →
                 </a>
               )}
             </nav>

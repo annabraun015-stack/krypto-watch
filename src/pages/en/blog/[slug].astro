@@ -1,22 +1,18 @@
 ---
-import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
 import { siteConfig } from '../../../config/site';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
-  return posts.map((post) => {
-    const slug = post.id.replace(/^en\//, '').replace(/\.mdx?$/, '');
-    return { params: { slug }, props: { post } };
-  });
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/en/blog/');
+
+const post = await getEntry('blog', `en/${slug}`);
+
+if (!post || post.data.draft) {
+  return new Response(null, { status: 404, statusText: 'Not found' });
 }
 
-interface Props {
-  post: CollectionEntry<'blog'>;
-}
-
-const { post } = Astro.props;
 const { title, description, date, author, category, tags, image, imageAlt, readingTime, coinSymbols } = post.data;
 const { Content } = await render(post);
 

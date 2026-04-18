@@ -28,7 +28,7 @@ locale: "en"
 
 ---
 
-## Why Bitcoin Needed a Second Layer {#why-needed}
+<h2 id="why-needed">Why Bitcoin Needed a Second Layer</h2>
 
 Bitcoin's base layer (Layer 1) is designed to be a secure, immutable settlement layer — not a high-speed payment network. Its [~10 minute block times](/en/blog/what-are-bitcoin-confirmations/) and limited throughput (~7 transactions per second on-chain) make it unsuitable for everyday small purchases.
 
@@ -45,7 +45,7 @@ The Lightning Network solves this by taking transactions **off-chain** while mai
 
 ---
 
-## What Is the Lightning Network? {#what-is}
+<h2 id="what-is">What Is the Lightning Network?</h2>
 
 The Lightning Network is a **second-layer payment protocol** built on top of Bitcoin. It was first proposed by Joseph Poon and Thaddeus Dryja in their 2015 whitepaper "The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments."
 
@@ -59,7 +59,7 @@ The Lightning Network is a **second-layer payment protocol** built on top of Bit
 
 ---
 
-## How Payment Channels Work {#payment-channels}
+<h2 id="payment-channels">How Payment Channels Work</h2>
 
 The fundamental building block of Lightning is the **payment channel** — a bidirectional channel between two parties.
 
@@ -92,7 +92,7 @@ Alice receives 0.105 BTC, Bob receives 0.095 BTC
 
 ---
 
-## Routing: Multi-Hop Payments {#routing}
+<h2 id="routing">Routing: Multi-Hop Payments</h2>
 
 The real power comes from routing payments through a network of channels — enabling payments between parties who don't have a direct channel.
 
@@ -119,7 +119,7 @@ For routing to work, each channel in the path must have sufficient **liquidity**
 
 ---
 
-## Lightning Network Architecture Diagram {#architecture}
+<h2 id="architecture">Lightning Network Architecture Diagram</h2>
 
 ```
 Lightning Network Topology (simplified):
@@ -143,7 +143,7 @@ Even without direct channel, payments route through hubs
 
 ---
 
-## Lightning vs. On-Chain Bitcoin {#comparison}
+<h2 id="comparison">Lightning vs. On-Chain Bitcoin</h2>
 
 | Property | Lightning Network | On-Chain Bitcoin |
 |----------|-----------------|-----------------|
@@ -169,7 +169,7 @@ Even without direct channel, payments route through hubs
 
 ---
 
-## Real-World Lightning Use Cases {#use-cases}
+<h2 id="use-cases">Real-World Lightning Use Cases</h2>
 
 ### 1. Bitcoin Beach, El Salvador
 A circular Bitcoin economy in El Zonte, El Salvador runs almost entirely on Lightning. Tourists, merchants, service providers, and families transact daily with sub-cent fees.
@@ -188,7 +188,7 @@ The Nostr decentralized social protocol uses Lightning for "zaps" — instant sa
 
 ---
 
-## Getting Started with Lightning Payments {#getting-started}
+<h2 id="getting-started">Getting Started with Lightning Payments</h2>
 
 ### Beginner (Custodial — Easy)
 1. Download **Wallet of Satoshi** (iOS/Android)
@@ -216,7 +216,7 @@ Learn about [Bitcoin nodes](/en/blog/what-is-a-bitcoin-node/) for the underlying
 
 ---
 
-## Lightning Network Statistics (2026) {#stats}
+<h2 id="stats">Lightning Network Statistics (2026)</h2>
 
 | Metric | Value (2026) |
 |--------|-------------|
@@ -231,7 +231,7 @@ Learn about [Bitcoin nodes](/en/blog/what-is-a-bitcoin-node/) for the underlying
 
 ---
 
-## Frequently Asked Questions {#faqs}
+<h2 id="faqs">Frequently Asked Questions</h2>
 
 ### Is the Lightning Network safe?
 Lightning has robust cryptographic guarantees. The main risks are: (1) if a channel counterparty tries to cheat (watchtowers protect against this), (2) if you go offline for extended periods while a channel closes, (3) custodial wallets (resolved by using non-custodial). For everyday use with reputable wallets, Lightning is safe.

@@ -26,7 +26,7 @@ locale: "de"
 
 ---
 
-## Was ist eine Bitcoin-Bestätigung? {#definition}
+<h2 id="definition">Was ist eine Bitcoin-Bestätigung?</h2>
 
 Eine **Bitcoin-Bestätigung** ist ein Maß dafür, wie tief eine Transaktion in der Blockchain verankert ist. Jedes Mal, wenn ein neuer Block auf den Block gemined wird, der Ihre Transaktion enthält, erhöht sich die Anzahl der Bestätigungen um 1.
 
@@ -39,7 +39,7 @@ Eine **Bitcoin-Bestätigung** ist ein Maß dafür, wie tief eine Transaktion in 
 
 ---
 
-## Wie der Bestätigungsprozess funktioniert {#process}
+<h2 id="process">Wie der Bestätigungsprozess funktioniert</h2>
 
 1. Sie senden eine Transaktion.
 2. Sie landet im **Mempool** (0 Bestätigungen).
@@ -51,7 +51,7 @@ Jeder weitere Block macht es für einen Angreifer teurer, die Transaktion rückg
 
 ---
 
-## Wie viele Bestätigungen benötigen Sie? {#how-many}
+<h2 id="how-many">Wie viele Bestätigungen benötigen Sie?</h2>
 
 | Wert der Transaktion | Empfohlene Bestätigungen | Zeit (~10 Min/Block) |
 |-------|--------------------------|----------------------|
@@ -63,13 +63,13 @@ Jeder weitere Block macht es für einen Angreifer teurer, die Transaktion rückg
 
 ---
 
-## Blockzeit: Warum dauert es ~10 Minuten? {#block-time}
+<h2 id="block-time">Blockzeit: Warum dauert es ~10 Minuten?</h2>
 
 Bitcoin ist so programmiert, dass im Durchschnitt alle **10 Minuten** ein Block gefunden wird. Dies wird durch die [Schwierigkeitsanpassung](/blog/bitcoin-mining-erklaert/) gesteuert. 10 Minuten sind ein Kompromiss zwischen Schnelligkeit und der Zeit, die das Netzwerk benötigt, um weltweit synchron zu bleiben.
 
 ---
 
-## Null-Bestätigung (0-conf) Transaktionen {#zero-conf}
+<h2 id="zero-conf">Null-Bestätigung (0-conf) Transaktionen</h2>
 
 Eine Transaktion mit 0 Bestätigungen ist riskant, da sie theoretisch noch durch eine [Double-Spend-Attacke](#double-spend) ersetzt werden könnte. Für kleine Zahlungen (wie einen Kaffee) ist das Risiko oft vernachlässigbar, für größere Beträge sollten Sie immer mindestens eine Bestätigung abwarten.
 
@@ -77,7 +77,7 @@ Das [Lightning Network](/blog/lightning-network/) löst dieses Problem für klei
 
 ---
 
-## Transaktion steckt fest? {#stuck}
+<h2 id="stuck">Transaktion steckt fest?</h2>
 
 Wenn Ihre Transaktion auch nach Stunden nicht bestätigt wurde, liegt das meist an einer zu niedrigen [Transaktionsgebühr](/blog/bitcoin-transaktionsgebuehren/).
 - **RBF (Replace-By-Fee)**: Erlaubt es, die Gebühr nachträglich zu erhöhen.
