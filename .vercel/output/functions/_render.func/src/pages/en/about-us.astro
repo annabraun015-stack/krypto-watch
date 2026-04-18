@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { siteConfig } from '../../config/site';
+
+const locale = 'en';
+const tr = t(locale);
+
+const teamMembers = [
+  { name: 'Dr. Marcus Richter', role: 'Editor-in-Chief & Bitcoin Analyst', avatar: 'M', bio: 'Marcus is an economist with over 10 years in traditional finance and 7 years in the crypto space.' },
+  { name: 'Sophia Wagner', role: 'Ethereum & DeFi Expert', avatar: 'S', bio: 'Sophia studied blockchain technology at ETH Zurich and has followed the Ethereum ecosystem since the genesis block.' },
+  { name: 'Dr. Lena Kaufmann', role: 'Regulation & Compliance', avatar: 'L', bio: 'Lena is a lawyer specializing in financial market law and crypto regulation.' },
+  { name: 'Alex Turner', role: 'Market Analyst', avatar: 'A', bio: 'Alex combines technical analysis with on-chain data interpretation for precise market insights.' },
+];
+---
+
+<BaseLayout
+  title={tr.seo.aboutTitle}
+  description={tr.seo.aboutDesc}
+  locale="en"
+  canonical={`${siteConfig.url}/en/about-us/`}
+  breadcrumbs={[
+    { name: 'KryptoWatch', url: siteConfig.url },
+    { name: 'About Us', url: `${siteConfig.url}/en/about-us/` },
+  ]}
+>
+  <section class="page-hero" aria-labelledby="about-en-title">
+    <div class="container">
+      <div class="badge badge-brand" style="margin-bottom: 1rem;">🏛️ About Us</div>
+      <h1 id="about-en-title" class="page-hero-title">{tr.about.title}</h1>
+      <p class="page-hero-subtitle">{tr.about.subtitle}</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="mission-en-heading">
+    <div class="container about-grid">
+      <div>
+        <p class="section-label">{tr.about.mission}</p>
+        <h2 id="mission-en-heading" class="about-section-title">Why KryptoWatch?</h2>
+        <p class="about-body">{tr.about.missionText}</p>
+        <p class="about-body">Founded in 2021, we are today one of the leading crypto intelligence platforms in Europe, with a growing English-language audience. Our team of economists, blockchain developers, and lawyers brings a unique perspective to the market.</p>
+        <div class="about-stats" role="list">
+          {[{num:'2021',label:'Founded'},{num:'50K+',label:'Monthly Readers'},{num:'500+',label:'Analyses'},{num:'10',label:'Experts'}].map((s) => (
+            <div class="about-stat" role="listitem">
+              <div class="about-stat-num">{s.num}</div>
+              <div class="about-stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-card"><div style="font-size:4rem;margin-bottom:1rem;">🔍</div><h3 style="font-family:var(--font-display);font-weight:700;color:var(--color-text-primary);margin-bottom:0.75rem;">Intelligence-First</h3><p style="color:var(--color-text-secondary);font-size:0.9375rem;line-height:1.65;">We believe informed decisions require deep intelligence – not just price data.</p></div>
+        <div class="about-card"><div style="font-size:4rem;margin-bottom:1rem;">⚖️</div><h3 style="font-family:var(--font-display);font-weight:700;color:var(--color-text-primary);margin-bottom:0.75rem;">Independent</h3><p style="color:var(--color-text-secondary);font-size:0.9375rem;line-height:1.65;">No hidden interests. Our analyses follow the evidence, not market sentiment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section values-section" aria-labelledby="values-en-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">💡 Our Principles</p>
+        <h2 id="values-en-heading" class="section-title">{tr.about.values}</h2>
+      </div>
+      <div class="values-grid" role="list">
+        {[{icon:'🎯',title:'Precision',desc:'Every analysis is based on verified data and transparent methodology.'},{icon:'🔒',title:'Integrity',desc:'No conflicts of interest. Clear disclosure of partnerships and potential conflicts.'},{icon:'📚',title:'Education',desc:'We make complex crypto concepts understandable – without losing depth.'},{icon:'🚀',title:'Innovation',desc:'We track the latest developments in the crypto ecosystem on your behalf.'}].map((v) => (
+          <div class="value-card" role="listitem"><div class="value-icon">{v.icon}</div><h3 class="value-title">{v.title}</h3><p class="value-desc">{v.desc}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="team-en-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">👥 Team</p>
+        <h2 id="team-en-heading" class="section-title">{tr.about.team}</h2>
+      </div>
+      <div class="team-grid" role="list">
+        {teamMembers.map((m) => (
+          <div class="team-card" role="listitem" itemscope itemtype="https://schema.org/Person">
+            <div class="team-avatar">{m.avatar}</div>
+            <h3 class="team-name" itemprop="name">{m.name}</h3>
+            <p class="team-role" itemprop="jobTitle">{m.role}</p>
+            <p class="team-bio" itemprop="description">{m.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="container cta-inner">
+      <h2 class="cta-title">Have a question?</h2>
+      <p class="cta-subtitle">We welcome feedback, tips, and partnership inquiries.</p>
+      <a href="/en/contact-us/" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: 4rem 3rem; text-align: center; background: radial-gradient(ellipse 70% 50% at 50% -10%, oklch(45% 0.22 250 / 0.12) 0%, transparent 60%); }
+  .page-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; color: var(--color-text-primary); margin-bottom: 1rem; letter-spacing: -0.03em; }
+  .page-hero-subtitle { font-size: 1.0625rem; color: var(--color-text-secondary); max-width: 540px; margin-inline: auto; line-height: 1.65; }
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start; }
+  @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+  .about-section-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--color-text-primary); margin-bottom: 1.25rem; letter-spacing: -0.03em; }
+  .about-body { font-size: 1.0625rem; color: var(--color-text-secondary); line-height: 1.75; margin-bottom: 1.5rem; }
+  .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2rem; }
+  .about-stat { background: oklch(14% 0.04 250 / 0.5); border: 1px solid oklch(25% 0.05 250 / 0.35); border-radius: 0.875rem; padding: 1.25rem; text-align: center; }
+  .about-stat-num { font-family: var(--font-display); font-size: 1.75rem; font-weight: 900; color: var(--color-brand-300); }
+  .about-stat-label { font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 0.25rem; }
+  .about-visual { display: flex; flex-direction: column; gap: 1.25rem; }
+  .about-card { background: oklch(14% 0.04 250 / 0.5); border: 1px solid oklch(25% 0.05 250 / 0.35); border-radius: 1rem; padding: 1.75rem; transition: all 0.3s; }
+  .about-card:hover { border-color: oklch(45% 0.2 250 / 0.4); transform: translateY(-2px); }
+  .values-section { background: oklch(10% 0.025 250); }
+  .values-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 1.25rem; }
+  @media (min-width: 640px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .values-grid { grid-template-columns: repeat(4, 1fr); } }
+  .value-card { background: linear-gradient(135deg, oklch(17% 0.04 250 / 0.6), oklch(12% 0.03 250 / 0.4)); border: 1px solid oklch(25% 0.05 250 / 0.35); border-radius: 1rem; padding: 1.75rem; transition: all 0.3s; }
+  .value-card:hover { border-color: oklch(45% 0.2 250 / 0.4); transform: translateY(-3px); }
+  .value-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .value-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.625rem; }
+  .value-desc { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.65; }
+  .team-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(4, 1fr); } }
+  .team-card { background: oklch(14% 0.04 250 / 0.5); border: 1px solid oklch(25% 0.05 250 / 0.35); border-radius: 1rem; padding: 1.75rem; text-align: center; transition: all 0.3s; }
+  .team-card:hover { border-color: oklch(45% 0.2 250 / 0.4); transform: translateY(-3px); }
+  .team-avatar { width: 4rem; height: 4rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white; margin: 0 auto 1rem; }
+  .team-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem; }
+  .team-role { font-size: 0.8125rem; color: var(--color-brand-400); font-weight: 500; margin-bottom: 0.75rem; }
+  .team-bio { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; }
+  .cta-section { background: oklch(10% 0.025 250); }
+  .cta-inner { text-align: center; padding-block: 1rem; }
+  .cta-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--color-text-primary); margin-bottom: 1rem; }
+  .cta-subtitle { color: var(--color-text-secondary); margin-bottom: 2rem; font-size: 1.0625rem; }
+</style>

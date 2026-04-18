@@ -1,0 +1,135 @@
+---
+// 404 page
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 – Seite nicht gefunden | KryptoWatch"
+  description="Diese Seite existiert nicht. Kehren Sie zur KryptoWatch-Startseite zurück."
+  locale="de"
+  robots="noindex, follow"
+>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <div class="container not-found-inner">
+      <div class="not-found-visual" aria-hidden="true">
+        <div class="not-found-code">404</div>
+        <div class="not-found-chart">
+          {[80, 65, 90, 45, 20, 10, 5].map((h) => (
+            <div class="nf-bar" style={`height: ${h}%`}></div>
+          ))}
+        </div>
+      </div>
+
+      <h1 id="not-found-title" class="not-found-title">Seite nicht gefunden</h1>
+      <p class="not-found-desc">Diese Seite scheint wie ein illiquider Token zu sein – existiert nicht (mehr). Vielleicht wurde die URL falsch eingegeben, oder die Seite wurde verschoben.</p>
+
+      <div class="not-found-actions">
+        <a href="/" class="btn btn-primary">🏠 Zur Startseite</a>
+        <a href="/blog/" class="btn btn-outline">📰 Zum Blog</a>
+      </div>
+
+      <div class="not-found-suggestions">
+        <p>Vielleicht suchen Sie:</p>
+        <div class="suggestion-links" role="list">
+          <a href="/blog/" class="suggestion-link" role="listitem">Blog</a>
+          <a href="/about-us/" class="suggestion-link" role="listitem">Über uns</a>
+          <a href="/contact-us/" class="suggestion-link" role="listitem">Kontakt</a>
+          <a href="/en/" class="suggestion-link" role="listitem">English</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: calc(100dvh - 16rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found-inner {
+    text-align: center;
+    padding-block: 4rem;
+  }
+
+  .not-found-visual {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .not-found-code {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 15vw, 8rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, var(--color-brand-300), var(--color-accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .not-found-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 80px;
+    opacity: 0.4;
+  }
+
+  .nf-bar {
+    width: 12px;
+    background: linear-gradient(180deg, var(--color-brand-400), var(--color-brand-700));
+    border-radius: 3px 3px 0 0;
+  }
+
+  .not-found-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .not-found-desc {
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    font-size: 1.0625rem;
+  }
+
+  .not-found-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .not-found-suggestions {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .suggestion-links {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+
+  .suggestion-link {
+    color: var(--color-brand-400);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .suggestion-link:hover { color: var(--color-brand-300); }
+</style>

@@ -1,0 +1,191 @@
+---
+import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedPosts from '../../../components/RelatedPosts.astro';
+import { siteConfig } from '../../../config/site';
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/en/blog/');
+
+const post = await getEntry('blog', `en/${slug}`);
+
+if (!post || post.data.draft) {
+  return new Response(null, { status: 404, statusText: 'Not found' });
+}
+
+const { title, description, date, author, category, tags, image, imageAlt, readingTime, coinSymbols } = post.data;
+const { Content } = await render(post);
+
+const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
+const postUrl = `${siteConfig.url}/en/blog/${Astro.params.slug}/`;
+
+const blogPostSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  url: postUrl,
+  datePublished: new Date(date).toISOString(),
+  dateModified: new Date(date).toISOString(),
+  author: { '@type': 'Person', name: author },
+  publisher: { '@type': 'Organization', name: 'KryptoWatch', logo: { '@type': 'ImageObject', url: `${siteConfig.url}/logo.svg` } },
+  image: image ? `${siteConfig.url}${image}` : `${siteConfig.url}${siteConfig.ogImage}`,
+  keywords: [...(tags ?? []), ...(coinSymbols ?? [])].join(', '),
+  articleSection: category,
+  inLanguage: 'en-US',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+};
+
+const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(date));
+---
+
+<BaseLayout
+  title={`${title} | KryptoWatch`}
+  description={description}
+  locale="en"
+  schema={blogPostSchema}
+  canonical={postUrl}
+  ogImage={image ?? siteConfig.ogImage}
+  breadcrumbs={[
+    { name: 'KryptoWatch', url: siteConfig.url },
+    { name: 'Blog', url: `${siteConfig.url}/en/blog/` },
+    { name: title, url: postUrl },
+  ]}
+>
+  <article class="post-page" itemscope itemtype="https://schema.org/BlogPosting">
+
+    <div class="post-breadcrumb">
+      <div class="container">
+        <nav aria-label="Breadcrumb">
+          <a href="/en/">KryptoWatch</a>
+          <span aria-hidden="true">/</span>
+          <a href="/en/blog/">Blog</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{title}</span>
+        </nav>
+      </div>
+    </div>
+
+    <header class="post-header">
+      <div class="container post-header-inner">
+        <div class="post-meta-top">
+          <a href={`/en/blog/?cat=${category}`} class="badge badge-brand">{category}</a>
+          {coinSymbols?.map((s) => (
+            <span class="badge badge-bitcoin">{s}</span>
+          ))}
+          {readingTime && (
+            <span class="post-reading-time">⏱ {readingTime} min read</span>
+          )}
+        </div>
+
+        <h1 class="post-title" itemprop="headline">{title}</h1>
+        <p class="post-description">{description}</p>
+
+        <div class="post-author-row">
+          <div class="post-author-avatar" aria-hidden="true">{author.charAt(0)}</div>
+          <div>
+            <span class="post-author-name" itemprop="author">{author}</span>
+            <time class="post-date" datetime={new Date(date).toISOString()} itemprop="datePublished">{formattedDate}</time>
+          </div>
+          <div class="post-share" aria-label="Share article">
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Share on Twitter">𝕏</a>
+            <a href={`https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(title)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Share on Telegram">✈</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {image && (
+      <div class="post-featured-image">
+        <div class="container">
+          <img src={image} alt={imageAlt ?? title} width="1200" height="630" class="featured-img" itemprop="image" />
+        </div>
+      </div>
+    )}
+
+    <div class="post-body">
+      <div class="container post-layout">
+        <div class="post-content prose-crypto" itemprop="articleBody">
+          <Content />
+          <div class="post-disclaimer" role="note">
+            <strong>⚠️ Disclaimer:</strong> This article does not constitute investment advice. Cryptocurrencies are highly volatile assets with significant risk of loss.
+          </div>
+          {tags && tags.length > 0 && (
+            <div class="post-tags" aria-label="Tags">
+              {tags.map((tag) => (
+                <a href={`/en/blog/?tag=${tag}`} class="tag-chip">#{tag}</a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <aside class="post-sidebar" aria-label="Sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card-title">Table of Contents</h3>
+            <p style="font-size: 0.85rem; color: var(--color-text-muted);">Navigate the article using the headings.</p>
+          </div>
+          <div class="sidebar-card sidebar-newsletter">
+            <div class="newsletter-icon">📬</div>
+            <h3 class="sidebar-card-title">Crypto Newsletter</h3>
+            <p class="sidebar-newsletter-desc">Daily top crypto news in your inbox.</p>
+            <form id="sidebar-nl-en" aria-label="Newsletter signup">
+              <input type="email" placeholder="your@email.com" class="form-input" required aria-label="Email" />
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Subscribe</button>
+            </form>
+          </div>
+          {coinSymbols && coinSymbols.length > 0 && (
+            <div class="sidebar-card">
+              <h3 class="sidebar-card-title">Coins Covered</h3>
+              <div class="sidebar-coins">
+                {coinSymbols.map((s) => (
+                  <a href={`/en/blog/?coin=${s}`} class="sidebar-coin-chip">{s}</a>
+                ))}
+              </div>
+            </div>
+          )}
+        </aside>
+      </div>
+
+      <div class="container">
+        <RelatedPosts currentPost={post} allPosts={allPosts} locale="en" />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-breadcrumb { padding-block: 1rem; border-bottom: 1px solid oklch(22% 0.04 250 / 0.3); background: oklch(10% 0.025 250); }
+  .post-breadcrumb nav { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--color-text-muted); flex-wrap: wrap; }
+  .post-breadcrumb a { color: var(--color-text-muted); text-decoration: none; transition: color 0.2s; }
+  .post-breadcrumb a:hover { color: var(--color-brand-300); }
+  .post-header { padding-block: 3rem 2rem; background: radial-gradient(ellipse 70% 50% at 50% -15%, oklch(45% 0.22 250 / 0.1) 0%, transparent 70%); }
+  .post-header-inner { max-width: 860px; }
+  .post-meta-top { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .post-reading-time { font-size: 0.8125rem; color: var(--color-text-muted); }
+  .post-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.025em; color: var(--color-text-primary); margin-bottom: 1.125rem; }
+  .post-description { font-size: 1.125rem; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 1.75rem; max-width: 700px; }
+  .post-author-row { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; }
+  .post-author-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 1rem; flex-shrink: 0; }
+  .post-author-name { display: block; font-size: 0.9375rem; font-weight: 600; color: var(--color-text-primary); }
+  .post-date { display: block; font-size: 0.8125rem; color: var(--color-text-muted); }
+  .post-share { display: flex; gap: 0.5rem; margin-left: auto; }
+  .share-btn { width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; background: oklch(17% 0.04 250); border: 1px solid oklch(28% 0.05 250 / 0.5); border-radius: 0.5rem; color: var(--color-text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.2s; }
+  .share-btn:hover { border-color: var(--color-brand-400); color: var(--color-brand-300); }
+  .post-featured-image { padding-block: 1.5rem; }
+  .featured-img { width: 100%; max-height: 480px; object-fit: cover; border-radius: 1rem; border: 1px solid oklch(25% 0.05 250 / 0.3); }
+  .post-body { padding-bottom: 5rem; }
+  .post-layout { display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding-top: 2.5rem; max-width: 1100px; }
+  @media (min-width: 1024px) { .post-layout { grid-template-columns: 1fr 300px; } }
+  .post-disclaimer { margin-top: 2.5rem; padding: 1rem 1.25rem; background: oklch(72% 0.22 75 / 0.07); border: 1px solid oklch(72% 0.22 75 / 0.2); border-radius: 0.75rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; }
+  .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+  .tag-chip { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8125rem; font-weight: 500; background: oklch(17% 0.04 250); border: 1px solid oklch(28% 0.05 250 / 0.4); color: var(--color-text-muted); text-decoration: none; transition: all 0.2s; }
+  .tag-chip:hover { border-color: var(--color-brand-400); color: var(--color-brand-300); }
+  .post-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+  .sidebar-card { background: oklch(14% 0.04 250 / 0.5); border: 1px solid oklch(25% 0.05 250 / 0.35); border-radius: 0.875rem; padding: 1.25rem; }
+  .sidebar-card-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.875rem; }
+  .newsletter-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .sidebar-newsletter-desc { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+  .sidebar-coins { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .sidebar-coin-chip { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 0.5rem; background: oklch(45% 0.2 250 / 0.1); border: 1px solid oklch(45% 0.2 250 / 0.25); color: var(--color-brand-300); text-decoration: none; transition: all 0.2s; }
+  .sidebar-coin-chip:hover { background: oklch(45% 0.2 250 / 0.2); }
+</style>
