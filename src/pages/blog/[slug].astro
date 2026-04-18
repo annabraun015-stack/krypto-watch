@@ -1,5 +1,13 @@
 ---
 import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace('de/', '') },
+    props: { post },
+  }));
+}
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import { siteConfig } from '../../config/site';
