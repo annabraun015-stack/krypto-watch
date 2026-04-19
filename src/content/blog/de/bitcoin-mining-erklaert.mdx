@@ -1,134 +1,195 @@
 ---
 title: "Was ist Bitcoin Mining? Wie neue BTC entstehen (Guide 2026)"
-description: "Erfahren Sie, wie Bitcoin Mining funktioniert, was ASIC-Miner tun, wie Block-Belohnungen berechnet werden und die Ökonomie hinter der Netzwerksicherheit."
-date: 2026-04-17
+description: "Erfahren Sie, wie Bitcoin Mining funktioniert, was ASIC-Miner tun, wie Block-Rewards berechnet werden und die wahre Ökonomie hinter der Netzwerksicherheit."
+date: 2026-04-19
 author: "KryptoWatch Redaktion"
 category: "bitcoin"
-tags: ["bitcoin mining", "btc", "asic", "proof of work", "block reward", "hashrate"]
+tags: ["bitcoin mining", "btc", "asic", "proof of work", "block reward", "hashrate", "kryptografie"]
 image: "/images/blog/bitcoin-mining.png"
 imageAlt: "Bitcoin Mining — ASIC-Miner leuchten in einem dunklen Serverraum"
 coinSymbols: ["BTC"]
-readingTime: 13
-featured: false
+readingTime: 16
+featured: true
 locale: "de"
 ---
 
+import SemanticTable from '../../../components/blog/SemanticTable.astro';
+
+{/* FAQ Schema */}
+export const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Was ist Bitcoin Mining?", "acceptedAnswer": { "@type": "Answer", "text": "Bitcoin Mining ist der rechenintensive Prozess zur Verifizierung von Transaktionen und deren Speicherung auf der Blockchain. Miner lösen kryptografische Rätsel und erhalten als Belohnung neu geschürfte Bitcoins." } },
+    { "@type": "Question", "name": "Kann ich zu Hause Bitcoin minen?", "acceptedAnswer": { "@type": "Answer", "text": "In Deutschland ist das Mining für Privatpersonen im Jahr 2026 aufgrund der hohen Stromkosten (oft über 30 Cent/kWh) und der teuren ASIC-Hardware praktisch unrentabel. Professionelles Mining findet meist dort statt, wo Strom extrem günstig oder als Überschuss vorhanden ist." } },
+    { "@type": "Question", "name": "Was passiert, wenn alle 21 Millionen Bitcoins gemined sind?", "acceptedAnswer": { "@type": "Answer", "text": "Sobald das Maximum von 21 Millionen Bitcoin erreicht ist (voraussichtlich im Jahr 2140), erhalten Miner keinen Block Reward mehr. Die Sicherheit des Netzwerks wird ab dann ausschließlich durch die Transaktionsgebühren der Nutzer finanziert." } }
+  ]
+};
+
 ## Inhaltsverzeichnis
 
-1. [Bitcoin Mining: Die 60-Sekunden-Erklärung](#definition)
-2. [Wie funktioniert Bitcoin Mining?](#how-it-works)
-3. [Die Rolle des Minings für die Sicherheit](#security)
-4. [ASIC-Miner vs. GPU-Mining](#hardware)
-5. [Mining Pools erklärt](#pools)
-6. [Die Energie-Debatte: Fakten vs. Fiktion](#energy)
-7. [Mining-Ökonomie: Rentabilität im Jahr 2026](#economics)
-8. [Schwierigkeitsanpassung (Difficulty Adjustment)](#difficulty)
-9. [Block Reward & Halving](#block-reward)
-10. [Häufig gestellte Fragen (FAQs)](#faqs)
+1. [Was ist Bitcoin Mining? (Grundlagen & Definition)](#definition)
+2. [Wie funktioniert Mining? (Kryptografie & Hashrate)](#wie-funktioniert)
+3. [ASIC-Hardware vs. GPU Mining (Vergleich)](#hardware)
+4. [Netzwerksicherheit & Die 51%-Attacke](#sicherheit)
+5. [Mining Pools vs. Solo-Mining in der Praxis](#pools)
+6. [Umwelt, ESG & Netzregulierung (Fakt vs. Fiktion)](#umwelt-esg)
+7. [Ökonomie: Lohnt sich Mining 2026 noch?](#oekonomie)
+8. [Schwierigkeitsanpassung & Hardware-Trends](#schwierigkeit)
+9. [Die Zukunft des Minings ohne Block Rewards](#zukunft)
+10. [Begriffsnetzwerk & Vokabular](#fachbegriffe)
+11. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
-## Bitcoin Mining: Die 60-Sekunden-Erklärung
+## Was ist Bitcoin Mining? (Grundlagen & Definition) {#definition}
 
-**Bitcoin Mining ist der Prozess, durch den neue Bitcoins entstehen und Transaktionen bestätigt werden.** Miner konkurrieren darum, komplexe mathematische Rätsel mit spezialisierter Hardware zu lösen. Wer die Lösung zuerst findet, darf den nächsten Block zur Blockchain hinzufügen und erhält eine Belohnung (Block Reward) in neu geschöpften BTC sowie die Transaktionsgebühren dieses Blocks.
+**Bitcoin Mining (Schürfen)** ist der dezentralisierte Prozess zur Überprüfung und dauerhaften Speicherung von Transaktionen in der Bitcoin-Blockchain. Da Bitcoin keine zentrale Instanz (wie die EZB oder eine Clearingstelle) besitzt, verlässt sich das System auf ein globales Netzwerk unabhängiger Computer – die sogenannten "Miner" – um die Regeln durchzusetzen.
 
-> **Featured Snippet Antwort:** Bitcoin Mining ist ein wettbewerbsorientierter Prozess, bei dem Miner spezialisierte Hardware (ASICs) nutzen, um SHA-256-Rätsel zu lösen. Der Gewinner fügt einen neuen Block zur Blockchain hinzu und erhält dafür aktuell 3,125 BTC (nach dem Halving 2024). Mining erzeugt gleichzeitig neue BTC und sichert das dezentrale Netzwerk.
+Miner stellen enorme Rechenleistung zur Verfügung, um ein komplexes mathematisches Rätsel zu lösen. Derjenige, der die Lösung zuerst findet, gewinnt das Recht, einen neuen "Block" verifizierter Transaktionen an die Blockchain anzuhängen. Als Entschädigung für den Strom- und Hardwareaufwand erhält der Miner den **Block Reward** – quasi frisch gedruckte Bitcoins. Dieser Prozess fungiert somit gleichzeitig als Kassenprüfung, globale Sicherheits-Firewall und als einzige Methode, neue Bitcoins in Umlauf zu bringen.
 
-Ohne Miner könnten [keine Transaktionen bestätigt werden](/blog/was-ist-bitcoin/) – sie sind das Rückgrat des Netzwerks.
+> **Featured Snippet Antwort:** Bitcoin Mining ist der wettbewerbsorientierte Prüfprozess, bei dem spezialisierte Computer (ASIC-Miner) kryptografische Rätsel lösen, um Transaktionen zu verifizieren. Wer das Rätsel knackt, fügt der Blockchain einen neuen Block hinzu und wird mit neu erschaffenen Bitcoins entlohnt. Dieser "Proof of Work" sichert das dezentrale System ohne Zutun von Banken.
 
----
-
-## Wie funktioniert Bitcoin Mining?
-
-Bitcoin nutzt den **Proof of Work (PoW)** Konsensmechanismus. Der Prozess sieht wie folgt aus:
-
-1. Neue Transaktionen werden an das Netzwerk gemeldet.
-2. Miner sammeln diese in einem "Kandidaten-Block".
-3. Miner fügen eine Zufallszahl (Nonce) hinzu und wenden die **SHA-256** Hash-Funktion an.
-4. Entspricht der Hash dem Zielwert (beginnt er mit genug Nullen)?
-   - **Nein**: Neue Nonce, neuer Versuch (Billionen Mal pro Sekunde).
-   - **Ja**: Lösung gefunden! Der Block wird an das Netzwerk gesendet.
-5. Andere Knoten prüfen die Lösung in Millisekunden und akzeptieren den Block.
-
-### SHA-256 Hashing
-Bitcoin nutzt den SHA-256 Algorithmus. Eine winzige Änderung an den Eingabedaten führt zu einem völlig anderen Ergebnis. Die Schwierigkeit, einen passenden Hash zu finden, macht das Mining rechenintensiv und damit fälschungssicher.
+*Semantische Dreiecke:*
+- **Bitcoin-Miner** → sichern die → **Blockchain**
+- **Proof of Work (PoW)** → ist der Konsensalgorithmus für → **Bitcoin (Q13479982)**
+- **ASIC** → berechnet → **SHA-256 Hashes**
 
 ---
 
-## Die Rolle des Minings für die Sicherheit
+## Wie funktioniert Mining? (Kryptografie & Hashrate) {#wie-funktioniert}
 
-Mining bietet **Sybil-Resistenz** – man kann Rechenleistung nicht billig fälschen. Ein Angriff auf Bitcoin (51%-Attacke) würde Milliarden Euro an Hardware und Strom kosten und den Wert der eigenen Beute sofort vernichten. Das macht Angriffe ökonomisch irrational. Lesen Sie mehr zur [Sicherheit von Bitcoin](/blog/wie-sicher-ist-bitcoin/).
+Bitcoins Mining-Algorithmus nennt sich **SHA-256** (Secure Hash Algorithm 256-Bit).
 
----
+Sobald Sie eine Krypto-Transaktion durchführen, landet diese im Wartezimmer des Netzwerks, dem **Mempool**. Miner bündeln Tausende dieser Transaktionen zu einem Kandidaten-Block. Um den Block abzuschließen, ergänzt der Miner-Computer die Daten um eine Zufallszahl (Nonce) und sendet sie durch den SHA-256-Algorithmus. Das Ziel ist es, einen "Hash" (einen 64 Zeichen langen Code) zu erzeugen, der mit einer bestimmten Anzahl von Nullen beginnt.
 
-## ASIC-Miner vs. GPU-Mining
+Da das Ergebnis eines Hashes völlig unvorhersehbar ist, gibt es keine Abkürzung. Der Miner muss durch pure Rechengewalt (Brute-Force) Trillionen an Zahlen raten, bis ein Treffer erzielt wird.
 
-Früher konnte man mit normalen Computern (CPUs) oder Grafikkarten (GPUs) minen. Heute beherrschen **ASICs** (Application-Specific Integrated Circuits) den Markt. Dies sind hochspezialisierte Chips, die nur eine Aufgabe haben: SHA-256 Hashes berechnen.
-
-- **Antminer S21+**: Einer der effizientesten Miner im Jahr 2026 mit über 216 TH/s Leistung.
-
----
-
-## Mining Pools erklärt
-
-Da es für Einzelpersonen fast unmöglich ist, alleine einen Block zu finden, schließen sich Miner in **Pools** zusammen. Sie bündeln ihre Rechenleistung und teilen die Belohnungen proportional auf. Bekannte Pools sind Foundry USA, AntPool und ViaBTC.
-
----
-
-## Die Energie-Debatte: Fakten vs. Fiktion
-
-### Mythos: "Bitcoin verschwendet Energie"
-**Realität:** Bitcoin Mining nutzt oft überschüssigen Strom aus erneuerbaren Quellen (Wasserkraft, Wind), der sonst ungenutzt bleiben würde. Miner fungieren als flexible Abnehmer, die das Stromnetz stabilisieren können. Schätzungsweise 50–70 % des Minings basieren bereits auf nachhaltiger Energie.
+<div class="mermaid">
+graph TD
+    A[Neue Transaktion im Mempool] --> B(Miner wählt Transaktion basierend auf Gebühr)
+    B --> C[Miner baut Kandidaten-Block]
+    C --> D{SHA-256 + Random Nonce anwenden}
+    D --> E[Ist der Hash kleiner als das Netzwerk-Target?]
+    E -- Nein --> D
+    E -- Ja --> F[Neuer Block ans Netzwerk gesendet]
+    F --> G[Andere Nodes verifizieren Gültigkeit]
+    G --> H[Miner erhält Block Reward / Belohnung]
+</div>
+*(Die Proof-of-Work-Schleife: Billionen von Rateversuchen sichern den Konsens der Blockchain.)*
 
 ---
 
-## Mining-Ökonomie: Rentabilität im Jahr 2026
+## ASIC-Hardware vs. GPU Mining (Vergleich) {#hardware}
 
-Die Profitabilität hängt von drei Faktoren ab:
-1. **Bitcoin-Preis**: Höherer Preis = mehr Einnahmen.
-2. **Strompreis**: Der größte Kostenfaktor. In Deutschland ist Mining für Privatpersonen wegen hoher Stromkosten meist unrentabel.
-3. **Hardware-Effizienz**: Neuere Geräte sparen Strom.
+Zu Beginn (2009) konnten Sie Bitcoins mit dem Prozessor (CPU) Ihres Laptops schürfen. Im Jahr 2026 ist die benötigte Rechenleistung derart gigantisch, dass nur noch hochspezialisierte Industriegeräte mithalten können.
 
----
+| Hardware Typ | Einsatzszenario 2026 | Effizienz für Bitcoin | Hash-Leistung (Schätzung) |
+|--------------|----------------------|-----------------------|---------------------------|
+| **CPU** (Computerprozessor) | Komplett obsolet | Praktisch null | ~10-100 KH/s |
+| **GPU** (Grafikkarte) | Für Altcoins (z.B. Ravencoin) nutzbar | Unrentabel für BTC | ~100 MH/s |
+| **ASIC** (Application-Specific Integrated Circuit) | **Bitcoin Mining Industriestandard** | Extrem hoch | 200+ TH/s (Terahashes/sek) |
 
-## Schwierigkeitsanpassung (Difficulty Adjustment)
-
-Alle **2.016 Blöcke** (ca. 2 Wochen) passt Bitcoin die Schwierigkeit automatisch an. Kommen viele neue Miner hinzu, wird es schwieriger. Gehen Miner vom Netz, wird es leichter. Dies garantiert, dass im Schnitt alle 10 Minuten ein Block gefunden wird.
-
----
-
-## Block Reward & Halving
-
-Die Belohnung startete 2009 bei 50 BTC und halbiert sich alle 4 Jahre:
-- **Genesis (2009)**: 50 BTC
-- **2012**: 25 BTC
-- **2016**: 12,5 BTC
-- **2020**: 6,25 BTC
-- **2024**: 3,125 BTC
-- **~2028**: 1,5625 BTC
-
-Erfahren Sie mehr über das [Bitcoin Halving](/blog/bitcoin-halving/) und das [21 Millionen Limit](/blog/bitcoin-21-millionen-limit/).
+Moderne ASICs (wie der Antminer S21+) können absolut nichts anderes, als SHA-256 Hashes auszurechnen – dies tun sie jedoch mit brutaler Effizienz.
 
 ---
 
-## Häufig gestellte Fragen (FAQs)
+## Netzwerksicherheit & Die 51%-Attacke {#sicherheit}
 
-### Kann ich zu Hause Bitcoin minen?
-Technisch ja, aber finanziell lohnt es sich in Deutschland kaum. Die Stromkosten sind zu hoch und die Hardware ist laut und heiß.
+Die reine Rechenleistung (Hashrate) schützt das Netzwerk vor sogenannten "Sybil-Attacken" (dem Vortäuschen von Millionen gefälschter Identitäten zur Übernahme der Netzmehrheit). Wer betrügen möchte, bräuchte mehr als **50 % der gesamten globalen Rechenleistung** (eine 51%-Attacke).
 
-### Was passiert, wenn alle BTC gemined sind?
-Miner verdienen dann ausschließlich an den Transaktionsgebühren. Lesen Sie mehr über [Bitcoin Transaktionsgebühren](/blog/bitcoin-transaktionsgebuehren/).
+Da die Hashrate im Jahr 2026 bei über 600 Exahashes pro Sekunde (EH/s) liegt, ist ein solcher Angriff faktisch illusorisch. Ein Angreifer müsste in Halbleiterfabriken investieren, Milliarden für Hardware ausgeben und die Energie eines kleinen Landes aufwenden – nur um den Wert des Systems zu zerstören, das er gerade stiehlt. Dem Angreifer droht der sofortige wirtschaftliche Ruin.
 
 ---
 
-## Indexierungssignale
+## Mining Pools vs. Solo-Mining in der Praxis {#pools}
 
-**Slug:** `/blog/bitcoin-mining-erklaert/`
-**Sitemap Priorität:** 0.9
-**Inhaltstyp:** Pillar-Artikel
-**Interne Verlinkungsempfehlungen:**
-- [Was ist Bitcoin?](/blog/was-ist-bitcoin/)
-- [Bitcoin Halving](/blog/bitcoin-halving/)
-- [Bitcoin 21 Millionen Limit](/blog/bitcoin-21-millionen-limit/)
-- [Sicherheit von Bitcoin](/blog/wie-sicher-ist-bitcoin/)
-- [Transaktionsgebühren](/blog/bitcoin-transaktionsgebuehren/)
+Da die weltweite Hashrate unvorstellbar groß ist, gleicht die Chance, als einzelner Betreiber mit einem ASIC-Miner einen Block zu finden, einem Lottogewinn.
+
+Daher schließen sich Miner heute in **Mining Pools** zusammen. 
+- **Das Pool Prinzip:** Tausende Miner bündeln ihre Rechenkraft über einen zentralen Server. Löst ein beliebiger Miner in der Gruppe das aktuelle Rätsel, wird der Gewinn (derzeit 3,125 BTC) anhand der anteilig beigesteuerten Hash-Power ("Pay Per Share") auf alle Teilnehmer im Pool aufgeteilt. So generieren Miner planbares Einkommen statt zufälliger Glückstreffer.
+
+---
+
+## Umwelt, ESG & Netzregulierung (Fakt vs. Fiktion) {#umwelt-esg}
+
+Der Energieverbrauch von Bitcoin ist ein ständiger politischer Streitpunkt – in der Fachwelt jedoch viel differenzierter betrachtet, als es die Medien oft darstellen.
+
+- **Energie-Arbitrage:** Bitcoin-Miner können ihre Server überall aufbauen. Sie müssen nicht in Großstädten stehen. Daher siedeln sie sich extrem oft an Orten an, wo Energie im Überfluss vorhanden (und daher extrem billig) ist: an abgelegenen Wasserkraftwerken in Skandinavien oder dort, wo sie andernfalls entweichendes Methangas abfackeln können (Flared Gas Mining in Texas).
+- **Das Stromnetz (Grid-Balancing):** Miner dienen als sofort steuerbare Last. Fällt im europäischen Winter die Solarenergie aus und der generelle Strombedarf steigt an, schalten große Mining-Farmen sofort ab und geben dem Stromnetz die Energie zurück. An sonnenreichen Sommernachmittagen kaufen sie die Überschüsse auf, die die Anlagenbetreiber sonst ins Leere hätten laufen lassen.
+- **Regulierung (BaFin / MiCA):** Ein generelles Mining-Verbot in der EU ist dank MiCA vom Tisch. Regulatorische Maßnahmen in Europa zielen im Jahr 2026 in erster Linie auf strenge Nachhaltigkeitsberichterstattung (ESG) ab.
+
+---
+
+## Ökonomie: Lohnt sich Mining 2026 noch? {#oekonomie}
+
+Für deutsche Privatanleger lautet die Antwort schlicht: **Nein**.
+
+Mining ist heutzutage eine knallharte hoch-industrialisierte Rohstoff-Gewinnung mit minimaler Gewinnmarge. Die Profitabilität – der sogenannte "Hash-Preis" – wird zerrieben zwischen drei enormen Kräften:
+
+1. **Den Stromkosten:** Während Miner in den Wüsten der USA oder im kühlen Kanada oft unter 5 Cent pro Kilowattstunde zahlen, sind die über 30 Cent in Teilen Europas absolut inakzeptabel.
+2. **Den Halvings:** Alle 210.000 Blöcke (ca. 4 Jahre) bricht und halbierte sich der Block Reward. 2024 fiel er von 6,25 auf 3,125 BTC. 2028 fällt er auf ~1,56 BTC.
+3. **Konkurrenzdruck:** Steigt der Preis von Bitcoin, schalten große Unternehmen Tausende neue ASICs ein, das Rätsel wird schwerer und der eigene Anteil schrumpft.
+
+---
+
+## Schwierigkeitsanpassung & Hardware-Trends {#schwierigkeit}
+
+### Difficulty Adjustment (Die Schwierigkeitsanpassung)
+Satoshi Nakamoto hat dem Code ein geniales Feature hinzugefügt: Das Netzwerk passt die Härte des Krypto-Rätsels automatisch alle 2016 Blöcke (etwa zwei Wochen) an die weltweite Rechenleistung an. Sind viele Miner aktiv, wird das Rätsel schwerer. Gehen Miner offline, wird es leichter. Dieses homöostatische Element sorgt dafür, dass immer zielgenau alle ~10 Minuten ein Block gefunden wird.
+
+### Immersion Cooling (Tauchkühlung)
+Da Hochleistungscomputer immense Abwärme erzeugen und Lüfter massiv Strom schlucken (und extrem laut sind), versenken moderne Anlagen die Serverplatinen von ASICs standardmäßig in elektrisch nicht-leitenden Flüssigkeiten ("Dielectric Fluid"). Das erhöht die Lebensdauer und ermöglicht Übertaktung.
+
+---
+
+## Die Zukunft des Minings ohne Block Rewards {#zukunft}
+
+Spätestens im Jahr 2140 werden die fest vorgesehenen 21 Millionen Bitcoins restlos geschürft sein. An diesem Tag fällt der Block Reward auf Null.
+
+Das Netzwerk stirbt dann nicht. Jeder Nutzer zahlt beim Versenden von Bitcoin schon heute eine kleine "Transaktionsgebühr". Langfristig werden Bitcoin als digitales Gold und Layer-1 primär für riesige, systemrelevante Zahlungen zwischen Staaten oder Konzernen genutzt werden. Diese immensen Transaktionsgebühren genügen laut Prognosen vollkommen, um den Minern einen lukrativen Anreiz zur Netzwerksicherheit zu bieten, während Kleinstbeträge im [Lightning Network](/blog/lightning-network/) abgewickelt werden.
+
+---
+
+## Begriffsnetzwerk & Vokabular {#fachbegriffe}
+
+<SemanticTable 
+  title="Lexikalische Relationen: Krypto Mining"
+  type="domain"
+  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
+  rows={[
+    ['ASIC', 'Mining Rig, SHA-256 Rechner', 'Hardware', 'CPU, GPU, Heim-PC'],
+    ['Proof of Work', 'PoW, Arbeitsnachweis', 'Netzwerk-Konsens', 'Proof of Stake (PoS)'],
+    ['Hash Rate', 'Rechenleistung, TH/s, EH/s', 'Metrik', 'Netzwerk-Difficulty'],
+    ['Mining Pool', 'Mining Syndicate, Verbund', 'Organisation', 'Solo-Miner'],
+    ['Block Reward', 'Blocksubvention, Belohnung', 'Ökonomie', 'Transaktionsgebühr (TX-Fee)']
+  ]}
+/>
+
+### Fachwissen & Entitäten
+*Bitcoin (Q13479982), ASIC (Application-Specific Integrated Circuit), Proof of Work, SHA-256, Hash Rate, Terahash, Exahash, Difficulty Adjustment, Nonce, Mempool, Mining Pool, Antpool, Foundry USA, Block Reward, Bitcoin Halving, Sybil Attacke, 51%-Attacke, Immersion Cooling, Grid Balancing (Netzstabilisierung), Hashpreis, Transaktionsgebühren, ESG.*
+
+---
+
+## Häufig gestellte Fragen (FAQs) {#faqs}
+
+### 1. Wie lange dauert es, einen Bitcoin zu schürfen?
+Mit einem einzigen hochmodernen ASIC-Gerät würde es rein statistisch über 1.000 Jahre dauern, selbstständig einen Block zu finden. In einem Mining-Pool verdienen Sie zwar Anteile, aber um einen ganzen Bitcoin in einem Jahr zugewiesenen zu bekommen, bräuchten Sie eine professionelle Multi-Geräte-Farm.
+
+### 2. Ist Bitcoin Mining schlecht für die Umwelt?
+Die Betrachtung hat sich gewandelt. Richtig ist, dass das Netzwerk den Strombedarf eines mittleren Nationalstaats hat. Allerdings verwenden Miner zunehmend (über 50 %) Energie aus gestrandeten oder erneuerbaren Energiequellen (Wasserkraft, überschüssiger Wind), die andernfalls verpufft wären, weil Stromleitungen fehlen. Eine Pauschalverurteilung als "Klimakiller" ist wissenschaftlich im Jahr 2026 nicht mehr haltbar.
+
+### 3. Was ist das Bitcoin Halving?
+Das Halving (Halbierung) ist ein im Bitcoin-Code fest einprogrammiertes Ereignis. Alle 210.000 geschürften Blöcke (was meist etwa 4 Jahre dauert) wird die Ausgabe neuer Bitcoins für die Miner halbiert. Dies sichert Bitcoins mathematische Knappheit und senkt systematisch die Inflationsrate bis zum Stopp bei 21 Millionen BTC.
+
+### 4. Bieten "Cloud-Mining" Websites seriöse Dienste an?
+Achtung: Die allermeisten Websites, die Ihnen anbieten, virtuell "Mining Power (Hashrate)" zu mieten, sind sogenannte Schneeballsysteme (Ponzi Schemes) oder Scams. Wenn das Schürfen wirklich so lukrativ wäre, würden die Anbieter den Gewinn selbst einstreichen, anstatt ihn an Laien zu vermieten. Kaufen Sie Bitcoin stattdessen lieber direkt über eine Börse.
+
+---
+**Wichtigste Erkenntnisse:**
+> Mining ist der gigantische Puzzlöser-Mechanismus, der Bitcoins digitale Unbestechlichkeit durch physischen Energieverbrauch garantiert. Für Privatanwender in Europa finanziell unattraktiv, formt Mining inzwischen ein Milliarden-Dollar-Ökosystem aus börsennotierten Großunternehmen, welches langfristig durch Transaktionsgebühren existieren wird.
+
+**Mehr Entdecken:**
+- [Warum gibt es genau 21 Millionen Bitcoins?](/blog/bitcoin-21-millionen-limit/)
+- [Wie bewahre ich Hardware Wallets sicher auf?](/blog/beste-bitcoin-wallets/)
+- [Der Unterschied zwischen Node und Miner](/blog/was-ist-ein-bitcoin-node/)

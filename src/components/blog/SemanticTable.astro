@@ -1,0 +1,47 @@
+---
+interface Props {
+  headers: string[];
+  rows: string[][];
+  title?: string;
+  type?: 'lexical' | 'domain';
+}
+
+const { headers, rows, title, type = 'lexical' } = Astro.props;
+
+// Determine colors based on type for UI aesthetics
+const accentColor = type === 'lexical' ? 'text-primary-400' : 'text-blue-400';
+const bgAccent = type === 'lexical' ? 'bg-primary-900/10' : 'bg-blue-900/10';
+const borderAccent = type === 'lexical' ? 'border-primary-500/20' : 'border-blue-500/20';
+---
+
+<div class={`my-8 overflow-hidden rounded-xl border border-white/10 bg-dark-card shadow-lg shadow-black/20 ${borderAccent}`}>
+  {title && (
+    <div class={`px-6 py-4 border-b border-white/5 ${bgAccent}`}>
+      <h3 class={`m-0 text-lg font-semibold ${accentColor}`}>{title}</h3>
+    </div>
+  )}
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-sm text-gray-300">
+      <thead class="bg-white/5 text-xs uppercase text-gray-400 border-b border-white/10">
+        <tr>
+          {headers.map((header) => (
+            <th scope="col" class="px-6 py-4 font-medium tracking-wider">
+              {header}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-white/5">
+        {rows.map((row, i) => (
+          <tr class="hover:bg-white/[0.02] transition-colors duration-200">
+            {row.map((cell, j) => (
+              <td class={`px-6 py-4 ${j === 0 ? 'font-medium text-white' : ''}`}>
+                {cell}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
