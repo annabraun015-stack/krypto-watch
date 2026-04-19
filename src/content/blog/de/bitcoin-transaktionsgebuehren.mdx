@@ -62,10 +62,10 @@ Der **Mempool** (Memory Pool) ist das "Wartezimmer" für Transaktionen. Wenn Sie
 <div class="mermaid">
 graph TD
     A[Nutzer sendet TX] --> B(Mempool: Wartezimmer)
-    B --> C{Miner Auswahl}
+    B --> C([Miner Auswahl])
     C -- Hohe Gebühr --> D[In nächsten Block aufgenommen]
     C -- Niedrige Gebühr --> E[Bleibt im Mempool]
-    E --> F{Netzwerk beruhigt sich?}
+    E --> F([Netzwerk beruhigt sich?])
     F -- Ja --> D
     F -- Nein --> G[Kann nach Tagen verfallen]
 </div>

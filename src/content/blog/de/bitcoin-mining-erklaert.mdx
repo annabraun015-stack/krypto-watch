@@ -69,8 +69,8 @@ Da das Ergebnis eines Hashes völlig unvorhersehbar ist, gibt es keine Abkürzun
 graph TD
     A[Neue Transaktion im Mempool] --> B(Miner wählt Transaktion basierend auf Gebühr)
     B --> C[Miner baut Kandidaten-Block]
-    C --> D{SHA-256 + Random Nonce anwenden}
-    D --> E[Ist der Hash kleiner als das Netzwerk-Target?]
+    C --> D([SHA-256 + Random Nonce anwenden])
+    D --> E([Ist der Hash kleiner als das Netzwerk-Target?])
     E -- Nein --> D
     E -- Ja --> F[Neuer Block ans Netzwerk gesendet]
     F --> G[Andere Nodes verifizieren Gültigkeit]

@@ -62,10 +62,10 @@ The **Mempool** (Memory Pool) is the "waiting room" for transactions. When you s
 <div class="mermaid">
 graph TD
     A[User Sends TX] --> B(Mempool: Waiting Room)
-    B --> C{Miner Selection}
+    B --> C([Miner Selection])
     C -- High Fee --> D[Included in Next Block]
     C -- Low Fee --> E[Stays in Mempool]
-    E --> F{Network Quiets Down?}
+    E --> F([Network Quiets Down?])
     F -- Yes --> D
     F -- No --> G[May eventually time out]
 </div>

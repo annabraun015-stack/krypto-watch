@@ -61,9 +61,9 @@ Das Halving ist simpel, aber mächtig. Es ist in der Funktion `GetBlockSubsidy` 
 
 <div class="mermaid">
 graph LR
-    A[Neuer Block gefunden] --> B{Blöcke < 210.000?}
+    A[Neuer Block gefunden] --> B([Blöcke < 210.000?])
     B -- Ja --> C[Belohnung: 50 BTC]
-    B -- Nein --> D{Blöcke < 420.000?}
+    B -- Nein --> D([Blöcke < 420.000?])
     D -- Ja --> E[Belohnung: 25 BTC]
     D -- Nein --> F[Halving-Prozess fortsetzen]
     F --> G[Ende bei 21 Mio. BTC]

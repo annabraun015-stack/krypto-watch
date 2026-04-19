@@ -61,9 +61,9 @@ The halving is simple but powerful. It is located in the `GetBlockSubsidy` funct
 
 <div class="mermaid">
 graph LR
-    A[New Block Found] --> B{Blocks < 210,000?}
+    A[New Block Found] --> B([Blocks < 210,000?])
     B -- Yes --> C[Reward: 50 BTC]
-    B -- No --> D{Blocks < 420,000?}
+    B -- No --> D([Blocks < 420,000?])
     D -- Yes --> E[Reward: 25 BTC]
     D -- No --> F[Continue Halving Process]
     F --> G[End Supply at 21M]

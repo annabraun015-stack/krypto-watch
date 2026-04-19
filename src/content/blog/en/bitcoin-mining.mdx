@@ -69,8 +69,8 @@ Since the output of a hash function is entirely unpredictable, miners cannot "ca
 graph TD
     A[New Transactions in Mempool] --> B(Miners select transactions based on fees)
     B --> C[Miners build Candidate Block]
-    C --> D{Apply SHA-256 Hash + Nonce}
-    D --> E[Is Hash lower than Network Target?]
+    C --> D([Apply SHA-256 Hash + Nonce])
+    D --> E([Is Hash lower than Network Target?])
     E -- No --> D
     E -- Yes --> F[Block Broadcast to Network]
     F --> G[Nodes Verify Validity]

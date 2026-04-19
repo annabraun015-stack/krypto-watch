@@ -74,7 +74,7 @@ Here’s the step-by-step technological breakdown:
 <div class="mermaid">
 graph TD
     A[User Signs Transaction] --> B(Broadcast to Network);
-    B --> C{Mempool};
+    B --> C([Mempool]);
     C --> D[Miners select Tx based on fees];
     D --> E[Miners solve Proof-of-Work];
     E --> F[Block added to Blockchain];
