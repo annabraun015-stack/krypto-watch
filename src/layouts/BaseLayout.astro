@@ -171,15 +171,30 @@ const allSchemas = [
       async function setupMermaid() {
         const elements = document.querySelectorAll('.mermaid');
         for (const el of elements) {
-          // Force text content cleanup - ensures no <p> or <br> tags interfere
-          el.textContent = el.textContent.trim();
+          // InnerText handles line breaks and initial HTML entities correctly
+          let text = (el.innerText || el.textContent).trim();
+          
+          // 1. Fix Smart Typography (MDX automatically converts characters)
+          // Convert em-dashes (—) and en-dashes (–) back into standard hyphens
+          text = text.replace(/[—–]/g, '--');
+          
+          // Convert curly quotes (“ ” ‘ ’) back into straight quotes (" ')
+          text = text.replace(/[“”]/g, '"');
+          text = text.replace(/[‘’]/g, "'");
+
+          // Reset the text content to the cleaned version
+          el.textContent = text;
         }
-        // Manually trigger rendering
+        
+        // Manually trigger rendering on all cleaned elements
         await mermaid.run();
       }
 
       // Initial run
       setupMermaid();
+      
+      // Support for future-proofing or dynamic content
+      document.addEventListener('astro:after-swap', setupMermaid);
     </script>
   </body>
 </html>
