@@ -42,7 +42,7 @@ export const faqSchema = {
 
 ---
 
-## Was ist ein Bitcoin Node? (Definition & Bedeutung) {#definition}
+## Was ist ein Bitcoin Node? (Definition & Bedeutung) <a id="definition"></a>
 
 Ein **Bitcoin Node** (Knotenpunkt) ist ein beliebiger Computer, der an das dezentrale Peer-to-Peer-Netzwerk von Bitcoin angeschlossen ist. Da Bitcoin keinen Geschäftsführer, Hauptstandort oder IT-Administrator besitzt, müssen Zehntausende Rechner weltweit den Zustand des Netzwerks fortlaufend untereinander abgleichen. Diese Rechner sind die Nodes.
 
@@ -59,7 +59,7 @@ Souveränität bedeutet in der Krypto-Welt: Wenn Sie sich keine eigene Node hins
 
 ---
 
-## Die exakte Aufgabe einer Node (Technik & Mempool) {#aufgaben}
+## Die exakte Aufgabe einer Node (Technik & Mempool) <a id="aufgaben"></a>
 
 Schaltet man eine Bitcoin Full Node (z.B. auf einem kleinen Raspberry Pi im heimischen Netzwerk) ein, beginnt das System mit dem sogenannten **Initial Block Download (IBD)**. Der Minicomputer lädt den allerersten Datenblock aus dem Jahr 2009 herunter, rechnet die Kryptografie nach, lädt Block 2, und führt dies für mehr als 800.000 Blöcke fort.
 
@@ -72,19 +72,19 @@ Sobald die Node "in der Gegenwart" angekommen ist, besteht ihr digitaler Alltag 
 <div class="mermaid">
 graph TD
     A[Transaktion per Wallet gesendet] --> B(Node empfängt Signal)
-    B --> C{Entspricht die Transaktion den Regeln?}
+    B --> C([Entspricht die Transaktion den Regeln?])
     C --> |Ungültige Signatur| D[Node blockiert & löscht sofort]
     C --> |Gültig| E[Node speichert im Mempool]
     E --> F[Miner holt Transaktion ab & baut Block]
     F --> G[Miner liefert fertigen Block an Nodes zurück]
-    G --> H{Zweite Prüfung: Betrügt der Miner?}
+    G --> H([Zweite Prüfung: Betrügt der Miner?])
     H --> |Ja, Regeln verletzt| I[Block wird vom Netzwerk verstoßen]
     H --> |Nein, alles korrekt| J[Node schreibt Block in die Blockchain]
 </div>
 
 ---
 
-## Full Nodes vs. Light Nodes (Der Vergleich) {#arten}
+## Full Nodes vs. Light Nodes (Der Vergleich) <a id="arten"></a>
 
 Nicht jedes Programm, das am Netzwerk teilnimmt, muss 600 Gigabyte Daten verarbeiten.
 
@@ -99,7 +99,7 @@ Apps auf Ihrem Smartphone (wie BlueWallet oder Trust Wallet) verwenden im Hinter
 
 ---
 
-## Das Prinzip der Gewaltenteilung: Nodes vs. Miner {#gewaltenteilung}
+## Das Prinzip der Gewaltenteilung: Nodes vs. Miner <a id="gewaltenteilung"></a>
 
 Bitcoin-Laien werfen Nodes und [Miner](/blog/bitcoin-mining-erklaert/) fälschlicherweise in einen Topf. Dabei sind sie Kontrahenten in jenem System der "Checks and Balances", das Bitcoin so faszinierend macht:
 
@@ -111,7 +111,7 @@ Die Nodes! Ein historisches Beispiel dafür ist der sogenannte "Blocksize War" v
 
 ---
 
-## Wie man 2026 seine eigene Node startet {#wie-starten}
+## Wie man 2026 seine eigene Node startet <a id="wie-starten"></a>
 
 Früher mussten Sie Linux programmieren können. Heute ist der Start einer Node so einfach wie das Einstecken eines Routers.
 
@@ -127,7 +127,7 @@ Früher mussten Sie Linux programmieren können. Heute ist der Start einer Node 
 
 ---
 
-## Zensurresistenz: Warum Bitcoin unaufhaltsam ist {#legalitaet}
+## Zensurresistenz: Warum Bitcoin unaufhaltsam ist <a id="legalitaet"></a>
 
 Da das Betreiben einer Node rein privater Natur ist (Sie lagern kein Geld für andere Kunden treuhänderisch, Sie schürfen kein Geld um Gewinne zu verbuchen), unterliegt es in Europa keinerlei Regulierungen (z.B. der BaFin). Wer die freie Software auf seinem Computer ausführt, übt in den Augen vieler Rechtsexperten nichts anderes aus als die Freiheit der Information.
 
@@ -135,7 +135,7 @@ In Deutschland, der Schweiz und Österreich gibt es, gemessen an der Gesamtbevö
 
 ---
 
-## Hardware-Hürden und die Initial Synchronisation (IBD) {#huerden}
+## Hardware-Hürden und die Initial Synchronisation (IBD) <a id="huerden"></a>
 
 Das Node-Leben hat nur wenige Hürden:
 
@@ -144,7 +144,7 @@ Das Node-Leben hat nur wenige Hürden:
 
 ---
 
-## Das Umbrel-Erlebnis & Layer-2 Apps {#oekosystem}
+## Das Umbrel-Erlebnis & Layer-2 Apps <a id="oekosystem"></a>
 
 Wer 2026 eine Node hostet, profitiert vom unglaublichen App-Ökosystem dieses "Sovereign Servers" (Souveräner Server).
 
@@ -156,7 +156,7 @@ Mit nur einem Klick können Sie zusätzlich zur Bitcoin-Software folgendes insta
 
 ---
 
-## Die Zukunft der Node-Dezentralisierung {#zukunft}
+## Die Zukunft der Node-Dezentralisierung <a id="zukunft"></a>
 
 Das größte Dilemma im Krypto-Sektor nennt sich das "Blockchain-Trilemma" (Kompromiss aus Dezentralisierung, Sicherheit und Geschwindigkeit).
 Rivalen wie Solana (SOL) fokussieren sich auf enorme globale Geschwindigkeit. Der Preis dafür: Ihre Nodes benötigen gigantisch teure Hardware, wodurch nur noch IT-Großkonzerne das Netzwerk verwalten. 
@@ -165,7 +165,7 @@ Bitcoin verneint das strikt. Das fundamentale Sicherheitsversprechen Bitcoins bl
 
 ---
 
-## Lexikalische Relationen & Fachbegriffe {#lexikalische-relationen}
+## Lexikalische Relationen & Fachbegriffe <a id="lexikalische-relationen"></a>
 
 <SemanticTable 
   title="Lexikalische Relationen: Aufbau der Nodes"
@@ -185,7 +185,7 @@ Bitcoin verneint das strikt. Das fundamentale Sicherheitsversprechen Bitcoins bl
 
 ---
 
-## Häufig gestellte Fragen (FAQs) {#faqs}
+## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Speichert meine eigene Node meine Bitcoins?
 Nein, das ist ein weitverbreiteter Irrtum. Ihre Hardware Wallet (der USB-Stick mit der Seed-Phrase) speichert den Zugang zu den Bitcoins. Die Node liefert lediglich der Wallet ein absolut vertrauenswürdiges Instrument ins Haus, um den eigenen Kontostand anonym im globalen Kassenbuch abfragen zu können. 

@@ -40,7 +40,7 @@ export const faqSchema = {
 
 ---
 
-## Die Philosophie der Eigenverwahrung (Definition) {#definition}
+## Die Philosophie der Eigenverwahrung (Definition) <a id="definition"></a>
 
 Bitcoin ist das erste Asset der Geschichte, das es Ihnen ermöglicht, Ihre eigene Bank zu sein. Im traditionellen System sind Sie ein "unbesicherter Gläubiger" Ihrer Bank. In Bitcoin sind Sie durch den Besitz kryptografischer Schlüssel der **absolute Eigentümer**.
 
@@ -55,7 +55,7 @@ Eigenverwahrung (Self-Custody) ist kein Bonus; es ist der Existenzgrund von Bitc
 
 ---
 
-## Hot vs. Cold Storage (Der fundamentale Unterschied) {#hot-vs-cold}
+## Hot vs. Cold Storage (Der fundamentale Unterschied) <a id="hot-vs-cold"></a>
 
 Das Verständnis von "Hot" (Online) und "Cold" (Offline) ist der erste Schritt jedes Sicherheitsplans.
 
@@ -68,9 +68,9 @@ graph TD
     C --> F[Hardware Wallets]
     C --> G[Air-Gapped / Paper]
     D -.-> H[Internetverbindung besteht]
-    H --> I{Höhers Risiko}
+    H --> I([Höhers Risiko])
     F -.-> J[Keine Internetverbindung]
-    J --> K{Höchste Sicherheit}
+    J --> K([Höchste Sicherheit])
 </div>
 
 - **Hot Wallets:** Ideal für kleine Beträge im Alltag. Wie das Bargeld in Ihrer Hosentasche.
@@ -78,7 +78,7 @@ graph TD
 
 ---
 
-## Die Seed Phrase: Ihr Generalschlüssel (Sicherheit) {#seed-phrase}
+## Die Seed Phrase: Ihr Generalschlüssel (Sicherheit) <a id="seed-phrase"></a>
 
 Ein sicheres Wallet gibt Ihnen 12 oder 24 Wörter (BIP-39 Standard). Dies ist der Backup-Mechanismus für alle Ihre privaten Schlüssel.
 
@@ -92,7 +92,7 @@ Wer diese Wörter hat, hat Ihr Geld. Wer sie verliert, verliert das Geld.
 
 ---
 
-## Hardware-Wallets: Der Goldstandard (Hardware) {#hardware}
+## Hardware-Wallets: Der Goldstandard (Hardware) <a id="hardware"></a>
 
 Eine Hardware-Wallet ist ein spezialisierter Computer, der Transaktionen signiert, ohne dass der private Schlüssel jemals den PC oder das Internet berührt.
 
@@ -105,7 +105,7 @@ Eine Hardware-Wallet ist ein spezialisierter Computer, der Transaktionen signier
 
 ---
 
-## Stahl-Backups: Schutz vor Katastrophen (Vorsorge) {#steel}
+## Stahl-Backups: Schutz vor Katastrophen (Vorsorge) <a id="steel"></a>
 
 Papier ist anfällig für Feuer, Wasser und Zerfall. Wenn Sie bedeutende Werte sichern, sollte Ihre Seed Phrase in Stahl geprägt sein.
 
@@ -113,7 +113,7 @@ Edelstahl oder Titan übersteht Hausbrände (bis zu 1400°C), während Papier be
 
 ---
 
-## Multisig: Schutz vor Einzelfehlern (Fortgeschritten) {#multisig}
+## Multisig: Schutz vor Einzelfehlern (Fortgeschritten) <a id="multisig"></a>
 
 Selbst mit einer Hardware-Wallet haben Sie einen "Single Point of Failure": Wenn Ihre Seed Phrase gestohlen wird, sind die Coins weg. **Multisig (Mehrfachsignatur)** löst dies, indem z.B. 2-von-3 Schlüsseln benötigt werden, um Geld zu bewegen.
 
@@ -121,7 +121,7 @@ Ein Angreifer müsste physisch in zwei verschiedene Orte einbrechen, um auf Ihre
 
 ---
 
-## Operational Security (OpSec) & Vererbung {#opsec}
+## Operational Security (OpSec) & Vererbung <a id="opsec"></a>
 
 Technische Sicherheit reicht nicht, wenn menschliche Fehler passieren:
 - **"Boat Accidents":** Erzählen Sie niemandem, wie viel Bitcoin Sie besitzen.
@@ -130,7 +130,7 @@ Technische Sicherheit reicht nicht, wenn menschliche Fehler passieren:
 
 ---
 
-## Lexikalische Relationen & Sicherheits-Vokabular {#lexikalische-relationen}
+## Lexikalische Relationen & Sicherheits-Vokabular <a id="lexikalische-relationen"></a>
 
 <SemanticTable 
   title="Lexikalische Relationen: Bitcoin Custody"
@@ -150,7 +150,7 @@ Technische Sicherheit reicht nicht, wenn menschliche Fehler passieren:
 
 ---
 
-## Häufig gestellte Fragen (FAQs) {#faqs}
+## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Kann mein Hardware-Wallet gehackt werden?
 Technisch ist kein PC zu 100% sicher, aber Hardware-Wallets sind gegen physische Angriffe und Fernzugriffe extrem gehärtet. Die größte Gefahr ist nicht ein Hacker, sondern dass Sie getäuscht werden (Social Engineering), Ihren Seed preiszugeben.

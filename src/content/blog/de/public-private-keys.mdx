@@ -41,7 +41,7 @@ export const faqSchema = {
 
 ---
 
-## Das Grundkonzept: Deine Schlüssel = Dein Bitcoin (Definition) {#grundkonzept}
+## Das Grundkonzept: Deine Schlüssel = Dein Bitcoin (Definition) <a id="grundkonzept"></a>
 
 Der berühmteste Satz in der gesamten Krypto-Welt lautet: **"Not your keys, not your coins."** (Nicht deine Schlüssel, nicht deine Coins).
 
@@ -58,7 +58,7 @@ Kaufen Sie Bitcoin auf einer Börse wie Bison, Kraken oder TradeRepublic und las
 
 ---
 
-## Was ist ein Privater Schlüssel (Private Key)? {#private-key}
+## Was ist ein Privater Schlüssel (Private Key)? <a id="private-key"></a>
 
 Ein **Private Key** ist fundamental gesehen einfach eine unfassbar große Zufallszahl – konkret eine Zahl mit 256 Bit Länge.
 
@@ -76,7 +76,7 @@ Dieser Zahlenraum umfasst $2^{256}$ Möglichkeiten. Um das zu veranschaulichen: 
 
 ---
 
-## Was ist ein Öffentlicher Schlüssel (Public Key)? {#public-key}
+## Was ist ein Öffentlicher Schlüssel (Public Key)? <a id="public-key"></a>
 
 Ein **öffentlicher Schlüssel (Public Key)** wird durch einen Einweg-Algorithmus aus dem Private Key berechnet. Bei Bitcoin nennt sich dieses mathematische System **Elliptische-Kurven-Kryptografie (ECC)**, basierend auf der Kurve *secp256k1*.
 
@@ -89,7 +89,7 @@ Ein roher Public Key ist sehr lang und aufgrund potenzieller Gefahren durch kün
 
 ---
 
-## Wie Schlüssel zusammenarbeiten (Der Transaktionsfluss) {#transaktion}
+## Wie Schlüssel zusammenarbeiten (Der Transaktionsfluss) <a id="transaktion"></a>
 
 Wie weiß das dezentrale Netzwerk, dass Sie nicht lügen, wenn Sie Bitcoins versenden? Es nutzt **Asymmetrische Digitale Signaturen**.
 
@@ -103,7 +103,7 @@ graph TD
     A[Senden: 1 BTC an Max] --> B(Blockchain-Daten generieren)
     B --> C[Mit Private Key signieren]
     C --> D[Transaktion + Signatur ans Netzwerk senden]
-    D --> E{Netzwerk Node-Prüfung}
+    D --> E([Netzwerk Node-Prüfung])
     E --> F[Passt die Signatur exakt zum Public Key?]
     F -- Nein --> G[Transaktion abgelehnt]
     F -- Ja --> H[Validiert: Miner schreiben den Block]
@@ -113,7 +113,7 @@ Jeder [Bitcoin-Node](/blog/was-ist-ein-bitcoin-node/) im Netzwerk kann betrachte
 
 ---
 
-## Seed Phrasen: Der lesbare Master-Schlüssel {#seed-phrase}
+## Seed Phrasen: Der lesbare Master-Schlüssel <a id="seed-phrase"></a>
 
 Menschen neigen zutiefst dazu, sich beim Abschreiben von 64 kryptischen Zeichenfolgen gnadenlos zu vertippen. Ein Tippfehler hieße: Bitcoins zerstört.
 
@@ -125,7 +125,7 @@ Die Bitcoin Entwickler-Community löste das Problem durch den Standard **BIP-39*
 
 ---
 
-## Best Practices für die Schlüsselsicherheit (Hygiene) {#sicherheits-tipps}
+## Best Practices für die Schlüsselsicherheit (Hygiene) <a id="sicherheits-tipps"></a>
 
 Da eine Brute-Force-Attacke auf die Mathematik scheitert, klauen Betrüger Ihnen schlicht den Schlüssel und machen Sie zum Vektor. 
 
@@ -135,7 +135,7 @@ Da eine Brute-Force-Attacke auf die Mathematik scheitert, klauen Betrüger Ihnen
 
 ---
 
-## Staatliche Beschlagnahmung vs. Kryptografie (Recht) {#beschlagnahmung}
+## Staatliche Beschlagnahmung vs. Kryptografie (Recht) <a id="beschlagnahmung"></a>
 
 Die kryptografische Natur von Bitcoin (die Trennung in öffentlichsichtiges Konto und verborgenen Schlüssel) hat bahnbrechende rechtliche Folgen.
 
@@ -145,7 +145,7 @@ Die Behörden können den Täter höchstens physisch zwingen, das Passwort zur W
 
 ---
 
-## Die Gefahr durch Quantencomputer (Zukunftstechnologie) {#quantencomputer}
+## Die Gefahr durch Quantencomputer (Zukunftstechnologie) <a id="quantencomputer"></a>
 
 Die Mathematik der elliptischen Kurven stützt sich auf die extreme Komplexität, gigantisch große Primzahlen zu faktorisieren. Aktuelle Computer scheitern kläglich. Quantencomputer, die *Shor's Algorithmus* durchführen, sollen dieses Problem künftig effizient knacken können.
 
@@ -155,7 +155,7 @@ Sollte die Gefahr in einigen Dekaden aber in Reichweite geraten, baut die Entwic
 
 ---
 
-## Lexikalische Relationen & Fachbegriffe {#lexikalische-relationen}
+## Lexikalische Relationen & Fachbegriffe <a id="lexikalische-relationen"></a>
 
 Das kryptografische Fachchinesisch richtig einzuordnen schützt vor panikhaften Anlagefehlern:
 
@@ -177,7 +177,7 @@ Das kryptografische Fachchinesisch richtig einzuordnen schützt vor panikhaften 
 
 ---
 
-## Häufig gestellte Fragen (FAQs) {#faqs}
+## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Kann mein privater Schlüssel versehentlich doppelt generiert werden?
 Das nennt man eine Kollision. Rein statistisch gesehen ist das zwar möglich, aber faktisch praktisch unmöglich. Dass zwei Hardware Wallets auf der Welt per Zufall die exakt gleiche Serie aus 24 Wörtern generieren, ist weitaus unwahrscheinlicher, als dass Sie in Ihrem Leben fünfmal nacheinander vom Blitz getroffen werden.

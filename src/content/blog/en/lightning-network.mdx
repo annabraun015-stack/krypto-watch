@@ -40,7 +40,7 @@ export const faqSchema = {
 
 ---
 
-## The Scalability Trilemma (Definition) {#trilemma}
+## The Scalability Trilemma (Definition) <a id="trilemma"></a>
 
 Bitcoin’s base layer (Layer 1) is designed for **Security** and **Decentralization**. However, it is fundamentally slow. With only 7 transactions per second, it cannot handle the daily payments of 8 billion people.
 
@@ -55,7 +55,7 @@ The Lightning Network is the solution. It sits *on top* of Bitcoin, handling mil
 
 ---
 
-## What is a Payment Channel? (Technology) {#channels}
+## What is a Payment Channel? (Technology) <a id="channels"></a>
 
 Imagine a "bar tab" at your local pub.
 1.  **Open Tab:** You give the bartender your credit card (On-chain Transaction).
@@ -74,7 +74,7 @@ graph LR
 
 ---
 
-## How Routing Works: The Onion Model (Network) {#routing}
+## How Routing Works: The Onion Model (Network) <a id="routing"></a>
 
 You don't need a direct channel with everyone you want to pay. You can **route** payments through existing nodes.
 
@@ -82,7 +82,7 @@ If Alice has a channel with Bob, and Bob has a channel with Carol, Alice can pay
 
 ---
 
-## Lightning vs. On-Chain Bitcoin (Comparison) {#on-chain-vs-lightning}
+## Lightning vs. On-Chain Bitcoin (Comparison) <a id="on-chain-vs-lightning"></a>
 
 | Feature | On-Chain (Layer 1) | Lightning (Layer 2) |
 |---------|--------------------|---------------------|
@@ -94,7 +94,7 @@ If Alice has a channel with Bob, and Bob has a channel with Carol, Alice can pay
 
 ---
 
-## Real-World Use Cases: 2026 Adoption (Adoption) {#use-cases}
+## Real-World Use Cases: 2026 Adoption (Adoption) <a id="use-cases"></a>
 
 In 2026, the Lightning Network is used in ways we never thought possible:
 *   **Decentralized Socials:** On platforms like Nostr, users "Zap" each other 1-cent tips for high-quality posts.
@@ -104,7 +104,7 @@ In 2026, the Lightning Network is used in ways we never thought possible:
 
 ---
 
-## The Best Lightning Wallets for 2026 (Usage) {#wallets}
+## The Best Lightning Wallets for 2026 (Usage) <a id="wallets"></a>
 
 | Wallet | Type | Best For |
 |--------|------|----------|
@@ -115,7 +115,7 @@ In 2026, the Lightning Network is used in ways we never thought possible:
 
 ---
 
-## Potential Risks and Liquidity Challenges (Security) {#risks}
+## Potential Risks and Liquidity Challenges (Security) <a id="risks"></a>
 
 - **Inbound Liquidity:** To *receive* money, your channel must have space to hold it. Managing this "Liquidity" is the biggest hurdle for new users.
 - **Watchtowers:** If you go offline for months, your channel partner could theoretically try to "cheat" the close. **Watchtowers** are automated services that monitor the chain for you to prevent this.
@@ -123,7 +123,7 @@ In 2026, the Lightning Network is used in ways we never thought possible:
 
 ---
 
-## Lexical Relations & Architectural Vokabular {#lexical-relations}
+## Lexical Relations & Architectural Vokabular <a id="lexical-relations"></a>
 
 <SemanticTable 
   title="Lexical Relations: Lightning Architecture"
@@ -143,7 +143,7 @@ In 2026, the Lightning Network is used in ways we never thought possible:
 
 ---
 
-## Frequently Asked Questions {#faqs}
+## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Does Lightning replace Bitcoin?
 No. Lightning **is** Bitcoin. It uses real Bitcoins locked in smart contracts. It is an expansion of Bitcoin's utility, not a separate coin.

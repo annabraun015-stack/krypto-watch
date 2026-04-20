@@ -41,7 +41,7 @@ export const faqSchema = {
 
 ---
 
-## The Core Concept: Your Keys = Your Bitcoin (Definition) {#core-concept}
+## The Core Concept: Your Keys = Your Bitcoin (Definition) <a id="core-concept"></a>
 
 The most famous maxim in all of cryptocurrency is: **"Not your keys, not your coins."**
 
@@ -58,7 +58,7 @@ If you purchase Bitcoin on a centralized exchange like Binance or Coinbase and l
 
 ---
 
-## What Is a Private Key? (The Master Password) {#private-key}
+## What Is a Private Key? (The Master Password) <a id="private-key"></a>
 
 A **Private Key** is fundamentally just a massive, randomly generated integer. Specifically, it is a 256-bit number. 
 
@@ -77,7 +77,7 @@ The number space is $2^{256}$. For context, this number is roughly equal to $10^
 
 ---
 
-## What Is a Public Key? (The Address Book) {#public-key}
+## What Is a Public Key? (The Address Book) <a id="public-key"></a>
 
 A **Public Key** is mathematically derived from the private key using **Elliptic Curve Cryptography (ECC)**, specifically the `secp256k1` curve. 
 
@@ -91,7 +91,7 @@ Therefore, Bitcoin puts the Public Key through two additional hashing functions 
 
 ---
 
-## How Keys Work Together (Technical Transaction Flow) {#transaction}
+## How Keys Work Together (Technical Transaction Flow) <a id="transaction"></a>
 
 When you want to send someone Bitcoin, how does the network know you aren't lying? It uses **Asymmetric Digital Signatures**.
 
@@ -105,7 +105,7 @@ graph TD
     A[Create Transaction: Send 1 BTC to Bob] --> B(Hash the Transaction Data)
     B --> C[Sign Hash with Private Key]
     C --> D[Broadcast Tx + Signature + Public Key]
-    D --> E{Network Validates}
+    D --> E([Network Validates])
     E --> F[Does Signature match Public Key?]
     F -- No --> G[Reject: Invalid Signature]
     F -- Yes --> H[Confirm: Miner adds to Block]
@@ -115,7 +115,7 @@ Any node on the network can look at the wax (Signature) and compare it to the ph
 
 ---
 
-## Seed Phrases: The Human-Readable Master Key {#seed-phrase}
+## Seed Phrases: The Human-Readable Master Key <a id="seed-phrase"></a>
 
 Humans are terrible at accurately writing down 64-character strings of random letters and numbers. Transcribing a private key perfectly is prone to disastrous typos. 
 
@@ -129,7 +129,7 @@ In 2013, the Bitcoin community introduced the **BIP-39 Standard**. This standard
 
 ---
 
-## Key Security Best Practices (Usage & Hygiene) {#security}
+## Key Security Best Practices (Usage & Hygiene) <a id="security"></a>
 
 Because cryptography cannot be hacked, thieves target your operational security instead. 
 
@@ -139,7 +139,7 @@ Because cryptography cannot be hacked, thieves target your operational security 
 
 ---
 
-## The Risk of Legal Seizure vs Cryptography {#legal-seizure}
+## The Risk of Legal Seizure vs Cryptography <a id="legal-seizure"></a>
 
 The cryptographic separation of public and private keys creates a fascinating legal reality. 
 
@@ -149,7 +149,7 @@ A government or court order can identify a public Bitcoin address and legally or
 
 ---
 
-## Quantum Computing: A Threat to Public Keys? (Trends) {#quantum}
+## Quantum Computing: A Threat to Public Keys? (Trends) <a id="quantum"></a>
 
 The underlying math of Elliptic Curve Cryptography (ECC) relies on the immense difficulty of factoring large prime numbers—a problem classical computers cannot solve.
 
@@ -160,7 +160,7 @@ However, cryptographers agree this is largely a theoretical concern for 2026. A 
 
 ---
 
-## Lexical Relations & Cryptography Vocabulary {#lexical-relations}
+## Lexical Relations & Cryptography Vocabulary <a id="lexical-relations"></a>
 
 <SemanticTable 
   title="Lexical Relations: Cryptographic Keys"
@@ -180,7 +180,7 @@ However, cryptographers agree this is largely a theoretical concern for 2026. A 
 
 ---
 
-## Frequently Asked Questions {#faqs}
+## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Can a private key be generated without an internet connection?
 Yes, absolutely. The most secure methods for generating private keys (such as rolling physical dice or using the secure element chip inside a hardware wallet) are deliberately performed in complete, "air-gapped" isolation from the internet. 

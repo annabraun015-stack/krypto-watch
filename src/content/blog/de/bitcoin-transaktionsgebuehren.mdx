@@ -40,7 +40,7 @@ export const faqSchema = {
 
 ---
 
-## Logik des Gebührenmarktes (Definition) {#definition}
+## Logik des Gebührenmarktes (Definition) <a id="definition"></a>
 
 Bitcoin hat eine begrenzte Kapazität. Im Durchschnitt wird alle 10 Minuten ein neuer Block gefunden, und jeder Block kann nur eine bestimmte Menge an Daten aufnehmen. Dies erzeugt einen **Gebührenmarkt.**
 
@@ -55,7 +55,7 @@ Miner sind ökonomisch motivierte Akteure. Sie wählen immer die Transaktionen a
 
 ---
 
-## Was ist der Mempool? (Netzwerk-Architektur) {#mempool}
+## Was ist der Mempool? (Netzwerk-Architektur) <a id="mempool"></a>
 
 Der **Mempool** (Memory Pool) ist das "Wartezimmer" für Transaktionen. Wenn Sie Bitcoin senden, gelangt die Transaktion zuerst in den Mempool von tausenden Nodes weltweit.
 
@@ -74,7 +74,7 @@ Stellen Sie es sich wie eine Auktion vor: Jeder im Mempool ruft seinen Preis. Mi
 
 ---
 
-## Berechnung von sat/vB: Daten vs. Wert (Technik) {#calculation}
+## Berechnung von sat/vB: Daten vs. Wert (Technik) <a id="calculation"></a>
 
 Die wichtigste Regel der Bitcoin-Gebühren: **Der Wert spielt keine Rolle, nur die Datenmenge.**
 
@@ -91,7 +91,7 @@ Eine Transaktion mit 10 Inputs (Sammeln von Kleingeld) ist "schwerer" und teurer
 
 ---
 
-## Die richtige Gebühr wählen: Dringlichkeitsstufen (Nutzung) {#usage}
+## Die richtige Gebühr wählen: Dringlichkeitsstufen (Nutzung) <a id="usage"></a>
 
 Die meisten modernen Wallets schätzen die Gebühr für Sie, aber es ist besser, die Stufen zu verstehen:
 
@@ -101,7 +101,7 @@ Die meisten modernen Wallets schätzen die Gebühr für Sie, aber es ist besser,
 
 ---
 
-## Beschleunigen hängender Transaktionen (RBF) {#rbf}
+## Beschleunigen hängender Transaktionen (RBF) <a id="rbf"></a>
 
 Was passiert, wenn Sie 5 sat/vB gezahlt haben, das Netzwerk aber plötzlich aktiv wird und die Mindestgebühr auf 50 sat/vB steigt? Ihre Transaktion ist **stuck** (hängt fest).
 
@@ -109,7 +109,7 @@ Was passiert, wenn Sie 5 sat/vB gezahlt haben, das Netzwerk aber plötzlich akti
 
 ---
 
-## Gebührenoptimierung: SegWit, Taproot und Batching {#optimization}
+## Gebührenoptimierung: SegWit, Taproot und Batching <a id="optimization"></a>
 
 Sie können Ihre Gebühren senken, ohne die Priorität zu verringern, indem Sie effizienter sind.
 
@@ -119,7 +119,7 @@ Sie können Ihre Gebühren senken, ohne die Priorität zu verringern, indem Sie 
 
 ---
 
-## Lightning Network: Skalierung jenseits des Mempools {#lightning}
+## Lightning Network: Skalierung jenseits des Mempools <a id="lightning"></a>
 
 Für den täglichen Kaffee machen On-Chain-Gebühren keinen Sinn. Das **Lightning Network** erlaubt es, Bruchteile eines Cents sofort zu bezahlen.
 
@@ -127,7 +127,7 @@ Lightning-Transaktionen landen nicht im Mempool. Es sind "Off-Chain"-Vereinbarun
 
 ---
 
-## Lexikalische Relationen & Transaktions-Vokabular {#lexical-relations}
+## Lexikalische Relationen & Transaktions-Vokabular <a id="lexical-relations"></a>
 
 <SemanticTable 
   title="Lexical Relations: Bitcoin Fees"
@@ -147,7 +147,7 @@ Lightning-Transaktionen landen nicht im Mempool. Es sind "Off-Chain"-Vereinbarun
 
 ---
 
-## Häufig gestellte Fragen (FAQs) {#faqs}
+## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Kann eine Transaktion für immer hängen bleiben?
 Technisch gesehen "vergessen" die meisten Nodes eine Transaktion nach etwa 2 Wochen, wenn sie nicht bestätigt wurde. Das Geld "verlässt" Ihr Wallet erst bei Bestätigung. Wenn es fehlschlägt, bleibt der Kontostand einfach bei Ihnen.

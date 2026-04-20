@@ -40,7 +40,7 @@ export const faqSchema = {
 
 ---
 
-## Das Skalierungs-Trilemma (Definition) {#trilemma}
+## Das Skalierungs-Trilemma (Definition) <a id="trilemma"></a>
 
 Bitcoins Basisschicht (Layer 1) ist auf **Sicherheit** und **Dezentralität** ausgelegt. Mit ca. 7 Transaktionen pro Sekunde ist sie jedoch technisch langsam. 
 
@@ -55,7 +55,7 @@ Das Lightning Network ist die Lösung. Es sitzt *oben auf* Bitcoin, wickelt Mill
 
 ---
 
-## Was ist ein Zahlungskanal? (Technologie) {#channels}
+## Was ist ein Zahlungskanal? (Technologie) <a id="channels"></a>
 
 Stellen Sie sich einen "Bierdeckel" in Ihrer Stammkneipe vor.
 1.  **Deckel aufmachen:** Sie hinterlegen Ihre Kreditkarte (On-Chain Transaktion).
@@ -74,7 +74,7 @@ graph LR
 
 ---
 
-## Wie Routing funktioniert: Das Onion-Modell (Netzwerk) {#routing}
+## Wie Routing funktioniert: Das Onion-Modell (Netzwerk) <a id="routing"></a>
 
 Sie müssen nicht mit jedem, den Sie bezahlen wollen, einen direkten Kanal haben. Sie können Zahlungen über bestehende Nodes **routen**.
 
@@ -82,7 +82,7 @@ Nutzt man das Netzwerk, fließen Zahlungen über Zwischenstationen. Dank **Onion
 
 ---
 
-## Lightning vs. On-Chain Bitcoin (Vergleich) {#on-chain-vs-lightning}
+## Lightning vs. On-Chain Bitcoin (Vergleich) <a id="on-chain-vs-lightning"></a>
 
 | Merkmal | On-Chain (Layer 1) | Lightning (Layer 2) |
 |---------|--------------------|---------------------|
@@ -94,7 +94,7 @@ Nutzt man das Netzwerk, fließen Zahlungen über Zwischenstationen. Dank **Onion
 
 ---
 
-## Praktische Anwendungsfälle: Die Adoption 2026 (Nutzung) {#use-cases}
+## Praktische Anwendungsfälle: Die Adoption 2026 (Nutzung) <a id="use-cases"></a>
 
 2026 ist das Lightning Network allgegenwärtig:
 *   **Dezentrale Social Media:** Auf Plattformen wie Nostr senden Nutzer sich gegenseitig "Zaps" (1-Cent-Trinkgelder) für gute Beiträge.
@@ -104,7 +104,7 @@ Nutzt man das Netzwerk, fließen Zahlungen über Zwischenstationen. Dank **Onion
 
 ---
 
-## Die besten Lightning Wallets 2026 (Anwendung) {#wallets}
+## Die besten Lightning Wallets 2026 (Anwendung) <a id="wallets"></a>
 
 | Wallet | Typ | Geeignet für |
 |--------|------|----------|
@@ -115,7 +115,7 @@ Nutzt man das Netzwerk, fließen Zahlungen über Zwischenstationen. Dank **Onion
 
 ---
 
-## Risiken und Liquiditäts-Herausforderungen (Sicherheit) {#risks}
+## Risiken und Liquiditäts-Herausforderungen (Sicherheit) <a id="risks"></a>
 
 - **Inbound Liquidity:** Um Geld *empfangen* zu können, muss Ihr Kanal "Platz" haben, um es aufzunehmen. Das Management dieser Liquidität ist die größte Hürde für Einsteiger.
 - **Watchtowers:** Wenn Sie Monate offline sind, könnte ein Partner versuchen, den Kanal zu seinen Gunsten zu schließen. **Watchtowers** sind automatisierte Dienste, die das Netzwerk für Sie überwachen.
@@ -123,7 +123,7 @@ Nutzt man das Netzwerk, fließen Zahlungen über Zwischenstationen. Dank **Onion
 
 ---
 
-## Lexikalische Relationen & Architektur-Vokabular {#lexikalische-relationen}
+## Lexikalische Relationen & Architektur-Vokabular <a id="lexikalische-relationen"></a>
 
 <SemanticTable 
   title="Lexikalische Relationen: Lightning Architektur"
@@ -143,7 +143,7 @@ Nutzt man das Netzwerk, fließen Zahlungen über Zwischenstationen. Dank **Onion
 
 ---
 
-## Häufig gestellte Fragen (FAQs) {#faqs}
+## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Ersetzt Lightning das normale Bitcoin?
 Nein. Lightning **ist** Bitcoin. Es nutzt echte Bitcoins, die in Smart Contracts gesperrt sind. Es ist eine Erweiterung des Nutzens, kein separater Coin.

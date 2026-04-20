@@ -4,12 +4,16 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+import remarkHeadingId from 'remark-heading-id';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://krypto-watch.de',
   output: 'static',
   integrations: [
-    mdx(),
+    mdx({
+      remarkPlugins: [remarkHeadingId],
+    }),
     sitemap({
       i18n: {
         defaultLocale: 'de',

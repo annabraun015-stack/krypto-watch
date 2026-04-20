@@ -42,7 +42,7 @@ export const faqSchema = {
 
 ---
 
-## What Is a Bitcoin Node? (Definition & Purpose) {#definition}
+## What Is a Bitcoin Node? (Definition & Purpose) <a id="definition"></a>
 
 A **Bitcoin Node** is any computer that connects to the Bitcoin peer-to-peer network. In a system without a central bank or a CEO, the network must rely on thousands of independent computers constantly checking each other's math to ensure the system's integrity. These computers are the nodes.
 
@@ -59,7 +59,7 @@ To achieve true financial sovereignty, you must run your own node. If you rely o
 
 ---
 
-## What Does a Node Actually Do? (Technology) {#what-it-does}
+## What Does a Node Actually Do? (Technology) <a id="what-it-does"></a>
 
 If you turn on a Bitcoin Full Node on a Raspberry Pi in your living room, it immediately begins a process called the **Initial Block Download (IBD)**. It downloads the very first block from 2009, verifies the math, downloads the second block, verifies it, and repeats this for all 800,000+ blocks in existence.
 
@@ -72,19 +72,19 @@ Once caught up to the present day, its daily tasks are:
 <div class="mermaid">
 graph TD
     A[New Transaction Broadcast] --> B(Propagated to Node Network)
-    B --> C{Node validation check}
+    B --> C([Node validation check])
     C --> |Invalid Signature| D[Node Rejects & Drops Tx]
     C --> |Valid| E[Node keeps Tx in Mempool]
     E --> F[Miner pulls from Mempool & Mines Block]
     F --> G[Miner broadcasts Block back to Node]
-    G --> H{Node audits the entire Miner Block}
+    G --> H([Node audits the entire Miner Block])
     H --> |Miner Cheated| I[Node Orphans the Block]
     H --> |All Rules Met| J[Node Updates Local Ledger]
 </div>
 
 ---
 
-## Full Nodes vs. Light Nodes (Comparison) {#types}
+## Full Nodes vs. Light Nodes (Comparison) <a id="types"></a>
 
 The Bitcoin network is vast, and not every computer operates with the same level of authority. 
 
@@ -99,7 +99,7 @@ A **SPV (Simplified Payment Verification)** node is what runs on your mobile pho
 
 ---
 
-## Nodes vs. Miners: The Separation of Powers {#nodes-vs-miners}
+## Nodes vs. Miners: The Separation of Powers <a id="nodes-vs-miners"></a>
 
 The most common misconception in Bitcoin is confusing Nodes with [Miners](/en/blog/bitcoin-mining/). 
 They are entirely different entities providing a "Separation of Powers" akin to the branches of a government.
@@ -112,7 +112,7 @@ The Nodes. Historically, when 90% of miners colluded to change the rules of Bitc
 
 ---
 
-## How to Run Your Own Node in 2026 {#how-to-run}
+## How to Run Your Own Node in 2026 <a id="how-to-run"></a>
 
 Running a node has evolved from a daunting command-line task into a beautiful, app-store-like experience. 
 
@@ -132,7 +132,7 @@ For purists, you can download **Bitcoin Core** directly from `bitcoincore.org`, 
 
 ---
 
-## The Legality and Resistance of Nodes {#legality}
+## The Legality and Resistance of Nodes <a id="legality"></a>
 
 Because running a Node does not involve creating new currency (mining) or holding custodial funds for others (acting as an exchange), running a Node is universally legal, even in countries with strict financial regulations.
 
@@ -140,7 +140,7 @@ The sheer distribution of Nodes is Bitcoin's greatest defense mechanism. With ov
 
 ---
 
-## Risks and Hardware Limitations {#risks}
+## Risks and Hardware Limitations <a id="risks"></a>
 
 Running a node is entirely safe, but there are logistical considerations:
 
@@ -149,7 +149,7 @@ Running a node is entirely safe, but there are logistical considerations:
 
 ---
 
-## Adoption & The Node Ecosystem {#adoption}
+## Adoption & The Node Ecosystem <a id="adoption"></a>
 
 Modern node operating systems have transformed the Node from a simple ledger-auditor into a personal sovereign server. 
 
@@ -160,7 +160,7 @@ Through apps installed on your node, you can now:
 
 ---
 
-## The Future of Node Decentralization {#future}
+## The Future of Node Decentralization <a id="future"></a>
 
 The central tension in blockchain development is the "Blockchain Trilemma": the trade-off between Decentralization, Security, and Scalability. 
 Many rival cryptocurrencies (like Solana) demand immense, enterprise-grade hardware to run a node, achieving massive speeds but centralizing power in the hands of a few data centers. 
@@ -169,7 +169,7 @@ Bitcoin fundamentally rejects this. The core developmental philosophy of Bitcoin
 
 ---
 
-## Lexical Relations & Node Vocabulary {#lexical-relations}
+## Lexical Relations & Node Vocabulary <a id="lexical-relations"></a>
 
 <SemanticTable 
   title="Lexical Relations: Bitcoin Nodes"
@@ -189,7 +189,7 @@ Bitcoin fundamentally rejects this. The core developmental philosophy of Bitcoin
 
 ---
 
-## Frequently Asked Questions {#faqs}
+## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Does a Node hold my Bitcoin?
 No. Your Node does not hold your keys or your Bitcoin. Your hardware wallet holds your keys. The Node simply acts as your personal gateway to check the ledger and broadcast your signed transactions securely, preventing third-party wallet providers from spying on your holdings.

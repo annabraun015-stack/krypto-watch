@@ -40,7 +40,7 @@ export const faqSchema = {
 
 ---
 
-## The Philosophy of Self-Custody (Definition) {#definition}
+## The Philosophy of Self-Custody (Definition) <a id="definition"></a>
 
 Bitcoin is unique because it allows you to be your own bank. In the legacy financial system, you are an "unsecured creditor" to your bank. In Bitcoin, you are the **absolute owner** through the possession of cryptographic keys.
 
@@ -55,7 +55,7 @@ Self-custody is not just a preference; it is the reason Bitcoin exists. Without 
 
 ---
 
-## Hot vs. Cold Storage (The Fundamental Split) {#hot-vs-cold}
+## Hot vs. Cold Storage (The Fundamental Split) <a id="hot-vs-cold"></a>
 
 Understanding the difference between "Hot" and "Cold" is the first step in any security plan.
 
@@ -68,9 +68,9 @@ graph TD
     C --> F[Hardware Wallets]
     C --> G[Air-Gapped/Paper]
     D -.-> H[Connected to Internet]
-    H --> I{Higher Risk}
+    H --> I([Higher Risk])
     F -.-> J[Disconnected from Internet]
-    J --> K{Highest Security}
+    J --> K([Highest Security])
 </div>
 
 - **Hot Wallets:** Best for small amounts of spending money. Like a physical wallet you carry in your pocket.
@@ -78,7 +78,7 @@ graph TD
 
 ---
 
-## The Seed Phrase: Your Master Key (Security) {#seed-phrase}
+## The Seed Phrase: Your Master Key (Security) <a id="seed-phrase"></a>
 
 When you set up a secure wallet, it will give you 12 or 24 words. This is **BIP-39**. 
 
@@ -92,7 +92,7 @@ If you have these words, you can recreate your wallet anywhere in the world, eve
 
 ---
 
-## Hardware Wallets: The Gold Standard (Hardware) {#hardware}
+## Hardware Wallets: The Gold Standard (Hardware) <a id="hardware"></a>
 
 A hardware wallet is a dedicated computer designed with one purpose: to sign transactions without ever revealing the private key to your PC or the internet.
 
@@ -105,7 +105,7 @@ A hardware wallet is a dedicated computer designed with one purpose: to sign tra
 
 ---
 
-## Steel Backups: Protecting Against Disaster (Backup) {#steel}
+## Steel Backups: Protecting Against Disaster (Backup) <a id="steel"></a>
 
 Paper is vulnerable to fire, water, and time. If you are storing significant wealth, your seed phrase should be etched in steel.
 
@@ -114,7 +114,7 @@ Stainless steel or titanium can survive house fires (up to 1400°C), whereas pap
 
 ---
 
-## Multisig: Eliminating Single Points of Failure (Advanced) {#multisig}
+## Multisig: Eliminating Single Points of Failure (Advanced) <a id="multisig"></a>
 
 Even with a hardware wallet, you still have a "Single Point of Failure": if your seed phrase is stolen, your coins are gone. **Multisig (Multi-Signature)** solves this by requiring 2-of-3 or 3-of-5 keys to move money.
 
@@ -127,7 +127,7 @@ An attacker would need to physically breach two separate locations to steal your
 
 ---
 
-## Operational Security (OpSec) & Inheritance {#opsec}
+## Operational Security (OpSec) & Inheritance <a id="opsec"></a>
 
 Common mistakes often bypass even the best technical security:
 - **Boat Accidents:** Don't tell people how much Bitcoin you have.
@@ -136,7 +136,7 @@ Common mistakes often bypass even the best technical security:
 
 ---
 
-## Lexical Relations & Security Vokabular {#lexical-relations}
+## Lexical Relations & Security Vokabular <a id="lexical-relations"></a>
 
 <SemanticTable 
   title="Lexical Relations: Bitcoin Custody"
@@ -156,7 +156,7 @@ Common mistakes often bypass even the best technical security:
 
 ---
 
-## Frequently Asked Questions {#faqs}
+## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Can my hardware wallet be hacked?
 Technically, no computer is 100% unhackable, but hardware wallets are designed to withstand physical attacks. To be hacked remotely, an attacker would need to trick you into entering your seed phrase into a fake website. **Your biggest threat is not a hacker; it is your own behavior.**

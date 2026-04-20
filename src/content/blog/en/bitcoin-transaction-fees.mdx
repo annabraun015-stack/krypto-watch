@@ -40,7 +40,7 @@ export const faqSchema = {
 
 ---
 
-## The Fee Market Logic (Definition) {#definition}
+## The Fee Market Logic (Definition) <a id="definition"></a>
 
 Bitcoin has a limited capacity. On average, a new block is found every 10 minutes, and each block can only hold a certain amount of data. This creates a **Fee Market.**
 
@@ -55,7 +55,7 @@ Miners are profit-seeking actors. They will always choose the transactions that 
 
 ---
 
-## What is the Mempool? (Network Architecture) {#mempool}
+## What is the Mempool? (Network Architecture) <a id="mempool"></a>
 
 The **Mempool** (Memory Pool) is the "waiting room" for transactions. When you send Bitcoin, it first goes to the mempool of thousands of nodes worldwide.
 
@@ -74,7 +74,7 @@ Think of it like an auction: everyone in the mempool is shouting their price. Mi
 
 ---
 
-## Calculating sat/vB: Data vs. Value (Technology) {#calculation)
+## Calculating sat/vB: Data vs. Value (Technology) <a id="calculation"></a>
 
 The most important rule of Bitcoin fees: **Value does not matter; Data does.**
 
@@ -91,7 +91,7 @@ A transaction with 10 inputs (collecting small change) is "heavier" and more exp
 
 ---
 
-## How to Set the Right Fee: Urgency Tiers (Usage) {#usage}
+## How to Set the Right Fee: Urgency Tiers (Usage) <a id="usage"></a>
 
 Most modern wallets estimate the fee for you, but it's better to understand the tiers:
 
@@ -101,7 +101,7 @@ Most modern wallets estimate the fee for you, but it's better to understand the 
 
 ---
 
-## Replacing a Stuck Transaction (RBF) {#rbf}
+## Replacing a Stuck Transaction (RBF) <a id="rbf"></a>
 
 What if you paid 5 sat/vB but the network suddenly got busy and now the minimum "Next Block" fee is 50 sat/vB? Your transaction is **Stuck.**
 
@@ -109,7 +109,7 @@ What if you paid 5 sat/vB but the network suddenly got busy and now the minimum 
 
 ---
 
-## Fee Optimization: SegWit, Taproot, and Batching {#optimization}
+## Fee Optimization: SegWit, Taproot, and Batching <a id="optimization"></a>
 
 You can lower your fees without lowering your priority by being more efficient.
 
@@ -119,7 +119,7 @@ You can lower your fees without lowering your priority by being more efficient.
 
 ---
 
-## Lightning Network: Scaling Beyond the Mempool {#lightning}
+## Lightning Network: Scaling Beyond the Mempool <a id="lightning"></a>
 
 For daily coffee payments, on-chain fees don't make sense. The **Lightning Network** allows you to pay fractions of a cent instantly.
 
@@ -127,7 +127,7 @@ Lightning transactions don't live in the mempool. They are "off-chain" agreement
 
 ---
 
-## Lexical Relations & Transaction Vokabular {#lexical-relations}
+## Lexical Relations & Transaction Vokabular <a id="lexical-relations"></a>
 
 <SemanticTable 
   title="Lexical Relations: Bitcoin Fees"
@@ -147,7 +147,7 @@ Lightning transactions don't live in the mempool. They are "off-chain" agreement
 
 ---
 
-## Frequently Asked Questions {#faqs}
+## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Can a transaction be stuck forever?
 Technically, most nodes will "forget" a transaction after 2 weeks if it hasn't been confirmed. The money never "leaves" your wallet until it's confirmed, so if it fails, the balance just stays with you.
