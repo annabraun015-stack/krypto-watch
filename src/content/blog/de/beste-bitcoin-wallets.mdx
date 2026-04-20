@@ -47,17 +47,6 @@ Die gesamte Architektur eines Wallets basiert auf asymmetrischer Kryptografie. W
 Für maximale Sicherheit muss die Erstellung der Schlüssel zwingend offline geschehen, weshalb man zwischen "Hot" (Online) und "Cold" (Offline) Storage unterscheidet:
 
 
-<div class="mermaid">
-graph TD
-    A[Bitcoin Verwahrungsmodelle] --> BHot Wallets)
-    A --> CCold Wallets)
-    B --> DSoftware & Mobile Apps]
-    B --> EBörsen & Custodials]
-    C --> FHardware Geräte]
-    C --> GPapier & Stahl-Backups]
-    D --> HSchlüssel sind oft online: Erhöhtes Risiko für Malware)
-    F --> ISchlüssel bleiben strikt offline: Maximales Sicherheitsniveau)
-</div>
 
 Ein Hardware-Ledger empfängt vom verbundenen Computer oder Smartphone lediglich Transaktionsrohdaten. Die Berechnung der Signatur findet *abgeschirmt im isolierten Chip des Geräts* statt. Der Private Key selbst berührt das Internet an keinem einzigen Punkt des Prozesses.
 

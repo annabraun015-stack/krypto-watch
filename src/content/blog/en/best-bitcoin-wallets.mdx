@@ -47,17 +47,6 @@ The architecture of a Bitcoin wallet revolves entirely around asymmetric cryptog
 For maximum security, this key generation and transaction signing must happen securely. This brings us to the difference between "Hot" and "Cold" storage:
 
 
-<div class="mermaid">
-graph TD
-    A[Bitcoin Storage Models] --> BHot Wallets)
-    A --> CCold Wallets)
-    B --> DSoftware/Mobile Apps]
-    B --> EExchange Accounts]
-    C --> FHardware Devices]
-    C --> GPaper Wallets / Steel Plates]
-    D --> HKeys are online: Vulnerable to malware)
-    F --> IKeys remain strictly offline: Extremely secure)
-</div>
 
 Hardware wallets operate by receiving unsigned transaction data via USB or Bluetooth, signing it internally inside a Secure Element (SE) chip, and sending the *signed* (but not the key itself) back to the internet. The private key physically cannot leave the device.
 

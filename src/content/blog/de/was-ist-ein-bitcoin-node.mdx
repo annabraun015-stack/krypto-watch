@@ -47,18 +47,6 @@ Sobald die Node "in der Gegenwart" angekommen ist, besteht ihr digitaler Alltag 
 3. **Persönlicher Zugang:** Sie erlaubt Ihnen als Nutzer, Ihren [Private Key](/blog/public-private-keys/) über die eigene Hardware sicher abzufragen – ohne dass Ihre IP-Adresse je an einen Konzern geleakt wird.
 
 
-<div class="mermaid">
-graph TD
-    A[Transaktion per Wallet gesendet] --> BNode empfängt Signal)
-    B --> CEntspricht die Transaktion den Regeln?])
-    C -->|Ungültige Signatur| DNode blockiert & löscht sofort]
-    C -->|Gültig| ENode speichert im Mempool]
-    E --> FMiner holt Transaktion ab & baut Block]
-    F --> GMiner liefert fertigen Block an Nodes zurück]
-    G --> HZweite Prüfung: Betrügt der Miner?])
-    H -->|Ja, Regeln verletzt| IBlock wird vom Netzwerk verstoßen]
-    H -->|Nein, alles korrekt| JNode schreibt Block in die Blockchain]
-</div>
 
 ---
 

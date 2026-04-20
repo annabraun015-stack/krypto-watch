@@ -39,15 +39,6 @@ Every 210,000 blocks (roughly every 4 years), the number of new Bitcoins created
 The halving is simple but powerful. It is located in the `GetBlockSubsidy` function of the Bitcoin Core source code.
 
 
-<div class="mermaid">
-graph LR
-    A[New Block Found] --> BBlocks < 210,000?])
-    B -- Yes --> CReward: 50 BTC]
-    B -- No --> DBlocks < 420,000?])
-    D -- Yes --> EReward: 25 BTC]
-    D -- No --> FContinue Halving Process]
-    F --> GEnd Supply at 21M]
-</div>
 
 This predictable reduction makes Bitcoin the first asset in human history with a supply that is **perfectly inelastic** to price. Even if the price of Bitcoin goes to $1,000,000, the network cannot produce more than the schedule allows.
 

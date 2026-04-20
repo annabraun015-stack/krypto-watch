@@ -43,19 +43,6 @@ Jeder nachfolgende Block, der nach Ihrem Block hinzugefügt wird, zählt als wei
 Um Bestätigungszeiten zu verstehen, müssen Sie die Reise einer Transaktion von Ihrer [Hardware Wallet](/blog/beste-bitcoin-wallets/) bis zur globalen Abwicklung kennen.
 
 
-<div class="mermaid">
-graph TD
-    A[Sie signieren Tx mit Private Key] --> BTx ans Node-Netzwerk senden)
-    B --> CTx landet im Mempool 'Wartezimmer']
-    C -->|0 Bestätigungen| DMiner wählen Tx aus])
-    D -->|Gebühr zu niedrig| ETx bleibt im Mempool]
-    D -->|Gebühr hoch genug| FMiner packt Tx in Kandidaten-Block]
-    F --> GMiner löst SHA-256 Rechenaufgabe]
-    G --> HBlock ans Netzwerk gesendet]
-    H --> I1. Bestätigung: Gelder offiziell transferiert]
-    I --> JNächster Block ca. 10 Minuten später]
-    J --> K2. Bestätigung]
-</div>
 
 **Wichtiges Kernkonzept: Der Gebührenmarkt**
 Miner können nur eine begrenzte Datenmenge (etwa 1 bis 4 Megabyte) in einen einzelnen Block packen. Der Blockplatz ist daher ein hart umkämpfter Markt. Miner wählen vernünftigerweise die Transaktionen aus, die die höchste Gebühr angehängt haben. Wenn Sie eine sehr niedrige Gebühr verwenden, ignorieren Miner Ihre Transaktion zugunsten höher zahlender Transaktionen, und Ihre Transaktion bleibt stundenlang oder tagelang unbestätigt.

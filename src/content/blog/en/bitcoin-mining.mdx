@@ -43,18 +43,6 @@ When a user broadcasts a transaction, it sits in a waiting area called the **Mem
 Since the output of a hash function is entirely unpredictable, miners cannot "calculate" the answer—they must guess it through brute force, millions of times per second. 
 
 
-<div class="mermaid">
-graph TD
-    A[New Transactions in Mempool] --> BMiners select transactions based on fees)
-    B --> CMiners build Candidate Block]
-    C --> DApply SHA-256 Hash + Nonce])
-    D --> EIs Hash lower than Network Target?])
-    E -- No --> D
-    E -- Yes --> FBlock Broadcast to Network]
-    F --> GNodes Verify Validity]
-    G --> HMiner receives Block Reward]
-</div>
-*(The Proof-of-Work loop: Trillions of guesses leading to mathematical consensus.)*
 
 ### Difficulty Adjustment
 To ensure a new block is produced roughly every **10 minutes**, the Bitcoin network automatically adjusts the difficulty of the puzzle every 2,016 blocks (about two weeks). If more miners plug in and the puzzle is solved too quickly, the difficulty increases. If miners unplug, the difficulty decreases.

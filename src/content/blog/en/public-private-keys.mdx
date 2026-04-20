@@ -79,16 +79,6 @@ Think of it like a wax seal on a medieval letter:
 - The **Digital Signature** is the actual red wax pressed onto the letter.
 
 
-<div class="mermaid">
-graph TD
-    A[Create Transaction: Send 1 BTC to Bob] --> B(Hash the Transaction Data)
-    B --> C[Sign Hash with Private Key]
-    C --> D[Broadcast Tx + Signature + Public Key]
-    D --> E([Network Validates])
-    E --> F[Does Signature match Public Key?]
-    F -- No --> G[Reject: Invalid Signature]
-    F -- Yes --> H[Confirm: Miner adds to Block]
-</div>
 
 Any node on the network can look at the wax (Signature) and compare it to the photograph (Public Key) to verify it came from your ring (Private Key)—*without ever needing to see or hold the ring itself*.
 

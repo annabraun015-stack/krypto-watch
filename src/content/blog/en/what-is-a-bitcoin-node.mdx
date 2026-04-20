@@ -47,18 +47,6 @@ Once caught up to the present day, its daily tasks are:
 3. **Wallet Interfacing:** It allows you to query your own addresses privately to see your true balance.
 
 
-<div class="mermaid">
-graph TD
-    A[New Transaction Broadcast] --> BPropagated to Node Network)
-    B --> CNode validation check])
-    C -->|Invalid Signature| DNode Rejects & Drops Tx]
-    C -->|Valid| ENode keeps Tx in Mempool]
-    E --> FMiner pulls from Mempool & Mines Block]
-    F --> GMiner broadcasts Block back to Node]
-    G --> HNode audits the entire Miner Block])
-    H -->|Miner Cheated| INode Orphans the Block]
-    H -->|All Rules Met| JNode Updates Local Ledger]
-</div>
 
 ---
 

@@ -43,19 +43,6 @@ Every subsequent block that is added to the chain *after* your block counts as a
 To understand confirm times, you must understand the journey of a transaction from your [Hardware Wallet](/en/blog/best-bitcoin-wallets/) to final global settlement.
 
 
-<div class="mermaid">
-graph TD
-    A[You Sign Tx with Private Key] --> BBroadcast to Node Network)
-    B --> CTx enters the Mempool 'Waiting Room']
-    C -->|0 Confirmations| DMiners Select Tx])
-    D -->|Low Fee| ETx stays in Mempool]
-    D -->|High Fee| FMiner packs Tx into Candidate Block]
-    F --> GMiner solves SHA-256 Math Puzzle]
-    G --> HBlock Broadcast to Network]
-    H --> I1 Confirmation: Funds Officially Moved]
-    I --> JNew Block Mined on top 10 mins later]
-    J --> K2 Confirmations]
-</div>
 
 **Crucial Concept: The Fee Market**
 Miners can only fit a limited amount of data (roughly 1 to 4 Megabytes) into a single block. Therefore, space in a block is a highly competitive real estate market. Miners rationally select the transactions that attached the highest miner fee. If you attach a very low fee, miners will ignore your transaction in favor of higher-paying ones, and your transaction will sit unconfirmed in the Mempool for hours or days.
