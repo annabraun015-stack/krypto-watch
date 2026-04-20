@@ -1,0 +1,155 @@
+---
+interface Props {
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+  locale?: string;
+}
+
+const { headings, locale = 'en' } = Astro.props;
+
+// Filter to show only h2 and h3
+const filteredHeadings = headings.filter(h => h.depth > 1 && h.depth <= 3);
+
+const labels = {
+  en: {
+    title: 'Table of Contents',
+    hint: 'Navigate the article'
+  },
+  de: {
+    title: 'Inhaltsverzeichnis',
+    hint: 'Navigation durch den Artikel'
+  }
+};
+
+const t = labels[locale as keyof typeof labels] || labels.en;
+---
+
+<div class="sidebar-card toc-container">
+  <h3 class="sidebar-card-title">{t.title}</h3>
+  <nav class="toc-nav" aria-label={t.title}>
+    {filteredHeadings.length > 0 ? (
+      <ul class="toc-list">
+        {filteredHeadings.map(heading => (
+          <li class={`toc-item depth-${heading.depth}`}>
+            <a href={`#${heading.slug}`} class="toc-link" data-slug={heading.slug}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="sidebar-toc-hint">{t.hint}</p>
+    )}
+  </nav>
+</div>
+
+<style>
+  .toc-container {
+    position: sticky;
+    top: 6rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand-500) transparent;
+  }
+
+  .toc-container::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .toc-container::-webkit-scrollbar-thumb {
+    background-color: var(--color-brand-600);
+    border-radius: 10px;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .toc-item {
+    line-height: 1.4;
+  }
+
+  .toc-item.depth-3 {
+    padding-left: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .toc-link {
+    display: block;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    margin-left: -0.75rem;
+  }
+
+  .toc-link:hover {
+    color: var(--color-brand-300);
+    padding-left: 1rem;
+  }
+
+  .toc-link.active {
+    color: var(--color-brand-300);
+    font-weight: 600;
+    border-left-color: var(--color-brand-500);
+    padding-left: 1rem;
+  }
+
+  .sidebar-toc-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+</style>
+
+<script>
+  function setupScrollSpy() {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-10% 0% -80% 0%',
+      threshold: 0
+    };
+
+    const links = document.querySelectorAll('.toc-link');
+    const sections = Array.from(links).map(link => {
+      const slug = link.getAttribute('data-slug');
+      return document.getElementById(slug!);
+    }).filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          links.forEach(link => {
+            if (link.getAttribute('data-slug') === id) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      if (section) observer.observe(section);
+    });
+  }
+
+  // Initialize on page load
+  setupScrollSpy();
+
+  // Re-initialize on view transitions if active
+  document.addEventListener('astro:after-swap', setupScrollSpy);
+</script>

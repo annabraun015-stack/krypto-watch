@@ -22,7 +22,8 @@ if (!post || post.data.draft) {
 }
 
 const { title, description, date, author, category, tags, image, imageAlt, readingTime, coinSymbols } = post.data;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+import TableOfContents from '../../../components/blog/TableOfContents.astro';
 
 const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
 const postUrl = `${siteConfig.url}/en/blog/${Astro.params.slug}/`;
@@ -128,10 +129,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
         </div>
 
         <aside class="post-sidebar" aria-label="Sidebar">
-          <div class="sidebar-card">
-            <h3 class="sidebar-card-title">Table of Contents</h3>
-            <p style="font-size: 0.85rem; color: var(--color-text-muted);">Navigate the article using the headings.</p>
-          </div>
+          <!-- Table of Contents -->
+          <TableOfContents headings={headings} locale="en" />
           <div class="sidebar-card sidebar-newsletter">
             <div class="newsletter-icon">📬</div>
             <h3 class="sidebar-card-title">Crypto Newsletter</h3>
