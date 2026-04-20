@@ -42,16 +42,17 @@ Sobald Sie eine Krypto-Transaktion durchführen, landet diese im Wartezimmer des
 
 Da das Ergebnis eines Hashes völlig unvorhersehbar ist, gibt es keine Abkürzung. Der Miner muss durch pure Rechengewalt (Brute-Force) Trillionen an Zahlen raten, bis ein Treffer erzielt wird.
 
+
 <div class="mermaid">
 graph TD
-    A[Neue Transaktion im Mempool] --> B(Miner wählt Transaktion basierend auf Gebühr)
-    B --> C[Miner baut Kandidaten-Block]
-    C --> D([SHA-256 + Random Nonce anwenden])
-    D --> E([Ist der Hash kleiner als das Netzwerk-Target?])
+    A[Neue Transaktion im Mempool] --> BMiner wählt Transaktion basierend auf Gebühr)
+    B --> CMiner baut Kandidaten-Block]
+    C --> DSHA-256 + Random Nonce anwenden])
+    D --> EIst der Hash kleiner als das Netzwerk-Target?])
     E -- Nein --> D
-    E -- Ja --> F[Neuer Block ans Netzwerk gesendet]
-    F --> G[Andere Nodes verifizieren Gültigkeit]
-    G --> H[Miner erhält Block Reward / Belohnung]
+    E -- Ja --> FNeuer Block ans Netzwerk gesendet]
+    F --> GAndere Nodes verifizieren Gültigkeit]
+    G --> HMiner erhält Block Reward / Belohnung]
 </div>
 *(Die Proof-of-Work-Schleife: Billionen von Rateversuchen sichern den Konsens der Blockchain.)*
 

@@ -161,12 +161,25 @@ const allSchemas = [
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       
-      // Sanitization: Remove any HTML tags (p, br, etc.) injected by MDX
-      document.querySelectorAll('.mermaid').forEach(el => {
-        el.textContent = el.textContent.trim();
+      // Initialize with startOnLoad: false for manual control
+      mermaid.initialize({ 
+        startOnLoad: false, 
+        theme: 'dark',
+        securityLevel: 'loose'
       });
+      
+      async function setupMermaid() {
+        const elements = document.querySelectorAll('.mermaid');
+        for (const el of elements) {
+          // Force text content cleanup - ensures no <p> or <br> tags interfere
+          el.textContent = el.textContent.trim();
+        }
+        // Manually trigger rendering
+        await mermaid.run();
+      }
 
-      mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+      // Initial run
+      setupMermaid();
     </script>
   </body>
 </html>

@@ -46,14 +46,15 @@ Dieser Prozess wird durch Mining (Schürfen) und Kryptografie gesichert:
 3. **Proof-of-Work (Mining):** Spezielle Computer (Miner) bündeln diese wartenden Transaktionen. Sie versuchen, als Erstes ein extrem schweres mathematisches Rätsel zu lösen.
 4. **Bestätigung:** Der Miner, der das Rätsel löst, hängt den neuen "Block" an die Blockchain an. Das Netzwerk bestätigt die Korrektheit. Zur Belohnung erhält der Miner neu geschaffene Bitcoins.
 
+
 <div class="mermaid">
 graph TD
-    A[Nutzer sendet BTC] --> B(Netzwerk prüft Signatur);
-    B --> C([Mempool Wartebereich]);
-    C --> D[Miner wählen Transaktion aus];
-    D --> E[Miner lösen kryptografisches Rätsel];
-    E --> F[Neuer Block der Chain hinzugefügt];
-    F --> G[Nutzer empfängt BTC];
+    A["Nutzer sendet BTC"] --> B("Netzwerk prüft Signatur")
+    B --> C(["Mempool Wartebereich"])
+    C --> D["Miner wählen Transaktion aus"]
+    D --> E["Miner lösen kryptografisches Rätsel"]
+    E --> F["Neuer Block der Chain hinzugefügt"]
+    F --> G["Nutzer empfängt BTC"]
 </div>
 *(Oben: Der Bitcoin-Transaktionsfluss, verifiziert durch dezentrale Netzwerkknoten)*
 

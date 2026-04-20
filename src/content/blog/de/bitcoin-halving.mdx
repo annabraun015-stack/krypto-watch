@@ -38,14 +38,15 @@ Alle 210.000 Blöcke (etwa alle 4 Jahre) wird die Anzahl der neu erschaffenen Bi
 
 Das Halving ist simpel, aber mächtig. Es ist in der Funktion `GetBlockSubsidy` des Bitcoin-Core-Quellcodes verankert.
 
+
 <div class="mermaid">
 graph LR
-    A[Neuer Block gefunden] --> B([Blöcke < 210.000?])
-    B -- Ja --> C[Belohnung: 50 BTC]
-    B -- Nein --> D([Blöcke < 420.000?])
-    D -- Ja --> E[Belohnung: 25 BTC]
-    D -- Nein --> F[Halving-Prozess fortsetzen]
-    F --> G[Ende bei 21 Mio. BTC]
+    A[Neuer Block gefunden] --> BBlöcke < 210.000?])
+    B -- Ja --> CBelohnung: 50 BTC]
+    B -- Nein --> DBlöcke < 420.000?])
+    D -- Ja --> EBelohnung: 25 BTC]
+    D -- Nein --> FHalving-Prozess fortsetzen]
+    F --> GEnde bei 21 Mio. BTC]
 </div>
 
 Diese vorhersehbare Reduktion macht Bitcoin zum ersten Asset in der Menschheitsgeschichte, dessen Angebot **völlig unelastisch** gegenüber dem Preis ist. Selbst wenn der Bitcoin-Preis auf 1.000.000 € steigt, kann das Netzwerk nicht mehr produzieren, als der Zeitplan erlaubt.

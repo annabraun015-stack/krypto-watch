@@ -38,15 +38,16 @@ Miners are profit-seeking actors. They will always choose the transactions that 
 
 The **Mempool** (Memory Pool) is the "waiting room" for transactions. When you send Bitcoin, it first goes to the mempool of thousands of nodes worldwide.
 
+
 <div class="mermaid">
 graph TD
-    A[User Sends TX] --> B(Mempool: Waiting Room)
-    B --> C([Miner Selection])
-    C -- High Fee --> D[Included in Next Block]
-    C -- Low Fee --> E[Stays in Mempool]
-    E --> F([Network Quiets Down?])
+    A[User Sends TX] --> BMempool: Waiting Room)
+    B --> CMiner Selection])
+    C -- High Fee --> DIncluded in Next Block]
+    C -- Low Fee --> EStays in Mempool]
+    E --> FNetwork Quiets Down?])
     F -- Yes --> D
-    F -- No --> G[May eventually time out]
+    F -- No --> GMay eventually time out]
 </div>
 
 Think of it like an auction: everyone in the mempool is shouting their price. Miners listen and pick the highest bidders first.

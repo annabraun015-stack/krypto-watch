@@ -38,15 +38,16 @@ Miner sind ökonomisch motivierte Akteure. Sie wählen immer die Transaktionen a
 
 Der **Mempool** (Memory Pool) ist das "Wartezimmer" für Transaktionen. Wenn Sie Bitcoin senden, gelangt die Transaktion zuerst in den Mempool von tausenden Nodes weltweit.
 
+
 <div class="mermaid">
 graph TD
-    A[Nutzer sendet TX] --> B(Mempool: Wartezimmer)
-    B --> C([Miner Auswahl])
-    C -- Hohe Gebühr --> D[In nächsten Block aufgenommen]
-    C -- Niedrige Gebühr --> E[Bleibt im Mempool]
-    E --> F([Netzwerk beruhigt sich?])
+    A[Nutzer sendet TX] --> BMempool: Wartezimmer)
+    B --> CMiner Auswahl])
+    C -- Hohe Gebühr --> DIn nächsten Block aufgenommen]
+    C -- Niedrige Gebühr --> EBleibt im Mempool]
+    E --> FNetzwerk beruhigt sich?])
     F -- Ja --> D
-    F -- Nein --> G[Kann nach Tagen verfallen]
+    F -- Nein --> GKann nach Tagen verfallen]
 </div>
 
 Stellen Sie es sich wie eine Auktion vor: Jeder im Mempool ruft seinen Preis. Miner hören zu und wählen die Höchstbietenden zuerst aus.

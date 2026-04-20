@@ -50,17 +50,18 @@ Every transaction block is secured by the **SHA-256** (Secure Hash Algorithm). E
 ### Layer 2: ECDSA & Schnorr Signatures
 To move funds, a user must mathematically prove they control the related [Private Key](/en/blog/public-private-keys/) using the **Elliptic Curve Digital Signature Algorithm (ECDSA)**. Since the Taproot upgrade in 2021, Schnorr signatures have been added, making complex multi-signature transactions indistinguishable from standard ones, vastly improving privacy.
 
+
 <div class="mermaid">
 graph TD
-    A[Bitcoin Security Layers] --> B(Protocol Layer)
-    A --> C(Custody Layer)
-    A --> D(Social/Economic Layer)
-    B --> B1[SHA-256 Proof of Work]
-    B --> B2[Asymmetric Cryptography]
-    C --> C1[Hardware Wallet Isolation]
-    C --> C2[Seed Phrase Backups]
-    D --> D1[Game Theory Miner Incentives]
-    D --> D2[Decentralized Node Auditing]
+    A[Bitcoin Security Layers] --> BProtocol Layer)
+    A --> CCustody Layer)
+    A --> DSocial/Economic Layer)
+    B --> B1SHA-256 Proof of Work]
+    B --> B2Asymmetric Cryptography]
+    C --> C1Hardware Wallet Isolation]
+    C --> C2Seed Phrase Backups]
+    D --> D1Game Theory Miner Incentives]
+    D --> D2Decentralized Node Auditing]
 </div>
 
 ---

@@ -42,16 +42,17 @@ When a user broadcasts a transaction, it sits in a waiting area called the **Mem
 
 Since the output of a hash function is entirely unpredictable, miners cannot "calculate" the answer—they must guess it through brute force, millions of times per second. 
 
+
 <div class="mermaid">
 graph TD
-    A[New Transactions in Mempool] --> B(Miners select transactions based on fees)
-    B --> C[Miners build Candidate Block]
-    C --> D([Apply SHA-256 Hash + Nonce])
-    D --> E([Is Hash lower than Network Target?])
+    A[New Transactions in Mempool] --> BMiners select transactions based on fees)
+    B --> CMiners build Candidate Block]
+    C --> DApply SHA-256 Hash + Nonce])
+    D --> EIs Hash lower than Network Target?])
     E -- No --> D
-    E -- Yes --> F[Block Broadcast to Network]
-    F --> G[Nodes Verify Validity]
-    G --> H[Miner receives Block Reward]
+    E -- Yes --> FBlock Broadcast to Network]
+    F --> GNodes Verify Validity]
+    G --> HMiner receives Block Reward]
 </div>
 *(The Proof-of-Work loop: Trillions of guesses leading to mathematical consensus.)*
 

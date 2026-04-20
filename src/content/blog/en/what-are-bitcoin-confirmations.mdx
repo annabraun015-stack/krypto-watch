@@ -42,18 +42,19 @@ Every subsequent block that is added to the chain *after* your block counts as a
 
 To understand confirm times, you must understand the journey of a transaction from your [Hardware Wallet](/en/blog/best-bitcoin-wallets/) to final global settlement.
 
+
 <div class="mermaid">
 graph TD
-    A[You Sign Tx with Private Key] --> B(Broadcast to Node Network)
-    B --> C[Tx enters the Mempool 'Waiting Room']
-    C --> |0 Confirmations| D([Miners Select Tx])
-    D --> |Low Fee| E[Tx stays in Mempool]
-    D --> |High Fee| F[Miner packs Tx into Candidate Block]
-    F --> G[Miner solves SHA-256 Math Puzzle]
-    G --> H[Block Broadcast to Network]
-    H --> I[1 Confirmation: Funds Officially Moved]
-    I --> J[New Block Mined on top 10 mins later]
-    J --> K[2 Confirmations]
+    A[You Sign Tx with Private Key] --> BBroadcast to Node Network)
+    B --> CTx enters the Mempool 'Waiting Room']
+    C -->|0 Confirmations| DMiners Select Tx])
+    D -->|Low Fee| ETx stays in Mempool]
+    D -->|High Fee| FMiner packs Tx into Candidate Block]
+    F --> GMiner solves SHA-256 Math Puzzle]
+    G --> HBlock Broadcast to Network]
+    H --> I1 Confirmation: Funds Officially Moved]
+    I --> JNew Block Mined on top 10 mins later]
+    J --> K2 Confirmations]
 </div>
 
 **Crucial Concept: The Fee Market**

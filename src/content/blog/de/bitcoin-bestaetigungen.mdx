@@ -42,18 +42,19 @@ Jeder nachfolgende Block, der nach Ihrem Block hinzugefügt wird, zählt als wei
 
 Um Bestätigungszeiten zu verstehen, müssen Sie die Reise einer Transaktion von Ihrer [Hardware Wallet](/blog/beste-bitcoin-wallets/) bis zur globalen Abwicklung kennen.
 
+
 <div class="mermaid">
 graph TD
-    A[Sie signieren Tx mit Private Key] --> B(Tx ans Node-Netzwerk senden)
-    B --> C[Tx landet im Mempool 'Wartezimmer']
-    C --> |0 Bestätigungen| D([Miner wählen Tx aus])
-    D --> |Gebühr zu niedrig| E[Tx bleibt im Mempool]
-    D --> |Gebühr hoch genug| F[Miner packt Tx in Kandidaten-Block]
-    F --> G[Miner löst SHA-256 Rechenaufgabe]
-    G --> H[Block ans Netzwerk gesendet]
-    H --> I[1. Bestätigung: Gelder offiziell transferiert]
-    I --> J[Nächster Block ca. 10 Minuten später]
-    J --> K[2. Bestätigung]
+    A[Sie signieren Tx mit Private Key] --> BTx ans Node-Netzwerk senden)
+    B --> CTx landet im Mempool 'Wartezimmer']
+    C -->|0 Bestätigungen| DMiner wählen Tx aus])
+    D -->|Gebühr zu niedrig| ETx bleibt im Mempool]
+    D -->|Gebühr hoch genug| FMiner packt Tx in Kandidaten-Block]
+    F --> GMiner löst SHA-256 Rechenaufgabe]
+    G --> HBlock ans Netzwerk gesendet]
+    H --> I1. Bestätigung: Gelder offiziell transferiert]
+    I --> JNächster Block ca. 10 Minuten später]
+    J --> K2. Bestätigung]
 </div>
 
 **Wichtiges Kernkonzept: Der Gebührenmarkt**
