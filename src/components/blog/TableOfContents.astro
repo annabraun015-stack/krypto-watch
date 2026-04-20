@@ -16,34 +16,42 @@ const filteredHeadings = headings.filter(h => h.depth > 1 && h.depth <= 3);
 const labels = {
   en: {
     title: 'Table of Contents',
-    hint: 'Navigate the article'
+    hint: 'Click to expand navigation'
   },
   de: {
     title: 'Inhaltsverzeichnis',
-    hint: 'Navigation durch den Artikel'
+    hint: 'Klicken zum Aufklappen'
   }
 };
 
 const t = labels[locale as keyof typeof labels] || labels.en;
 ---
 
-<div class="sidebar-card toc-container">
-  <h3 class="sidebar-card-title">{t.title}</h3>
-  <nav class="toc-nav" aria-label={t.title}>
-    {filteredHeadings.length > 0 ? (
-      <ul class="toc-list">
-        {filteredHeadings.map(heading => (
-          <li class={`toc-item depth-${heading.depth}`}>
-            <a href={`#${heading.slug}`} class="toc-link" data-slug={heading.slug}>
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p class="sidebar-toc-hint">{t.hint}</p>
-    )}
-  </nav>
+<div class="sidebar-card toc-container" id="toc-container">
+  <button class="toc-toggle" id="toc-toggle" aria-expanded="false" aria-controls="toc-list-wrapper">
+    <h3 class="sidebar-card-title">{t.title}</h3>
+    <svg class="toc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  
+  <div class="toc-list-wrapper" id="toc-list-wrapper">
+    <nav class="toc-nav" aria-label={t.title}>
+      {filteredHeadings.length > 0 ? (
+        <ul class="toc-list">
+          {filteredHeadings.map(heading => (
+            <li class={`toc-item depth-${heading.depth}`}>
+              <a href={`#${heading.slug}`} class="toc-link" data-slug={heading.slug}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="sidebar-toc-hint">{t.hint}</p>
+      )}
+    </nav>
+  </div>
 </div>
 
 <style>
@@ -51,18 +59,60 @@ const t = labels[locale as keyof typeof labels] || labels.en;
     position: sticky;
     top: 6rem;
     max-height: calc(100vh - 8rem);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-brand-500) transparent;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important; /* Managed by toggle button padding */
+    overflow: hidden;
   }
 
-  .toc-container::-webkit-scrollbar {
-    width: 4px;
+  .toc-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
   }
 
-  .toc-container::-webkit-scrollbar-thumb {
-    background-color: var(--color-brand-600);
-    border-radius: 10px;
+  .toc-toggle:hover {
+    background: oklch(20% 0.04 250 / 0.3);
+  }
+
+  .toc-toggle .sidebar-card-title {
+    margin-bottom: 0;
+  }
+
+  .toc-chevron {
+    color: var(--color-text-muted);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Grid-based height interpolation */
+  .toc-list-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-inline: 1.25rem;
+  }
+
+  /* When expanded */
+  .toc-container.is-expanded .toc-list-wrapper {
+    grid-template-rows: 1fr;
+    padding-bottom: 1.25rem;
+  }
+
+  .toc-container.is-expanded .toc-chevron {
+    transform: rotate(180deg);
+    color: var(--color-brand-400);
+  }
+
+  .toc-nav {
+    overflow: hidden;
+    min-height: 0;
   }
 
   .toc-list {
@@ -71,7 +121,8 @@ const t = labels[locale as keyof typeof labels] || labels.en;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.625rem;
+    padding-top: 0.5rem;
   }
 
   .toc-item {
@@ -110,18 +161,39 @@ const t = labels[locale as keyof typeof labels] || labels.en;
     font-size: 0.85rem;
     color: var(--color-text-muted);
     line-height: 1.5;
+    padding-top: 0.5rem;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .toc-container {
+    scrollbar-width: none;
+  }
+  .toc-container::-webkit-scrollbar {
+    display: none;
   }
 </style>
 
 <script>
-  function setupScrollSpy() {
+  function setupTOC() {
+    const container = document.getElementById('toc-container');
+    const toggle = document.getElementById('toc-toggle');
+    const links = document.querySelectorAll('.toc-link');
+
+    if (!container || !toggle) return;
+
+    // Toggle expansion
+    toggle.addEventListener('click', () => {
+      const isExpanded = container.classList.toggle('is-expanded');
+      toggle.setAttribute('aria-expanded', isExpanded.toString());
+    });
+
+    // Scroll Spy Logic
     const observerOptions = {
       root: null,
       rootMargin: '-10% 0% -80% 0%',
       threshold: 0
     };
 
-    const links = document.querySelectorAll('.toc-link');
     const sections = Array.from(links).map(link => {
       const slug = link.getAttribute('data-slug');
       return document.getElementById(slug!);
@@ -145,11 +217,18 @@ const t = labels[locale as keyof typeof labels] || labels.en;
     sections.forEach(section => {
       if (section) observer.observe(section);
     });
+
+    // Close on link click (optional, but good for mobile/narrow views)
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        // We keep it open so they see where they went, but on mobile you might want close
+      });
+    });
   }
 
   // Initialize on page load
-  setupScrollSpy();
+  setupTOC();
 
-  // Re-initialize on view transitions if active
-  document.addEventListener('astro:after-swap', setupScrollSpy);
+  // Re-initialize on view transitions
+  document.addEventListener('astro:after-swap', setupTOC);
 </script>
