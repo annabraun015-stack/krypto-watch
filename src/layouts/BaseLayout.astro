@@ -160,6 +160,12 @@ const allSchemas = [
     <Footer locale={locale} />
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      
+      // Sanitization: Remove any HTML tags (p, br, etc.) injected by MDX
+      document.querySelectorAll('.mermaid').forEach(el => {
+        el.textContent = el.textContent.trim();
+      });
+
       mermaid.initialize({ startOnLoad: true, theme: 'dark' });
     </script>
   </body>
