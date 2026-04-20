@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Best Practices für die Schlüsselsicherheit (Hygiene)](#sicherheits-tipps)
 7. [Staatliche Beschlagnahmung vs. Kryptografie (Recht)](#beschlagnahmung)
 8. [Die Gefahr durch Quantencomputer (Zukunftstechnologie)](#quantencomputer)
-9. [Lexikalische Relationen & Fachbegriffe](#lexikalische-relationen)
-10. [Häufig gestellte Fragen (FAQs)](#faqs)
+9. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -48,13 +45,6 @@ Der berühmteste Satz in der gesamten Krypto-Welt lautet: **"Not your keys, not 
 Im Gegensatz zu Ihrem Leder-Geldbeutel enthält ein [Bitcoin Wallet](/blog/beste-bitcoin-wallets/) absolut keine physischen Münzen. Die Bitcoins existieren ausschließlich als Einträge im Kassenbuch der weltweiten Blockchain. Ihr Wallet speichert stattdessen nur kryptografische **Schlüssel (Keys)** – mathematische Beweise, die Sie dazu berechtigen, das Kassenbuch zu aktualisieren und Gelder zu bewegen.
 
 Kaufen Sie Bitcoin auf einer Börse wie Bison, Kraken oder TradeRepublic und lassen die Coins dort liegen, besitzen Sie die entsprechenden Schlüssel nicht. Die Börse hält die Rechte für Sie treuhänderisch. Geht die Plattform pleite, verlieren Sie den Zugriff. Wahre finanzielle Unabhängigkeit erreichen Sie erst, wenn Sie die "Private Keys" selbst halten (Eigenverwahrung).
-
-> **Featured Snippet Antwort:** Ein privater Schlüssel (Private Key) ist eine geheime 256-Bit-Zahl, die Sie als Eigentümer Ihrer Bitcoins ausweist und Transaktionen autorisiert. Ein öffentlicher Schlüssel (Public Key) wird daraus berechnet und zur Erstellung Ihrer Bitcoin-Adresse genutzt. Während Sie Ihre Adresse teilen müssen, um Geld zu erhalten, muss der private Key zwingend geheim bleiben: Der Verlust des Schlüssels ist gleichbedeutend mit dem totalen Verlust der Bitcoins.
-
-*Semantische Dreiecke:*
-- **Private Key** → signiert → **Transaktionen**
-- **Public Key** → erzeugt die → **Bitcoin Adresse**
-- **Hardware-Wald** → schützt den → **Private Key**
 
 ---
 
@@ -152,28 +142,6 @@ Die Mathematik der elliptischen Kurven stützt sich auf die extreme Komplexität
 Sicherheitsexperten und die Kryptografie-Institute der Bundesregierung datieren diese Gefährdung derzeit jedoch eher als abstrakte Gefahr in weiter Ferne ein. Maschinen, die dazu taugen würden, benötigen Millionen perfekter, entkoppelter "Qubits". Heute stolpern Forscher über Hürden mit wenigen hundert Qubits. 
 
 Sollte die Gefahr in einigen Dekaden aber in Reichweite geraten, baut die Entwickler-Community kurzerhand ein Upgrade (eine "Hard Fork") in das Netzwerk ein, um **Post-Quantum-Kryptografie (PQC)** zu integrieren. Nutzer haben dann Jahre Zeit, ihre Keys zu aktualisieren.
-
----
-
-## Lexikalische Relationen & Fachbegriffe <a id="lexikalische-relationen"></a>
-
-Das kryptografische Fachchinesisch richtig einzuordnen schützt vor panikhaften Anlagefehlern:
-
-<SemanticTable 
-  title="Lexikalische Relationen: Krypto-Schlüssel"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Private Key', 'Privater Schlüssel, Master-Passwort', 'Autorisierung', 'Public Key, Öffentliche Adresse'],
-    ['Seed Phrase', 'Mnemonic Phrase, 24-Recovery Wörter', 'Backup-Format', 'Speichern auf einer Börse'],
-    ['Public Key', 'Verifikations-Schlüssel', 'Authentifizierung', 'Gesicherter Privat-Schlüssel'],
-    ['Bitcoin-Adresse', 'Empfangsadresse, PubKeyHash', 'Routing', 'Transaktions-ID (TXID)'],
-    ['Eigenverwahrung', 'Self-Custody, Non-Custodial', 'Sicherheitskonzept', 'Custodial-Börsenkonto']
-  ]}
-/>
-
-### Begriffe des Krypto-Wissensraums
-*Kryptografie, Asymmetrische Verschlüsselung, Private Key, Public Key, ECDSA, secp256k1, Schnorr-Signaturen, Taproot, Hierarchisch Deterministische (HD) Wallet, BIP-39 Standard, Seed Phrase, Eigenverwahrung, Multisig, Wallet Adresse, WIF, Quantencomputer, Shor's Algorithmus, PQC.*
 
 ---
 

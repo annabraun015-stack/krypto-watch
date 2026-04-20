@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [2018–2020: The Infrastructure Build & Halvings (Maturity)](#maturity)
 8. [2021–2024: The Institutional Awakening & ETFs (Validation)](#institutional)
 9. [2025–Beyond: The Sovereign Reserve Era (Future)](#sovereign-era)
-10. [Lexical Relations & Historical Terminology](#lexical-relations)
-11. [Frequently Asked Questions (FAQs)](#faqs)
+10. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -47,21 +44,6 @@ export const faqSchema = {
 Bitcoin did not emerge from a vacuum. It was the culmination of over 30 years of research by a group known as the **Cypherpunks** — activists advocating for privacy and freedom through cryptography. 
 
 Before Satoshi Nakamoto, multiple brilliant attempts at "Digital Cash" failed due to one problem: **Centralization.** If a company issued the money, the government could shut it down.
-
-<SemanticTable 
-  title="Pre-Bitcoin Digital Cash Experiments"
-  type="lexical"
-  headers={['Project', 'Year', 'Creator', 'Failure Point']}
-  rows={[
-    ['DigiCash', '1989', 'David Chaum', 'Company went bankrupt; centralized.'],
-    ['e-gold', '1996', 'Douglas Jackson', 'Shut down by the US government.'],
-    ['b-money', '1998', 'Wei Dai', 'Never implemented; lacked PoW.'],
-    ['Bit Gold', '1998', 'Nick Szabo', 'Conceptually close, but lacked an automated difficulty adjustment.'],
-    ['Hashcash', '1997', 'Adam Back', 'Created PoW, but was used for anti-spam, not money.']
-  ]}
-/>
-
-> **Featured Snippet Answer:** Bitcoin's history is a 16-year journey of technical survival and economic growth. Created in response to the 2008 financial crisis, Bitcoin evolved from a fringe experiment with zero value to the world's first decentralized trillion-dollar asset class. Key milestones include the Mining of the Genesis Block (2009), the Mt. Gox collapse (2014), the internal Scaling Wars of 2017, and the 2024 institutional validation through Spot ETFs. Each crisis has historically 'hardened' the network, leading to higher levels of security and global trust.
 
 ---
 
@@ -132,26 +114,6 @@ graph LR
     C --> D[Institutional Validation]
     D --> E[Sovereign Reserve Era]
 </div>
-
----
-
-## Lexical Relations & Historical Terminology <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: The Evolution of Bitcoin"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Genesis Block', 'Block 0', 'Milestone', 'The Lead Block'],
-    ['Halving', 'Supply cut, Reduction event', 'Economics', 'Inflation, Coin printing'],
-    ['Hard Fork', 'Chain split, Protocol break', 'Conflict', 'Soft Fork, Compatibility'],
-    ['Mt. Gox', 'The Gox Hack, 2014 Collapse', 'Crisis', 'Regulated Custody'],
-    ['Cypherpunk', 'Privacy activist, Cryptographer', 'Movement', 'Centralized Institution']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Satoshi Nakamoto, Hal Finney, Nick Szabo, Wei Dai, Adam Back, 2008 Whitepaper, Genesis Block, Proof of Work, Difficulty Adjustment, Bitcoin Pizza Day, Silk Road, Mt. Gox, SegWit, Bitcoin Cash, Lightning Network, MicroStrategy, Spot ETF, Sovereign Reserve.*
 
 ---
 

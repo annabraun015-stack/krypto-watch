@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -39,8 +37,7 @@ export const faqSchema = {
 7. [Risks, Hacks & Limitations](#risks-limitations)
 8. [Adoption & User Experience (2026 Trends)](#adoption-ux)
 9. [The Future of Bitcoin](#future-outlook)
-10. [Lexical Relations & Domain Knowledge](#lexical-relations)
-11. [Frequently Asked Questions](#faqs)
+10. [Frequently Asked Questions](#faqs)
 
 ---
 
@@ -49,13 +46,6 @@ export const faqSchema = {
 **Bitcoin (BTC)** is a decentralized, peer-to-peer digital currency that allows anyone on Earth to send and receive value directly—without the need for a bank, credit card company, or government intermediary. Introduced in 2009 by an anonymous creator known as [Satoshi Nakamoto](/en/blog/who-is-satoshi-nakamoto/) (Wikidata ID: Q14660312), Bitcoin relies on a public ledger called the blockchain to verify and record transactions. 
 
 Unlike traditional "fiat" currencies like the US Dollar or the Euro, which can be printed endlessly by central banks, Bitcoin has a strictly capped supply: **only 21 million Bitcoins will ever exist**. This mathematically enforced scarcity has earned Bitcoin the moniker of "digital gold." 
-
-> **Featured Snippet Answer:** Bitcoin is the world's first decentralized digital currency, launched in 2009. It operates on a public blockchain ledger maintained by thousands of distributed nodes worldwide. No single authority controls Bitcoin. Because only 21 million BTC will ever be created, it acts as a deflationary asset used globally for both transactions and as a long-term store of value.
-
-### Semantic Triples at Play
-- **Bitcoin** → is a → **Decentralized Cryptocurrency** (Wikidata: Q13479982)
-- **Satoshi Nakamoto** → created → **The Bitcoin Network**
-- **The Blockchain** → records → **Bitcoin Transactions**
 
 ---
 
@@ -174,28 +164,6 @@ Bitcoin adoption continues to climb the "S-Curve." In 2026, the User Experience 
 Looking ahead, Bitcoin's path seems solidified as the base layer of the decentralized internet of value. 
 
 The focus of developers is no longer altering the base protocol—which remains fiercely conservative and hard to change—but rather building layers atop it. We will see expanded Rollups, improved privacy protocols, and perhaps integrations with decentralized identities. As multi-chain ecosystems evolve, Bitcoin remains the ultimate, incorruptible settlement layer.
-
----
-
-## Lexical Relations & Domain Knowledge <a id="lexical-relations"></a>
-
-To fully comprehend the broader semantic network of Bitcoin, familiarize yourself with these terms and their relations:
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Terminology"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Hardware Wallet', 'Cold wallet, device wallet', 'Custody', 'Hot wallet, software wallet'],
-    ['Seed Phrase', 'Recovery phrase, mnemonic', 'Security', 'Forgotten/Unbacked seed'],
-    ['Self-Custody', 'Non-custodial, sovereignty', 'Ownership', 'Exchange wallet, Custodial'],
-    ['Private Key', 'Secret key', 'Blockchain Security', 'Public Key (address)'],
-    ['Multi-Sig', 'Shared custody, 2-of-3 setup', 'Security', 'Single-signature setup'],
-    ['Fiat Currency', 'Paper money, USD, EUR', 'Economics', 'Hard money, Bitcoin, Gold']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Bitcoin (Q13479982), BTC, Blockchain, Distributed Ledger Technology (DLT), Peer-to-Peer, Cryptography, SHA-256, Hash function, Public Key, Private Key, Hardware Wallet (e.g., Ledger Nano X Q106719820), Software Wallet, Metamask, Trust Wallet, Seed Phrase, UTXO (Unspent Transaction Output), Mempool, Block Height, Node, Full Node, SPV Node, Miner, ASIC (Application-Specific Integrated Circuit), Proof of Work (PoW), Difficulty Adjustment, Block Reward, Halving, Satoshi Nakamoto, 21 Million Cap, Deflationary Asset, Digital Gold, Store of Value, Medium of Exchange, Unit of Account, Lightning Network, Layer 2, SegWit (Segregated Witness), Taproot, Multisig, Cold Storage, Hot Wallet, KYC/AML, Central Bank Digital Currency (CBDC).*
 
 ---
 

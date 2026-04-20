@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Replace-By-Fee (RBF): Die Lösung für feststeckende Transaktionen](#rbf)
 7. [Das Bedrohungsmodell: Der "Double Spend"-Exploit (Sicherheit)](#double-spend)
 8. [Das Ende der Wartezeit: Das Lightning Network (Zukunft)](#lightning)
-9. [Lexikalische Relationen & Transaktionsbegriffe](#lexikalische-relationen)
-10. [Häufig gestellte Fragen (FAQs)](#faqs)
+9. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -50,13 +47,6 @@ Eine **Bitcoin-Bestätigung** ist ein Maß dafür, wie tief Ihre Transaktion dau
 Wenn Sie Bitcoin senden, wird Ihre Transaktion ans Netzwerk gesendet, aber ist zunächst "unbestätigt". Sie wartet in einem Wartezimmer. Wenn ein [Miner](/blog/bitcoin-mining-erklaert/) Ihre Transaktion aufnimmt und erfolgreich in einen Datenblock packt, und dieser Block an die Blockchain angehängt wird, erhält Ihre Transaktion ihre **erste (1.) Bestätigung**.
 
 Jeder nachfolgende Block, der nach Ihrem Block hinzugefügt wird, zählt als weitere Bestätigung.
-
-> **Featured Snippet Antwort:** Eine Bitcoin-Bestätigung erfolgt, wenn ein Miner Ihre Transaktion in einen neuen Block der Blockchain aufnimmt. Eine Bestätigung bedeutet, dass die Transaktion offiziell im Kassenbuch steht. Jeder nachfolgende Block macht die Umkehrung Ihrer Transaktion exponentiell schwieriger. Sechs Bestätigungen gelten als mathematisch unwiderruflich.
-
-*Semantische Dreiecke:*
-- **Bitcoin Miner** → erzeugen → **Transaktionsbestätigungen**
-- **Der Mempool** → speichert → **Unbestätigte Transaktionen**
-- **Sechs Bestätigungen** → garantieren → **Endgültige Zahlungsabwicklung**
 
 ---
 
@@ -153,26 +143,6 @@ Der böswillige Akteur nutzt sofort RBF, um genau diesel 50.000 € an eine eige
 Deshalb wurde das **Lightning Network** entwickelt. Lightning ist ein "Layer-2"-Protokoll, das auf Bitcoin aufgebaut ist. Es nutzt kryptografische Smart Contracts, um Zahlungskanäle zwischen Nutzern zu schaffen. Transaktionen im Lightning Network erfordern keine Miner-Bestätigungen.
 
 Sie werden sofort (in Millisekunden) abgerechnet, mit Gebühren, die Bruchteile eines Cents betragen. El Salvador, viele deutsche Krypto-Cafés und Online-Händler akzeptieren Bitcoin über Lightning genau deshalb, um die Basis-Layer-Bestätigungszeiten vollständig zu umgehen.
-
----
-
-## Lexikalische Relationen & Transaktionsbegriffe <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Bitcoin-Transaktionen"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Bestätigung', 'Blockeinschluss, Zahlungsabwicklung', 'Netzwerkstatus', 'Unbestätigt, Mempool-Status'],
-    ['Mempool', 'Memory Pool, Transaktionswarteschlange', 'Datenstruktur', 'Die permanente Blockchain'],
-    ['Replace-By-Fee', 'RBF, Gebührenerhöhung', 'Protokollfunktion', 'Unwiderruflich bestätigte Tx'],
-    ['Double Spend', 'Doppelausgabe, Tx-Umkehrungsbetrug', 'Angriffsvektor', 'Finalisierte Abwicklung'],
-    ['Miner-Gebühr', 'Transaktionsgebühr, Netzwerkgebühr', 'Wirtschaftlicher Anreiz', 'Blockbelohnung (Subvention)']
-  ]}
-/>
-
-### Begriffe des Krypto-Wissensraums
-*Bitcoin-Blockchain, Bestätigungen, Mempool, Unbestätigte Transaktion, Replace-By-Fee (RBF), Child-Pays-For-Parent (CPFP), Gebührenmarkt, Prioritätswarteschlange, Proof of Work, Double Spend, Zahlungsfinalisierung, Layer 1, Lightning Network, Satoshi Nakamoto.*
 
 ---
 

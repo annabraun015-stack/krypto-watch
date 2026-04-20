@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [SegWit und Taproot: Der Erfolg von Soft Forks (Upgrades)](#upgrades)
 6. [Die Zukunft von Bitcoin Forks: BitVM und Covenants](#future)
 7. [Verhalten bei einem strittigen Fork (Sicherheit)](#safety)
-8. [Lexikalische Relationen & Governance-Vokabular](#lexikalische-relationen)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Bitcoin ist keine statische Software, sondern ein lebendiges Protokoll, das von einer dezentralen globalen Community gewartet wird. Da es keinen "CEO von Bitcoin" gibt, werden Änderungen an den Regeln durch einen Prozess namens **Konsens** (Consensus) abgewickelt.
 
 Ein **Fork** (Gabelung) tritt auf, wenn sich die Regeln des Netzwerks ändern. Ob diese Änderung klein und kompatibel oder groß und spaltend ist, bestimmt den "Typ" des Forks und die Zukunft des Netzwerks.
-
-> **Featured Snippet Antwort:** Ein Bitcoin Fork ist eine Änderung des Protokolls, die die Regeln der Blockchain verändert. Hard Forks sind nicht rückwärtskompatibel und führen zu einer dauerhaften Kettenspaltung sowie einer neuen Kryptowährung (z. B. Bitcoin Cash). Soft Forks sind rückwärtskompatible Upgrades, bei denen alte Nodes weiterhin Blöcke neuer Nodes validieren können, wodurch das Netzwerk eine einzige Kette bleibt. Im Jahr 2026 entwickelt sich Bitcoin primär durch Soft Forks (wie Taproot) weiter, um Sicherheit und Stabilität zu wahren.
-
-*Semantische Dreiecke:*
-- **Konsensregeln** → steuern → **Blockchain-Validität**
-- **Hard Fork** → erschafft → **Neue Kryptowährung**
-- **Soft Fork** → ermöglicht → **Rückwärtskompatible Upgrades**
 
 ---
 
@@ -133,27 +123,6 @@ Sollte ein größerer Fork bevorstehen:
 
 ---
 
-## Lexikalische Relationen & Governance-Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Bitcoin Governance"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Hard Fork', 'Kettenspaltung, Inkompatible Änderung', 'Governance', 'Soft Fork, Vereinte Kette'],
-    ['Soft Fork', 'Rückwärtskompatibles Upgrade', 'Governance', 'Hard Fork'],
-    ['Konsens', 'Netzwerk-Einigung, Gemeinsame Regeln', 'Gesellschaft', 'Disput, Fork'],
-    ['SegWit', 'Segregated Witness, BIP 141', 'Upgrade', 'Legacy Adresse'],
-    ['Taproot', 'Schnorr-Upgrade, BIP 341', 'Privatsphäre', 'ECDSA'],
-    ['Mainnet', 'Echte Kette, Produktion', 'Umgebung', 'Testnet, Signet']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*Hard Fork, Soft Fork, Konsens, Blockgröße, SegWit, Taproot, Bitcoin Cash (BCH), Replay-Attacke, Kettenspaltung, Private Keys, UTXO-Historie, Miner-Signaling, UASF (User Activated Soft Fork), Node-Durchsetzung, BIP (Bitcoin Improvement Proposal).*
-
----
-
 ## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Erzeugt jeder Fork einen neuen Coin?
@@ -173,4 +142,3 @@ Weil sie sicherer sind. Sie zwingen Nutzer nicht zu einem sofortigen Upgrade und
 - [Das Lightning Network: Skalierung ohne Forks](/de/blog/lightning-network/)
 - [Das 21-Millionen-Limit von Bitcoin verstehen](/de/blog/bitcoin-21-millionen-limit/)
 - [Bitcoin sicher aufbewahren bei Netzwerkänderungen](/de/blog/bitcoin-sicher-aufbewahren/)
----

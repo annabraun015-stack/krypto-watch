@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Die Rolle von KYC: Von der Börse zur Identität (Regulierung)](#kyc)
 6. [Privatsphäre-Tools: CoinJoin, Taproot und Lightning (Lösungen)](#solutions)
 7. [Bitcoin vs. Privacy Coins (Monero-Vergleich)](#privacy-coins)
-8. [Lexikalische Relationen & Privatsphäre-Vokabular](#lexikalische-relationen)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Ein weit verbreiteter Mythos ist, dass Bitcoin "unsichtbar" oder "anonymes Geld" sei. In Wahrheit ist Bitcoin das transparenteste Finanznetzwerk, das jemals erschaffen wurde.
 
 Es ist **pseudonym**. Das bedeutet, Sie agieren unter einem "Pseudonym" (Ihrer Bitcoin-Adresse). Solange niemand weiß, wem die Adresse gehört, sind Sie privat. Sobald diese Verbindung jedoch hergestellt wird, ist das Pseudonym wertlos.
-
-> **Featured Snippet Antwort:** Bitcoin ist pseudonym, was bedeutet, dass alle Transaktionen öffentlich sind, aber nicht direkt mit einem Namen verknüpft sind. Ihre Identität kann jedoch durch KYC-Börsen, Adresswiederholung und Blockchain-Analysen mit Ihren Bitcoins verknüpft werden. Um 2026 Privatsphäre zu wahren, müssen Nutzer aktiv Strategien wie den Verzicht auf Adresswiederholung, die Nutzung von Tor und Layer-2-Lösungen wie das Lightning Network oder CoinJoin-Protokolle einsetzen.
-
-*Semantische Dreiecke:*
-- **Bitcoin Blockchain** → bietet → **Volle Transaktionstransparenz**
-- **Adresswiederholung** → führt zu → **Privatsphäre-Verlust**
-- **CoinJoin** → ermöglicht → **Verschleierung durch Mischung**
 
 ---
 
@@ -123,26 +113,6 @@ Bitcoin priorisiert **Auditierbarkeit** (sicherstellen, dass niemand Geld fälsc
 | **Geldmengenprüfung** | Sofort & Öffentlich | Komplex |
 | **Akzeptanz** | Extrem Hoch | Niedrig (oft von Börsen entfernt) |
 | **Privatsphäre-Tools** | Opt-In (CoinJoin) | Integriert (Ring-Sigs) |
-
----
-
-## Lexikalische Relationen & Privatsphäre-Vokabular <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Bitcoin Privatsphäre"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Pseudonymität', 'Alias, Maskierung', 'Status', 'Anonymität, Doxing'],
-    ['CoinJoin', 'Mixing, Tumbling', 'Verschleierung', 'On-chain Verknüpfung'],
-    ['KYC', 'Identitätsprüfung, AML', 'Regulierung', 'Non-KYC, Peer-to-Peer'],
-    ['Heuristik', 'Clustering-Logik, Muster', 'Analyse', 'Zufälligkeit'],
-    ['UTXO-Set', 'Globales Kassenbuch, Coin-Status', 'Architektur', 'Accounts (Kontomodell)']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*Pseudonymität, Anonymität, KYC (Know Your Customer), AML (Anti-Money Laundering), CoinJoin, Wasabi Wallet, Chainalysis, Heuristiken, Clustering, Tor Project, VPN, Taproot, Schnorr-Signaturen, Coin Control, UTXO Management.*
 
 ---
 

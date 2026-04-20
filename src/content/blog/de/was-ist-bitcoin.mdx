@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -38,8 +36,7 @@ export const faqSchema = {
 7. [Risiken, Hacks & Limitierungen](#risiken)
 8. [Adoption & Nutzererfahrung 2026](#adoption)
 9. [Die Zukunft von Bitcoin](#zukunft)
-10. [Begriffsnetzwerk & Semantik](#semantik)
-11. [Häufig gestellte Fragen (FAQs)](#faqs)
+10. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -48,13 +45,6 @@ export const faqSchema = {
 **Bitcoin (BTC)** ist das erste und größte dezentrale, kryptografische Geldnetzwerk der Welt. Im Gegensatz zu traditionellem Geld wie dem Euro oder dem US-Dollar (Fiat-Währungen), gibt es bei Bitcoin keine zentrale Kontrollinstanz: keine Zentralbank, keinen Vorstandsvorsitzenden und keine Regierung. 
 
 Geschaffen wurde Bitcoin im Jahr 2009 von einer bis heute anonym gebliebenen Person oder Gruppe unter dem Namen [Satoshi Nakamoto](/blog/wer-ist-satoshi-nakamoto/) (Wikidata ID: Q14660312). Das Hauptziel war, ein System für elektronisches Bargeld zu entwickeln, das direkte Zahlungen von Person zu Person (Peer-to-Peer) ermöglicht, ohne einer Bank vertrauen zu müssen.
-
-> **Featured Snippet Antwort:** Bitcoin (2009 veröffentlicht) ist eine dezentrale, auf der Blockchain-Technologie basierende Kryptowährung. Das System wird durch Tausende unabhängige Knotenpunkte weltweit gesichert und verwaltet. Durch das algorithmisch festgesetzte Limit von 21 Millionen Einheiten ist Bitcoin absolut knapp und dient zunehmend als "digitales Gold" und Schutz vor Inflation.
-
-*Semantische Dreiecke:*
-- **Bitcoin** → ist eine → **Kryptowährung** (Wikidata: Q13479982)
-- **Die Blockchain** → speichert → **Bitcoin Transaktionen**
-- **Satoshi Nakamoto** → erfand → **Das Bitcoin Netzwerk**
 
 ---
 
@@ -157,26 +147,6 @@ Die Einstiegshürde in Bitcoin ist massiv gesunken.
 ## Die Zukunft von Bitcoin <a id="zukunft"></a>
 
 Bitcoin strebt nicht mehr an, Visa in Bezug auf alltägliche Kaffeekäufe auf der Basisschicht (Layer 1) zu ersetzen. Layer 1 dient als das sicherste, unbestechlichste Abwicklungssystem der Welt (Settlement Layer). Kleinere, schnelle Transaktionen finden heute standardmäßig auf Layer 2 (dem Lightning Network) statt. In der Zukunft des Web3 wird Bitcoin voraussichtlich weiterhin die Rolle der unangreifbaren "digitalen Basiswährung" spielen.
-
----
-
-## Begriffsnetzwerk & Semantik <a id="semantik"></a>
-
-<SemanticTable 
-  title="Begriffsnetzwerk: Bitcoin Vokabular"
-  type="domain"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz']}
-  rows={[
-    ['Cold Wallet', 'Hardware Wallet, Offline-Speicher', 'Verwahrung', 'Hot Wallet, Börse'],
-    ['Seed Phrase', 'Wiederherstellungssatz, Mnemonic', 'Sicherheit', 'Passwort vergessen'],
-    ['Private Key', 'Privater Schlüssel, Geheimnis', 'Kryptografie', 'Public Key (Adresse)'],
-    ['Fiat-Geld', 'Papiergeld, Fiat-Währung', 'Ökonomie', 'Hartgeld, Bitcoin, Gold'],
-    ['Halving', 'Halvening (Belohnungshalbierung)', 'Protokoll-Event', 'Beliebiges Gelddrucken']
-  ]}
-/>
-
-### Fachwissen & Entitäten
-*Bitcoin (Q13479982), BTC, Blockchain, Distributed Ledger Technology (DLT), Peer-to-Peer, Kryptografie, SHA-256, Hashwert, Public Key, Private Key, Hardware Wallet (z.B. Ledger Nano X Q106719820), Software Wallet, Metamask, Seed Phrase, UTXO (Unspent Transaction Output), Mempool, Miner, ASIC, Proof of Work (PoW), Difficulty Adjustment, Block-Belohnung, Halving, Satoshi Nakamoto, 21-Millionen-Limit, Deflationäres Asset, Digitales Gold, Wertspeicher, Lightning Network, Layer 2, SegWit, Taproot, Multi-Sig, Cold Storage, BaFin, MiCA (Q124376123).*
 
 ---
 

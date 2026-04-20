@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Stahl-Backups: Schutz vor Katastrophen (Vorsorge)](#steel)
 6. [Multisig: Schutz vor Einzelfehlern (Fortgeschritten)](#multisig)
 7. [Operational Security (OpSec) & Vererbung](#opsec)
-8. [Lexikalische Relationen & Sicherheits-Vokabular](#lexikalische-relationen)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Bitcoin ist das erste Asset der Geschichte, das es Ihnen ermöglicht, Ihre eigene Bank zu sein. Im traditionellen System sind Sie ein "unbesicherter Gläubiger" Ihrer Bank. In Bitcoin sind Sie durch den Besitz kryptografischer Schlüssel der **absolute Eigentümer**.
 
 Eigenverwahrung (Self-Custody) ist kein Bonus; es ist der Existenzgrund von Bitcoin. Ohne sie handeln Sie lediglich mit einem digitalen Schuldschein.
-
-> **Featured Snippet Antwort:** Eine sichere Bitcoin-Aufbewahrung erfordert, dass die privaten Schlüssel niemals mit dem Internet in Berührung kommen (Cold Storage). Der Goldstandard 2026 ist die Nutzung einer Hardware-Wallet (z. B. BitBox02, Ledger oder Trezor) in Kombination mit einer feuerfesten Stahlplatte zur Sicherung der 24-Wörter-Seed-Phrase. Für große Vermögen wird ein 'Multisig'-Setup (2-von-3 Schlüssel) empfohlen, um jede einzelne Schwachstelle zu eliminieren.
-
-*Semantische Dreiecke:*
-- **Eigenverwahrung** → ermöglicht → **Finanzielle Souveränität**
-- **Hardware-Wallet** → isoliert → **Private Keys vom Internet**
-- **Seed Phrase** → repräsentiert → **Mathematischen Zugriff auf die Blockchain**
 
 ---
 
@@ -127,26 +117,6 @@ Technische Sicherheit reicht nicht, wenn menschliche Fehler passieren:
 - **"Boat Accidents":** Erzählen Sie niemandem, wie viel Bitcoin Sie besitzen.
 - **5$-Wrench-Attack:** Schützen Sie sich physisch. Nutzen Sie eine "Passphrase" (25. Wort), um ein verstecktes Wallet zu erstellen.
 - **Nachlassplanung:** Stellen Sie sicher, dass Ihre Erben wissen, wie sie im Notfall zugreifen können (versiegelter Umschlag beim Notar).
-
----
-
-## Lexikalische Relationen & Sicherheits-Vokabular <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Bitcoin Custody"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Cold Storage', 'Offline-Verwahrung, Air-gapped', 'Sicherheitsstatus', 'Hot Wallet, Online'],
-    ['Seed Phrase', 'Mnemonic, Wiederherstellungswörter', 'Zugriffskontrolle', 'Private Key (Roh)'],
-    ['Eigenverwahrung', 'Self-Custody, Non-custodial', 'Besitzverhältnis', 'Börse, Custodian'],
-    ['Passphrase', 'Das 25. Wort, Hidden Wallet', 'Erweiterte Sicherheit', 'PIN-Code'],
-    ['Hardware Wallet', 'Signiergerät, HWW', 'Hardware', 'Software Wallet']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*Self-Custody, Non-custodial, Cold Storage, Air-gapped, Hardware Wallet (HWW), BIP-39, Seed Phrase, Private Key, Public Key, Multisig (Mehrfachsignatur), Air-gapped Transaction, PSBT (Partially Signed Bitcoin Transaction), Zensurresistenz, Secure Element.*
 
 ---
 

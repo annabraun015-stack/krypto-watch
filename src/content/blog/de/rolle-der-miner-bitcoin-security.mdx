@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Miner vs. Nodes: Die Gewaltenteilung (Architektur)](#architecture)
 6. [Hashpower 2026: Die geopolitische Verschiebung (Adoption)](#geopolitics)
 7. [Der Übergang zu Gebühren: Sicherheit nach der Blockbelohnung](#fees)
-8. [Lexikalische Relationen & Sicherheits-Vokabular](#lexical-relations)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 In der traditionellen IT-Sicherheit nutzen wir Passwörter und Firewalls. In Bitcoin nutzen wir **Physik.**
 
 Bitcoin-Miner fungieren als das Immunsystem des Netzwerks. Sie wenden massive Mengen an Elektrizität auf, um Transaktionen in Blöcken zu "versiegeln". Diese Energie schafft eine fälschungssichere Aufzeichnung der Geschichte. Um die Vergangenheit zu ändern, muss man die gesamte Energie erneut aufwenden, die bereits in sie geflossen ist.
-
-> **Featured Snippet Antwort:** Bitcoin-Miner sichern das Netzwerk, indem sie Elektrizität durch Proof of Work in 'Sicherheitskapital' umwandeln. Im Jahr 2026, mit einer Netzwerk-Hashrate von über 700 EH/s, werden die Kosten für einen Angriff auf Bitcoin in Milliarden Euro an Hardware und Infrastruktur gemessen. Diese Abstimmung ökonomischer Anreize – bei der ehrliches Mining immer profitabler ist als ein Angriff – schafft ein selbstverstärkendes Sicherheitsmodell, das über 1,5 Billionen Euro an globalem Wert schützt.
-
-*Semantische Dreiecke:*
-- **Hashpower** → garantiert → **Unveränderlichkeit der Historie**
-- **Anreiz-Harmonisierung** → verhindert → **Erfolg böswilliger Akteure**
-- **Proof of Work** → verbindet → **Digitalen Konsens mit realer Energie**
 
 ---
 
@@ -129,26 +119,6 @@ Kritiker sorgen sich, dass dies die Sicherheit senken könnte. Doch da das [Ligh
 
 ---
 
-## Lexikalische Relationen & Sicherheits-Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Bitcoin Sicherheit"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Hashpower', 'Hashrate, Sicherheitsbudget', 'Sicherheitsmetrik', 'Staking, Gewicht'],
-    ['Proof of Work', 'PoW, Nakamoto-Konsens', 'Technik', 'Proof of Stake, Zentrales Vertrauen'],
-    ['51%-Attacke', 'Mehrheitsangriff, Double Spend', 'Risiko', 'Ehrlicher Konsens'],
-    ['ASIC', 'Mining-Hardware, Spezialchip', 'Hardware', 'CPU/GPU Mining'],
-    ['Energieschild', 'Historien-Schutz, Akkumulierte Arbeit', 'Metapher', 'Sozialer Konsens']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*Hashrate, EH/s (Exahashes pro Sekunde), Proof of Work, Secure Hash Algorithm (SHA-256), Nonce, Block-Header, Difficulty Adjustment, 51%-Attacke, Double-Spending, Re-org (Reorganisierung), ASIC (Application-Specific Integrated Circuit), Stratum-Protokoll, Mining-Pool, Block-Subvention, Gebührenmarkt.*
-
----
-
 ## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Verschwendet Mining Strom?
@@ -168,4 +138,3 @@ Die Bitcoin-Schwierigkeit würde sinken, sodass es wieder profitabel wäre, mit 
 - [Das 21-Millionen-Limit verstehen](/de/blog/bitcoin-21-millionen-limit/)
 - [Lightning Network: Skalierung der Sicherheit](/de/blog/lightning-network/)
 - [Eigene Node betreiben und Miner verifizieren](/de/blog/was-ist-ein-bitcoin-node/)
----

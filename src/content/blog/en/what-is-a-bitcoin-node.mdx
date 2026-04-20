@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [Risks and Hardware Limitations](#risks)
 8. [Adoption & The Node Ecosystem](#adoption)
 9. [The Future of Node Decentralization](#future)
-10. [Lexical Relations & Node Vocabulary](#lexical-relations)
-11. [Frequently Asked Questions](#faqs)
+10. [Frequently Asked Questions](#faqs)
 
 ---
 
@@ -49,13 +46,6 @@ A **Bitcoin Node** is any computer that connects to the Bitcoin peer-to-peer net
 The nodes are the supreme auditors of Bitcoin. They download the entire history of the blockchain and enforce the consensus rules. If a transaction attempts to spend the same Bitcoin twice, or if a miner tries to give themselves more than the allowed block reward, the nodes immediately reject it. 
 
 To achieve true financial sovereignty, you must run your own node. If you rely on the node of your wallet provider (like Ledger or Trust Wallet), you are essentially trusting a third party to tell you the correct balance of your account.
-
-> **Featured Snippet Answer:** A Bitcoin node is a computer that connects to the Bitcoin network, downloads the complete blockchain ledger, and independently verifies every single transaction against Bitcoin's consensus rules. Full nodes are the ultimate source of truth in Bitcoin. By running a node, you achieve absolute sovereignty: you verify your own transactions and balance without trusting any third party or corporation.
-
-*Semantic Triples:*
-- **Bitcoin Node** → enforces → **Consensus Rules**
-- **Full Node** → connects to → **Peer-to-Peer Network**
-- **Miners** → are governed by → **Node Operators**
 
 ---
 
@@ -166,26 +156,6 @@ The central tension in blockchain development is the "Blockchain Trilemma": the 
 Many rival cryptocurrencies (like Solana) demand immense, enterprise-grade hardware to run a node, achieving massive speeds but centralizing power in the hands of a few data centers. 
 
 Bitcoin fundamentally rejects this. The core developmental philosophy of Bitcoin is that *anyone, anywhere in the world, on a rudimentary and cheap computer, must be able to run a Full Node*. Limiting the block size keeps the hardware requirements low, guaranteeing that Bitcoin remains the most decentralized monetary network on Earth.
-
----
-
-## Lexical Relations & Node Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Nodes"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Full Node', 'Validating Node, Auditor', 'Network Participant', 'Light Node (SPV), Miner'],
-    ['Bitcoin Core', 'Satoshi Client', 'Software Implementation', 'Rival forks (e.g. Bitcoin Cash)'],
-    ['Mempool', 'Memory pool, Waiting area', 'Data Structure', 'Confirmed Blockchain data'],
-    ['Initial Block Download', 'IBD, Syncing the chain', 'Process', 'Fully Synced, Real-time tracking'],
-    ['Pruned Node', 'Storage-optimized node', 'Node Variant', 'Archival Node']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Bitcoin Node, Full Node, Light Node (SPV), Mining Node, Consensus Rules, Separation of Powers, Blocksize War, Raspberry Pi, Umbrel, Bitcoin Core, Mempool, Initial Block Download (IBD), Archival Node, Decentralization, Peer-to-Peer, Tor Routing.*
 
 ---
 

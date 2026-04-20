@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Miners vs. Nodes: The Balance of Power (Architecture)](#architecture)
 6. [Hash Power in 2026: The Geopolitical Shift (Adoption)](#geopolitics)
 7. [The Fee Transition: Post-Block Reward Security](#fees)
-8. [Lexical Relations & Security Vokabular](#lexical-relations)
-9. [Frequently Asked Questions (FAQs)](#faqs)
+8. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 In traditional security, we use passwords and firewalls. In Bitcoin, we use **Physics.**
 
 Bitcoin miners act as the network's immune system. They expend massive amounts of electricity to "lock" transactions into blocks. This energy creates an unforgeable record of history. To change the past, you must re-expend all the energy that went into it.
-
-> **Featured Snippet Answer:** Bitcoin miners secure the network by transforming electricity into 'Security Capital' through Proof of Work. In 2026, with a network hashrate exceeding 700 EH/s, the cost to attack Bitcoin is measured in the billions of dollars in hardware and electrical infrastructure. This alignment of economic incentives—where honest mining is always more profitable than attacking—creates a self-reinforcing security model that protects over $1.5 trillion in global value.
-
-*Semantic Triples:*
-- **Hash Power** → provides → **Immutability of History**
-- **Incentive Alignment** → prevents → **Malicious Actor Success**
-- **Proof of Work** → bridges → **Digital Consensus and Physical Energy**
 
 ---
 
@@ -129,26 +119,6 @@ Critics worry this will lower security. However, as the [Lightning Network](/en/
 
 ---
 
-## Lexical Relations & Security Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Security"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Hash Power', 'Hashrate, Security Budget', 'Security Metric', 'Staking, Weight'],
-    ['Proof of Work', 'PoW, Nakamoto Consensus', 'Technology', 'Proof of Stake, Centralized Trust'],
-    ['51% Attack', 'Majority Attack, Double Spend', 'Risk', 'Honest Consensus'],
-    ['ASIC', 'Mining Hardware, Application Specific', 'Hardware', 'CPU/GPU Mining'],
-    ['Energy Shield', 'History Protection, Accumulated Work', 'Metaphor', 'Social Consensus']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Hashrate, EH/s (Exahashes per second), Proof of Work, Secure Hash Algorithm (SHA-256), Nonce, Block Header, Difficulty Adjustment, 51% Attack, Double-Spending, Re-org (Reorganization), ASIC (Application-Specific Integrated Circuit), Stratum Protocol, Mining Pool, Block Subsidy, Fee Market.*
-
----
-
 ## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Does mining waste electricity?
@@ -168,4 +138,3 @@ The Bitcoin difficulty would adjust downward, making it profitable for even a ho
 - [Understanding the 21 Million Supply Limit](/en/blog/bitcoin-supply-21-million/)
 - [The Lightning Network: Scaling Security](/en/blog/lightning-network/)
 - [How to Run Your Own Node and Verify the Miners](/en/blog/what-is-a-bitcoin-node/)
----

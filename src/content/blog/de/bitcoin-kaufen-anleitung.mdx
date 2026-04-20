@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [Typische Fehler und Scam-Fallen vermeiden](#fehler)
 8. [Adoption & Zukunft der Fiat-On-Ramps](#adoption)
 9. [Die Zukunft des Krypto-Einkaufs](#zukunft)
-10. [Begriffsnetzwerk & Vokabular](#begriffsnetzwerk)
-11. [Häufig gestellte Fragen (FAQs)](#faqs)
+10. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -47,13 +44,6 @@ export const faqSchema = {
 Wenn Sie sich entscheiden, Bitcoin zu kaufen, wandeln Sie "Fiatgeld" (in unserem Fall Euro) in dezentrales, digitales Geld um. Die Schnittstelle, an der diese beiden Finanzwelten aufeinandertreffen, nennt man **Krypto-Börse** (Exchange) oder **Broker**.
 
 Im Jahr 2026 ist der Bitcoin-Kauf genauso simpel und sicher wie die Eröffnung eines herkömmlichen Tagesgeldkontos beim Online-Banking. Die Wahl der *richtigen* Plattform ist jedoch entscheidend: Bitcoin-Transaktionen sind unwiderruflich. Fallen Sie auf eine unregulierte Fake-App herein, kann keine Bank der Welt Ihr Geld zurückbuchen.
-
-> **Featured Snippet Antwort:** Der sicherste Weg, um 2026 Bitcoin zu kaufen, ist die Nutzung einer staatlich regulierten Krypto-Börse (wie Bison, BSDEX, Kraken oder Bitvavo). Erstellen Sie ein Konto, schließen Sie die gesetzlich vorgeschriebene Video-Identifizierung (KYC) ab, überweisen Sie Euro via SEPA und führen Sie den Kauf aus. Zur langfristigen Sicherheit sollten die Bitcoins danach auf eine eigene Hardware Wallet gesendet werden.
-
-*Semantische Dreiecke:*
-- **BSDEX** → ist eine regulierte → **Krypto-Börse in Deutschland** (Wikidata: Q801053)
-- **KYC (Know Your Customer)** → verhindert → **Geldwäsche**
-- **Fiatgeld (Euro)** → bezahlt für → **Bitcoin**
 
 ---
 
@@ -145,28 +135,6 @@ Der Vorteil: Sie umgehen die emotionalen Stressphasen des Marktes (FOMO im Bulle
 Im Jahr 2026 nähern sich Krypto-Welt und klassische Banken rasant an. Immer mehr deutsche Neo-Banken (z. B. N26, Revolut oder C24) bieten Bitcoin-Käufe direkt in der normalen Banking-App an. 
 
 **Vorsicht hierbei:** Prüfen Sie vorher, ob Ihre Bank Ihnen auch die Auszahlung (Withdrawal) des realen Bitcoins an Ihre Hardware Wallet erlaubt. Manche Banken verkaufen lediglich ein "Finanzderivat" auf den Bitcoin-Preis. Echtes Bitcoin-Ownership haben Sie hier nicht.
-
----
-
-## Lexikalische Relationen & Begriffsnetzwerk <a id="begriffsnetzwerk"></a>
-
-Damit Sie das Finanzenglisch der Börsen verstehen, hier die wichtigsten Vokabeln:
-
-<SemanticTable 
-  title="Lexikalische Relationen: Krypto-Börsen & Kauf"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Fiatgeld', 'Euro, Dollar, Staatengeld', 'Ökonomie', 'Kryptowährung, Bitcoin'],
-    ['KYC', 'Identitätsprüfung, Video-Ident', 'Regulierung', 'Anonym, Peer-to-Peer (P2P)'],
-    ['Market Order', 'Sofortkauf', 'Trading / Handel', 'Limit Order (Zielpreis-Kauf)'],
-    ['DCA', 'Sparplan, Dollar-Cost-Averaging', 'Investment-Strategie', 'Lump-Sum (Einmalkauf), Spekulation'],
-    ['Withdrawal', 'Auszahlung, On-Chain-Transfer', 'Bestandsverwaltung', 'Deposit (Einzahlung)']
-  ]}
-/>
-
-### Fachbegriffe (Knowledge Domain)
-*Krypto-Börse (Exchange), KYC (Know Your Customer), AML (Anti-Money Laundering), Market Order, Limit Order, Spread-Gebühr, SEPA-Überweisung, Peer-to-Peer, Hardware Wallet, Auszahlungsgebühr, BaFin-Lizenz, MiCA, Krypto-Verwahrgeschäft, Maker/Taker Fee, Orderbuch, Liquidität.*
 
 ---
 

@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [The Role of KYC: From Exchange to Identity (Regulation)](#kyc)
 6. [Privacy Tools: CoinJoin, Taproot, and Lightning (Solutions)](#solutions)
 7. [Bitcoin vs. Privacy Coins (Monero Comparison)](#privacy-coins)
-8. [Lexical Relations & Privacy Vokabular](#lexical-relations)
-9. [Frequently Asked Questions (FAQs)](#faqs)
+8. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 A common myth is that Bitcoin is "invisible" or "anonymous money." In reality, Bitcoin is the most transparent financial network ever created. 
 
 It is **pseudonymous**. This means you act under a "pseudonym" (your Bitcoin address). As long as no one knows who owns the address, you are private. But once that link is made, the pseudonym is broken.
-
-> **Featured Snippet Answer:** Bitcoin is pseudonymous, meaning all transactions are public but not directly tied to a name. However, your identity can be linked to your Bitcoin through KYC (Know Your Customer) exchanges, address reuse, and blockchain analytics. To maintain privacy in 2026, users must actively employ strategies like using fresh addresses for every transaction, routing traffic through Tor, and utilizing Layer 2 solutions like the Lightning Network or privacy protocols like CoinJoin.
-
-*Semantic Triples:*
-- **Bitcoin Blockchain** → provides → **Full Transaction Transparency**
-- **Address Reuse** → leads to → **Privacy Leakage**
-- **CoinJoin** → enables → **Mixing for Obfuscation**
 
 ---
 
@@ -123,26 +113,6 @@ Bitcoin prioritizes **auditability** (ensuring no one prints fake money). Privac
 | **Supply Audit** | Instant & Public | Complex |
 | **Mainstream Acceptance** | Extremely High | Low (often delisted) |
 | **Privacy Tooling** | Opt-In (CoinJoin) | Integrated (Ring Sigs) |
-
----
-
-## Lexical Relations & Privacy Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Privacy"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Pseudonymity', 'Alias, Masking', 'Privacy Status', 'Anonymity, Doxing'],
-    ['CoinJoin', 'Mixing, Tumbling', 'Obfuscation', 'On-chain linking'],
-    ['KYC', 'Identity Verification, AML', 'Regulation', 'Non-KYC, Peer-to-Peer'],
-    ['Heuristic', 'Clustering Logic, Pattern', 'Analysis', 'Randomness'],
-    ['UTXO Set', 'Global Ledger, Coin state', 'Architecture', 'Account Balance']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Pseudonymity, Anonymity, KYC (Know Your Customer), AML (Anti-Money Laundering), CoinJoin, Wash Trading, Chainalysis, Heuristics, Clustering, Multi-hop, Tor Project, VPN, Taproot, Schnorr Signatures, Coin Control, UTXO management.*
 
 ---
 

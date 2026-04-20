@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Fee Selection: Choosing the Right Sat/vB (Efficiency)](#fees)
 7. [Verification: Blockchain Explorers & Confirmations](#verification)
 8. [Common Pitfalls & Security Best Practices](#pitfalls)
-9. [Lexical Relations & Transaction Vokabular](#lexical-relations)
-10. [Frequently Asked Questions (FAQs)](#faqs)
+9. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -46,13 +43,6 @@ export const faqSchema = {
 Sending Bitcoin is not like sending an email; it is more like moving physical gold into a transparent, unforgeable digital vault. 
 
 Every transaction is a broadcast to the thousands of nodes worldwide, informing them that a certain amount of value has moved from **Address A** to **Address B**. Once a miner includes this broadcast into a block, it becomes part of the permanent history of the world.
-
-> **Featured Snippet Answer:** To send Bitcoin, you need the recipient's wallet address, an chosen amount, and a network fee (sat/vB). The sender signs the transaction with their private key, broadcasts it to the network, and it is confirmed by miners. To receive Bitcoin, you simply provide a fresh receiving address from your wallet to the sender. Bitcoin transactions are irreversible, censorship-resistant, and global, typically requiring 10 to 60 minutes for finality on the base layer.
-
-*Semantic Triples:*
-- **Bitcoin Wallet** → generates → **Receiving Addresses**
-- **Sender** → signs transaction with → **Private Key**
-- **Miner** → validates and includes → **Transaction in a Block**
 
 ---
 
@@ -148,26 +138,6 @@ Once a transaction is sent, it is public. You can track it using its **TXID** (T
 ❌ **Sending to the Wrong Chain:** Sending Bitcoin to an Ethereum or Bitcoin Cash address usually results in lost funds.
 ❌ **Trusting the Clipboard:** Always assume your computer might have "Clipboard Malware" that changes addresses. Verify every character on your secure device.
 ❌ **Panic over Pending:** If your transaction is stuck for days, use **RBF (Replace-By-Fee)** to increase the fee and get it confirmed.
-
----
-
-## Lexical Relations & Transaction Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Transactions"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['UTXO', 'Digital Bill, Unspent Output', 'Architecture', 'Account Balance'],
-    ['Mempool', 'Waiting Room, Queue', 'Network', 'Confirmed Block'],
-    ['Address', 'Public Key Hash, Receiving ID', 'Identity', 'Private Key'],
-    ['Confirmation', 'Block Inclusion, Finality', 'Security', 'Pending, Unconfirmed'],
-    ['Sat/vB', 'Fee Rate, Priority Level', 'Economy', 'Mining Reward']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*UTXO, Mempool, TXID, Satoshis, Bech32 (SegWit), P2SH, P2PKH, Taproot, RBF (Replace-By-Fee), CPFP (Child Pays For Parent), Inputs, Outputs, Change Address, Block Explorer, Mining Fee, Scripts.*
 
 ---
 

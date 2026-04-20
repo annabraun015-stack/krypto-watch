@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Der Fall 'Craig Wright': Betrug und Gerichtsurteile (Rechtliches)](#rechtliches)
 6. [Warum Anonymität notwendig ist: Die Spieltheorie des Schweigens (Strategie)](#strategie)
 7. [Was geschah mit Satoshi? (Das Verschwinden)](#verschwinden)
-8. [Lexikalische Relationen & Identitäts-Vokabular](#lexikalische-relationen)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Am 31. Oktober 2008 erschien ein 9-seitiges Whitepaper auf einer Nischen-Mailingliste für Kryptografie. Es schlug ein "Peer-to-Peer Electronic Cash System" vor, das keine Banken oder vertrauenswürdigen Vermittler benötigte. Der Name des Autors: **Satoshi Nakamoto.**
 
 Satoshi ist mehr als ein Erfinder; er ist der Architekt eines neuen globalen Währungssystems. Doch die wahre Identität hinter dem Namen ist bis heute unbekannt, was sie zum teuersten Rätsel der Menschheitsgeschichte macht.
-
-> **Featured Snippet Antwort:** Satoshi Nakamoto ist der pseudonyme Schöpfer von Bitcoin, der das Whitepaper (2008) verfasste und den Quellcode (2009) startete. Trotz der Billionen-Dollar-Bewertung von Bitcoin im Jahr 2026 bleibt Satoshis Identität unbewiesen. Die 'Satoshi-Ära' (2008-2011) hinterließ etwa 1,1 Millionen BTC an ungenutzten Coins. Die Anonymität war eine bewusste strategische Entscheidung, um sicherzustellen, dass Bitcoin dezentral, führerlos und resistent gegen staatlichen Zwang bleibt.
-
-*Semantische Dreiecke:*
-- **Satoshi Nakamoto** → erschuf → **Bitcoin-Protokoll**
-- **Satoshi Nakamoto** → verschwand im → **April 2011**
-- **Die Patoshi-Coins** → repräsentieren → **1,1 Mio. ungenutzte BTC**
 
 ---
 
@@ -83,19 +73,6 @@ Sollten diese Coins jemals auf eine Börse bewegt werden, um verkauft zu werden,
 ## Die Hauptkandidaten: Wer könnte es sein? (Analyse) <a id="kandidaten"></a>
 
 Seit 2011 hat die Welt nach Satoshi gesucht. Fünf Kandidaten ragen heraus.
-
-<SemanticTable 
-  title="Vergleich der Top-Satoshi-Kandidaten"
-  type="lexical"
-  headers={['Kandidat', 'Wahrscheinlichkeit', 'Technischer Match', 'Warum er?']}
-  rows={[
-    ['Hal Finney', 'Extrem hoch', 'Perfekt', 'Erster Nutzer; legendärer Kryptograf; wohnte nah bei Dorian Nakamoto.'],
-    ['Nick Szabo', 'Hoch', 'Akademisch', 'Erschuf Bit Gold (Vorläufer); linguistische Übereinstimmung.'],
-    ['Adam Back', 'Mittel', 'Schöpfer', 'Erfinder von Hashcash (PoW); erste Person, die Satoshi kontaktierte.'],
-    ['Len Sassaman', 'Moderat', 'Deep Tech', 'Brillanter Kryptograf; starb kurz nach Satoshis Verschwinden.'],
-    ['Eine Gruppe', 'Hoch', 'Industriell', 'Der Code ist zu poliert für einen einzelnen Menschen; wahrsch. 2-3 Personen.']
-  ]}
-/>
 
 ---
 
@@ -141,26 +118,6 @@ Satoshis letzte E-Mail wurde am 26. April 2011 an den Entwickler Gavin Andresen 
 1. **Tod:** Kandidaten wie Hal Finney (2014) oder Len Sassaman (2011) sind verstorben, was perfekt erklären würde, warum die 1,1 Millionen Coins nie bewegt wurden.
 2. **Altruistisches Schweigen:** In dem Wissen, dass seine Anwesenheit die Reife von Bitcoin behindern würde, zerstörte Satoshi seine Festplatte und zog sich in ein Privatleben zurück.
 3. **Angst vor Strafverfolgung:** Nachdem die US-Regierung Systeme wie e-gold und Liberty Reserve geschlossen hatte, zog sich Satoshi zurück, um einer lebenslangen Haftstrafe zu entgehen.
-
----
-
-## Lexikalische Relationen & Identitäts-Vokabular <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Die Satoshi-Identität"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Pseudonym', 'Alias, Maske, Deckname', 'Status', 'Klarname, Doxing'],
-    ['Patoshi', 'Satoshi-Muster, Ur-Miner', 'Datenanalyse', 'Börsen-Wallet'],
-    ['Genesis Private Key', 'Die verbotenen Schlüssel', 'Sicherheit', 'Public Keys'],
-    ['Führerlos', 'Dezentral, Ohne Kopf', 'Governance', 'Unternehmens-CEO, Zentralbank'],
-    ['Cypherpunk', 'Privacy-Aktivist, Kryptograf', 'Kultur', 'Compliance, Überwachungsstaat']
-  ]}
-/>
-
-### Begriffe des Krypto-Wissensraums
-*Satoshi Nakamoto, Hal Finney, Nick Szabo, Craig Wright, BIP-39, BIP-32, ECDSA, SHA-256, Patoshi-Muster, Whitepaper, Block 0, Genesis-Transaktion, COPA-Prozess, Blockchain-Forensik, Proof of Work, Cypherpunk Manifesto.*
 
 ---
 

@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Steel Backups: Protecting Against Disaster (Backup)](#steel)
 6. [Multisig: Eliminating Single Points of Failure (Advanced)](#multisig)
 7. [Operational Security (OpSec) & Inheritance](#opsec)
-8. [Lexical Relations & Security Vokabular](#lexical-relations)
-9. [Frequently Asked Questions (FAQs)](#faqs)
+8. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Bitcoin is unique because it allows you to be your own bank. In the legacy financial system, you are an "unsecured creditor" to your bank. In Bitcoin, you are the **absolute owner** through the possession of cryptographic keys.
 
 Self-custody is not just a preference; it is the reason Bitcoin exists. Without it, you are simply trading a digital IOU.
-
-> **Featured Snippet Answer:** Safe Bitcoin storage requires moving your private keys away from internet-connected devices (Cold Storage). The gold standard for individual security in 2026 is using a dedicated hardware wallet (like BitBox02, Ledger, or Trezor) combined with a fireproof steel backup of your 24-word seed phrase. For high-net-worth individuals, a 'Multisig' setup (2-of-3 or 3-of-5) is recommended to eliminate single points of failure. Self-custody ensures that no bank, government, or exchange can freeze or seize your assets.
-
-*Semantic Triples:*
-- **Self-Custody** → provides → **Sovereign Asset Ownership**
-- **Hardware Wallet** → isolates → **Private Keys from the Internet**
-- **Seed Phrase** → represents → **Mathematical Access to the Blockchain**
 
 ---
 
@@ -133,26 +123,6 @@ Common mistakes often bypass even the best technical security:
 - **Boat Accidents:** Don't tell people how much Bitcoin you have.
 - **Wrench Attacks:** Physical security matters. Large holders should use a "Passphrase" (25th word) to create a hidden wallet with the same seed.
 - **The "Hit by a Bus" Plan:** Ensure your family knows how to access your Bitcoin if you are no longer there. Use a "Dead Man's Switch" or simple instructions stored with your executor.
-
----
-
-## Lexical Relations & Security Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Custody"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Cold Storage', 'Offline Storage, Air-gapped', 'Security State', 'Hot Wallet, Online Storage'],
-    ['Seed Phrase', 'Recovery Phrase, BIP-39 Mnemonic', 'Access Control', 'Private Key (Raw)'],
-    ['Self-Custody', 'Sovereign Custody, Non-custodial', 'Ownership', 'Exchange, Custodian'],
-    ['Passphrase', 'The 25th Word, Hidden Wallet', 'Advanced Auth', 'PIN code'],
-    ['Hardware Wallet', 'Signing Device, HWW', 'Hardware', 'Software Wallet']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Self-Custody, Non-custodial, Cold Storage, Air-gapped, Hardware Wallet (HWW), BIP-39, Seed Phrase, Private Key, Public Key, Multisig (Multi-signature), Air-gapped Transaction, PSBT (Partially Signed Bitcoin Transaction), Seizability, Censorship-resistance, Secure Element.*
 
 ---
 

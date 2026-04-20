@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Replace-By-Fee (RBF): Un-sticking a Transaction (Usage)](#rbf)
 7. [The Threat Model: The "Double Spend" Exploit (Security)](#double-spend)
 8. [The End of Confirmations: The Lightning Network (Future)](#lightning)
-9. [Lexical Relations & Transaction Vocabulary](#lexical-relations)
-10. [Frequently Asked Questions](#faqs)
+9. [Frequently Asked Questions](#faqs)
 
 ---
 
@@ -50,13 +47,6 @@ A **Bitcoin Confirmation** is a metric measuring how deeply your transaction has
 When you send Bitcoin, your transaction is broadcast to the network but is initially "unconfirmed." It floats in a waiting room. When a [Miner](/en/blog/bitcoin-mining/) picks up your transaction and successfully packs it into a block of data, and that block is appended to the blockchain, your transaction receives its **First (1) Confirmation**.
 
 Every subsequent block that is added to the chain *after* your block counts as an additional confirmation. 
-
-> **Featured Snippet Answer:** A Bitcoin confirmation occurs when a miner includes your transaction in a new block on the blockchain. One confirmation means the transaction is officially in the ledger. Each subsequent block mined on top adds another confirmation. Because each block requires massive amounts of cryptographic energy (Proof-of-Work) to create, each confirmation makes reversing your transaction exponentially harder. Six confirmations is considered mathematically irreversible.
-
-*Semantic Triples:*
-- **Bitcoin Miners** → generate → **Transaction Confirmations**
-- **The Mempool** → holds → **Unconfirmed Transactions**
-- **Six Confirmations** → guarantees → **Final Settlement Finality**
 
 ---
 
@@ -153,26 +143,6 @@ Waiting 10 to 30 minutes for a transaction confirmation is acceptable when you a
 This is why the **Lightning Network** was created. Lightning is a "Layer 2" protocol built on top of Bitcoin. It uses cryptographic smart contracts to create payment channels between users. Transactions on the Lightning Network do not require miner confirmations. 
 
 They settle instantly (within milliseconds), with fees costing fractions of a cent. Today, merchants accepting Bitcoin in El Salvador or online use Lightning specifically to bypass the base-layer confirmation times entirely.
-
----
-
-## Lexical Relations & Transaction Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Transactions"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Confirmation', 'Block inclusion, Settlement', 'Network Status', 'Unconfirmed, Mempool status'],
-    ['Mempool', 'Memory pool, Tx queue', 'Data Structure', 'The permanent Blockchain'],
-    ['Replace-By-Fee', 'RBF, Fee bumping', 'Protocol Feature', 'Irreversible Confirmed Tx'],
-    ['Double Spend', 'Tx reversal fraud', 'Attack Vector', 'Finalized settlement'],
-    ['Miner Fee', 'Tx Fee, Network Fee', 'Incentive', 'Block Reward (Subsidy)']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Bitcoin Blockchain, Confirmations, Mempool, Unconfirmed Transaction, Replace-By-Fee (RBF), Child-Pays-For-Parent (CPFP), Miner Fee, Priority Queue, Proof of Work, Double Spend Attack, Finality, Settlement Layer, Lightning Network, Satoshi Nakamoto.*
 
 ---
 

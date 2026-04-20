@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Hängende Transaktionen beschleunigen (RBF)](#rbf)
 6. [Gebührenoptimierung: SegWit, Taproot und Batching](#optimization)
 7. [Lightning Network: Skalierung jenseits des Mempools](#lightning)
-8. [Lexikalische Relationen & Transaktions-Vokabular](#lexical-relations)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Bitcoin hat eine begrenzte Kapazität. Im Durchschnitt wird alle 10 Minuten ein neuer Block gefunden, und jeder Block kann nur eine bestimmte Menge an Daten aufnehmen. Dies erzeugt einen **Gebührenmarkt.**
 
 Miner sind ökonomisch motivierte Akteure. Sie wählen immer die Transaktionen aus, die am meisten "Miete" für den begrenzten Platz in ihren Blöcken zahlen. Wenn Sie zu wenig zahlen, bleibt Ihre Transaktion im "Wartezimmer" (dem Mempool), bis das Netzwerk weniger ausgelastet ist.
-
-> **Featured Snippet Antwort:** Bitcoin Transaktionsgebühren werden an Miner gezahlt, um Ihre Daten im nächsten Block zu priorisieren. Die Gebühren werden basierend auf dem 'Gewicht' der Transaktion in virtuellen Bytes (vB) und dem aktuellen Marktsatz in Satoshis pro virtuellem Byte (sat/vB) berechnet. Im Jahr 2026 nutzen effiziente Anwender Taproot- und SegWit-Adressen, um das Gewicht um bis zu 40 % zu reduzieren, und nutzen das Lightning Network für sofortige Zahlungen fast ohne Gebühren.
-
-*Semantische Dreiecke:*
-- **Transaktionsgebühr** → incentiviert → **Miner-Inklusion**
-- **Blockplatz** → ist eine → **Knappe Ressource**
-- **sat/vB Rate** → bestimmt → **Bestätigungsgeschwindigkeit**
 
 ---
 
@@ -127,26 +117,6 @@ Lightning-Transaktionen landen nicht im Mempool. Es sind "Off-Chain"-Vereinbarun
 
 ---
 
-## Lexikalische Relationen & Transaktions-Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Fees"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Mempool', 'Wartezimmer, Memory Pool', 'Architektur', 'Blockchain (Bestätigt)'],
-    ['sat/vB', 'Gebührenrate, Preis pro Byte', 'Metrik', 'Flat Fee (Pauschal)'],
-    ['RBF', 'Replace-By-Fee, Gebühren-Bumping', 'Protokoll', 'Unersetzbare TX'],
-    ['CPFP', 'Child Pays For Parent', 'Protokoll', 'RBF'],
-    ['Dust', 'Staub, Winzige UTXOs', 'Ökonomie', 'Konsolidierte UTXO']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*Mempool, sat/vB (Satoshis pro virtuellem Byte), RBF (Replace-By-Fee), CPFP (Child Pays For Parent), UTXO-Konsolidierung, SegWit (BIP 141), Taproot (BIP 341), Schnorr-Signaturen, Zeugendaten (Witness Data), Transaktionsgewicht, vSize, Blockkapazität, Gebührenmarkt, Mining Reward.*
-
----
-
 ## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Kann eine Transaktion für immer hängen bleiben?
@@ -166,4 +136,3 @@ Nein. Eine 0,001 BTC Transaktion mit 100 sat/vB wird viel schneller bestätigt a
 - [Wie Bitcoin Mining funktioniert: Warum Miner Gebühren brauchen](/de/blog/bitcoin-mining/)
 - [Lightning Network: Sofortzahlungen fast ohne Gebühr](/de/blog/lightning-network/)
 - [Bitcoin Bestätigungen verstehen](/de/blog/bitcoin-bestaetigungen/)
----

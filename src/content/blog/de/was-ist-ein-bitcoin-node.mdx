@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [Hardware-Hürden und die Initial Synchronisation (IBD)](#huerden)
 8. [Das Umbrel-Erlebnis & Layer-2 Apps](#oekosystem)
 9. [Die Zukunft der Node-Dezentralisierung](#zukunft)
-10. [Lexikalische Relationen & Fachbegriffe](#lexikalische-relationen)
-11. [Häufig gestellte Fragen (FAQs)](#faqs)
+10. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -49,13 +46,6 @@ Ein **Bitcoin Node** (Knotenpunkt) ist ein beliebiger Computer, der an das dezen
 Zusammen bilden sie die gigantische, dezentrale "Wirtschaftsprüfung" des Netzwerks. Eine sogenannte **Full Node** lädt die gesamte Blockchain (das Kassenbuch) vom ersten Tag an herunter und verifiziert, ob alle Regeln eingehalten werden. Versucht ein Hacker, Bitcoins aus dem Nichts zu drucken, oder verstößt ein Miner gegen das [21 Millionen Limit](/blog/bitcoin-21-millionen-limit/), schlägt die Node Alarm und löscht diesen Block.
 
 Souveränität bedeutet in der Krypto-Welt: Wenn Sie sich keine eigene Node hinstellen, müssen Sie bei der Prüfung Ihres Geld-Eingangs blind [einer fremden Node oder einem Hardware-Wallet Unternehmen vertrauen](/blog/beste-bitcoin-wallets/). "Don't Trust, Verify" – Vertraue niemandem, überprüfe es selbst. Diesen Grundsatz erfüllt nur die eigene Node.
-
-> **Featured Snippet Antwort:** Eine Bitcoin Node ist ein Computer, der sich an das Krypto-Netzwerk anschließt, die gesamte Blockchain speichert und eigenständig jede Transaktion validiert. Full Nodes sind die ultimative Quelle der Wahrheit in Bitcoin. Miner müssen den Regeln folgen, die von den Nodes diktiert werden. Eine eigene Node zu betreiben bedeutet 100%ige finanzielle Unabhängigkeit und vollkommene Privatsphäre.
-
-*Semantische Dreiecke:*
-- **Bitcoin Node** → erzwingt → **Die Konsensregeln**
-- **Light Node (SPV)** → vertraut auf → **Full Nodes**
-- **Miner** → unterwerfen sich → **Den Node-Betreibern**
 
 ---
 
@@ -162,26 +152,6 @@ Das größte Dilemma im Krypto-Sektor nennt sich das "Blockchain-Trilemma" (Komp
 Rivalen wie Solana (SOL) fokussieren sich auf enorme globale Geschwindigkeit. Der Preis dafür: Ihre Nodes benötigen gigantisch teure Hardware, wodurch nur noch IT-Großkonzerne das Netzwerk verwalten. 
 
 Bitcoin verneint das strikt. Das fundamentale Sicherheitsversprechen Bitcoins bleibt: Jeder noch so arme Student mit einem gebrauchten Laptop irgendwo in Südamerika muss technisch in der Lage sein, eine Node zu betreiben, um der Regierung und den Minern auf die Finger zu schauen.
-
----
-
-## Lexikalische Relationen & Fachbegriffe <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Aufbau der Nodes"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Full Node', 'Vollknotenpunkt, Auditor', 'Infrastruktur', 'Light Node (Smartphone App), Miner'],
-    ['Bitcoin Core', 'Satoshi-Client', 'Software-Client', 'Fork-/Fake-Versionen (Bitcoin Cash)'],
-    ['Mempool', 'Wartehalle, Memory Pool', 'Sammelbecken', 'In blöcke geschriebte (Bestätigte) Daten'],
-    ['Initial Block Download', 'IBD, Historien-Sync', 'Setup-Prozess', 'Fully Synced, Live Tracking'],
-    ['Blocksize War', 'Scaling-Krieg 2017', 'Historisches Event', 'Zentralisierter Code-Push']
-  ]}
-/>
-
-### Begriffe des Krypto-Wissensraums
-*Bitcoin Node, Full Node, SPV (Light Node), Mining Farm, Konsensregeln (Consensus Rules), Gewaltenteilung, Blocksize War, Raspberry Pi, Umbrel, Start9, Bitcoin Core, Mempool, IBD, Archival Node, Dezentralisierung, Peer-to-Peer, Tor Routing.*
 
 ---
 

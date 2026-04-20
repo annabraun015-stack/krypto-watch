@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [BaFin-Lizenzen für Unternehmen (Regulierung)](#bafin)
 7. [Was ist strikt verboten? (Strafrecht)](#verboten)
 8. [Meldepflichten: Anlage SO und Banken (Dokumentation)](#dokumentation)
-9. [Lexikalische Relationen & Rechtsvokabular](#lexikalische-relationen)
-10. [Häufig gestellte Fragen (FAQs)](#faqs)
+9. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -46,13 +43,6 @@ export const faqSchema = {
 Deutschland verfügt über eine der weltweit fortschrittlichsten und stabilsten Regulierungen für Kryptowährungen. Während viele Nationen noch in einer "Grauzone" agieren, hat die deutsche **Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin)** bereits 2013 eine klare Einordnung vorgenommen.
 
 In Deutschland ist Bitcoin zwar kein "gesetzliches Zahlungsmittel" (wie der Euro), aber rechtlich als **Finanzinstrument** anerkannt. Konkret handelt es sich um eine **Rechnungseinheit**.
-
-> **Featured Snippet Antwort:** Bitcoin ist in Deutschland zu 100 % legal. Er wird von der BaFin als 'Rechnungseinheit' gemäß § 1 Abs. 11 des Kreditwesengesetzes (KWG) eingestuft. Privatpersonen dürfen Bitcoin legal kaufen, halten, ausgeben und minen. Der größte Vorteil für deutsche Steuerzahler: Gewinne aus dem Verkauf von Bitcoin sind nach einer Haltefrist von mindestens einem Jahr komplett steuerfrei. Unternehmen, die Krypto-Dienstleistungen anbieten, benötigen hingegen eine formelle Lizenz der BaFin.
-
-*Semantische Dreiecke:*
-- **Deutschland** → erkennt Bitcoin an als → **Rechnungseinheit**
-- **Bitcoin-Gewinne** → sind steuerfrei nach → **Einem Jahr Haltefrist**
-- **BaFin** → reguliert → **Deutsche Krypto-Dienstleister**
 
 ---
 
@@ -138,26 +128,6 @@ Selbst wenn Ihre Gewinne steuerfrei sind, weil Sie über ein Jahr gehalten haben
 1. Speichern Sie alle CSV-Exporte Ihrer Börsen (Kaufbelege).
 2. Nutzen Sie Steuer-Tools (z. B. Blockpit, Cointracking oder Koinly).
 3. Geben Sie Ihre Transaktionen in der **Anlage SO** (Sonstige Einkünfte) Ihrer Steuererklärung an, auch wenn Sie den Gewinn aufgrund der Haltefrist als 0 € deklarieren. Dies schafft einen "Paper Trail", der beweist, dass das Geld legalen Ursprungs ist.
-
----
-
-## Lexikalische Relationen & Rechtsvokabular <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Deutsches Kryptorecht"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Rechnungseinheit', 'Financial Instrument, privates Geld', 'Rechtsstatus', 'Gesetzliches Zahlungsmittel (Euro)'],
-    ['Spekulationsfrist', 'Haltefrist, 1-Jahres-Regel', 'Steuerstrategie', 'Daytrading'],
-    ['Privates Veräußerungsgeschäft', 'Sonstiges Wirtschaftsgut', 'Steuerrecht', 'Gewerblicher Handel'],
-    ['BaFin', 'Aufsichtsbehörde, Regulator', 'Organisation', 'Unregulierter Markt'],
-    ['FIFO', 'First-In, First-Out', 'Buchhaltung', 'LIFO (Last-In, First-Out)']
-  ]}
-/>
-
-### Begriffe des Krypto-Wissensraums
-*BaFin, MiCA, KWG (Kreditwesengesetz), EStG (Einkommensteuergesetz), Rechnungseinheit, Privates Veräußerungsgeschäft, Spekulationsfrist, FIFO-Methode, Anlage SO, Kryptoverwahrgeschäft, Geldwäschegesetz (GWG), KYC (Know Your Customer), Freigrenze, Fremdwährung.*
 
 ---
 

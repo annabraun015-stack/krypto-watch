@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -38,8 +36,7 @@ export const faqSchema = {
 7. [Risiken, Hacks und Verwahrungs-Limitierungen](#risiken-hacks)
 8. [Wallet-Adoption & UX-Trends 2026](#adoption-ux)
 9. [Die Zukunft der Bitcoin Wallets](#zukunft)
-10. [Lexikalische Relationen & Fachbegriffe](#lexikalische-relationen)
-11. [Häufig gestellte Fragen (FAQs)](#faqs)
+10. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -50,13 +47,6 @@ Eine **Bitcoin Wallet** (bzw. ein "Bitcoin-Geldbeutel") ist eine Software oder e
 Der wichtigste Grundsatz des Jahres 2026 bei der Suche nach der besten Bitcoin-Wallet ist die Unterscheidung zwischen **Custodial** (fremdverwahrt) und **Non-Custodial** (selbstverwahrt).
 - *Custodial Wallet:* Eine Drittpartei, wie beispielsweise eine Krypto-Börse, hält die Schlüssel (und damit die tatsächliche Macht über das Geld).
 - *Non-Custodial Wallet:* Allein Sie besitzen und verwalten Ihre Schlüssel. Das bringt volle finanzielle Souveränität, aber auch 100 % der Verantwortung.
-
-> **Featured Snippet Antwort:** Eine Bitcoin Wallet ist eine digitale Applikation oder ein physisches Gerät, das Ihre kryptografischen Schlüssel verwaltet, um Ihnen Zugriff auf Ihre Bitcoins auf der Blockchain zu geben. Die besten Bitcoin Wallets 2026 in puncto Sicherheit sind selbstverwahrte (non-custodial) Hardware-Wallets wie die BitBox02, der Trezor Safe 5 oder der Ledger Flex, die Ihre Private Keys strikt offline halten.
-
-*Semantische Dreiecke:*
-- **BitBox02** → ist eine → **Hardware Wallet**
-- **Der Private Key** → autorisiert → **Bitcoin-Transaktionen**
-- **Hardware Wallet** → ist das Gegenteil von → **Hot Wallet**
 
 ---
 
@@ -157,28 +147,6 @@ Die Nutzererfahrung hat immense Sprünge gemacht.
 ## Die Zukunft der Bitcoin Wallets <a id="zukunft"></a>
 
 In der nahen Zukunft wird das klassische 24-Wörter Seedphrase Setup vermutlich der Account Abstraction weichen. Smart Contract gestützte Wallets werden dann Multi-Faktor-Authentifizierungen ohne zentrale Verwahrstelle ermöglichen. Bis dahin bleibt das Air-Gapped Setup einer Coldcard Mk4 oder einer BitBox02 in Verbindung mit einem Desktop-Portal wie dem Sparrow Wallet der industrieweite Goldstandard für Bitcoin Minimalisten.
-
----
-
-## Lexikalische Relationen & Fachbegriffe <a id="lexikalische-relationen"></a>
-
-Das Vokabular der Kryptoverwahrung muss sitzen, um nicht Opfer von Scams zu werden:
-
-<SemanticTable 
-  title="Lexikalische Relationen: Krypto-Verwahrung"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Cold Wallet', 'Hardware Wallet, Ledger, BitBox', 'Lagerungsart', 'Hot Wallet, Software Wallet'],
-    ['Self-Custody', 'Non-Custodial, Eigenverwahrung', 'Besitzmodell', 'Custodial, Fremdverwahrung (Börse)'],
-    ['Seed Phrase', 'Mnemonic, Wiederherstellungs-Passwort', 'Sicherheits-Backup', 'Verlorenes Backup / Single Point of Failure'],
-    ['Air-gapped', 'Offline-Signierung, SD-Karten Datentausch', 'Konnektivität', 'USB Konnektivität, Bluetooth'],
-    ['Multi-Sig', 'Mehrfach-Signatur, 2-aus-3 Setup', 'Sicherheitsschicht', 'Single-Sig (Standard Wallet)']
-  ]}
-/>
-
-### Fachbegriffe (Knowledge Domain)
-*Hardware Wallet, Hot Wallet, Cold Storage, Ledger Nano X (Q106719820), Trezor, BitBox02, Private Key, Public Key, Seed Phrase, BIP-39, Asymmetrische Kryptografie, Blockchain, Eigenverwahrung, Custodial Börse, Not your keys not your coins, Multisig, Air-gapped, Secure Element (SE Chip), Open-source Firmware, UTXO (Unspent Transaction Output), Coin Control, Mempool, BaFin (Q801083), MiCA.*
 
 ---
 

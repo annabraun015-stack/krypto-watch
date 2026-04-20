@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [On-Chain Analytics: Whale and Exchange Flows (Data)](#on-chain)
 7. [Regulatory Impact: Clarity vs. Enforcement (Legal)](#regulation)
 8. [Bitcoin Price Models: S2F to Power Law (Analysis)](#models)
-9. [Lexical Relations & Economic Vocabulary](#lexical-relations)
-10. [Frequently Asked Questions (FAQs)](#faqs)
+9. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -46,13 +43,6 @@ export const faqSchema = {
 Bitcoin's price is not set by any central bank, government, or CEO. It is the result of a **global, 24/7 price discovery mechanism** involving millions of individuals, institutions, and automated trading algorithms. 
 
 Unlike a company stock, which has an earnings report, or a bond, which has a yield, Bitcoin is a pure commodity. Its price is the point where the collective desire to hold the asset meets the collective willingness to sell it.
-
-> **Featured Snippet Answer:** Bitcoin's price is determined by the intersection of absolute mathematical scarcity (the 21 million supply cap) and global demand. Key drivers in 2026 include institutional ETF inflows, macroeconomic liquidity cycles (interest rates), the impact of the four-year halving, and on-chain metrics like exchange supply depletion. Because Bitcoin's supply is perfectly inelastic, all demand increases translate directly into upward price pressure.
-
-*Semantic Triples:*
-- **Bitcoin Price** → emerges from → **Supply and Demand Equilibrium**
-- **Institutions** → create → **Structural Demand Shocks**
-- **High Interest Rates** → typically cause → **Reduced Risk-On Appetite**
 
 ---
 
@@ -144,26 +134,6 @@ Several mathematical models attempt to value Bitcoin, despite it having no cash 
 | **Stock-to-Flow (S2F)** | Valued based on the yearly production vs existing supply. | Proved the impact of halvings, but struggled with precise timing due to demand-side volatility. |
 | **Power Law** | Proposes that Bitcoin's price follows a logarithmic growth curve over decades. | Currently the most respected model for long-term "fair value" estimates. |
 | **MVRV Ratio** | Compares Market Value to "Realized" Value (the price people actually paid for their coins). | Excellent for identifying market cycle tops and bottoms. |
-
----
-
-## Lexical Relations & Economic Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Market Dynamics"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Volatility', 'Price swings, Variance', 'Market Behavior', 'Stability, Market Maturity'],
-    ['Bull Market', 'Uptrend, Expansion phase', 'Market Cycle', 'Bear Market, Consolidation'],
-    ['Whale', 'Institutional holder, HNI', 'Market Participant', 'Retail, Shrimp, Plankton'],
-    ['Inelasticity', 'Fixed supply, Hard cap', 'Economics', 'Elasticity (Fiat money printing)'],
-    ['Liquidity', 'Market depth, Volume', 'Trading', 'Illiquidity, Slippage']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Supply and Demand, Market Equilibrium, Inelastic Supply, ETF Flows, M2 Money Supply, Quantitative Easing, Fear & Greed Index, FOMO, FUD, On-Chain Analysis, Whale Tracking, Realized Price, Stock-to-Flow, Power Law, Halving Supply Shock, Price Discovery, 21 Million Cap.*
 
 ---
 

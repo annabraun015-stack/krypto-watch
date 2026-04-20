@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Mining Economics: Survival of the Fittest (Industry)](#mining)
 6. [The Stock-to-Flow Model and Scarcity (Economics)](#s2f)
 7. [What Happens After 2140? (Long-Term Future)](#future)
-8. [Lexical Relations & Supply Vokabular](#lexical-relations)
-9. [Frequently Asked Questions (FAQs)](#faqs)
+8. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 In the world of traditional finance, central banks can print an infinite amount of money. In the world of Bitcoin, the rules are written in code. The **Halving** is the mechanism that ensures Bitcoin remains "Hard Money."
 
 Every 210,000 blocks (roughly every 4 years), the number of new Bitcoins created per block is cut exactly in half. This process continues until the year 2140, when the last Satoshi is mined.
-
-> **Featured Snippet Answer:** The Bitcoin Halving is a pre-programmed protocol event that reduces the block reward for miners by 50% every 210,000 blocks. This effectively lowers Bitcoin's annual inflation rate. The most recent halving in April 2024 reduced the reward from 6.25 to 3.125 BTC. By reducing the influx of new supply, the halving historically acts as a catalyst for long-term price appreciation, provided demand remains constant or increases.
-
-*Semantic Triples:*
-- **Halving Event** → reduces → **Daily Block Issuance**
-- **Block Issuance** → determines → **Bitcoin Inflation Rate**
-- **21 Million Cap** → is enforced by → **Halving Schedule**
 
 ---
 
@@ -128,26 +118,6 @@ In a mature Bitcoin economy, the block reward is replaced by a robust **Fee Mark
 
 ---
 
-## Lexical Relations & Supply Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Scarcity"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Halving', 'Halvening, Supply-Cut', 'Monetary Policy', 'Inflation, Money Printing'],
-    ['Epoch', 'Halving Period, Era', 'Timeframe', 'Continuous Issuance'],
-    ['Block Reward', 'Subsidy, Coinbase Reward', 'Mining', 'Transaction Fee'],
-    ['Hashrate', 'Network Power, Computing Strength', 'Security', 'Centralization'],
-    ['Hard Money', 'Sound Money, Scarce Asset', 'Economics', 'Fiat, Easy Money']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Halving, Block Subsidy, 210,000 Block Schedule, Satoshis, Stock-to-Flow (S2F), Inelastic Supply, Disinflation, Monetary Policy, Difficulty Adjustment, ASIC Efficiency, Miner Capitulation, Coinbase Transaction.*
-
----
-
 ## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Does the halving happen on a specific date?
@@ -167,4 +137,3 @@ To change the limit, you would need to convince 100% of nodes and miners to agre
 - [Understand the 21 Million Supply Cap](/en/blog/bitcoin-supply-21-million/)
 - [How Bitcoin Mining Actually Works](/en/blog/bitcoin-mining/)
 - [Bitcoin vs. Fiat: The Inflation Battle](/en/blog/bitcoin-vs-fiat-money/)
----

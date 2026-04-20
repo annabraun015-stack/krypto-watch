@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [Risks, Profitability & Limitations](#risks-limitations)
 8. [Adoption & Hardware Trends (2026)](#adoption)
 9. [The Future of the Mining Ecosystem](#future)
-10. [Lexical Relations & Mining Vocabulary](#lexical-relations)
-11. [Frequently Asked Questions](#faqs)
+10. [Frequently Asked Questions](#faqs)
 
 ---
 
@@ -47,13 +44,6 @@ export const faqSchema = {
 **Bitcoin Mining** is the decentralized process of auditing, verifying, and permanently recording transactions onto the Bitcoin blockchain. Because Bitcoin has no central bank or clearinghouse to approve transactions, it relies on a global, distributed network of computers (called "miners") to enforce the rules. 
 
 Miners dedicate massive amounts of computational power to solve difficult mathematical puzzles. The first miner to find the correct answer is permitted to add a new "block" of verified transactions to the chain. In exchange for this effort, they are compensated with a **Block Reward**—newly minted Bitcoin. This serves simultaneously as an auditing mechanism, a security firewall, and the sole method for introducing new Bitcoin into circulation.
-
-> **Featured Snippet Answer:** Bitcoin mining is a competitive computational process where specialized computers (ASIC miners) solve complex cryptographic puzzles to verify transactions. The miner who solves the puzzle first adds a new block to the blockchain and is rewarded with newly minted Bitcoin. This Proof-of-Work system is what secures the entire network without a central bank.
-
-*Semantic Triples:*
-- **Bitcoin Miners** → secure → **The Blockchain**
-- **Proof of Work (PoW)** → is the consensus protocol for → **Bitcoin**
-- **ASIC** → mines → **Bitcoin (Q13479982)**
 
 ---
 
@@ -151,26 +141,6 @@ Industrial mining has matured into a Wall Street-integrated sector.
 By the year 2140, the final fraction of a Bitcoin will be mined. At that exact moment, the block reward will hit zero.
 
 How will miners survive without newly minted coins? The transition is already happening. Miners also collect **Transaction Fees** attached to the transfers they process. As base-layer block space becomes an ultra-premium settlement layer for the globe, transaction fees will eventually replace the block reward entirely, perpetually funding the security wall that protects the Bitcoin protocol.
-
----
-
-## Lexical Relations & Mining Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Mining"
-  type="domain"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['ASIC', 'Mining rig, hashing ASIC', 'Hardware', 'CPU, GPU, General Purpose PC'],
-    ['Proof of Work', 'PoW, Consensus mechanism', 'Network Rules', 'Proof of Stake (PoS)'],
-    ['Hash Rate', 'Hashing power, TH/s, EH/s', 'Metrics', 'Network difficulty (Reactionary metric)'],
-    ['Mining Pool', 'Pool operator, Syndicate', 'Organization', 'Solo miner'],
-    ['Block Reward', 'Miner subsidy, Block subsidy', 'Economics', 'Transaction Fees']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Bitcoin (Q13479982), ASIC, Proof of Work, SHA-256, Hash Rate, Terahash, Exahash, Difficulty Adjustment, Nonce, Mempool, Mining Pool, Foundry USA, Antpool, Block Reward, Bitcoin Halving, Sybil Attack, 51% Attack, Immersion Cooling, Grid Balancing, Hash Price, Transaction Fees.*
 
 ---
 

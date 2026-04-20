@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Persönliche Sicherheit & Best Practices (Nutzung)](#persoenliche-sicherheit)
 7. [Rechtlicher Schutz und MiCA-Regulierung (Recht)](#recht-regulierung)
 8. [Zukunftsausblick: Die Gefahr durch Quantencomputer](#quantencomputer)
-9. [Lexikalische Relationen & Fachbegriffe](#lexikalische-relationen)
-10. [Häufig gestellte Fragen (FAQs)](#faqs)
+9. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -51,13 +48,6 @@ Wenn Menschen fragen, *"Ist Bitcoin eigentlich sicher?"*, vermischen sie oft dre
 Das **Bitcoin-Protokoll** ist ein dezentrales, mathematisch reguliertes System. In über 16 Jahren pausenlosem Betrieb – und mit einem impliziten "Kopfgeld" von über einer Billion Euro für denjenigen, der das System hacken kann – wurde das Fundament nie geknackt. 
 
 Die Peripherie (also die Stellen, an denen Bitcoin die echte Welt berührt) ist hingegen chronisch gefährdet. Kriminelle können das Bitcoin-Netzwerk nicht hacken. Also hacken sie stattdessen die menschlichen Nutzer.
-
-> **Featured Snippet Antwort:** Der Kern des Bitcoin-Protokolls ist mathematisch extrem sicher und wurde durch die SHA-256 Kryptografie noch nie gehackt. Das Hauptsicherheitsrisiko bei Bitcoin liegt auf der menschlichen Ebene: Anleger, die auf Phishing-E-Mails hereinfallen, Passwörter verlieren oder ihre Coins auf unregulierten Krypto-Börsen liegen lassen, die später insolvent gehen.
-
-*Semantische Dreiecke:*
-- **Das Bitcoin-Protokoll** → basiert auf → **SHA-256 Kryptografie** (Wikidata: Q8789)
-- **Ein 51%-Angriff** → benötigt → **Die Hashrate-Mehrheit**
-- **Hardware Wallets** → verhindern → **Private Key Diebstahl**
 
 ---
 
@@ -171,26 +161,6 @@ Die stetig wiederkehrende Angsttheorie lautet: Ein leistungsstarker Quantencompu
 Fachleute im Jahr 2026 ordnen dies als theoretische Langzeitgefahr ein. Ein solcher Computer bräuchte dutzende Millionen logischer "Qubits" – heutige Geräte ringen mit wenigen Hundert.
 
 Die Lösung in Bitcoin ist ohnehin trivial: Wenn sich Quantencomputer am Horizont als einsatzbereit abzeichnen, werden die Bitcoin-Entwickler lange vor dem Durchbruch ein "Post-Quantum Cryptography (PQC)" Upgrade implementieren. Nutzer senden ihre Bitcoins dann einfach in das neue, unknackbare Adressformat.
-
----
-
-## Lexikalische Relationen & Fachbegriffe <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Krypto-Sicherheit"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['51%-Attacke', 'Mehrheitsangriff, Hash-Attacke', 'Netzwerkbedrohung', 'Dezentraler Konsens'],
-    ['Self-Custody', 'Eigenverwahrung', 'Besitzstruktur', 'Börsen-Verwahrung (Custodial)'],
-    ['Phishing-Angriff', 'Social Engineering, Scam', 'Benutzer-Bedrohung', 'Hardware Verifizierung'],
-    ['SHA-256', 'Hash-Algorithmus', 'Kryptografie', 'Unverschlüsselter Text (Plaintext)'],
-    ['Double Spend', 'Doppelausgabe, Reorg', 'Finanz-Exploit', 'Unveränderliche Finalität (Immutability)']
-  ]}
-/>
-
-### Fachbegriffe (Knowledge Domain)
-*Kryptografie (Q8789), SHA-256, ECDSA, Schnorr-Signaturen, 51%-Angriff, Sybil-Angriff, Proof of Work, Double Spend, Node-Konsens, Cold Storage, Private Key, Public Key, Seed Phrase, Multi-Sig, Phishing, SIM-Swapping, Deniable Plausibility, Quantencomputer, Shor's Algorithmus, MiCA.*
 
 ---
 

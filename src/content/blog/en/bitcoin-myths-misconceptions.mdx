@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -39,8 +37,7 @@ export const faqSchema = {
 9. [Myth 8: "Bitcoin is too slow for payments"](#myth-slow)
 10. [Myth 9: "You have to buy a whole Bitcoin"](#myth-whole)
 11. [Myth 10: "Bitcoin is completely unregulated"](#myth-unregulated)
-12. [Lexical Relations & Myth Vocabulary](#lexical-relations)
-13. [Frequently Asked Questions](#faqs)
+12. [Frequently Asked Questions](#faqs)
 
 ---
 
@@ -49,13 +46,6 @@ export const faqSchema = {
 In the cryptocurrency space, there is a term used universally to describe misinformation: **FUD** (Fear, Uncertainty, and Doubt). 
 
 Bitcoin is genuinely novel. It has no CEO, no marketing department, and no precedent in human history. It sits at the complex intersection of cryptography, macroeconomics, game theory, and distributed systems architecture. Because traditional financial analysts often lack computer science backgrounds, and computer scientists often lack macroeconomic backgrounds, Bitcoin is fundamentally misunderstood by mainstream commentators.
-
-> **Featured Snippet Answer:** The most common Bitcoin myths include: "it's only for criminals" (False — analytics show illicit volume is under 0.34%), "it has no intrinsic value" (False — scarcity, immutability, and decentralization create robust value), and "it wastes energy" (False — Bitcoin utilizes predominantly renewable and stranded energy). We debunk these claims using hard data rather than emotional narratives.
-
-*Semantic Triples:*
-- **Bitcoin** → suffers from → **FUD (Fear, Uncertainty, Doubt)**
-- **Public Blockchains** → prevent → **Anonymous Crime**
-- **Intrinsic Value** → is derived from → **Utility and Scarcity**
 
 ---
 
@@ -193,26 +183,6 @@ If you have $10, you can buy a fraction of a Bitcoin (roughly 12,500 Satoshis). 
 **The Reality:**
 The code itself is mathematically regulated by the nodes, completely devoid of human intervention. Meanwhile, the legal bridges between Bitcoin and the banking system are heavily policed.
 In the US, the IRS taxes Bitcoin as property. In Europe, the MiCA framework heavily regulates Krypto-custodians. In Germany, BaFin explicitly recognizes Bitcoin as a legitimate unit of account (Rechnungseinheit). 
-
----
-
-## Lexical Relations & Myth Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Myths & FUD"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['FUD', 'Fear Uncertainty Doubt, Misinformation', 'Psychology', 'Hopium, Fact-checking'],
-    ['Intrinsic Value', 'Fundamental value, Real worth', 'Economics', 'Subjective value, Fiat decree'],
-    ['Ponzi Scheme', 'Pyramid scheme', 'Financial Fraud', 'Open Market Commodity'],
-    ['Satoshi (Unit)', 'Sats, Micro-bitcoin', 'Divisibility', 'A Whole Coin (1.0 BTC)'],
-    ['Stranded Energy', 'Wasted energy, Flared gas', 'Mining Concept', 'Grid-competing consumption']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*FUD, Ponzi Scheme, Greater Fool Theory, Intrinsic Value, Extrinsic Value, Fiat Currency, Chainalysis, Dark Web, Ransomware, Stranded Energy, Bitcoin Mining Council, Lindy Effect, Pseudonymous, Lightning Network, Volatility.*
 
 ---
 

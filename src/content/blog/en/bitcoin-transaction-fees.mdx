@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Replacing a Stuck Transaction (RBF)](#rbf)
 6. [Fee Optimization: SegWit, Taproot, and Batching](#optimization)
 7. [Lightning Network: Scaling Beyond the Mempool](#lightning)
-8. [Lexical Relations & Transaction Vokabular](#lexical-relations)
-9. [Frequently Asked Questions (FAQs)](#faqs)
+8. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Bitcoin has a limited capacity. On average, a new block is found every 10 minutes, and each block can only hold a certain amount of data. This creates a **Fee Market.**
 
 Miners are profit-seeking actors. They will always choose the transactions that pay the most "rent" for the limited space in their blocks. If you pay too little, your transaction stays in the "waiting room" (the Mempool) until the network becomes less busy.
-
-> **Featured Snippet Answer:** Bitcoin transaction fees are paid to miners to prioritize your data in the next block. Fees are calculated based on the transaction's 'Weight' in virtual bytes (vB) and the current market rate in satoshis per virtual byte (sat/vB). In 2026, efficient users utilize Taproot and SegWit addresses to reduce transaction weight by up to 40% and use the Lightning Network for high-frequency, low-cost payments that bypass the on-chain fee market entirely.
-
-*Semantic Triples:*
-- **Transaction Fee** → incentivizes → **Miner Inclusion**
-- **Block Space** → is a → **Scarce Resource**
-- **sat/vB Rate** → determines → **Confirmation Speed**
 
 ---
 
@@ -127,26 +117,6 @@ Lightning transactions don't live in the mempool. They are "off-chain" agreement
 
 ---
 
-## Lexical Relations & Transaction Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Fees"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Mempool', 'Waiting Room, Memory Pool', 'Architecture', 'Blockchain (Confirmed)'],
-    ['sat/vB', 'Fee Rate, Price per byte', 'Metric', 'Flat Fee'],
-    ['RBF', 'Replace-By-Fee, Fee Bumping', 'Protocol', 'Unreplaceable TX'],
-    ['CPFP', 'Child Pays For Parent', 'Protocol', 'RBF'],
-    ['Dust', 'Scrap coins, Tiny UTXOs', 'Economics', 'Consolidated UTXO']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Mempool, sat/vB (Satoshis per virtual byte), RBF (Replace-By-Fee), CPFP (Child Pays For Parent), UTXO Consolidation, SegWit (BIP 141), Taproot (BIP 341), Schnorr Signatures, Witness Data, Transaction Weight, vSize, Block Capacity, Fee Market, Mining Reward.*
-
----
-
 ## Frequently Asked Questions <a id="faqs"></a>
 
 ### 1. Can a transaction be stuck forever?
@@ -166,4 +136,3 @@ No. A 0.001 BTC transaction with a 100 sat/vB fee will confirm much faster than 
 - [How Bitcoin Mining Works: Why Miners Need Fees](/en/blog/bitcoin-mining/)
 - [Lightning Network: Near-Zero Fee Instant Payments](/en/blog/lightning-network/)
 - [Understanding Bitcoin Confirmations](/en/blog/what-are-confirmations/)
----

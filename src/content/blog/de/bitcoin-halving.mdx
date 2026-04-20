@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Mining-Ökonomie: Überleben der Effizientesten (Industrie)](#mining)
 6. [Das Stock-to-Flow-Modell und Knappheit (Ökonomie)](#s2f)
 7. [Was passiert nach dem Jahr 2140? (Langzeit-Zukunft)](#future)
-8. [Lexikalische Relationen & Angebots-Vokabular](#lexical-relations)
-9. [Häufig gestellte Fragen (FAQs)](#faqs)
+8. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 In der Welt der traditionellen Finanzen können Zentralbanken unendlich viel Geld drucken. In der Welt von Bitcoin sind die Regeln in Stein – oder besser gesagt in Code – gemeißelt. Das **Halving** ist der Mechanismus, der sicherstellt, dass Bitcoin "Hartes Geld" bleibt.
 
 Alle 210.000 Blöcke (etwa alle 4 Jahre) wird die Anzahl der neu erschaffenen Bitcoins pro Block exakt halbiert. Dieser Prozess setzt sich bis zum Jahr 2140 fort, wenn der letzte Satoshi gemined wird.
-
-> **Featured Snippet Antwort:** Das Bitcoin Halving ist ein vorprogrammiertes Protokoll-Ereignis, das die Blockbelohnung für Miner alle 210.000 Blöcke um 50 % reduziert. Dies senkt effektiv die jährliche Inflationsrate von Bitcoin. Das jüngste Halving im April 2024 reduzierte die Belohnung von 6,25 auf 3,125 BTC. Durch die Verknappung des neuen Angebots wirkt das Halving historisch als Katalysator für langfristige Preissteigerungen, sofern die Nachfrage konstant bleibt oder wächst.
-
-*Semantische Dreiecke:*
-- **Halving-Ereignis** → reduziert → **Tägliche Block-Emission**
-- **Block-Emission** → bestimmt → **Bitcoin-Inflationsrate**
-- **21-Millionen-Limit** → wird erzwungen durch → **Halving-Zeitplan**
 
 ---
 
@@ -128,26 +118,6 @@ In einer reifen Bitcoin-Ökonomie wird die Blockbelohnung durch einen robusten *
 
 ---
 
-## Lexikalische Relationen & Angebots-Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Bitcoin Knappheit"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Halving', 'Halvening, Angebots-Schnitt', 'Geldpolitik', 'Inflation, Gelddrucken'],
-    ['Epoche', 'Halving-Periode, Ära', 'Zeitrahmen', 'Kontinuierliche Ausgabe'],
-    ['Block-Belohnung', 'Subvention, Coinbase Reward', 'Mining', 'Transaktionsgebühr'],
-    ['Hashrate', 'Netzwerkleistung, Rechenkraft', 'Sicherheit', 'Zentralisierung'],
-    ['Hartgeld', 'Sound Money, Knappe Assets', 'Währungstheorie', 'Fiat, Weichwährung']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*Halving, Block-Subvention, 210.000 Block-Zyklus, Satoshis, Stock-to-Flow (S2F), Inelastisches Angebot, Disinflation, Geldpolitik, Difficulty Adjustment, ASIC-Effizienz, Miner-Kapitulation, Coinbase Transaktion.*
-
----
-
 ## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
 
 ### 1. Findet das Halving an einem bestimmten Datum statt?
@@ -167,4 +137,3 @@ Um das Limit zu ändern, müsste man 100 % der Nodes und Miner davon überzeugen
 - [Das 21-Millionen-Limit von Bitcoin verstehen](/de/blog/bitcoin-21-millionen-limit/)
 - [Wie Bitcoin Mining wirklich funktioniert](/de/blog/bitcoin-mining/)
 - [Bitcoin vs. Fiat: Der Kampf der Systeme](/de/blog/bitcoin-vs-fiat-geld/)
----

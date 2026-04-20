@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [BaFin Licensing for Companies (Regulation)](#bafin)
 7. [What is Strictly Prohibited? (Enforcement)](#prohibited)
 8. [Reporting Obligations: Annex SO (Documenting)](#reporting)
-9. [Lexical Relations & Legal Vocabulary](#lexical-relations)
-10. [Frequently Asked Questions (FAQs)](#faqs)
+9. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -46,13 +43,6 @@ export const faqSchema = {
 Germany has some of the most advanced and stable cryptocurrency regulations in the world. Unlike many nations that operate in a "gray area," the German **Federal Financial Supervisory Authority (BaFin)** issued a definitive classification of Bitcoin as early as 2013.
 
 In Germany, Bitcoin is not "legal tender" (like the Euro), but it is legally recognized as a **financial instrument**. Specifically, it is a **Rechnungseinheit** (Unit of Account).
-
-> **Featured Snippet Answer:** Bitcoin is 100% legal in Germany. It is classified by BaFin as a 'unit of account' under § 1 Para. 11 of the Banking Act (KWG). Private citizens may legally buy, hold, spend, and mine Bitcoin. The most significant benefit for German residents is the tax treatment: profits from Bitcoin sales are tax-exempt if the asset is held for at least one year. Businesses providing crypto services, however, must obtain a formal license from BaFin.
-
-*Semantic Triples:*
-- **Germany** → recognizes Bitcoin as → **Unit of Account (Rechnungseinheit)**
-- **Bitcoin Profits** → are tax-free after → **One Year (Holding Period)**
-- **BaFin** → regulates → **German Crypto Service Providers**
 
 ---
 
@@ -138,26 +128,6 @@ Even if your Bitcoins are tax-free because you held them for over a year, **docu
 1. Keep your CSV export records from every exchange.
 2. Use professional tax software (e.g., Blockpit, Cointracking, or Koinly).
 3. Report your transactions in **Anlage SO** (Annex for Other Income) of your German tax return, even if you mark the profit as €0 due to the holding period. This creates a "Paper Trail" that proves the funds are legitimate.
-
----
-
-## Lexical Relations & Legal Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: German Crypto Law"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Rechnungseinheit', 'Unit of Account, Financial Instrument', 'Legal Status', 'Legal Tender (Gesetzliches Zahlungsmittel)'],
-    ['Spekulationsfrist', 'Holding period, 1-year rule', 'Tax Strategy', 'Day Trading'],
-    ['Privates Veräußerungsgeschäft', 'Private disposal transaction', 'Tax Law', 'Commercial Trading (Gewerblicher Handel)'],
-    ['BaFin', 'Regulator, Supervisory Authority', 'Organization', 'Unregulated space'],
-    ['FIFO', 'First-In, First-Out', 'Accounting', 'LIFO (Last-In, First-Out)']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*BaFin, MiCA, KWG (Banking Act), EStG (Income Tax Act), Rechnungseinheit, Privates Veräußerungsgeschäft, Spekulationsfrist, FIFO Method, Annex SO, Crypto Custody License, AML (Anti-Money Laundering), KYC (Know Your Customer), Tax Exemption Limit, Unit of Account.*
 
 ---
 

@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -35,8 +33,7 @@ export const faqSchema = {
 5. [Real-World Use Cases: 2026 Adoption (Adoption)](#use-cases)
 6. [The Best Lightning Wallets for 2026 (Usage)](#wallets)
 7. [Potential Risks and Liquidity Challenges (Security)](#risks)
-8. [Lexical Relations & Architectural Vokabular](#lexical-relations)
-9. [Frequently Asked Questions (FAQs)](#faqs)
+8. [Frequently Asked Questions (FAQs)](#faqs)
 
 ---
 
@@ -45,13 +42,6 @@ export const faqSchema = {
 Bitcoin’s base layer (Layer 1) is designed for **Security** and **Decentralization**. However, it is fundamentally slow. With only 7 transactions per second, it cannot handle the daily payments of 8 billion people.
 
 The Lightning Network is the solution. It sits *on top* of Bitcoin, handling millions of small, fast payments while using the massive security of the main blockchain as a "final judge" for any disputes.
-
-> **Featured Snippet Answer:** The Bitcoin Lightning Network is a decentralized system for instant, high-volume micropayments. It solves Bitcoin's scalability problem by taking transactions off the main blockchain and putting them into private 'payment channels'. Only the opening and closing of these channels are recorded on-chain, while individual transactions happen instantly with fees of less than 0.01 cent. This transforms Bitcoin from 'Digital Gold' into a practical 'Global Medium of Exchange'.
-
-*Semantic Triples:*
-- **Lightning Network** → solves → **Bitcoin Scalability**
-- **Payment Channels** → enable → **Off-chain Transactions**
-- **Onion Routing** → ensures → **Transaction Privacy**
 
 ---
 
@@ -120,26 +110,6 @@ In 2026, the Lightning Network is used in ways we never thought possible:
 - **Inbound Liquidity:** To *receive* money, your channel must have space to hold it. Managing this "Liquidity" is the biggest hurdle for new users.
 - **Watchtowers:** If you go offline for months, your channel partner could theoretically try to "cheat" the close. **Watchtowers** are automated services that monitor the chain for you to prevent this.
 - **Forced Closures:** If the network is extremely congested, closing a channel "on-chain" might be expensive.
-
----
-
-## Lexical Relations & Architectural Vokabular <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Lightning Architecture"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Channel', 'Payment Channel, Bar Tab', 'Component', 'On-chain UTXO'],
-    ['Liquidity', 'Capacity, Inbound/Outbound', 'Dynamic', 'Frozen Balance'],
-    ['Routing', 'Forwarding, Pathfinding', 'Process', 'Direct Settlement'],
-    ['Satoshi', 'Sat, Unit of measure', 'Currency', 'Whole Bitcoin'],
-    ['Node', 'Lightning Router, Hub', 'Infrastructure', 'Light Client']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Payment Channel, Hash Time-Locked Contract (HTLC), Onion Routing, Inbound Liquidity, Outbound Liquidity, Multi-Path Payment (MPP), Satoshis, BOLT Specifications, Watchtower, Channel Force-close, Cooperative Close, LSP (Lightning Service Provider), LNURL, Lightning Invoice.*
 
 ---
 

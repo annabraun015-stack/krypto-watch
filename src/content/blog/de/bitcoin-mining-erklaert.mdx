@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [Ökonomie: Lohnt sich Mining 2026 noch?](#oekonomie)
 8. [Schwierigkeitsanpassung & Hardware-Trends](#schwierigkeit)
 9. [Die Zukunft des Minings ohne Block Rewards](#zukunft)
-10. [Begriffsnetzwerk & Vokabular](#fachbegriffe)
-11. [Häufig gestellte Fragen (FAQs)](#faqs)
+10. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -47,13 +44,6 @@ export const faqSchema = {
 **Bitcoin Mining (Schürfen)** ist der dezentralisierte Prozess zur Überprüfung und dauerhaften Speicherung von Transaktionen in der Bitcoin-Blockchain. Da Bitcoin keine zentrale Instanz (wie die EZB oder eine Clearingstelle) besitzt, verlässt sich das System auf ein globales Netzwerk unabhängiger Computer – die sogenannten "Miner" – um die Regeln durchzusetzen.
 
 Miner stellen enorme Rechenleistung zur Verfügung, um ein komplexes mathematisches Rätsel zu lösen. Derjenige, der die Lösung zuerst findet, gewinnt das Recht, einen neuen "Block" verifizierter Transaktionen an die Blockchain anzuhängen. Als Entschädigung für den Strom- und Hardwareaufwand erhält der Miner den **Block Reward** – quasi frisch gedruckte Bitcoins. Dieser Prozess fungiert somit gleichzeitig als Kassenprüfung, globale Sicherheits-Firewall und als einzige Methode, neue Bitcoins in Umlauf zu bringen.
-
-> **Featured Snippet Antwort:** Bitcoin Mining ist der wettbewerbsorientierte Prüfprozess, bei dem spezialisierte Computer (ASIC-Miner) kryptografische Rätsel lösen, um Transaktionen zu verifizieren. Wer das Rätsel knackt, fügt der Blockchain einen neuen Block hinzu und wird mit neu erschaffenen Bitcoins entlohnt. Dieser "Proof of Work" sichert das dezentrale System ohne Zutun von Banken.
-
-*Semantische Dreiecke:*
-- **Bitcoin-Miner** → sichern die → **Blockchain**
-- **Proof of Work (PoW)** → ist der Konsensalgorithmus für → **Bitcoin (Q13479982)**
-- **ASIC** → berechnet → **SHA-256 Hashes**
 
 ---
 
@@ -148,26 +138,6 @@ Da Hochleistungscomputer immense Abwärme erzeugen und Lüfter massiv Strom schl
 Spätestens im Jahr 2140 werden die fest vorgesehenen 21 Millionen Bitcoins restlos geschürft sein. An diesem Tag fällt der Block Reward auf Null.
 
 Das Netzwerk stirbt dann nicht. Jeder Nutzer zahlt beim Versenden von Bitcoin schon heute eine kleine "Transaktionsgebühr". Langfristig werden Bitcoin als digitales Gold und Layer-1 primär für riesige, systemrelevante Zahlungen zwischen Staaten oder Konzernen genutzt werden. Diese immensen Transaktionsgebühren genügen laut Prognosen vollkommen, um den Minern einen lukrativen Anreiz zur Netzwerksicherheit zu bieten, während Kleinstbeträge im [Lightning Network](/blog/lightning-network/) abgewickelt werden.
-
----
-
-## Begriffsnetzwerk & Vokabular <a id="fachbegriffe"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Krypto Mining"
-  type="domain"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['ASIC', 'Mining Rig, SHA-256 Rechner', 'Hardware', 'CPU, GPU, Heim-PC'],
-    ['Proof of Work', 'PoW, Arbeitsnachweis', 'Netzwerk-Konsens', 'Proof of Stake (PoS)'],
-    ['Hash Rate', 'Rechenleistung, TH/s, EH/s', 'Metrik', 'Netzwerk-Difficulty'],
-    ['Mining Pool', 'Mining Syndicate, Verbund', 'Organisation', 'Solo-Miner'],
-    ['Block Reward', 'Blocksubvention, Belohnung', 'Ökonomie', 'Transaktionsgebühr (TX-Fee)']
-  ]}
-/>
-
-### Fachwissen & Entitäten
-*Bitcoin (Q13479982), ASIC (Application-Specific Integrated Circuit), Proof of Work, SHA-256, Hash Rate, Terahash, Exahash, Difficulty Adjustment, Nonce, Mempool, Mining Pool, Antpool, Foundry USA, Block Reward, Bitcoin Halving, Sybil Attacke, 51%-Attacke, Immersion Cooling, Grid Balancing (Netzstabilisierung), Hashpreis, Transaktionsgebühren, ESG.*
 
 ---
 

@@ -13,8 +13,6 @@ featured: true
 locale: "en"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Key Security Best Practices (Usage & Hygiene)](#security)
 7. [The Risk of Legal Seizure vs Cryptography](#legal-seizure)
 8. [Quantum Computing: A Threat to Public Keys? (Trends)](#quantum)
-9. [Lexical Relations & Cryptography Vocabulary](#lexical-relations)
-10. [Frequently Asked Questions](#faqs)
+9. [Frequently Asked Questions](#faqs)
 
 ---
 
@@ -48,13 +45,6 @@ The most famous maxim in all of cryptocurrency is: **"Not your keys, not your co
 Unlike a physical leather wallet containing paper money, your [Bitcoin wallet](/en/blog/best-bitcoin-wallets/) does not actually hold your Bitcoin. The Bitcoin permanently resides on the public blockchain ledger. Instead, your wallet holds cryptographic **Keys**—mathematical proofs that authorize you to update the ledger and move the funds.
 
 If you purchase Bitcoin on a centralized exchange like Binance or Coinbase and leave it there, you do not own the keys. The exchange owns the keys and gives you a digital IOU. If that exchange goes bankrupt, your IOU is worthless. True financial sovereignty means removing your funds from the exchange into self-custody.
-
-> **Featured Snippet Answer:** In Bitcoin, a private key is a secret 256-bit number that proves ownership of your funds and mathematically authorizes transactions. A public key is computationally derived from the private key and used to generate your wallet address (where others send you money). You must share your address but guard your private key; losing the private key means losing access to your Bitcoin forever.
-
-*Semantic Triples:*
-- **Private Key** → authorizes → **Bitcoin Transactions**
-- **Public Key** → derives → **Bitcoin Address**
-- **Seed Phrase** → backs up → **Private Key**
 
 ---
 
@@ -157,26 +147,6 @@ A sufficiently powerful **Quantum Computer** running Shor’s Algorithm could th
 
 However, cryptographers agree this is largely a theoretical concern for 2026. A machine capable of this would require tens of millions of stable qubits. Current top-tier quantum computers struggle to maintain a few hundred physical qubits. When (or if) quantum computers approach this horizon, the Bitcoin network will execute a coordinated hard-fork to upgrade the protocol to **Post-Quantum Cryptography (PQC)**. 
 *(This is also why Bitcoin uses hashed addresses rather than exposing the raw public key natively—it provides an additional layer of quantum resistance).*
-
----
-
-## Lexical Relations & Cryptography Vocabulary <a id="lexical-relations"></a>
-
-<SemanticTable 
-  title="Lexical Relations: Cryptographic Keys"
-  type="lexical"
-  headers={['Term', 'Synonyms / Variants', 'Category', 'Opposites / Contrasts']}
-  rows={[
-    ['Private Key', 'Secret key, Signing key', 'Authorization', 'Public Key, Bitcoin Address'],
-    ['Seed Phrase', 'Mnemonic phrase, Recovery phrase', 'Backup Format', 'Raw WIF Private Key'],
-    ['Public Key', 'Verification key', 'Authentication', 'Private Key'],
-    ['Bitcoin Address', 'Receiving address, PubKeyHash', 'Routing', 'Transaction Hash (TXID)'],
-    ['Self-Custody', 'Non-custodial, Cold storage', 'Ownership', 'Exchange Custodial']
-  ]}
-/>
-
-### Knowledge Domain Terms
-*Cryptography, Asymmetric Cryptography, Private Key, Public Key, ECDSA, secp256k1, Schnorr Signatures, Taproot, Hierarchical Deterministic (HD) Wallet, BIP-39, Seed Phrase, Self-Custody, Multisig, Wallet Address, WIF Format, Quantum Computing, Shor's Algorithm.*
 
 ---
 

@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -37,8 +35,7 @@ export const faqSchema = {
 7. [2018–2020: Infrastrukturausbau & Halvings (Reifezeit)](#reifezeit)
 8. [2021–2024: Institutionelle Erleuchtung & ETFs (Validierung)](#institutionen)
 9. [2025–Heute: Die Ära der staatlichen Reserven (Zukunft)](#staatsreserven)
-10. [Lexikalische Relationen & Historisches Vokabular](#lexikalische-relationen)
-11. [Häufig gestellte Fragen (FAQs)](#faqs)
+10. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -47,21 +44,6 @@ export const faqSchema = {
 Bitcoin entstand nicht im luftleeren Raum. Es war der Höhepunkt von über 30 Jahren Forschung der **Cypherpunks** – Aktivisten, die sich für Privatsphäre und Freiheit durch Kryptografie einsetzten.
 
 Vor Satoshi Nakamoto gab es mehrere brillante Versuche, "digitales Bargeld" zu erschaffen. Alle scheiterten an einem Punkt: **Zentralisierung.** Wenn eine Firma das Geld ausgibt, kann der Staat sie schließen.
-
-<SemanticTable 
-  title="Digitale Geld-Experimente vor Bitcoin"
-  type="lexical"
-  headers={['Projekt', 'Jahr', 'Erfinder', 'Scheiternsgrund']}
-  rows={[
-    ['DigiCash', '1989', 'David Chaum', 'Firma ging bankrott; zentralisiert.'],
-    ['e-gold', '1996', 'Douglas Jackson', 'Von der US-Regierung geschlossen.'],
-    ['b-money', '1998', 'Wei Dai', 'Nie implementiert; fehlendes PoW-Konzept.'],
-    ['Bit Gold', '1998', 'Nick Szabo', 'Konzeptionell nah dran, aber ohne automatische Schwierigkeitsanpassung.'],
-    ['Hashcash', '1997', 'Adam Back', 'Erfand PoW, wurde aber für Anti-Spam (E-Mail) genutzt, nicht als Geld.']
-  ]}
-/>
-
-> **Featured Snippet Antwort:** Die Geschichte von Bitcoin ist eine 16-jährige Reise technischer Überlebenskunst und ökonomischen Wachstums. Als Antwort auf die Finanzkrise von 2008 entwickelt, wandelte sich Bitcoin von einem Nischenexperiment ohne Wert zur ersten dezentralen Billionen-Dollar-Anlageklasse der Welt. Wichtige Meilensteine sind das Mining des Genesis-Blocks (2009), der Mt.-Gox-Kollaps (2014), die internen Skalierungskriege von 2017 und die institutionelle Anerkennung durch Spot-ETFs im Jahr 2024.
 
 ---
 
@@ -132,26 +114,6 @@ graph LR
     C --> D[Institutionelle Validierung]
     D --> E[Staatliche Reserven]
 </div>
-
----
-
-## Lexikalische Relationen & Historisches Vokabular <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Die Evolution von Bitcoin"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['Genesis-Block', 'Block 0, Erster Block', 'Meilenstein', 'Der Lead Block'],
-    ['Halving', 'Halbierung, Supply-Cut', 'Ökonomie', 'Inflation, Gelddrucken'],
-    ['Hard Fork', 'Ketten-Abspaltung, Protokollbruch', 'Konflikt', 'Soft Fork, Kompatibilität'],
-    ['Mt. Gox', 'Gox-Hack, 2014 Kollaps', 'Krise', 'Regulierte Verwahrung'],
-    ['Cypherpunk', 'Kryptograf, Privacy-Aktivist', 'Bewegung', 'Zentrale Institution']
-  ]}
-/>
-
-### Begriffe des Krypto-Wissensraums
-*Satoshi Nakamoto, Hal Finney, Nick Szabo, Wei Dai, Adam Back, 2008 Whitepaper, Genesis Block, Proof of Work, Difficulty Adjustment, Bitcoin Pizza Day, Silk Road, Mt. Gox, SegWit, Bitcoin Cash, Lightning Network, MicroStrategy, Spot ETF, Staatsreserve.*
 
 ---
 

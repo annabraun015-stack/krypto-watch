@@ -13,8 +13,6 @@ featured: true
 locale: "de"
 ---
 
-import SemanticTable from '../../../components/blog/SemanticTable.astro';
-
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
@@ -36,8 +34,7 @@ export const faqSchema = {
 6. [Gebührenwahl: Die richtige Priorität (Effizient)](#fees)
 7. [Verifizierung: Block-Explorer & Bestätigungen](#verification)
 8. [Häufige Fehler & Sicherheits-Best-Practices](#pitfalls)
-9. [Lexikalische Relationen & Transaktions-Vokabular](#lexikalische-relationen)
-10. [Häufig gestellte Fragen (FAQs)](#faqs)
+9. [Häufig gestellte Fragen (FAQs)](#faqs)
 
 ---
 
@@ -46,13 +43,6 @@ export const faqSchema = {
 Bitcoin zu senden ist kein Versenden einer E-Mail; es ist eher wie der Transport von digitalem Gold in einen transparenten, fälschungssicheren Tresor.
 
 Jede Transaktion ist ein Signal an tausende Nodes weltweit, dass ein Wert von **Adresse A** zu **Adresse B** verschoben wurde. Sobald ein Miner dieses Signal in einen Block aufnimmt, wird es Teil der unlöschbaren Weltgeschichte.
-
-> **Featured Snippet Antwort:** Um Bitcoin zu senden, benötigen Sie die Wallet-Adresse des Empfängers, einen Betrag und eine Netzwerkgebühr (sat/vB). Die Transaktion wird mit Ihrem privaten Schlüssel signiert und an das Netzwerk gesendet. Um Bitcoin zu empfangen, stellen Sie dem Sender einfach eine frische Empfangsadresse aus Ihrem Wallet zur Verfügung. Bitcoin-Transaktionen sind global, zensurresistent und auf der Hauptschicht (Layer 1) nach etwa 10 bis 60 Minuten endgültig abgeschlossen.
-
-*Semantische Dreiecke:*
-- **Bitcoin Wallet** → generiert → **Empfangsadressen**
-- **Absender** → signiert Transaktion mit → **Private Key**
-- **Miner** → validiert und schreibt → **Transaktion in einen Block**
 
 ---
 
@@ -145,26 +135,6 @@ Sobald eine Transaktion gesendet wurde, ist sie öffentlich. Nutzen Sie die **TX
 ❌ **Adresswiederholung:** Immer die gleiche Adresse zu nutzen, verknüpft all Ihre Finanzen öffentlich.
 ❌ **Falscher Chain-Versand:** Bitcoin an eine Ethereum- oder Bitcoin-Cash-Adresse zu senden, führt meist zum Totalverlust.
 ❌ **Clipboard-Malware:** Gehen Sie davon aus, dass Ihr PC infiziert sein könnte. Prüfen Sie jedes Zeichen der Adresse auf Ihrem sicheren Gerät.
-
----
-
-## Lexikalische Relationen & Transaktions-Vokabular <a id="lexikalische-relationen"></a>
-
-<SemanticTable 
-  title="Lexikalische Relationen: Bitcoin Transaktionen"
-  type="lexical"
-  headers={['Begriff', 'Synonyme / Varianten', 'Kategorie', 'Gegensatz / Kontrast']}
-  rows={[
-    ['UTXO', 'Digitaler Geldschein, Unspent Output', 'Architektur', 'Account-Modell (Ethereum)'],
-    ['Mempool', 'Wartezimmer, Warteschlange', 'Netzwerk', 'Bestätigter Block'],
-    ['Adresse', 'Public Key Hash, Empfangskonto', 'Identität', 'Private Key'],
-    ['Bestätigung', 'Block-Inklusion, Finalität', 'Sicherheit', 'Pending, Unconfirmed'],
-    ['Sat/vB', 'Gebührenrate, Priorität', 'Ökonomie', 'Mining Reward']
-  ]}
-/>
-
-### Fachbegriffe des Krypto-Wissensraums
-*UTXO, Mempool, TXID, Satoshis, Bech32 (SegWit), P2SH, P2PKH, Taproot, RBF (Replace-By-Fee), CPFP (Child Pays For Parent), Inputs, Outputs, Change-Adresse, Block Explorer, Mining Fee, Scripts.*
 
 ---
 
