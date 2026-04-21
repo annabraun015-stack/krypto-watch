@@ -18,6 +18,16 @@ if (!post) {
   return new Response(null, { status: 404, statusText: 'Not found' });
 }
 
+// Find the German alternative
+const germanPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
+// Simple mapping for the current article
+const slugMapping: Record<string, string> = {
+  'what-is-a-bitcoin-node': 'was-ist-ein-bitcoin-node',
+};
+const currentSlug = post.id.replace(/^(en|de)\//, '').replace(/\.mdx?$/, '');
+const germanSlug = slugMapping[currentSlug] || germanPosts.find(p => p.id.includes(currentSlug.replace('what-is-', 'was-ist-')))?.id.replace('de/', '').replace(/\.mdx?$/, '');
+const altPath = germanSlug ? `/blog/${germanSlug}/` : '/blog/';
+
 const { title, description, date, author, category, tags, image, imageAlt, readingTime, coinSymbols } = post.data;
 const { Content, headings } = await render(post);
 import TableOfContents from '../../../components/blog/TableOfContents.astro';
@@ -49,6 +59,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   title={`${title} | KryptoWatch`}
   description={description}
   locale="en"
+  altPath={altPath}
   schema={blogPostSchema}
   canonical={postUrl}
   ogImage={image ?? siteConfig.ogImage}

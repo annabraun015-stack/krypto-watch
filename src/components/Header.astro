@@ -4,13 +4,14 @@ import { getLocalizedUrl, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
+  altPath?: string;
 }
-const { locale } = Astro.props;
+const { locale, altPath } = Astro.props;
 const links = navLinks[locale];
 const altLocale = locale === 'de' ? 'en' : 'de';
-const altPath = locale === 'de'
+const altPathFinal = altPath || (locale === 'de'
   ? `/en${Astro.url.pathname}`
-  : Astro.url.pathname.replace(/^\/en/, '') || '/';
+  : Astro.url.pathname.replace(/^\/en/, '') || '/');
 ---
 
 <header class="header" id="site-header" role="banner">
@@ -46,7 +47,7 @@ const altPath = locale === 'de'
     <div class="header-actions">
       <!-- Language switcher -->
       <a
-        href={altPath}
+        href={altPathFinal}
         class="lang-switch"
         aria-label={altLocale === 'en' ? 'Switch to English' : 'Zu Deutsch wechseln'}
         title={altLocale === 'en' ? 'English' : 'Deutsch'}
@@ -102,7 +103,7 @@ const altPath = locale === 'de'
         </li>
       ))}
       <li>
-        <a href={altPath} class="mobile-nav-link lang-mobile">
+        <a href={altPathFinal} class="mobile-nav-link lang-mobile">
           {altLocale === 'en' ? '🇬🇧 English' : '🇩🇪 Deutsch'}
         </a>
       </li>
