@@ -59,35 +59,6 @@ const offset = arcLength - (value / 100) * arcLength;
   <div class="grid-overlay"></div>
 </div>
 
-<script>
-  async function updateSentiment() {
-    try {
-      const res = await fetch('https://api.alternative.me/fng/?limit=1');
-      const data = await res.json();
-      if (data.data && data.data[0]) {
-        const val = parseInt(data.data[0].value);
-        const label = data.data[0].value_classification;
-        
-        const valueEl = document.querySelector('.gauge-value');
-        const labelEl = document.querySelector('.gauge-label');
-        const pathEl = document.querySelector('.gauge-active') as SVGPathElement;
-
-        if (valueEl) valueEl.textContent = val.toString();
-        if (labelEl) labelEl.textContent = label;
-        if (pathEl) {
-          const circumference = 219.9;
-          pathEl.style.strokeDashoffset = (circumference - (val / 100) * circumference).toString();
-        }
-      }
-    } catch (err) {
-      console.error('Sentiment fetch failed:', err);
-    }
-  }
-
-  updateSentiment();
-  setInterval(updateSentiment, 3600000); // Once an hour is enough for F&G
-</script>
-
 <style>
   .sentiment-gauge {
     padding: 1.5rem;

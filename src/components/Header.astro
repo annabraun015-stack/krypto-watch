@@ -45,19 +45,6 @@ const altPathFinal = altPath || (locale === 'de'
 
     <!-- Right actions -->
     <div class="header-actions">
-      <!-- Search Trigger -->
-      <button 
-        id="search-trigger" 
-        class="header-search-btn" 
-        aria-label={locale === 'de' ? 'Suche öffnen' : 'Open Search'}
-        title="Ctrl+K"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </button>
-
       <!-- Language switcher -->
       <a
         href={altPathFinal}
@@ -209,26 +196,6 @@ const altPathFinal = altPath || (locale === 'de'
     font-size: 0.875rem;
   }
 
-  .header-search-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 0.5rem;
-    background: transparent;
-    border: 1px solid oklch(30% 0.05 250 / 0.5);
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .header-search-btn:hover {
-    color: var(--color-neon-cyan);
-    border-color: var(--color-neon-cyan);
-    background: oklch(20% 0.04 250 / 0.5);
-  }
-
   /* Hamburger */
   .menu-toggle {
     display: flex;
@@ -354,12 +321,6 @@ const altPathFinal = altPath || (locale === 'de'
   toggle.addEventListener('click', openMenu);
   closeBtn.addEventListener('click', closeMenu);
   backdrop.addEventListener('click', closeMenu);
-
-  // Search trigger
-  const searchBtn = document.getElementById('search-trigger');
-  searchBtn?.addEventListener('click', () => {
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
-  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
