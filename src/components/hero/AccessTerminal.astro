@@ -1,0 +1,121 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  cta: string;
+  href: string;
+}
+
+const { title, text, cta, href } = Astro.props;
+---
+
+<div class="access-terminal card-glass">
+  <div class="terminal-header">
+    <div class="terminal-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="4 17 10 11 4 5"></polyline>
+        <line x1="12" y1="19" x2="20" y2="19"></line>
+      </svg>
+    </div>
+    <h3 class="terminal-title">{title}</h3>
+  </div>
+
+  <div class="terminal-body">
+    <p class="terminal-text">{text}</p>
+    
+    <a href={href} class="terminal-btn">
+      <span class="btn-text">{cta}</span>
+      <div class="btn-glow"></div>
+    </a>
+  </div>
+</div>
+
+<style>
+  .access-terminal {
+    background: linear-gradient(135deg, oklch(20% 0.05 300 / 0.4), oklch(10% 0.05 300 / 0.6));
+    border-color: oklch(40% 0.2 300 / 0.3);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .access-terminal:hover {
+    border-color: var(--color-neon-purple);
+    box-shadow: 0 0 30px -10px var(--color-neon-purple);
+  }
+
+  .terminal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .terminal-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(223, 0, 255, 0.1);
+    color: var(--color-neon-purple);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(223, 0, 255, 0.2);
+  }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: oklch(90% 0.02 250 / 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .terminal-btn {
+    display: block;
+    width: 100%;
+    background: var(--color-neon-purple);
+    color: black;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 900;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .terminal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-neon-purple);
+  }
+
+  .btn-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .terminal-btn:hover .btn-glow {
+    transform: translateX(100%);
+  }
+</style>

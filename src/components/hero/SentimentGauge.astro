@@ -1,0 +1,141 @@
+---
+interface Props {
+  title: string;
+  value: number;
+  label: string;
+}
+
+const { title, value, label } = Astro.props;
+
+// Calculate SVG path for the gauge arc
+const radius = 80;
+const stroke = 12;
+const normalizedRadius = radius - stroke * 2;
+const circumference = normalizedRadius * 2 * Math.PI;
+const arcLength = circumference / 2; // Semi-circle
+const offset = arcLength - (value / 100) * arcLength;
+---
+
+<div class="sentiment-gauge card-glass">
+  <div class="sidebar-header">
+    <div class="decor-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 3v18h18"></path>
+        <path d="M18.7 8l-5.1 5.2-2.8-2.7L3 18.3"></path>
+      </svg>
+    </div>
+    <h3 class="sidebar-title">{title}</h3>
+  </div>
+
+  <div class="gauge-container">
+    <svg width="180" height="100" viewBox="0 0 180 100">
+      <!-- Background Arc -->
+      <path
+        d="M 20 90 A 70 70 0 0 1 160 90"
+        fill="none"
+        stroke="rgba(255,255,255,0.1)"
+        stroke-width="12"
+        stroke-linecap="round"
+      />
+      <!-- Active Arc -->
+      <path
+        d="M 20 90 A 70 70 0 0 1 160 90"
+        fill="none"
+        stroke="var(--color-neon-cyan)"
+        stroke-width="12"
+        stroke-linecap="round"
+        stroke-dasharray={`219.9 219.9`}
+        stroke-dashoffset={219.9 - (value / 100) * 219.9}
+        class="gauge-active"
+      />
+    </svg>
+    
+    <div class="gauge-info">
+      <span class="gauge-value">{value}</span>
+      <span class="gauge-label">{label}</span>
+    </div>
+  </div>
+
+  <div class="grid-overlay"></div>
+</div>
+
+<style>
+  .sentiment-gauge {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .decor-icon {
+    color: var(--color-text-muted);
+  }
+
+  .sidebar-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .gauge-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    z-index: 1;
+  }
+
+  .gauge-active {
+    filter: drop-shadow(0 0 8px var(--color-neon-cyan));
+    transition: stroke-dashoffset 1s ease-out;
+  }
+
+  .gauge-info {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gauge-value {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 900;
+    line-height: 1;
+    color: white;
+  }
+
+  .gauge-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 800;
+    color: var(--color-neon-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  badge: string;
+  image: string;
+}
+
+const { title, subtitle, badge, image } = Astro.props;
+---
+
+<div class="cover-story card-glass">
+  <div class="image-wrapper">
+    <img src={image} alt={title} class="main-image" />
+    <div class="gradient-overlay"></div>
+  </div>
+
+  <div class="content-overlay">
+    <div class="badge-cyan">{badge}</div>
+    <h1 class="main-title">{title}</h1>
+    <p class="main-subtitle">{subtitle}</p>
+  </div>
+</div>
+
+<style>
+  .cover-story {
+    position: relative;
+    height: 100%;
+    min-height: 500px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    border: 1px solid oklch(35% 0.1 250 / 0.3);
+  }
+
+  .image-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cover-story:hover .main-image {
+    transform: scale(1.05);
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      rgba(0, 0, 0, 0.9) 100%
+    );
+  }
+
+  .content-overlay {
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem;
+    max-width: 90%;
+  }
+
+  .badge-cyan {
+    display: inline-block;
+    background: var(--color-neon-cyan);
+    color: black;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .main-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .main-subtitle {
+    font-size: 1.125rem;
+    color: oklch(90% 0.02 250 / 0.8);
+    line-height: 1.5;
+    max-width: 600px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .cover-story { min-height: 400px; }
+    .content-overlay { padding: 1.5rem; }
+    .main-title { font-size: 1.75rem; }
+  }
+</style>

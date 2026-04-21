@@ -141,5 +141,21 @@
     "contactDesc": "Nehmen Sie Kontakt mit dem KryptoWatch-Team auf. Wir freuen uns auf Ihre Nachricht.",
     "privacyTitle": "Datenschutzerklärung – KryptoWatch",
     "termsTitle": "Allgemeine Geschäftsbedingungen – KryptoWatch"
+  },
+  "creativeHero": {
+    "trendingAlerts": "TRENDING_ALERTS",
+    "alerts": [
+      { "time": "04:12 UTC", "text": "Whale Alert: 50.000 ETH von unbekanntem Wallet zu Coinbase transferiert" },
+      { "time": "03:45 UTC", "text": "Gaspreise auf 12-Monats-Tief gefallen, während L2-Adoption steigt" },
+      { "time": "02:30 UTC", "text": "Exploit in YieldMaster v2 Smart Contract entdeckt" }
+    ],
+    "coverStory": "COVER_STORY",
+    "mainTitle": "DIE SYNTHETISCHE EVOLUTION: WIE KI-AGENTEN HUMANE TRADER LIQUIDIEREN.",
+    "mainSubtitle": "Autonome neuronale Netze kontrollieren jetzt über 65% des DEX-Volumens. Wir blicken hinter die Kulissen der neuen algorithmischen Elite.",
+    "marketSentiment": "MARKET_SENTIMENT",
+    "extremeGreed": "EXTREME GIER",
+    "accessTerminal": "ACCESS_TERMINAL",
+    "terminalText": "REAL-TIME DARK POOL TRACKING & SMART MONEY FLOWS.",
+    "initializeSubscription": "ABONNEMENT INITIALISIEREN"
   }
 }

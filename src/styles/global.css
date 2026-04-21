@@ -52,6 +52,13 @@
   --shadow-card: 0 4px 24px -4px oklch(5% 0.05 250 / 0.5);
   --shadow-glow-brand: 0 0 40px -8px var(--color-brand-500);
   --shadow-glow-gold: 0 0 40px -8px var(--color-accent-500);
+
+  /* ── Cyberpunk / Neon Theme Extensions ── */
+  --color-neon-cyan: oklch(75% 0.22 195);
+  --color-neon-purple: oklch(60% 0.35 300);
+  --color-cyber-black: oklch(10% 0.02 260);
+  --shadow-neon-cyan: 0 0 20px -2px var(--color-neon-cyan);
+  --shadow-neon-purple: 0 0 20px -2px var(--color-neon-purple);
 }
 
 /* ── Base Reset ── */

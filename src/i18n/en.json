@@ -141,5 +141,21 @@
     "contactDesc": "Get in touch with the KryptoWatch team. We look forward to hearing from you.",
     "privacyTitle": "Privacy Policy – KryptoWatch",
     "termsTitle": "Terms and Conditions – KryptoWatch"
+  },
+  "creativeHero": {
+    "trendingAlerts": "TRENDING_ALERTS",
+    "alerts": [
+      { "time": "04:12 UTC", "text": "Whale Alert: 50,000 ETH moved from unknown wallet to Coinbase" },
+      { "time": "03:45 UTC", "text": "Gas prices drop to 12-month low as L2 adoption surges" },
+      { "time": "02:30 UTC", "text": "Exploit detected in YieldMaster v2 smart contract" }
+    ],
+    "coverStory": "COVER_STORY",
+    "mainTitle": "THE SYNTHETIC EVOLUTION: HOW AI AGENTS ARE LIQUIDATING HUMAN TRADERS.",
+    "mainSubtitle": "Autonomous neural networks now control over 65% of DEX volume. We go inside the high-frequency server farms of the new algorithmic elite.",
+    "marketSentiment": "MARKET_SENTIMENT",
+    "extremeGreed": "EXTREME GREED",
+    "accessTerminal": "ACCESS_TERMINAL",
+    "terminalText": "REAL-TIME DARK POOL TRACKING & SMART MONEY FLOWS.",
+    "initializeSubscription": "INITIALIZE_SUBSCRIPTION"
   }
 }
