@@ -1,0 +1,32 @@
+---
+interface Props {
+  steps: {
+    title: string;
+    description: string;
+  }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="my-10 space-y-6">
+  {steps.map((step, index) => (
+    <div class="relative flex gap-6 group">
+      <!-- Logic for the connector line -->
+      {index !== steps.length - 1 && (
+        <div class="absolute left-[23px] top-[48px] bottom-[-24px] w-px bg-gradient-to-b from-brand-500/50 to-transparent"></div>
+      )}
+      
+      <!-- Step Number Circle -->
+      <div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-900 border border-brand-500/30 flex items-center justify-center font-display font-bold text-brand-400 shadow-glow-brand group-hover:scale-110 transition-transform duration-300">
+        {String(index + 1).padStart(2, '0')}
+      </div>
+      
+      <!-- Content -->
+      <div class="flex-grow pt-2 pb-6">
+        <h4 class="m-0 text-text-primary text-lg font-bold mb-2 group-hover:text-brand-300 transition-colors">{step.title}</h4>
+        <p class="m-0 text-text-secondary text-sm leading-relaxed">{step.description}</p>
+      </div>
+    </div>
+  ))}
+</div>

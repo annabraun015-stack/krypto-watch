@@ -1,0 +1,33 @@
+---
+interface Props {
+  term: string;
+  icon?: string;
+}
+
+const { term, icon = "💡" } = Astro.props;
+---
+
+<div class="my-10 relative group">
+  <!-- Gradient Border Glow -->
+  <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+  
+  <div class="relative card-glass p-8 overflow-hidden">
+    <!-- Subtle Background Pattern -->
+    <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+      <span class="text-8xl font-display">{icon}</span>
+    </div>
+
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-2xl">
+        {icon}
+      </div>
+      <div>
+        <h3 class="m-0 text-accent-400 font-display text-sm tracking-widest uppercase font-bold mb-2">Definition</h3>
+        <h4 class="m-0 text-text-primary text-2xl font-bold mb-4">{term}</h4>
+        <div class="text-text-secondary leading-relaxed prose-p:m-0">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
