@@ -10,8 +10,6 @@ import { cryptoCategories, siteConfig } from '../../config/site';
 
 import TrendingAlerts from '../../components/hero/TrendingAlerts.astro';
 import CoverStory from '../../components/hero/CoverStory.astro';
-import SentimentGauge from '../../components/hero/SentimentGauge.astro';
-import AccessTerminal from '../../components/hero/AccessTerminal.astro';
 
 const locale = 'en';
 const tr = t(locale);
@@ -71,22 +69,6 @@ const homepageSchema = [
             image="/images/hero/ai-agents-evolution.png"
           />
         </main>
-
-        <!-- Sidebar Widgets -->
-        <aside class="hero-right">
-          <SentimentGauge 
-            title={ch.marketSentiment}
-            value={78}
-            label={ch.extremeGreed}
-          />
-          
-          <AccessTerminal 
-            title={ch.accessTerminal}
-            text={ch.terminalText}
-            cta={ch.initializeSubscription}
-            href="/en/contact-us/"
-          />
-        </aside>
       </div>
     </div>
     
@@ -208,7 +190,7 @@ const homepageSchema = [
 
   @media (min-width: 1024px) {
     .hero-layout {
-      grid-template-columns: 320px 1fr 300px;
+      grid-template-columns: 320px 1fr;
       gap: 1.5rem;
     }
   }
@@ -225,11 +207,6 @@ const homepageSchema = [
     min-width: 0;
   }
 
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
 
   /* Scanline effect */
   .hero-scanline {
