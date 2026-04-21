@@ -2,6 +2,7 @@
 // Static market data cards – API-ready structure
 const marketData = [
   {
+    id: 'btc-dominance',
     label: 'Bitcoin Dominanz',
     labelEn: 'Bitcoin Dominance',
     value: '52.4%',
@@ -12,8 +13,9 @@ const marketData = [
     descEn: 'BTC Market Share',
   },
   {
-    label: 'Gesamt-Marktkapitalisierung',
-    labelEn: 'Total Market Cap',
+    id: 'market-cap',
+    label: 'Marktkapitalisierung',
+    labelEn: 'Market Cap',
     value: '$2.18T',
     trend: '+3.2%',
     pos: true,
@@ -22,40 +24,44 @@ const marketData = [
     descEn: '24h Change',
   },
   {
+    id: 'fear-greed',
     label: 'Fear & Greed Index',
     labelEn: 'Fear & Greed Index',
     value: '72',
     trend: 'Gier',
     pos: true,
     icon: '🎯',
-    desc: 'Greed',
-    descEn: 'Greed',
+    desc: 'Markt Sentiment',
+    descEn: 'Market Sentiment',
   },
   {
+    id: 'defi-tvl',
     label: 'DeFi TVL',
     labelEn: 'DeFi TVL',
     value: '$98.5B',
     trend: '+1.4%',
     pos: true,
     icon: '🔗',
-    desc: '24h Veränderung',
-    descEn: '24h Change',
+    desc: 'Gesamtwert gesperrt',
+    descEn: 'Total Value Locked',
   },
   {
+    id: 'volume',
     label: '24h Volumen',
     labelEn: '24h Volume',
     value: '$142B',
     trend: '-5.1%',
     pos: false,
     icon: '💱',
-    desc: 'Globales Handelsvolumen',
-    descEn: 'Global Trading Volume',
+    desc: 'Handelsvolumen',
+    descEn: 'Trading Volume',
   },
   {
+    id: 'gas-price',
     label: 'ETH Gas Preis',
     labelEn: 'ETH Gas Price',
     value: '12 Gwei',
-    trend: '-18%',
+    trend: 'Low',
     pos: true,
     icon: '⛽',
     desc: '24h Durchschnitt',
@@ -71,19 +77,89 @@ const { locale = 'de' } = Astro.props;
 
 <div class="market-grid" role="list" aria-label={locale === 'de' ? 'Marktdaten' : 'Market Data'}>
   {marketData.map((item) => (
-    <div class="price-card" role="listitem">
+    <div class="price-card" role="listitem" id={`market-card-${item.id}`}>
       <div class="market-card-top">
         <span class="market-icon" aria-hidden="true">{item.icon}</span>
-        <span class={`trend-pill ${item.pos ? 'trend-pos' : 'trend-neg'}`}>
+        <span class={`trend-pill ${item.pos ? 'trend-pos' : 'trend-neg'}`} data-trend={item.id}>
           {item.pos ? '▲' : '▼'} {item.trend}
         </span>
       </div>
-      <div class="coin-price">{item.value}</div>
+      <div class="coin-price" data-value={item.id}>{item.value}</div>
       <div class="coin-name">{locale === 'de' ? item.label : (item.labelEn ?? item.label)}</div>
       <div class="market-desc">{locale === 'de' ? item.desc : (item.descEn ?? item.desc)}</div>
     </div>
   ))}
 </div>
+
+<script>
+  async function updateMarketData() {
+    try {
+      // 1. Global Data (Dominance, MC, Volume)
+      const globalRes = await fetch('https://api.coingecko.com/api/v3/global');
+      const globalData = await globalRes.json();
+      
+      if (globalData.data) {
+        const d = globalData.data;
+        
+        updateField('btc-dominance', `${d.market_cap_percentage.btc.toFixed(1)}%`);
+        updateField('market-cap', `$${(d.total_market_cap.usd / 1e12).toFixed(2)}T`);
+        updateField('volume', `$${(d.total_volume.usd / 1e9).toFixed(1)}B`);
+        
+        // Update trends if available (simple mock or calculation)
+        updateTrend('market-cap', d.market_cap_change_percentage_24h_usd.toFixed(1) + '%', d.market_cap_change_percentage_24h_usd >= 0);
+      }
+
+      // 2. Fear & Greed
+      const fngRes = await fetch('https://api.alternative.me/fng/?limit=1');
+      const fngData = await fngRes.json();
+      if (fngData.data && fngData.data[0]) {
+        updateField('fear-greed', fngData.data[0].value);
+        updateTrend('fear-greed', fngData.data[0].value_classification, true);
+      }
+
+      // 3. DeFi TVL
+      const defiRes = await fetch('https://api.llama.fi/lite/charts');
+      const defiData = await defiRes.json();
+      if (defiData && defiData.length > 0) {
+        const latestTVL = defiData[defiData.length - 1].totalLiquidityUSD;
+        updateField('defi-tvl', `$${(latestTVL / 1e9).toFixed(1)}B`);
+      }
+
+      // 4. Gas Price (Mock for now as public keyless gas APIs are rate-limited)
+      // In production, use a provider like Infura or Etherscan with a key
+    } catch (err) {
+      console.error('Failed to fetch market data:', err);
+    }
+  }
+
+  function updateField(id, newValue) {
+    const el = document.querySelector(`[data-value="${id}"]`);
+    if (el && el.textContent !== newValue) {
+      el.textContent = newValue;
+      
+      // Add pulse effect
+      const card = document.getElementById(`market-card-${id}`);
+      if (card) {
+        card.classList.remove('pulse-active');
+        void card.offsetWidth; // trigger reflow
+        card.classList.add('pulse-active');
+      }
+    }
+  }
+
+  function updateTrend(id, newTrend, isPos) {
+    const el = document.querySelector(`[data-trend="${id}"]`);
+    if (el) {
+      el.textContent = (isPos ? '▲ ' : '▼ ') + newTrend;
+      el.className = `trend-pill ${isPos ? 'trend-pos' : 'trend-neg'}`;
+    }
+  }
+
+  // Initial update
+  updateMarketData();
+  // Refresh every 5 minutes
+  setInterval(updateMarketData, 300000);
+</script>
 
 <style>
   .market-grid {
@@ -128,5 +204,16 @@ const { locale = 'de' } = Astro.props;
     font-size: 0.6875rem;
     color: var(--color-text-muted);
     margin-top: 0.2rem;
+  }
+
+  /* Pulse Animation */
+  @keyframes pulse-cyan {
+    0% { border-color: oklch(35% 0.05 250 / 0.3); }
+    50% { border-color: var(--color-neon-cyan); box-shadow: 0 0 15px -5px var(--color-neon-cyan); }
+    100% { border-color: oklch(35% 0.05 250 / 0.3); }
+  }
+
+  .pulse-active {
+    animation: pulse-cyan 1.5s ease-out;
   }
 </style>

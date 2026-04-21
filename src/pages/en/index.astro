@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CryptoTicker from '../../components/CryptoTicker.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import MarketData from '../../components/MarketData.astro';
+import MarketOverview from '../../components/MarketOverview.astro';
 import FAQ from '../../components/FAQ.astro';
 import { t } from '../../i18n';
 import { getCollection } from 'astro:content';
@@ -11,6 +12,8 @@ import { cryptoCategories, siteConfig } from '../../config/site';
 import TrendingAlerts from '../../components/hero/TrendingAlerts.astro';
 import CoverStory from '../../components/hero/CoverStory.astro';
 import FeaturedStrip from '../../components/hero/FeaturedStrip.astro';
+import SentimentGauge from '../../components/hero/SentimentGauge.astro';
+import AccessTerminal from '../../components/hero/AccessTerminal.astro';
 
 const locale = 'en';
 const tr = t(locale);
@@ -59,20 +62,37 @@ const homepageSchema = [
       <div class="hero-layout">
         <!-- Sidebar Alerts -->
         <aside class="hero-left">
-          <TrendingAlerts title={ch.trendingAlerts} alerts={ch.alerts} />
+          <div class="hero-sidebar-stack">
+            <SentimentGauge 
+              title={ch.marketSentiment} 
+              value={72} 
+              label={ch.extremeGreed} 
+            />
+            <TrendingAlerts title={ch.trendingAlerts} alerts={ch.alerts} />
+          </div>
         </aside>
 
         <!-- Main Feature -->
         <main class="hero-center">
-          <CoverStory 
-            title={ch.mainTitle}
-            subtitle={ch.mainSubtitle}
-            badge={ch.coverStory}
-            image="/images/hero/ai-agents-evolution.png"
-          />
-        </main>
+            <CoverStory 
+              title={ch.mainTitle}
+              subtitle={ch.mainSubtitle}
+              badge={ch.coverStory}
+              image="/images/hero/ai-agents-evolution.png"
+            />
+          </main>
+
+          <!-- Terminal / Right Sidebar -->
+          <aside class="hero-right">
+             <AccessTerminal 
+               title={ch.accessTerminal}
+               text={ch.terminalText}
+               cta={ch.initializeSubscription}
+               href="/en/about-us/"
+             />
+          </aside>
+        </div>
       </div>
-    </div>
     
     <!-- Background Decor -->
     <div class="hero-scanline"></div>
@@ -93,6 +113,13 @@ const homepageSchema = [
         <p class="section-subtitle">{tr.sections.marketDataSubtitle}</p>
       </div>
       <MarketData locale={locale} />
+    </div>
+  </section>
+
+  <!-- Market Overview -->
+  <section class="section" aria-hidden="true">
+    <div class="container">
+      <MarketOverview />
     </div>
   </section>
 
@@ -195,9 +222,9 @@ const homepageSchema = [
     align-items: stretch;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     .hero-layout {
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: 320px 1fr 320px;
       gap: 1.5rem;
     }
   }
@@ -206,12 +233,26 @@ const homepageSchema = [
     display: none;
   }
 
+  .hero-right {
+    display: none;
+  }
+
   @media (min-width: 768px) {
     .hero-left { display: block; }
   }
 
+  @media (min-width: 1280px) {
+    .hero-right { display: block; }
+  }
+
   .hero-center {
     min-width: 0;
+  }
+
+  .hero-sidebar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
 

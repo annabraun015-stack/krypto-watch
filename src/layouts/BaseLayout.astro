@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SearchPalette from '../components/SearchPalette.astro';
 import { siteConfig } from '../config/site';
 import { getLangAttribute, type Locale } from '../i18n';
 
@@ -160,5 +161,6 @@ const allSchemas = [
     </main>
 
     <Footer locale={locale} />
+    <SearchPalette locale={locale} />
   </body>
 </html>

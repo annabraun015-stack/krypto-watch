@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CryptoTicker from '../components/CryptoTicker.astro';
 import BlogCard from '../components/BlogCard.astro';
 import MarketData from '../components/MarketData.astro';
+import MarketOverview from '../components/MarketOverview.astro';
 import FAQ from '../components/FAQ.astro';
 import { t } from '../i18n';
 import { getCollection } from 'astro:content';
@@ -11,6 +12,8 @@ import { cryptoCategories, siteConfig } from '../config/site';
 import TrendingAlerts from '../components/hero/TrendingAlerts.astro';
 import CoverStory from '../components/hero/CoverStory.astro';
 import FeaturedStrip from '../components/hero/FeaturedStrip.astro';
+import SentimentGauge from '../components/hero/SentimentGauge.astro';
+import AccessTerminal from '../components/hero/AccessTerminal.astro';
 
 const locale = 'de';
 const tr = t(locale);
@@ -58,7 +61,14 @@ const homepageSchema = [
       <div class="hero-layout">
         <!-- Sidebar Alerts -->
         <aside class="hero-left">
-          <TrendingAlerts title={ch.trendingAlerts} alerts={ch.alerts} />
+          <div class="hero-sidebar-stack">
+            <SentimentGauge 
+              title={ch.marketSentiment} 
+              value={72} 
+              label={ch.extremeGreed} 
+            />
+            <TrendingAlerts title={ch.trendingAlerts} alerts={ch.alerts} />
+          </div>
         </aside>
 
         <!-- Main Feature -->
@@ -70,6 +80,16 @@ const homepageSchema = [
             image="/images/hero/ai-agents-evolution.png"
           />
         </main>
+
+        <!-- Terminal / Right Sidebar -->
+        <aside class="hero-right">
+           <AccessTerminal 
+             title={ch.accessTerminal}
+             text={ch.terminalText}
+             cta={ch.initializeSubscription}
+             href="/about-us/"
+           />
+        </aside>
       </div>
     </div>
     
@@ -92,6 +112,13 @@ const homepageSchema = [
         <p class="section-subtitle">{tr.sections.marketDataSubtitle}</p>
       </div>
       <MarketData locale={locale} />
+    </div>
+  </section>
+
+  <!-- ══ MARKET OVERVIEW ══ -->
+  <section class="section" aria-hidden="true">
+    <div class="container">
+      <MarketOverview />
     </div>
   </section>
 
@@ -223,9 +250,9 @@ const homepageSchema = [
     align-items: stretch;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     .hero-layout {
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: 320px 1fr 320px;
       gap: 1.5rem;
     }
   }
@@ -234,12 +261,26 @@ const homepageSchema = [
     display: none; /* Hidden on small mobile to prioritize center */
   }
 
+  .hero-right {
+    display: none;
+  }
+
   @media (min-width: 768px) {
     .hero-left { display: block; }
   }
 
+  @media (min-width: 1280px) {
+    .hero-right { display: block; }
+  }
+
   .hero-center {
     min-width: 0;
+  }
+
+  .hero-sidebar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
 

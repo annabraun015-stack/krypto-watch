@@ -1,0 +1,236 @@
+---
+import { t } from '../i18n';
+const { locale = 'de' } = Astro.props;
+const tr = t(locale as any);
+---
+
+<div id="search-palette" class="search-overlay" aria-hidden="true">
+  <div class="search-modal card-glass">
+    <div class="search-header">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input 
+        type="text" 
+        id="search-input" 
+        placeholder={tr.blog.searchPlaceholder}
+        autocomplete="off"
+      />
+      <div class="search-kbd">ESC</div>
+    </div>
+    
+    <div id="search-results" class="search-results">
+      <!-- Results will be injected here -->
+      <div class="search-empty">
+        <p>{locale === 'de' ? 'Drücken Sie ESC zum Schließen' : 'Press ESC to close'}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let searchIndex = null;
+  const overlay = document.getElementById('search-palette');
+  const input = document.getElementById('search-input') as HTMLInputElement;
+  const resultsContainer = document.getElementById('search-results');
+  const locale = document.documentElement.lang || 'de';
+
+  async function initSearch() {
+    if (!searchIndex) {
+      const res = await fetch('/search-index.json');
+      searchIndex = await res.json();
+    }
+  }
+
+  function openSearch() {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    initSearch();
+    setTimeout(() => input.focus(), 10);
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    input.value = '';
+    renderResults([]);
+  }
+
+  function renderResults(results) {
+    if (!resultsContainer) return;
+    
+    if (results.length === 0 && input.value.length > 0) {
+      resultsContainer.innerHTML = `<div class="search-empty">Keine Ergebnisse gefunden</div>`;
+      return;
+    }
+
+    if (results.length === 0) {
+      resultsContainer.innerHTML = `<div class="search-empty">${locale === 'de' ? 'Tippen Sie zum Suchen...' : 'Type to search...'}</div>`;
+      return;
+    }
+
+    resultsContainer.innerHTML = results.map(post => `
+      <a href="${post.locale === 'de' ? '/blog/' : '/en/blog/'}${post.slug}/" class="search-item">
+        <div class="search-item-info">
+          <div class="search-item-title">${post.title}</div>
+          <div class="search-item-meta">${post.category} • ${post.locale.toUpperCase()}</div>
+        </div>
+        <div class="search-item-arrow">→</div>
+      </a>
+    `).join('');
+  }
+
+  // Simple fuzzy search
+  function search(query) {
+    if (!searchIndex) return [];
+    const q = query.toLowerCase();
+    return searchIndex
+      .filter(post => 
+        (post.locale === locale) && 
+        (post.title.toLowerCase().includes(q) || post.description.toLowerCase().includes(q))
+      )
+      .slice(0, 8);
+  }
+
+  input?.addEventListener('input', (e) => {
+    const results = search((e.target as HTMLInputElement).value);
+    renderResults(results);
+  });
+
+  // Hotkeys
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape') {
+      closeSearch();
+    }
+  });
+
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) closeSearch();
+  });
+</script>
+
+<style>
+  .search-overlay {
+    position: fixed;
+    inset: 0;
+    background: oklch(5% 0.02 250 / 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding-top: 15vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .search-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .search-modal {
+    width: 100%;
+    max-width: 650px;
+    height: fit-content;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    border-color: oklch(35% 0.05 250 / 0.5);
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.2, 1, 0.2, 1);
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .search-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid oklch(35% 0.05 250 / 0.3);
+  }
+
+  .search-icon { color: var(--color-neon-cyan); }
+
+  #search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.125rem;
+    outline: none;
+    font-family: var(--font-sans);
+  }
+
+  .search-kbd {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    padding: 0.25rem 0.5rem;
+    background: oklch(25% 0.05 250 / 0.5);
+    border: 1px solid oklch(35% 0.05 250 / 0.3);
+    border-radius: 4px;
+    color: var(--color-text-muted);
+  }
+
+  .search-results {
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+
+  .search-empty {
+    padding: 3rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .search-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .search-item:hover {
+    background: oklch(17% 0.04 250 / 0.5);
+    border-color: oklch(35% 0.05 250 / 0.3);
+    color: white;
+    transform: translateX(4px);
+  }
+
+  .search-item-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .search-item-meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .search-item-arrow {
+    color: var(--color-neon-cyan);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .search-item:hover .search-item-arrow {
+    opacity: 1;
+  }
+</style>
