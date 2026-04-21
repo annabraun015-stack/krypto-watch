@@ -13,18 +13,19 @@ featured: true
 locale: "de"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Wie lange dauert es, Bitcoin zu senden?", "acceptedAnswer": { "@type": "Answer", "text": "Eine Standard-On-Chain-Transaktion dauert im Durchschnitt etwa 10 Minuten für die erste Bestätigung. Bei größeren Summen wird empfohlen, 3 bis 6 Bestätigungen (30–60 Minuten) abzuwarten, um mathematische Unumkehrbarkeit zu garantieren." } },
-    { "@type": "Question", "name": "Kann ich eine Bitcoin-Transaktion rückgängig machen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Bitcoin-Transaktionen sind unwiderruflich, sobald sie im Netzwerk veröffentlicht wurden. Wenn eine Transaktion jedoch wegen zu niedriger Gebühren im 'Mempool' festsitzt, kann man mittels RBF (Replace-By-Fee) versuchen, die Gebühr zu erhöhen oder die Transaktion umzuleiten." } },
-    { "@type": "Question", "name": "Muss ich online sein, um Bitcoin zu empfangen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Sie können Bitcoin empfangen, während Ihr Gerät offline ist. Die Transaktion wird auf der öffentlichen Blockchain protokolliert; Ihr Wallet aktualisiert die Anzeige des Kontostands, sobald es wieder mit dem Internet verbunden ist." } }
   ]
 };
 
----
 
 ## 🎯 Einleitung: Die Mechanik der digitalen Überweisung
 

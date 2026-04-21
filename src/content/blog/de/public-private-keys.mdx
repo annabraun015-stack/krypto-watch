@@ -22,9 +22,10 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Was passiert, wenn ich meinen privaten Schlüssel verliere?", "acceptedAnswer": { "@type": "Answer", "text": "Ihre Bitcoins sind dann dauerhaft unzugänglich. Da es keine Zentralbank gibt, existiert kein 'Passwort zurücksetzen'-Button. Ihre einzige Rettung ist Ihr physisches Backup, die Seed Phrase." } },
-    { "@type": "Question", "name": "Kann jemand meinen privaten Schlüssel erraten?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Der mathematische Raum eines 256-Bit-Schlüssels ist so gigantisch (größer als die Anzahl der Atome im sichtbaren Universum), dass alle Computer der Erde zusammen Billionen Jahre zum Erraten bräuchten." } },
-    { "@type": "Question", "name": "Ist die Bitcoin-Adresse dasselbe wie der Public Key?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Adresse ist eine verkürzte, gehashte Version des öffentlichen Schlüssels. Dies sorgt für zusätzliche Sicherheit und Quantenresistenz.## 🎯 Einleitung: Die DNA des digitalen Eigentums
+  ]
+};
+
+## 🎯 Einleitung: Die DNA des digitalen Eigentums
 
 In der traditionellen Welt beweisen Sie Ihr Eigentum an Geld durch einen Personalausweis oder den Login in ein Webbanking-Portal. In der Welt von Bitcoin wird Eigentum durch **Mathematik** bewiesen. 
 
@@ -138,4 +139,3 @@ Das Meistern Ihrer Schlüssel ist der ultimative Schritt in die finanzielle Souv
 ## 🧬 Semantische Entity-Map
 - **Haupt-Entität:** Public & Private Keys
 - **Verwandte Entitäten:** secp256k1, ECDSA, BIP39 Seed Phrase, Asymmetrische Kryptografie, SHA-256, Self-Custody, Hardware Wallet, Adress-Reuse, Quantenresistenz, Entropie.
-, Bitcoin-Adresse, Seed Phrase (BIP-39), Asymmetrische Kryptografie, Elliptische Kurven (secp256k1), Eigenverwahrung, Hardware-Wallet, Multi-Sig.

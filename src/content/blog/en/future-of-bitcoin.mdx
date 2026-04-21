@@ -13,18 +13,19 @@ featured: true
 locale: "en"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "What is Bitcoin's projected price by 2030?", "acceptedAnswer": { "@type": "Answer", "text": "While purely speculative, leading institutional analysts like ARK Invest and Standard Chartered have established base cases ranging from $500,000 to over $1,000,000 per BTC. These predictions are predicated on institutional adoption, Bitcoin capturing 10-15% of the gold market cap, and continued monetary debasement." } },
-    { "@type": "Question", "name": "Could a new cryptocurrency replace Bitcoin?", "acceptedAnswer": { "@type": "Answer", "text": "This becomes increasingly unlikely due to the 'Lindy Effect.' The longer Bitcoin exists without a technical failure, the more trust it aggregates. While newer chains may be faster or more complex, they cannot replicate Bitcoin's decentralization, security, or the immaculately fair distribution of its genesis." } },
-    { "@type": "Question", "name": "How will Bitcoin evolve technically in the next decade?", "acceptedAnswer": { "@type": "Answer", "text": "The focus of Bitcoin's technical evolution is 'Layering.' While the base layer (L1) remains a slow, indestructible settlement mechanism, Layer 2 (Lightning Network) and Layer 3 (Smart Contract platforms like BitVM) will handle billions of transactions and complex decentralized finance applications." } }
   ]
 };
 
----
 
 ## 🎯 Introduction: The Sovereign Monetary Transition
 

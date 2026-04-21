@@ -13,18 +13,19 @@ featured: true
 locale: "de"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Ist Bitcoin in Deutschland legal?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, Bitcoin ist in Deutschland vollkommen legal. Die Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin) klassifiziert Bitcoin als 'Rechnungseinheit' (financial instrument), was ihn rechtlich mit Fremdwährungen vergleichbar macht. Privatpersonen dürfen Bitcoin unbegrenzt kaufen, halten und verkaufen." } },
-    { "@type": "Question", "name": "Sind Bitcoin-Gewinne in Deutschland steuerfrei?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, unter bestimmten Bedingungen. Wenn Sie Ihre Bitcoins länger als 12 Monate halten (die sogenannte Spekulationsfrist), ist der gesamte Gewinn aus dem Verkauf für Privatpersonen nach aktuellem Recht zu 100 % steuerfrei. Bei einem Verkauf innerhalb eines Jahres unterliegen Gewinne dem persönlichen Einkommensteuersatz, sofern sie die Freigrenze von 600 Euro überschreiten." } },
-    { "@type": "Question", "name": "Reguliert Deutschland Krypto-Börsen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Anbieter, die in Deutschland aktiv sind, benötigen eine BaFin-Lizenz für das 'Kryptoverwahrgeschäft'. Zudem bietet die EU-weite MiCA-Verordnung (Markets in Crypto-Assets) seit 2024 einen stabilen und sicheren Rechtsrahmen für alle Krypto-Dienstleister in der Europäischen Union." } }
   ]
 };
 
----
 
 ## 🎯 Einleitung: Der Rechtsrahmen der finanziellen Freiheit
 

@@ -22,13 +22,9 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Why are Bitcoin fees so high right now?", "acceptedAnswer": { "@type": "Answer", "text": "Fees are driven by demand. Since Bitcoin has limited block space (roughly 1MB every 10 minutes), users must bid against each other for priority. High demand leads to a bidding war among transactions in the mempool." } },
-    { "@type": "Question", "name": "Does the fee depend on the amount of BTC I send?", "acceptedAnswer": { "@type": "Answer", "text": "No. Bitcoin fees are based on the data 'size' of the transaction (bytes), not the financial value. Sending $1,000,000 can cost the same as sending $1 if both transactions use the same number of inputs and outputs." } },
-    { "@type": "Question", "name": "What is RBF (Replace-By-Fee)?", "acceptedAnswer": { "@type": "Answer", "text": "RBF is a feature that allows you to increase the fee of a transaction that is already waiting in the mempool. This 'unsticks' the transaction by giving miners a higher incentive to process it." } }
   ]
 };
 
----
 
 ## 🎯 Introduction: The Economics of Block Space
 
@@ -147,11 +143,3 @@ Bitcoin fees are the market's way of valuing the most precious digital real esta
 ## 🧬 Semantic Entity Map
 - **Primary Entity:** Bitcoin Transaction Fees
 - **Related Entities:** Mempool, sat/vB, vBytes, RBF (Replace-By-Fee), CPFP (Child-Pays-For-Parent), SegWit, Taproot, UTXO Management, Block Space, Security Budget.
-
-Bitcoin fees are the market's way of valuing the world's most secure digital space. By understanding mempool dynamics, using modern address formats, and utilizing Layer 2 solutions like Lightning, you can manage your digital wealth with more efficiency and lower cost than any legacy bank. In the decentralized future, **knowledge of fees is power.**
-
----
-
-## 🧬 Semantic Entity Map
-- **Primary Entity:** Bitcoin Transaction Fees
-- **Related Entities:** Mempool, sat/vB, UTXO, Input/Output, RBF (Replace-By-Fee), SegWit, Taproot, Lightning Network, Block Space, Miner.

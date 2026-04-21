@@ -13,14 +13,16 @@ featured: true
 locale: "en"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Is Bitcoin legal in Germany?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Bitcoin is completely legal in Germany. The Federal Financial Supervisory Authority (BaFin) classifies Bitcoin as a 'unit of account' (Rechnungseinheit), a financial instrument similar to foreign currency. Private individuals can buy, sell, and hold any amount of Bitcoin legally." } },
-    { "@type": "Question", "name": "Are Bitcoin gains tax-free in Germany?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, but only under specific conditions. If you hold your Bitcoin for more than 12 months (the 'speculation period'), any profit from the sale is currently 100% tax-free for private individuals. If sold within 12 months, gains are taxed at your personal income tax rate, with an annual exemption limit of 600 Euros." } },
-    { "@type": "Question", "name": "Does Germany regulate crypto exchanges?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Platforms operating in Germany must have a BaFin license for 'crypto custody business' (Kryptoverwahrgeschäft). Additionally, the EU-wide MiCA (Markets in Crypto-Assets) regulation provides a stable and secure legal framework for all crypto service providers in the European Union." } }
   ]
 };
 

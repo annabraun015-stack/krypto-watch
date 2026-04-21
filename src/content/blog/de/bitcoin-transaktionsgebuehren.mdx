@@ -22,16 +22,17 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Warum sind die Bitcoin-Gebühren gerade so hoch?", "acceptedAnswer": { "@type": "Answer", "text": "Gebühren werden durch die Nachfrage bestimmt. Da Bitcoin nur begrenzten Platz pro Block bietet, müssen Nutzer gegeneinander bieten. Hohe Nachfrage führt zu einem Bieterwettstreit im Mempool." } },
-    { "@type": "Question", "name": "Hängt die Gebühr vom versendeten BTC-Betrag ab?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Bitcoin-Gebühren basieren auf der Datengröße (Bytes) der Transaktion, nicht auf dem finanziellen Wert. Das Versenden von 1.000.000 € kann genauso viel kosten wie 1 €, wenn beide dieselbe Anzahl an Inputs nutzen." } },
-    { "@type": "Question", "name": "Was ist RBF (Replace-By-Fee)?", "acceptedAnswer": { "@type": "Answer", "text": "RBF ist eine Funktion, mit der man die Gebühr einer bereits im Mempool wartenden Transaktion nachträglich erhöhen kann. Dies 'befreit' hängende Transaktionen, indem Minern ein höherer Anreiz geb## 🎯 Einleitung: Der globale Marktplatz für Blockplatz
+    { "@type": "Question", "name": "Was ist RBF (Replace-By-Fee)?", "acceptedAnswer": { "@type": "Answer", "text": "RBF ist eine Funktion, mit der man die Gebühr einer bereits im Mempool wartenden Transaktion nachträglich erhöhen kann. Dies 'befreit' hängende Transaktionen, indem Minern ein höherer Anreiz geb" } }
+  ]
+};
+
+## 🎯 Einleitung: Der globale Marktplatz für Blockplatz
 
 Anders als bei Kreditkarten oder traditionellen Banken, die oft einen Prozentsatz des Transaktionswertes verlangen, berechnet Bitcoin die Gebühren nach dem physischen Platz, den Ihre Daten auf der Blockchain einnehmen. Dies hat einen globalen, rund um die Uhr aktiven **Gebührenmarkt** geschaffen. 
 
 Im Jahr 2026, in dem Bitcoin Billionenwerte absichert, ist das Verständnis dieses Marktes entscheidend. Es ist der Unterschied zwischen einer Gebühr von wenigen Cent und mehreren Euro für dieselbe Überweisung. In diesem Guide dekonstruieren wir die Architektur des Mempools und zeigen Ihnen, wie Sie die Mechanik von Satoshis pro virtuellem Byte (sat/vB) meistern.
 
 ---
-
 ## Sektion 1: Definition — Die Mempool-Auktion
 
 Das Versenden einer Transaktion ist effektiv eine blinde Auktion um Platz in einem limitierten digitalen Kassenbuch.
@@ -137,5 +138,3 @@ Bitcoin-Gebühren sind der Marktpreis für den sichersten Blockplatz der Welt. D
 ## 🧬 Semantische Entity-Map
 - **Haupt-Entität:** Bitcoin Transaktionsgebühren
 - **Verwandte Entitäten:** Mempool, sat/vB, SegWit, Taproot, RBF (Replace-By-Fee), CPFP (Child-Pays-For-Parent), UTXO-Management, Miner, Blockplatz, virtuelle Bytes (vB).
-nsgebühren
-- **Verwandte Entitäten:** Mempool, sat/vB, UTXO, Input/Output, RBF (Replace-By-Fee), SegWit, Taproot, Lightning Network, Blockplatz, Miner.

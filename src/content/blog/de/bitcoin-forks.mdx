@@ -13,18 +13,19 @@ featured: true
 locale: "de"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Was ist der Unterschied zwischen einem Hard Fork und einem Soft Fork?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Hard Fork ist eine nicht rückwärtskompatible Änderung, die die Blockchain in zwei separate Pfade spaltet (wie BTC und BCH). Ein Soft Fork ist ein rückwärtskompatibles Upgrade, bei dem alte Nodes die neuen Blöcke weiterhin verstehen (wie SegWit oder Taproot), wodurch das Netzwerk vereint bleibt." } },
-    { "@type": "Question", "name": "Bekomme ich bei einem Bitcoin Hard Fork kostenlose Coins?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Wenn Sie Ihre privaten Schlüssel selbst kontrollieren (Eigenverwahrung) während eines Hard Forks, besitzen Sie automatisch eine äquivalente Menge an Coins auf beiden Blockchains – der ursprünglichen und der neu geforkten." } },
-    { "@type": "Question", "name": "Gehört Bitcoin Cash noch zu Bitcoin?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Bitcoin Cash (BCH) ist ein völlig eigenständiges Netzwerk mit eigenen Regeln, Entwicklern und einem eigenen Marktpreis. Es teilt die gleiche Historie wie Bitcoin bis August 2017, ist aber heute ein komplett anderes Asset." } }
   ]
 };
 
----
 
 ## 🎯 Einleitung: Die Evolution des digitalen Protokolls
 

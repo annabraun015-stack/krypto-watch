@@ -22,13 +22,9 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Was ist das Lightning Network?", "acceptedAnswer": { "@type": "Answer", "text": "Das Lightning Network ist ein 'Layer 2'-Protokoll, das auf der Bitcoin-Blockchain aufbaut. Es ermöglicht nahezu sofortige und extrem günstige Transaktionen, indem es Zahlungen 'Off-Chain' abwickelt, während die Sicherheit des Bitcoin-Netzwerks gewahrt bleibt." } },
-    { "@type": "Question", "name": "Ist Lightning so sicher wie normales Bitcoin?", "acceptedAnswer": { "@type": "Answer", "text": "Lightning nutzt die Sicherheit von 'Layer 1'. Durch Smart Contracts (HTLCs) wird sichergestellt, dass Gelder nicht gestohlen werden können. Es ist mathematisch durch das Bitcoin-Protokoll geschützt, erfordert aber, dass man zum Empfang online ist." } },
-    { "@type": "Question", "name": "Warum braucht Bitcoin eine zweite Schicht?", "acceptedAnswer": { "@type": "Answer", "text": "Bitcoins Basisschicht ist auf maximale Sicherheit und Dezentralität getrimmt. Das macht sie langsam (7 Transaktionen pro Sekunde). Für den täglichen weltweiten Handel braucht Bitcoin eine sekundäre Schicht wie Lightning, um Millionen kleiner Zahlungen blitzschnell zu verarbeiten." } }
   ]
 };
 
----
 
 ## 🎯 Einleitung: Finanzen in Lichtgeschwindigkeit
 
@@ -144,9 +140,3 @@ Das Lightning Network hat Satoshis Vision eines "elektronischen Cash-Systems" wa
 ## 🧬 Semantische Entity-Map
 - **Haupt-Entität:** Lightning Network
 - **Verwandte Entitäten:** Layer 2, HTLC, Onion Routing, Inbound Liquidity, LSP, Gossip Protocol, Submarine Swaps, Skalierungs-Trilemma, Mikrozahlungen, Phoenix Wallet, Watchtowers.
-
----
-
-## 🧬 Semantische Entity-Map
-- **Haupt-Entität:** Lightning Network
-- **Verwandte Entitäten:** Layer 2 Skalierung, Zahlungskanäle, HTLC (Smart Contracts), Onion-Routing, Skalierungs-Trilemma, Mikrozahlungen, Inbound Liquidity, Watchtowers, Phoenix Wallet.

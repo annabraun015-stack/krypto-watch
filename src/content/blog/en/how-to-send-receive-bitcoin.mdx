@@ -13,18 +13,19 @@ featured: true
 locale: "en"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "How long does it take to send Bitcoin?", "acceptedAnswer": { "@type": "Answer", "text": "A standard on-chain Bitcoin transaction typically takes about 10 minutes for the first confirmation. For high-value transfers, it is recommended to wait for 3 to 6 confirmations (30–60 minutes) to ensure mathematical irreversibility." } },
-    { "@type": "Question", "name": "Can I cancel a Bitcoin transaction after sending it?", "acceptedAnswer": { "@type": "Answer", "text": "No. Bitcoin transactions are irreversible once broadcast to the network. However, if a transaction is still 'pending' in the mempool due to a low fee, you may be able to use RBF (Replace-By-Fee) to redirect or speed up the transaction before a miner includes it in a block." } },
-    { "@type": "Question", "name": "Do I need to be online to receive Bitcoin?", "acceptedAnswer": { "@type": "Answer", "text": "No. You can receive Bitcoin in your wallet even while your device is fully offline. The transaction is recorded on the public blockchain; your wallet simply synchronizes and updates the balance as soon as it reconnects to the internet." } }
   ]
 };
 
----
 
 ## 🎯 Introduction: The Protocol of Peer-to-Peer Settlement
 

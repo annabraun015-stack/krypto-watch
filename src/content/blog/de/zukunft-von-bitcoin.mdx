@@ -13,18 +13,19 @@ featured: true
 locale: "de"
 ---
 
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
+
+
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Wo liegt die Preisprognose für Bitcoin im Jahr 2030?", "acceptedAnswer": { "@type": "Answer", "text": "Obwohl rein spekulativ, haben führende institutionelle Analysten wie ARK Invest und Standard Chartered Basisszenarien aufgestellt, die von 500.000 $ bis über 1.000.000 $ pro BTC reichen. Diese Prognosen basieren auf der Annahme einer breiten institutionellen Adoption und darauf, dass Bitcoin 10-15 % des Gold-Marktanteils erobert." } },
-    { "@type": "Question", "name": "Könnte eine neue Kryptowährung Bitcoin ersetzen?", "acceptedAnswer": { "@type": "Answer", "text": "Aufgrund des 'Lindy-Effekts' wird dies zunehmend unwahrscheinlicher. Je länger Bitcoin ohne technischen Fehler existiert, desto mehr Vertrauen sammelt es an. Während neuere Ketten schneller oder komplexer sein mögen, können sie Bitcoins Dezentralität, Sicherheit oder die immaculately faire Verteilung seines Genesis-Blocks nicht kopieren." } },
-    { "@type": "Question", "name": "Wie wird sich Bitcoin technologisch im nächsten Jahrzehnt entwickeln?", "acceptedAnswer": { "@type": "Answer", "text": "Der Schwerpunkt der technologischen Evolution liegt auf dem 'Layering'. Während die Basisebene (L1) ein unzerstörbarer Abrechnungsmechanismus bleibt, werden Layer 2 (Lightning Network) und Layer 3 (Smart-Contract-Plattformen wie BitVM) Milliarden von Transaktionen und komplexe Finanzanwendungen abwickeln." } }
   ]
 };
 
----
 
 ## 🎯 Einleitung: Der Pfad zur globalen Abrechnungsschicht
 
