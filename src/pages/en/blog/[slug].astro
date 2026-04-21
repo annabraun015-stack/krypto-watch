@@ -4,7 +4,7 @@ import { getCollection, getEntry, render, type CollectionEntry } from 'astro:con
 export async function getStaticPaths() {
   const posts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
   return posts.map((post) => ({
-    params: { slug: post.id.replace('en/', '') },
+    params: { slug: post.id.replace(/^(en|de)\//, '').replace(/\.mdx?$/, '') },
     props: { post },
   }));
 }
@@ -15,7 +15,7 @@ import { siteConfig } from '../../../config/site';
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/en/blog/');
 
-const post = await getEntry('blog', `en/${slug}`);
+const post = await getEntry('blog', `en/${slug}.mdx`) || await getEntry('blog', `en/${slug}.md`);
 
 if (!post || post.data.draft) {
   return new Response(null, { status: 404, statusText: 'Not found' });

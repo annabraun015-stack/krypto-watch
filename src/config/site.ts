@@ -8,7 +8,7 @@ export const siteConfig = {
   github: 'https://github.com/kryptowatch',
   telegram: 'https://t.me/kryptowatch',
   linkedin: 'https://linkedin.com/company/kryptowatch',
-  postsPerPage: 12,
+  postsPerPage: 100,
   logo: '/logo.svg',
   ogImage: '/og-default.jpg',
   themeColor: '#0f172a',
