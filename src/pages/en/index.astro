@@ -10,6 +10,7 @@ import { cryptoCategories, siteConfig } from '../../config/site';
 
 import TrendingAlerts from '../../components/hero/TrendingAlerts.astro';
 import CoverStory from '../../components/hero/CoverStory.astro';
+import FeaturedStrip from '../../components/hero/FeaturedStrip.astro';
 
 const locale = 'en';
 const tr = t(locale);
@@ -19,6 +20,7 @@ const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.loca
 const sorted = allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const latestPosts = sorted.slice(0, 6);
 const featuredPosts = allPosts.filter((p) => p.data.featured).slice(0, 3);
+const stripPosts = allPosts.filter((p) => p.data.status).slice(0, 4);
 
 const homepageSchema = [
   {
@@ -76,6 +78,11 @@ const homepageSchema = [
     <div class="hero-scanline"></div>
     <div class="hero-vignette"></div>
   </section>
+
+  <!-- ══ FEATURED STRIP ══ -->
+  {stripPosts.length > 0 && (
+    <FeaturedStrip posts={stripPosts} locale={locale} />
+  )}
 
   <!-- Market Data -->
   <section class="section market-section" aria-labelledby="market-en-heading">
