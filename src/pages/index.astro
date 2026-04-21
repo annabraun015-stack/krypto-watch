@@ -280,7 +280,7 @@ const homepageSchema = [
   }
 
   /* Market section */
-  .market-section { background: oklch(10% 0.025 250); }
+  .market-section { background: oklch(10% 0.02 260); }
 
   /* Blog grid */
   .blog-grid {
@@ -308,7 +308,7 @@ const homepageSchema = [
 
   /* Featured section bg */
   .featured-section {
-    background: linear-gradient(180deg, transparent, oklch(10% 0.025 250) 50%, transparent);
+    background: linear-gradient(180deg, transparent, oklch(10% 0.02 260) 50%, transparent);
   }
 
   /* Categories */
@@ -328,8 +328,8 @@ const homepageSchema = [
     align-items: center;
     gap: 0.5rem;
     padding: 1.25rem 0.75rem;
-    background: oklch(14% 0.04 250 / 0.5);
-    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    background: oklch(14% 0.04 260 / 0.5);
+    border: 1px solid oklch(25% 0.05 195 / 0.35);
     border-radius: 0.875rem;
     text-decoration: none;
     transition: all 0.25s;
@@ -352,7 +352,7 @@ const homepageSchema = [
 
   .category-card:hover {
     border-color: color-mix(in oklch, var(--cat-color) 50%, transparent);
-    background: oklch(18% 0.05 250 / 0.7);
+    background: oklch(18% 0.05 260 / 0.7);
     transform: translateY(-3px);
   }
 
@@ -364,7 +364,7 @@ const homepageSchema = [
   .category-card:hover .cat-arrow { transform: translateX(3px); }
 
   /* How it works */
-  .how-section { background: oklch(10% 0.025 250); }
+  .how-section { background: oklch(10% 0.02 260); }
 
   .how-grid {
     display: grid;
@@ -375,8 +375,8 @@ const homepageSchema = [
   @media (min-width: 768px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
 
   .how-card {
-    background: linear-gradient(135deg, oklch(17% 0.04 250 / 0.6), oklch(12% 0.03 250 / 0.4));
-    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    background: linear-gradient(135deg, oklch(17% 0.04 260 / 0.6), oklch(12% 0.03 260 / 0.4));
+    border: 1px solid oklch(25% 0.05 195 / 0.35);
     border-radius: 1rem;
     padding: 2rem;
     position: relative;
@@ -384,15 +384,16 @@ const homepageSchema = [
   }
 
   .how-card:hover {
-    border-color: oklch(45% 0.2 250 / 0.4);
+    border-color: var(--color-brand-400);
     transform: translateY(-3px);
+    box-shadow: var(--shadow-neon-cyan);
   }
 
   .how-step-num {
     font-family: var(--font-display);
     font-size: 3.5rem;
     font-weight: 900;
-    color: oklch(45% 0.2 250 / 0.15);
+    color: oklch(45% 0.2 195 / 0.1);
     line-height: 1;
     margin-bottom: 1rem;
     letter-spacing: -0.04em;

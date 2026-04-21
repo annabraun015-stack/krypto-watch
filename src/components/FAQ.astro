@@ -54,15 +54,16 @@ const { faqs, locale = 'de' } = Astro.props;
   }
 
   .faq-item {
-    background: oklch(14% 0.04 250 / 0.6);
-    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    background: oklch(14% 0.04 260 / 0.6);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
     border-radius: 0.875rem;
     overflow: hidden;
-    transition: border-color 0.25s;
+    transition: border-color 0.25s, box-shadow 0.25s;
   }
 
   .faq-item:has(.faq-question[aria-expanded="true"]) {
-    border-color: oklch(45% 0.2 250 / 0.4);
+    border-color: var(--color-brand-400);
+    box-shadow: var(--shadow-neon-cyan);
   }
 
   .faq-question {
@@ -116,7 +117,7 @@ const { faqs, locale = 'de' } = Astro.props;
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
     line-height: 1.7;
-    border-top: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-top: 1px solid oklch(25% 0.05 195 / 0.2);
     padding-top: 1rem;
   }
 </style>

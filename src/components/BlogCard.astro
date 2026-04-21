@@ -105,8 +105,8 @@ const catClass = categoryColors[category] ?? 'badge-default';
 
 <style>
   .blog-card {
-    background: linear-gradient(135deg, oklch(17% 0.04 250 / 0.7), oklch(12% 0.03 250 / 0.5));
-    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    background: linear-gradient(135deg, oklch(17% 0.04 260 / 0.7), oklch(12% 0.03 260 / 0.5));
+    border: 1px solid oklch(25% 0.05 195 / 0.4);
     border-radius: 1rem;
     overflow: hidden;
     display: flex;
@@ -117,12 +117,13 @@ const catClass = categoryColors[category] ?? 'badge-default';
 
   .blog-card:hover {
     transform: translateY(-4px);
-    border-color: oklch(45% 0.2 250 / 0.5);
-    box-shadow: 0 12px 40px -8px oklch(8% 0.05 250 / 0.6), 0 0 0 1px oklch(45% 0.2 250 / 0.2);
+    border-color: var(--color-brand-400);
+    box-shadow: 0 12px 40px -8px oklch(8% 0.05 260 / 0.6), var(--shadow-neon-cyan);
   }
 
   .blog-card--featured {
-    border-color: oklch(72% 0.22 75 / 0.35);
+    border-color: var(--color-accent-500);
+    box-shadow: 0 0 20px -5px var(--color-accent-500);
   }
 
   /* Image */
@@ -162,13 +163,14 @@ const catClass = categoryColors[category] ?? 'badge-default';
     position: absolute;
     top: 0.75rem;
     left: 0.75rem;
-    background: oklch(72% 0.22 75 / 0.9);
-    color: oklch(10% 0.03 75);
+    background: var(--color-neon-purple);
+    color: black;
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 800;
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
     letter-spacing: 0.04em;
+    box-shadow: var(--shadow-neon-purple);
   }
 
   .coin-chips {
@@ -222,7 +224,7 @@ const catClass = categoryColors[category] ?? 'badge-default';
   .badge-defi { background: oklch(72% 0.2 165 / 0.12); color: var(--color-defi); border-color: oklch(72% 0.2 165 / 0.25); }
   .badge-purple { background: oklch(65% 0.2 300 / 0.12); color: oklch(72% 0.2 300); border-color: oklch(65% 0.2 300 / 0.25); }
   .badge-pink { background: oklch(68% 0.22 0 / 0.12); color: oklch(75% 0.22 0); border-color: oklch(68% 0.22 0 / 0.25); }
-  .badge-default { background: oklch(35% 0.05 250 / 0.3); color: var(--color-text-secondary); border-color: oklch(35% 0.05 250 / 0.3); }
+  .badge-default { background: oklch(35% 0.05 195 / 0.3); color: var(--color-text-secondary); border-color: oklch(35% 0.05 195 / 0.3); }
 
   /* Title */
   .blog-card-title {
@@ -270,7 +272,7 @@ const catClass = categoryColors[category] ?? 'badge-default';
     width: 1.875rem;
     height: 1.875rem;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
+    background: linear-gradient(135deg, var(--color-neon-cyan), var(--color-neon-purple));
     display: flex;
     align-items: center;
     justify-content: center;

@@ -11,7 +11,7 @@ export const siteConfig = {
   postsPerPage: 100,
   logo: '/logo.svg',
   ogImage: '/og-default.jpg',
-  themeColor: '#0f172a',
+  themeColor: '#0a0b10',
   locale: {
     de: 'de-DE',
     en: 'en-US',

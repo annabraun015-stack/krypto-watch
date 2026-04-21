@@ -2,58 +2,50 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand Colors ── */
-  --color-brand-50: oklch(97% 0.02 250);
-  --color-brand-100: oklch(92% 0.05 250);
-  --color-brand-200: oklch(84% 0.1 250);
-  --color-brand-300: oklch(74% 0.16 250);
-  --color-brand-400: oklch(63% 0.22 250);
-  --color-brand-500: oklch(53% 0.26 250);
-  --color-brand-600: oklch(45% 0.24 250);
-  --color-brand-700: oklch(37% 0.2 250);
-  --color-brand-800: oklch(30% 0.16 250);
-  --color-brand-900: oklch(22% 0.12 250);
+  /* ── Brand Colors (Neon Cyan Based) ── */
+  --color-brand-50: oklch(97% 0.02 195);
+  --color-brand-100: oklch(92% 0.05 195);
+  --color-brand-200: oklch(84% 0.1 195);
+  --color-brand-300: oklch(74% 0.16 195);
+  --color-brand-400: oklch(63% 0.22 195);
+  --color-brand-500: oklch(53% 0.26 195);
+  --color-brand-600: oklch(45% 0.24 195);
+  --color-brand-700: oklch(37% 0.2 195);
+  --color-brand-800: oklch(30% 0.16 195);
+  --color-brand-900: oklch(22% 0.12 195);
 
-  /* ── Accent / Gold ── */
-  --color-accent-400: oklch(80% 0.18 75);
-  --color-accent-500: oklch(72% 0.22 75);
-  --color-accent-600: oklch(64% 0.2 75);
+  /* ── Accent / Neon Purple Scale (Replacing Gold) ── */
+  --color-accent-400: oklch(80% 0.2 300);
+  --color-accent-500: oklch(72% 0.25 300);
+  --color-accent-600: oklch(64% 0.3 300);
 
   /* ── Crypto Coin Colors ── */
   --color-bitcoin: oklch(75% 0.18 60);
   --color-ethereum: oklch(68% 0.14 280);
   --color-defi: oklch(72% 0.2 165);
 
-  /* ── Neutral Palette (dark-first) ── */
-  --color-surface-950: oklch(8% 0.02 250);
-  --color-surface-900: oklch(12% 0.03 250);
-  --color-surface-800: oklch(17% 0.04 250);
-  --color-surface-700: oklch(24% 0.05 250);
-  --color-surface-600: oklch(35% 0.04 250);
+  /* ── Cyber Surface Palette ── */
+  --color-surface-950: oklch(8% 0.02 260);
+  --color-surface-900: oklch(12% 0.03 260);
+  --color-surface-800: oklch(17% 0.04 260);
+  --color-surface-700: oklch(24% 0.05 260);
+  --color-surface-600: oklch(35% 0.04 260);
 
-  --color-text-primary: oklch(97% 0.005 250);
-  --color-text-secondary: oklch(72% 0.04 250);
-  --color-text-muted: oklch(55% 0.03 250);
+  --color-text-primary: oklch(98% 0.01 195);
+  --color-text-secondary: oklch(80% 0.05 195);
+  --color-text-muted: oklch(60% 0.04 195);
 
   /* ── Typography ── */
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Outfit", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* ── Spacing scale additions ── */
-  --spacing-18: 4.5rem;
-  --spacing-22: 5.5rem;
-
-  /* ── Border radius ── */
-  --radius-card: 1rem;
-  --radius-pill: 9999px;
-
   /* ── Shadows ── */
-  --shadow-card: 0 4px 24px -4px oklch(5% 0.05 250 / 0.5);
+  --shadow-card: 0 4px 24px -4px oklch(5% 0.08 260 / 0.8);
   --shadow-glow-brand: 0 0 40px -8px var(--color-brand-500);
-  --shadow-glow-gold: 0 0 40px -8px var(--color-accent-500);
+  --shadow-glow-accent: 0 0 40px -8px var(--color-accent-500);
 
-  /* ── Cyberpunk / Neon Theme Extensions ── */
+  /* ── Cyberpunk / Neon Theme ── */
   --color-neon-cyan: oklch(75% 0.22 195);
   --color-neon-purple: oklch(60% 0.35 300);
   --color-cyber-black: oklch(10% 0.02 260);
@@ -106,14 +98,14 @@ body {
 .font-display { font-family: var(--font-display); }
 
 .text-gradient-brand {
-  background: linear-gradient(135deg, var(--color-brand-300), var(--color-accent-400));
+  background: linear-gradient(135deg, var(--color-brand-400), var(--color-accent-400));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.text-gradient-gold {
-  background: linear-gradient(135deg, var(--color-accent-400), oklch(88% 0.12 70));
+.text-gradient-accent {
+  background: linear-gradient(135deg, var(--color-accent-400), var(--color-brand-300));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -135,7 +127,7 @@ body {
 }
 
 .card-glass:hover {
-  border-color: oklch(53% 0.26 250 / 0.4);
+  border-color: var(--color-brand-500);
   box-shadow: var(--shadow-card), var(--shadow-glow-brand);
   transform: translateY(-2px);
 }
@@ -185,10 +177,10 @@ body {
   border: 1px solid oklch(53% 0.26 250 / 0.25);
 }
 
-.badge-gold {
-  background: oklch(72% 0.22 75 / 0.15);
+.badge-accent {
+  background: oklch(72% 0.25 300 / 0.15);
   color: var(--color-accent-400);
-  border: 1px solid oklch(72% 0.22 75 / 0.25);
+  border: 1px solid oklch(72% 0.25 300 / 0.25);
 }
 
 .badge-bitcoin {
@@ -248,12 +240,13 @@ body {
 .btn-outline {
   background: transparent;
   color: var(--color-text-primary);
-  border: 1px solid oklch(35% 0.05 250 / 0.5);
+  border: 1px solid oklch(35% 0.05 195 / 0.5);
 }
 
 .btn-outline:hover {
   border-color: var(--color-brand-400);
   color: var(--color-brand-300);
+  box-shadow: var(--shadow-neon-cyan);
 }
 
 .btn-ghost {
@@ -422,7 +415,7 @@ body {
 .prose-crypto code {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background: oklch(17% 0.04 250);
+  background: oklch(17% 0.04 260);
   padding: 0.125rem 0.375rem;
   border-radius: 4px;
   color: var(--color-brand-300);

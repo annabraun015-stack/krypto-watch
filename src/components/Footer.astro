@@ -31,7 +31,7 @@ const currentYear = new Date().getFullYear();
               <path d="M16 14v8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
               <defs>
                 <linearGradient id="fLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/>
+                  <stop stop-color="#00f2ff"/><stop offset="1" stop-color="#bc00ff"/>
                 </linearGradient>
               </defs>
             </svg>
@@ -141,8 +141,8 @@ const currentYear = new Date().getFullYear();
 
 <style>
   .site-footer {
-    background: oklch(8% 0.02 250);
-    border-top: 1px solid oklch(20% 0.04 250 / 0.5);
+    background: oklch(8% 0.02 260);
+    border-top: 1px solid oklch(20% 0.04 195 / 0.5);
     padding-top: 4rem;
     padding-bottom: 2rem;
     position: relative;
@@ -155,7 +155,7 @@ const currentYear = new Date().getFullYear();
     right: 10%;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--color-brand-500), var(--color-accent-400), transparent);
-    opacity: 0.4;
+    opacity: 0.6;
   }
 
   .footer-grid {
@@ -212,8 +212,8 @@ const currentYear = new Date().getFullYear();
     display: flex;
     align-items: center;
     justify-content: center;
-    background: oklch(17% 0.04 250);
-    border: 1px solid oklch(28% 0.05 250 / 0.5);
+    background: oklch(17% 0.04 260);
+    border: 1px solid oklch(28% 0.05 195 / 0.5);
     border-radius: 0.5rem;
     color: var(--color-text-secondary);
     transition: all 0.25s;
@@ -302,7 +302,7 @@ const currentYear = new Date().getFullYear();
   /* Bottom bar */
   .footer-bottom {
     padding-top: 2rem;
-    border-top: 1px solid oklch(20% 0.04 250 / 0.4);
+    border-top: 1px solid oklch(20% 0.04 195 / 0.4);
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 2rem;

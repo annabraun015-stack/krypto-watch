@@ -37,22 +37,25 @@ const allCoins = [...coins, ...coins];
 
   .ticker-symbol {
     font-family: var(--font-mono);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.8125rem;
-    color: var(--color-text-primary);
-    letter-spacing: 0.03em;
+    color: var(--color-brand-400);
+    letter-spacing: 0.05em;
   }
 
   .ticker-price {
     font-size: 0.8125rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     font-variant-numeric: tabular-nums;
   }
 
   .ticker-change {
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 800;
     font-variant-numeric: tabular-nums;
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+    background: color-mix(in oklch, currentColor 10%, transparent);
   }
 
   .ticker-change.pos { color: oklch(72% 0.2 145); }
