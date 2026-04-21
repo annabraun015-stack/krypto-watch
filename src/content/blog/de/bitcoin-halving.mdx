@@ -24,131 +24,123 @@ export const faqSchema = {
   "mainEntity": [
     { "@type": "Question", "name": "Wann ist das nächste Bitcoin Halving?", "acceptedAnswer": { "@type": "Answer", "text": "Das nächste Bitcoin Halving wird voraussichtlich im Frühjahr 2028 stattfinden. Es wird die Blockbelohnung von 3,125 BTC auf 1,5625 BTC reduzieren. Das genaue Datum hängt von der Hashrate des Netzwerks ab." } },
     { "@type": "Question", "name": "Warum hat Bitcoin ein Halving?", "acceptedAnswer": { "@type": "Answer", "text": "Das Halving stellt sicher, dass die Gesamtmenge von Bitcoin niemals 21 Millionen überschreitet. Es schafft eine künstliche Knappheit, die Bitcoin mathematisch gesehen 'härter' macht als Gold oder staatliche Währungen." } },
-    { "@type": "Question", "name": "Steigt der Preis nach jedem Halving?", "acceptedAnswer": { "@type": "Answer", "text": "Historisch gesehen folgten auf jedes Halving innerhalb von 12-18 Monaten massive Kurssteigerungen. Preisgarantien gibt es jedoch nicht; der Marktpreis wird durch das Verhältnis von reduziertem Angebot zu konstanter oder steigender Nachfrage bestimmt." } }
-  ]
-};
+    { "@type": "Question", "name": "Steigt der Preis nach jedem Halving?", "acceptedAnswer": { "@type": "Answer", "text": "Historisch gesehen folgten auf jedes Halving innerhalb von 12-18 Monaten massive Kurssteigerungen. Preisgarantien gibt es jedoch nicht; der Marktpreis wird durch das Verhältnis von reduziertem Angebot zu konstanter oder steigender Nachfrage bestimmt." } ## 🎯 Einleitung: Der algorithmische Herzschlag der Knappheit
+
+Die mächtigste Eigenschaft von Bitcoin ist nicht seine Technologie, sondern seine **Geldpolitik**. Während Zentralbanken weltweit Zinssätze ändern und Geld nach menschlichem Ermessen drucken, operiert Bitcoin nach einem festen, vorhersehbaren Zeitplan. 
+
+Dieser Zeitplan wird durch das **Halving** verankert – ein Ereignis, das die Ausgabe neuer Bitcoins alle vier Jahre automatisch halbiert. Im Jahr 2026 leben wir in der Post-2024 "ETF-Ära", in der die Auswirkungen des Halvings tiefergreifender sind als je zuvor. In diesem Guide analysieren wir die Mechanik hinter dem Angebotsschock, die Spieltheorie der Miner und warum das Halving der ultimative Beweis für die Souveränität von Code gegenüber Politik ist.
 
 ---
 
-## 🎯 Einleitung: Der algorithmische Herzschlag der Knappheit
+## Sektion 1: Definition — Was ist ein 'Halving'?
 
-Die mächtigste Eigenschaft von Bitcoin ist nicht seine Technologie, sondern seine **Geldpolitik**. Während Zentralbanken weltweit Zinssätze ändern und Geld nach menschlichem Ermessen drucken, operiert Bitcoin nach einem festen, vorhersehbaren Zeitplan. Dieser Zeitplan wird durch das **Halving** verankert – ein Ereignis, das die Ausgabe neuer Bitcoins alle vier Jahre automatisch halbiert. Im Jahr 2026 leben wir in der Post-2024 "ETF-Ära", in der die Auswirkungen des Halvings tiefgreifender sind als je zuvor.
+Das Halving ist der Mechanismus des Netzwerks, um sicherzustellen, dass Bitcoin die Eigenschaften eines physischen Rohstoffs wie Gold imitiert — und ihn schließlich übertrifft.
 
----
-
-## Sektion 1: Definition & der Zweck des Halvings
-
-Das Halving ist der Mechanismus des Netzwerks, um sicherzustellen, dass Bitcoin die Eigenschaften eines physischen Rohstoffs wie Gold imitiert oder sogar übertrifft.
-
-<DefinitionBlock term="Bitcoin Halving" icon="⏳">
-  Ein **Bitcoin Halving** ist ein vorprogrammiertes Ereignis, das alle 210.000 Blöcke (ca. alle 4 Jahre) stattfindet. Es halbiert die Belohnung, die Miner für das Sichern des Netzwerks erhalten. Dies reduziert die Rate, mit der neue Bitcoins auf den Markt kommen, sichert das 21-Millionen-Limit ab und erzeugt einen "Angebotsschock".
+<DefinitionBlock term="Algorithmische Emission" icon="⏳">
+  **Bitcoin Halving** bezeichnet die Reduzierung der Blockbelohnung (Block Subsidy) um exakt 50 % nach jeweils 210.000 Blöcken. Da ein Block im Durchschnitt alle 10 Minuten gefunden wird, findet dieses Ereignis etwa alle vier Jahre statt. Es ist der Motor der digitalen Knappheit und stellt sicher, dass die Inflation von Bitcoin planbar gegen Null sinkt.
 </DefinitionBlock>
 
-Ohne das Halving wären alle 21 Millionen Bitcoins bereits in den ersten Jahren gemined worden. Durch die Streckung der Ausgabe über 130 Jahre schuf Satoshi Nakamoto einen "Slow-Release"-Mechanismus, der es dem Netzwerk erlaubt, an Wert zu gewinnen, während es seltener wird.
-
 ---
 
-## Sektion 2: Das Kernkonzept (Die Epochen-Uhr)
+## Sektion 2: Kernkonzept — Die Epochen-Uhr und S2F
 
-Stellen Sie sich das Halving als einen mechanischen Countdown vor, der alle vier Jahre einen Paradigmenwechsel in der Wirtschaftswelt von Bitcoin auslöst.
+Jedes Halving markiert den Beginn einer neuen ökonomischen "Epoche". Im Jahr 2026 befinden wir uns in der 5. Epoche.
 
 <ConceptVisual 
-  src="/images/blog/halving-epoch-clock.png" 
-  alt="Visualisierung des Bitcoin Halving Countdowns und Belohnungs-Shifts" 
-  type="flow" 
-  caption="Alle 210.000 Blöcke beginnt eine neue 'Epoche'. Jede Epoche halbiert die Emission, wodurch das Netzwerk 50 % schwerer 'auszubeuten' wird als in der vorangegangenen Periode."
+  src="/images/blog/bitcoin-halving.png" 
+  alt="Bitcoin Stock-to-Flow-Kurve nach Halving" 
+  type="concept" 
+  caption="Das 'Stock-to-Flow' (S2F) Modell misst die Härte eines Assets. Vor dem 2024 Halving war Bitcoin mit Gold (S2F ~60) gleichauf. Seit der Halbierung auf 3,125 BTC pro Block ist Bitcoin mit einem S2F von ~120 das härteste Asset der Welt. Das nächste Ziel im Jahr 2028: Ein S2F von über 240."
 />
 
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Futuristische digitale Uhr mit holografischen Zahlen, die Blöcke zählen; ein mechanischer Hebel klickt nach unten, um einen Datenstrom zu halbieren; orange-graue Ästhetik, cinematisches Licht."
-- **Dateiname:** `halving-epoch-clock.png`
+Das Halving erzeugt einen permanenten "Angebotsschock". Da die tägliche Neuproduktion sinkt, muss der Preis (bei gleichbleibender Nachfrage) steigen, um ein neues Gleichgewicht zu finden.
 
 ---
 
-## Sektion 3: Wie es funktioniert (Die Subsidy-Formel)
+## Sektion 3: Funktionsweise — Miner-Kapitulation und Schwierigkeit
 
-Das Halving wird durch eine einfache mathematische Formel im Quellcode von Bitcoin Core erzwungen. Es hängt nicht von menschlichen Wahlen ab, sondern von reiner Logik.
+Was passiert mit den Maschinen, wenn die Einnahmen über Nacht halbiert werden?
 
 <ProcessStep steps={[
   {
-    title: "Blockhöhe als Trigger",
-    description: "Das Netzwerk überwacht die 'Blockhöhe'. Sobald sie ein Vielfaches von 210.000 erreicht, wird die Reduktion sofort ausgelöst."
+    title: "Der Subsidy-Cut",
+    description: "In der Sekunde des Halvings wird die Belohnung für Miner halbiert. Ineffiziente Miner mit hohen Stromkosten geraten sofort unter Druck."
   },
   {
-    title: "Subsidy-Schnitt",
-    description: "Der Code führt eine 'Bit-Shift'-Operation aus, die die aktuelle Blockbelohnung durch zwei teilt (z.B. von 3,125 auf 1,5625 BTC im Jahr 2028)."
+    title: "Die 'Bereinigung'",
+    description: "Einige Miner schalten ihre Hardware ab. Die Hashrate sinkt kurzzeitig. Dies wird oft als 'Miner-Kapitulation' bezeichnet."
   },
   {
-    title: "Mining-Anpassung",
-    description: "Falls ineffiziente Miner abschalten, passt das Netzwerk seine Schwierigkeit automatisch an, damit alle 10 Minuten ein Block gefunden wird."
+    title: "Schwierigkeits-Anpassung",
+    description: "Spätestens nach 2.016 Blöcken passt das Netzwerk die Schwierigkeit (Difficulty) nach unten an. Das Mining wird für die effizienten Überlebenden wieder profitabel."
   },
   {
-    title: "Markt-Gleichgewicht",
-    description: "Mit 50 % weniger täglichem 'Verkaufsdruck' durch Miner muss der Markt einen neuen Preis basierend auf der Nachfrage finden."
+    title: "Infrastruktur-Upgrade",
+    description: "Überlebende Miner investieren in effizientere ASICs. Das Netzwerk wird mit weniger Energieeinsatz sicherer als je zuvor."
   }
 ]} />
 
 ---
 
-## Sektion 4: Halving-Zeitstrahl (Historie der Knappheit)
+## Sektion 4: Halving-Vergleich 2024 vs. 2028
 
-Jedes Halving ging historisch einer massiven Expansion des Bitcoin-Ökosystems voraus.
+Im Jahr 2026 blicken wir zurück auf den massiven Shift von 2024 und bereiten uns auf 2028 vor.
 
-| Epoche | Jahr | Block-Belohnung | Zirkulation in % | Markt-Ära |
-|---|---|---|---|---|
-| **Genesis** | 2009 | 50 BTC | 0% - 50% | Hobbyisten & Cypherpunks |
-| **1. Halving** | 2012 | 25 BTC | 50% - 75% | Erste Börsen |
-| **2. Halving** | 2016 | 12,5 BTC | 75% - 87,5% | Retail-Welle |
-| **3. Halving** | 2020 | 6,25 BTC | 87,5% - 93,75% | Institutioneller Einstieg |
-| **4. Halving** | 2024 | 3,125 BTC | 93,75% - 96,8% | **Die ETF-Ära** |
-| **5. Halving** | 2028 | 1,5625 BTC | 96,8% - 98,4% | Strategische Reserven |
+| Merkmal | Epoche 4 (2020-24) | Epoche 5 (2024-28) | Epoche 6 (Ab 2028) |
+|---|---|---|---|
+| **Belohnung** | 6,25 BTC | 3,125 BTC | 1,5625 BTC |
+| **Jährl. Inflation**| ~1,7 % | ~0,8 % | ~0,4 % |
+| **Dominanter Käufer**| Retail / Grayscale | BlackRock / ETFs | Nationalstaaten / Zentralbanken |
+| **Status** | Emerging Asset | Globaler Reserve-Standard | Ultimatve Knappheit |
 
 ---
 
-## Sektion 5: Die Ökonomie (Stock-to-Flow Vergleich)
+## Sektion 5: Die Psychologie des 4-Jahres-Zyklus
 
-Das **Stock-to-Flow (S2F)** Verhältnis misst die "Härte" eines Assets. Je höher die Zahl, desto schwieriger ist es, das Angebot durch Neuproduktion zu verwässern.
-
-<ConceptVisual 
-  src="/images/blog/s2f-dashboard.png" 
-  alt="Vergleich Bitcoin vs. Gold Stock-to-Flow Verhältnis" 
-  type="diagram" 
-  caption="Nach dem 2024 Halving hat Bitcoin das S2F-Verhältnis von Gold überholt. Bis 2028 wird Bitcoin fast doppelt so 'hart' sein wie das erfolgreichste physische Asset der Geschichte."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Datenschweres UI-Dashboard, zwei Balken: einer 'Gold' (S2F 60), einer 'Bitcoin' (S2F 120), letzterer leuchtet intensiv. Saubere weiße Typografie auf dunklem Hintergrund."
-- **Dateiname:** `s2f-dashboard.png`
+Warum folgt der Preis oft einem ähnlichen Muster?
+1. **Antizipation:** Monate vor dem Halving steigt das Bewusstsein (Hype).
+2. **Der Schock:** Die tatsächliche Angebotsverknappung sickert in die Orderbücher der Börsen.
+3. **Die Euphorie:** Wenn das reduzierte Angebot auf die steigende ETF-Nachfrage trifft, beginnt oft die parabolische Phase.
+4. **Die Reife:** Der Markt findet ein neues, höheres Preisplateau, bis der nächste Zyklus beginnt.
 
 ---
 
-## Sektion 6: Verwandte Themen (Knappheits-Cluster)
+## Sektion 6: Verwandte Themen — Das Knappheits-Ökosystem
 
-Vertiefen Sie Ihr Verständnis der Bitcoin-Angebotsmechanik:
-- [Das 21-Millionen-Limit](/de/blog/bitcoin-21-millionen-limit/) → Warum die Ausgabe irgendwann bei Null stoppt.
-- [Wie Bitcoin Mining funktioniert](/de/blog/bitcoin-mining/) → Die Maschinen, welche die Belohnungen erhalten.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie die Halving-Regeln erzwungen werden.
-- [Was bestimmt den Preis?](/de/blog/was-bestimmt-den-bitcoin-preis/) → Die Nachfrageseite der Gleichung.
-- [Bitcoin vs. Fiat-Geld](/de/blog/bitcoin-vs-fiat-geld/) → Digitales vs. staatliches Geld.
+Lernen Sie, wie das Halving den gesamten Markt beeinflusst:
+- [Das 21-Millionen-Limit](/de/blog/bitcoin-21-millionen-limit/) → Warum das Halving irgendwann stoppt.
+- [Bitcoin Mining erklärt](/de/blog/bitcoin-mining-erklaert/) → Die ökonomische Frontlinie.
+- [Was bestimmt den Preis?](/de/blog/was-bestimmt-den-bitcoin-preis/) → Angebot vs. Nachfrage im Detail.
+- [Bitcoin transaktionsgebuehren](/de/blog/bitcoin-transaktionsgebuehren/) → Warum Miner in Zukunft von Gebühren leben.
+- [Zukunft von Bitcoin](/de/blog/zukunft-von-bitcoin/) → Der Weg zur Hyper-Bitcoinisierung.
 
 ---
 
-## Sektion 7: FAQ (Häufige Fragen & Irrtümer)
+## Sektion 7: FAQ — Experten-Fragen zum Halving
 
-### 1. Werden Miner nach dem Halving aufhören?
-Ein Teilschluss ineffizienter Miner ist eine normale "Reinigung" des Netzwerks. Effiziente Miner mit günstigen Stromquellen überleben. Die [Schwierigkeitsanpassung](/de/blog/bitcoin-mining/) sorgt dafür, dass das Netzwerk stabil bleibt.
+### 1. Ist das Halving durch die ETFs 'anders' geworden?
+Ja. Im Jahr 2026 sehen wir, dass die Wall Street (ETFs) die tägliche Produktion der Miner oft um das Zehnfache aufkauft. Dies verstärkt den Angebotsschock des Halvings massiv, da das "verfügbare Angebot" an den Börsen rekordtief ist.
 
-### 2. Ist das Halving "eingepreist"?
-Dies ist die große Debatte im Jahr 2026. Während der Termin bekannt ist, entfaltet sich der reale Einfluss des reduzierten Verkaufsdrucks der Miner erst über Monate. Man kann eine physische Verknappung des Angebots nicht vollständig "einpreisen", solange sie noch nicht stattgefunden hat.
+### 2. Was passiert, wenn der Preis nach dem Halving nicht steigt?
+Sollte der Preis stagnieren, müssten viele Miner abschalten. Das Netzwerk würde sich jedoch über die **Difficulty Adjustment** wieder stabilisieren. Bitcoin braucht keinen steigenden Preis, um zu funktionieren — aber die Geschichte zeigt, dass Knappheit langfristig immer eingepreist wird.
 
-### 3. Was passiert nach dem letzten Halving 2140?
-Miner werden dann zu 100 % durch [Transaktionsgebühren](/de/blog/bitcoin-transaktionsgebuehren/) bezahlt. Da Bitcoin täglich Milliardenwerte abrechnet, wird der Wettbewerb um den Platz im Block genug Einnahmen generieren, um die Netzwerksicherheit zu garantieren.
+### 3. Wann endet die Inflation von Bitcoin komplett?
+Um das Jahr 2140. Dann wird die Belohnung auf den kleinsten Nenner (1 Satoshi) fallen und schließlich verschwinden. Ab dann ist Bitcoin ein perfekt festes Gefäß für globalen Wert.
 
 ---
 
 ## Sektion 8: Zusammenfassung — Das Uhrwerk des harten Geldes
 
 Das Bitcoin Halving ist der ultimative Beweis dafür, dass Mathematik über Politik steht. Es ist eine Einbahnstraße in eine Zukunft absoluter Knappheit. Während die Ausgaberate sinkt und das Stock-to-Flow-Verhältnis steigt, wandelt sich Bitcoin von einer experimentellen Währung zum stabilsten langfristigen Reserve-Asset der Welt.
+
+**Vertrauen Sie nicht dem Versprechen von Banken; vertrauen Sie dem Herzschlag der Blockchain.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Halving
+- **Verwandte Entitäten:** Block Reward, 210.000 Blöcke, Stock-to-Flow (S2F), Angebotsschock, Miner-Kapitulation, Difficulty Adjustment, ETF-Adoption, Inflation, Werthaltigkeit, Spieltheorie.
+in von einer experimentellen Währung zum stabilsten langfristigen Reserve-Asset der Welt.
 
 ---
 

@@ -24,134 +24,118 @@ export const faqSchema = {
   "mainEntity": [
     { "@type": "Question", "name": "Was passiert, wenn ich meinen privaten Schlüssel verliere?", "acceptedAnswer": { "@type": "Answer", "text": "Ihre Bitcoins sind dann dauerhaft unzugänglich. Da es keine Zentralbank gibt, existiert kein 'Passwort zurücksetzen'-Button. Ihre einzige Rettung ist Ihr physisches Backup, die Seed Phrase." } },
     { "@type": "Question", "name": "Kann jemand meinen privaten Schlüssel erraten?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Der mathematische Raum eines 256-Bit-Schlüssels ist so gigantisch (größer als die Anzahl der Atome im sichtbaren Universum), dass alle Computer der Erde zusammen Billionen Jahre zum Erraten bräuchten." } },
-    { "@type": "Question", "name": "Ist die Bitcoin-Adresse dasselbe wie der Public Key?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Adresse ist eine verkürzte, gehashte Version des öffentlichen Schlüssels. Dies sorgt für zusätzliche Sicherheit und Quantenresistenz." } }
-  ]
-};
+    { "@type": "Question", "name": "Ist die Bitcoin-Adresse dasselbe wie der Public Key?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Adresse ist eine verkürzte, gehashte Version des öffentlichen Schlüssels. Dies sorgt für zusätzliche Sicherheit und Quantenresistenz.## 🎯 Einleitung: Die DNA des digitalen Eigentums
+
+In der traditionellen Welt beweisen Sie Ihr Eigentum an Geld durch einen Personalausweis oder den Login in ein Webbanking-Portal. In der Welt von Bitcoin wird Eigentum durch **Mathematik** bewiesen. 
+
+Sie "besitzen" Bitcoin nicht wie eine Goldmünze in Ihrer Tasche; stattdessen besitzen Sie die kryptografische Fähigkeit, eine Transaktion im dezentralen Kassenbuch zu autorisieren. Diese Fähigkeit liegt in Ihren **Schlüsseln (Keys)**. Im Jahr 2026 ist das Verständnis dieser Mechanismen der Unterschied zwischen finanzieller Freiheit und dem Totalverlust Ihrer Ersparnisse. In diesem Guide dekonstruieren wir das Herzstück der Bitcoin-Sicherheit.
 
 ---
 
-## 🎯 Einleitung: Die DNA des digitalen Eigentums
+## Sektion 1: Definition — Die 'Not Your Keys'-Regel
 
-In der traditionellen Welt beweisen Sie Ihr Eigentum an Geld durch einen Personalausweis oder den Login in ein Webbanking-Portal. In der Welt von Bitcoin wird Eigentum durch **Kryptografie** bewiesen. Sie "besitzen" Bitcoin nicht wie eine Goldmünze; stattdessen besitzen Sie die mathematische Fähigkeit, sie zu bewegen. Diese Fähigkeit liegt in Ihren **Schlüsseln (Keys)**.
+Die wichtigste Regel der Krypto-Welt lautet: **"Not your keys, not your coins."** (Nicht deine Schlüssel, nicht deine Coins). 
 
----
-
-## Sektion 1: Definition & die "Not Your Keys"-Regel
-
-Die wichtigste Regel der Krypto-Welt lautet: **"Not your keys, not your coins."** (Nicht deine Schlüssel, nicht deine Coins). Wenn Sie die kryptografischen Schlüssel nicht kontrollieren, sind Sie lediglich ein Gläubiger einer Börse, aber kein wahrer Eigentümer von Bitcoin.
-
-<DefinitionBlock term="Private Key" icon="🔑">
-  Ein **Private Key** (privater Schlüssel) ist eine geheime 256-Bit-Zahl, die das Ausgeben von Bitcoin autorisiert. Er ist das digitale Äquivalent einer unkopierbaren Unterschrift. Wer Ihren Private Key hat, hat die totale Kontrolle über Ihr Guthaben.
+<DefinitionBlock term="Asymmetrische Kryptografie" icon="🔑">
+  Bitcoin nutzt ein System aus zwei zusammengehörigen Schlüsseln: dem **Private Key** (privater Schlüssel) zum Ausgeben und dem **Public Key** (öffentlicher Schlüssel) zum Empfangen. Diese 'Einweg-Mathematik' stellt sicher, dass man vom öffentlichen Schlüssel niemals auf den privaten schließen kann, während der private Schlüssel jede Transaktion unanfechtbar signieren kann.
 </DefinitionBlock>
 
-Lassen Sie Ihre Bitcoins auf einer Börse (wie Bison, Coinbase oder Kraken) liegen, hält die Börse die Schlüssel für Sie treuhänderisch verwahrt. Wahre finanzielle Souveränität beginnt erst mit der **Eigenverwahrung (Self-Custody)**.
+Wahre finanzielle Souveränität beginnt erst mit der **Eigenverwahrung (Self-Custody)**, bei der nur Sie allein den Private Key besitzen.
 
 ---
 
-## Sektion 2: Kernkonzept (Die Tresor-Analogie)
+## Sektion 2: Kernkonzept — Elliptische Kurven & secp256k1
 
-Um das Zusammenspiel der Schlüssel zu verstehen, hilft das Bild eines modernen Briefkastensystems.
+Bitcoin nutzt keine herkömmlichen Zufallszahlen, sondern eine spezielle Form der Mathematik: die **Elliptische Kurven-Kryptografie (ECC)**.
 
 <ConceptVisual 
-  src="/images/blog/public-private-keys-analogy.png" 
-  alt="Analogie: Public Key vs. Private Key Tresor" 
-  type="comparison" 
-  caption="Ihr Public Key ist wie ein gläserner Tresor (jeder kann ihn sehen und Geld hineinwerfen), während Ihr Private Key der einzige physische Schlüssel ist, der ihn öffnen kann."
+  src="/images/blog/public-private-keys.png" 
+  alt="Elliptische Kurven Mathematik Visualisierung" 
+  type="concept" 
+  caption="Der Private Key ist eine riesige Zahl. Durch das 'Punkt-Addieren' auf einer elliptischen Kurve (Standard: secp256k1) wird der Public Key berechnet. Diese Operation ist in eine Richtung blitzschnell, aber die Umkehrung (den Private Key aus dem Public Key finden) würde Milliarden Jahre auf den stärksten Computern der Welt dauern."
 />
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Moderner technologischer Diagramm-Stil, ein leuchtender oranger Tresor mit Glasfront, der digitale Münzen zeigt, darüber schwebt ein transparenter Schlüssel mit Lichtströmen, minimalistisches 3D-Design, dunkler Hintergrund."
-- **Dateiname:** `public-private-keys-analogy.png`
 
 ---
 
-## Sektion 3: Wie es funktioniert (Ableitung & Signaturen)
+## Sektion 3: Funktionsweise — Vom Seed zur Adresse
 
-Bitcoin nutzt **Asymmetrische Kryptografie**. Das bedeutet, es werden zwei Schlüssel verwendet: einer zum "Abschließen" (Public) und einer zum "Aufschließen" (Private).
+Wie entsteht aus 24 Wörtern eine Bitcoin-Adresse? Dieser Prozess folgt strengen Industriestandards.
 
 <ProcessStep steps={[
   {
-    title: "Schlüssel-Generierung",
-    description: "Ihr Wallet generiert eine zufällige 256-Bit-Zahl (Private Key) komplett offline."
+    title: "Der Entropie-Ursprung",
+    description: "Ihr Wallet würfelt eine Zufallszahl mit 256 Bits. Dies ist die absolute Basis Ihrer Sicherheit."
   },
   {
-    title: "Die Einweg-Mathematik",
-    description: "Mittels Elliptischer-Kurven-Mathematik wird der Public Key abgeleitet. Rückwärtsrechnen ist unmöglich."
+    title: "BIP39 Seed Phrase",
+    description: "Um die Zahl für Menschen lesbar zu machen, wird sie in 12 oder 24 Wörter übersetzt. Dies ist Ihre 'Seed Phrase' — der Master-Schlüssel."
   },
   {
-    title: "Adress-Hashing",
-    description: "Der Public Key wird in eine kürzere 'Bitcoin-Adresse' umgewandelt (gehasht), um das Teilen sicherer zu machen."
+    title: "Ableitungs-Pfade (BIP44)",
+    description: "Aus einem Seed generiert das Wallet Milliarden von Private Keys. Das ermöglicht es, für jede Zahlung eine neue Adresse zu nutzen, ohne den Überblick zu verlieren."
   },
   {
-    title: "Digitale Signatur",
-    description: "Beim Versenden erstellt Ihr Private Key eine 'Signatur'. Sie beweist die Autorisierung, ohne den Schlüssel selbst preiszugeben."
+    title: "Hashing & Checksum",
+    description: "Der Public Key wird mehrfach gehasht (SHA-256 & RIPEMD-160), um die finale Bitcoin-Adresse zu erzeugen. Dies fügt eine Schutzschicht gegen Tippfehler hinzu."
   }
 ]} />
 
 ---
 
-## Sektion 4: Lesbare Schlüssel (Die Seed Phrase)
+## Sektion 4: Sicherheit — Hot vs. Cold Storage
 
-Da 256-Bit-Zahlen für Menschen unmöglich zu merken sind, wurde der **BIP-39 Standard** eingeführt.
+Im Jahr 2026 ist die Trennung der Schlüssel-Umgebungen entscheidend für den Schutz vor Hackern.
 
-- **Der Master-Key:** Ihre 12 oder 24 Wörter umfassende **Seed Phrase** ist lediglich eine lesbare Darstellung Ihres primären Private Keys.
-- **Hierarchical Deterministic (HD):** Diese eine Phrase kann Milliarden eindeutiger Adressen generieren. Sie müssen nur diese eine Phrase sichern, um Ihr gesamtes Portfolio zu schützen.
-
-> [!WARNING]
-> **Die goldene Sicherheitsregel**: Tippen Sie Ihre Seed Phrase niemals in einen Computer ein, fotografieren Sie sie nicht und speichern Sie sie nicht in der Cloud. Sobald sie das Internet berührt, ist sie potenziell kompromittiert. Speichern Sie sie in Stahl oder auf Papier in einem Tresor.
-
----
-
-## Sektion 5: Vergleich (Key vs. Adresse vs. Wallet)
-
-| Begriff | Sichtbarkeit | Funktion | Analogie |
-|--------|------------|----------|------------|
-| **Private Key** | 🔒 Geheim | Autorisiert Ausgaben | Der Tresorschlüssel |
-| **Public Key** | 👁️ Sichtbar | Eigentumsnachweis | Der Ausweis |
-| **Adresse** | 📢 Öffentlich | Empfang von Geldern | Die IBAN / Kontonummer |
-| **Seed Phrase** | 🔒 Master | Haupt-Backup | Der Master-Wiederherstellungscode |
+| Typ | Lagerung | Risiko | Anwendung |
+|---|---|---|---|
+| **Hot Keys** | Auf dem Handy / PC | Mittleres Hack-Risiko | Kleingeld, tägliche Einkäufe |
+| **Cold Keys** | Hardware Wallet / Stahl | Nahezu Null (Offline) | Langfristige Ersparnisse |
+| **Air-Gapped**| Nie mit Internet verbunden | Extrem sicher | Erbe, Firmenvermögen |
 
 ---
 
-## Sektion 6: Sicherheitshygiene & Best Practices
+## Sektion 5: Experten-Wissen — Signatur & Quantenresistenz
 
-Diebe knacken selten die Mathematik; sie tricksen den Nutzer aus.
-1. **Adressen nie mehrfach nutzen:** Verwenden Sie für jede Transaktion eine neue Adresse, um Ihre [Privatsphäre](/blog/ist-bitcoin-anonym/) zu schützen.
-2. **Hardware Wallets:** Nutzen Sie Geräte wie BitBox02, Ledger oder Trezor. Diese halten den Private Key in einem isolierten Chip ("Secure Element"), der nie mit dem Internet in Berührung kommt.
-3. **Multi-Sig:** Für sehr hohe Beträge können Sie einrichten, dass 2 von 3 Schlüsseln an verschiedenen Orten nötig sind, um eine Zahlung zu autorisieren.
-
----
-
-## Sektion 7: Verwandte Themen (Themencluster)
-
-Vertiefen Sie Ihr Wissen über das kryptografische Fundament:
-- [Wie sicher ist Bitcoin wirklich?](/blog/wie-sicher-ist-bitcoin/) → Die Mathematik hinter den Schlüsseln.
-- [Was ist eine Bitcoin Node?](/blog/was-ist-ein-bitcoin-node/) → Wie Nodes Ihre Signaturen prüfen.
-- [Die besten Wallets 2026](/blog/beste-bitcoin-wallets/) → Wo Sie Ihre Schlüssel sicher lagern.
-- [Regulierung in Deutschland](/blog/bitcoin-rechtliche-lage-deutschland/) → Rechtliche Sicht auf die Eigenverwahrung.
-- [Die Identität von Satoshi](/blog/wer-ist-satoshi-nakamoto/) → Der Besitzer der berühmtesten Schlüssel der Welt.
+Wie beweist man, dass man den Schlüssel hat, ohne ihn zu zeigen?
+- **ECDSA (Digital Signature Algorithm):** Wenn Sie Bitcoin senden, erstellt Ihr Private Key eine mathematische Signatur. Nodes prüfen diese Signatur gegen Ihren Public Key. Das Ergebnis ist ein 'Ja' oder 'Nein' — der Schlüssel selbst verlässt niemals Ihr Gerät.
+- **Adress-Reuse Risiko:** Die Wiederverwendung von Adressen schwächt Ihre Privatsphäre und macht Ihren Public Key sichtbar. Moderne Wallets generieren daher automatisch neue Adressen für jede Transaktion.
+- **Quanten-Roadmap:** Bitcoin-Adressen (Hashes) sind bereits heute quantenresistent. Sollten Quantencomputer jemals Public Keys knacken können, wird Bitcoin auf 'Quantum-Resistant Signatures' upgraden.
 
 ---
 
-## Sektion 8: FAQ (Häufige Fragen)
+## Sektion 6: Verwandte Themen — Der Sicherheits-Stack
 
-### 1. Kann mein privater Schlüssel erraten werden?
-Nein. Es gibt $2^{256}$ Kombinationen. Das sind mehr Möglichkeiten als Atome im sichtbaren Universum. Selbst alle Computer der Erde zusammen bräuchten Billionen Jahre für einen einzigen Treffer.
-
-### 2. Kann ich Bitcoin empfangen, wenn mein Wallet offline ist?
-Ja. Ihre Bitcoin-Adresse befindet sich auf der öffentlichen Blockchain. Leute senden Geld an diese Adresse im Kassenbuch. Ihr "Wallet" hält lediglich den Schlüssel bereit, um diese Gelder später wieder freizuschalten.
-
-### 3. Was passiert, wenn mein Hardware-Wallet kaputtgeht?
-Das physische Gerät ist zweitrangig. Solange Sie Ihre **24-Wörter (Seed Phrase)** haben, können Sie Ihr Guthaben auf jedem anderen BIP-39 kompatiblen Gerät oder in einer App sofort wiederherstellen.
+Sicherheit ist ein mehrschichtiger Prozess:
+- [Wie sicher ist Bitcoin wirklich?](/de/blog/wie-sicher-ist-bitcoin/) → Die Kraft von SHA-256.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Der Wächter Ihrer Signaturen.
+- [Beste Bitcoin Wallets 2026](/de/blog/beste-bitcoin-wallets/) → Wo Ihre Schlüssel am besten aufgehoben sind.
+- [Ist Bitcoin anonym?](/de/blog/ist-bitcoin-anonym/) → Warum Adress-Management Privatsphäre bedeutet.
+- [Was ist ein Satoshi?](/de/blog/was-ist-ein-satoshi/) → Die kleinste Einheit auf Ihren Schlüsseln.
 
 ---
 
-## Sektion 9: Zusammenfassung — Die Macht des Schlüssels
+## Sektion 7: FAQ — Häufige Fragen zu Keys & Seeds
 
-Das Meistern Ihrer Schlüssel ist der Übergang vom passiven "Konsumenten" zum souveränen Akteur. Im alten System kontrolliert die Bank den Tresor. In Bitcoin **sind Sie der Tresor.** Mit großer Macht kommt große Verantwortung: Schützen Sie Ihre Private Keys, und Sie schützen Ihre Zukunft.
+### 1. Kann ich meine Seed Phrase in der Cloud speichern?
+**Nein.** Niemals. Im Jahr 2026 scannen KI-gestützte Bots das Internet und die Cloud nach Seed-Phrasen-Mustern. Sobald Ihre Wörter online sind, werden Ihre Coins in Millisekunden gestohlen. Nutzen Sie Stahl-Backups oder Papier im Tresor.
+
+### 2. Was passiert, wenn mein Hardware-Wallet verloren geht?
+Kein Problem. Ihre Bitcoins sind nicht *auf* dem Gerät, sondern auf der Blockchain. Solange Sie Ihre **Seed Phrase (24 Wörter)** haben, können Sie Ihre Schlüssel auf jedem neuen Gerät sofort wiederherstellen.
+
+### 3. Sterben private Schlüssel jemals ab?
+Nein. Die Schlüssel sind rein mathematisch. Sie verfallen nicht und benötigen kein Update. Ein Private Key von 2009 funktioniert heute noch genauso perfekt wie damals.
+
+---
+
+## Sektion 8: Zusammenfassung — Werden Sie Ihr eigener Tresor
+
+Das Meistern Ihrer Schlüssel ist der ultimative Schritt in die finanzielle Souveränität. Im alten System kontrolliert die Bank den Zugriff. Bei Bitcoin **sind Sie der Tresor.** Mit dieser großen Macht kommt eine ebenso große Verantwortung: Schützen Sie Ihre Private Keys, und Sie schützen Ihre Zukunft.
+
+**Ihr Schlüssel, Ihr Bitcoin. Ihre Freiheit.**
 
 ---
 
 ## 🧬 Semantische Entity-Map
-- **Haupt-Entität:** Private Key (Privater Schlüssel)
-- **Verwandte Entitäten:** Public Key, Bitcoin-Adresse, Seed Phrase (BIP-39), Asymmetrische Kryptografie, Elliptische Kurven (secp256k1), Eigenverwahrung, Hardware-Wallet, Multi-Sig.
+- **Haupt-Entität:** Public & Private Keys
+- **Verwandte Entitäten:** secp256k1, ECDSA, BIP39 Seed Phrase, Asymmetrische Kryptografie, SHA-256, Self-Custody, Hardware Wallet, Adress-Reuse, Quantenresistenz, Entropie.
+, Bitcoin-Adresse, Seed Phrase (BIP-39), Asymmetrische Kryptografie, Elliptische Kurven (secp256k1), Eigenverwahrung, Hardware-Wallet, Multi-Sig.

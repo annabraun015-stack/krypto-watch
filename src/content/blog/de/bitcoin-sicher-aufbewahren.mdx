@@ -24,130 +24,112 @@ export const faqSchema = {
   "mainEntity": [
     { "@type": "Question", "name": "Was ist der sicherste Weg, große Mengen Bitcoin zu lagern?", "acceptedAnswer": { "@type": "Answer", "text": "Die sicherste Methode ist 'Cold Storage' mittels einer dedizierten Hardware-Wallet (wie BitBox02, Ledger oder Trezor). Für extrem hohe Beträge ist ein 2-von-3 Multisig-Setup unter Verwendung verschiedener Hardware-Marken der Goldstandard für 2026." } },
     { "@type": "Question", "name": "Kann ich meine Seed Phrase auf dem Computer speichern?", "acceptedAnswer": { "@type": "Answer", "text": "Auf keinen Fall. Digitalisieren Sie Ihre Seed Phrase niemals. Machen Sie kein Foto, laden Sie sie nicht in eine Cloud hoch und tippen Sie sie nicht in eine Textdatei. Wenn Ihr Computer kompromittiert wird, können Hacker Ihr Wallet sofort rekonstruieren und Ihr Geld stehlen." } },
-    { "@type": "Question", "name": "Was ist der Unterschied zwischen einer PIN und der Seed Phrase?", "acceptedAnswer": { "@type": "Answer", "text": "Eine PIN schützt nur den Zugriff auf das physische Gerät (ähnlich wie eine Handy-Sperre). Die Seed Phrase (12-24 Wörter) ist das eigentliche Backup der privaten Schlüssel. Wird das Gerät zerstört, können Sie Ihr Guthaben mit der Seed Phrase auf einem neuen Gerät wiederherstellen." } }
-  ]
-};
+    { "@type": "Question", "name": "Was ist der Unterschied zwischen einer PIN und der Seed Phrase?", "acceptedAnswer": { "@type": "Answer", "text": "Eine PIN schützt nur den Zugriff auf das physische Gerät (ähnlich wie eine Handy-Sperre). Die Seed Phrase (12-24 Wörter) ist das eigentliche Backup der privaten Schlüssel. Wird das Gerät zerstört, können Sie Ihr Guthaben mit der Seed Phrase auf einem neuen Gerät wiederherstelle## 🎯 Einleitung: Die Verantwortung der Souveränität
+
+Bitcoin zu besitzen ist grundlegend anders als Geld auf einer Bank zu haben. Bei einer Bank besitzen Sie ein Zahlungsversprechen. Bei Bitcoin besitzen Sie das **Asset selbst** – aber nur dann, wenn Sie die Schlüssel kontrollieren. 
+
+Da der Wert von Bitcoin im Jahr 2026 neue Rekordhöhen erreicht, sind auch die Anreize für Hacker und physische Angreifer so hoch wie nie zuvor. Dieser Guide ist Ihr defensives Handbuch. Wir dekonstruieren die Mechanismen des 'Cold Storage' und zeigen Ihnen, wie Sie Ihr Vermögen gegen digitale Angreifer, physischen Raub und die eigenen Fehler absichern.
 
 ---
 
-## 🎯 Einleitung: Die Verantwortung der Souveränität
+## Sektion 1: Definition — Was ist 'Cold Storage'?
 
-Bitcoin zu besitzen ist grundlegend anders als Geld auf einer Bank zu haben. Bei einer Bank besitzen Sie ein Zahlungsversprechen. Bei Bitcoin besitzen Sie das **Asset selbst** – aber nur dann, wenn Sie die Schlüssel kontrollieren. Da der Wert von Bitcoin im Jahr 2026 neue Rekordhöhen erreicht, sind auch die Anreize für Hacker und Betrüger so hoch wie nie zuvor. Dieser Guide liefert Ihnen den bewährten Bauplan, um Ihre Bitcoins gegen digitale und physische Bedrohungen zu sichern.
+Sicherheit beginnt bei der strikten Trennung zwischen Ihrem Vermögen und der digitalen Außenwelt.
 
----
-
-## Sektion 1: Definition & die erste Regel der Verwahrung
-
-Der Ausgangspunkt jeder Sicherheitsstrategie ist das Verständnis darüber, wer die Kontrolle ausübt.
-
-<DefinitionBlock term="Cold Storage" icon="🧊">
-  **Cold Storage** bezeichnet die Praxis, die privaten Bitcoin-Schlüssel in einer Umgebung aufzubewahren, die komplett vom Internet getrennt ist. Durch die Verwendung spezialisierter Hardware, die niemals "online" geht, eliminieren Sie 99,9 % der Fernangriffsrisiken. Dies ist die einzig akzeptable Methode für nennenswerte Ersparnisse.
+<DefinitionBlock term="Air-Gapped Cold Storage" icon="🧊">
+  **Cold Storage** bezeichnet die Aufbewahrung privater Schlüssel in einer Umgebung, die physisch niemals mit dem Internet verbunden war. Im Jahr 2026 geht dies über Hardware-Wallets hinaus: Es umfasst den gesamten Prozess der 'kryptografischen Isolation', bei dem Transaktionen nur über QR-Codes oder SD-Karten signiert werden, ohne dass ein elektrischer Datenstrom zum PC besteht.
 </DefinitionBlock>
 
-Das Mantra der Industrie bleibt: *"Not your keys, not your coins."* Wenn Sie die Schlüssel nicht halten, sind Sie rechtlich nur ein unbesicherter Gläubiger eines Treuhänders.
-
 ---
 
-## Sektion 2: Das Kernkonzept (Die vielschichtige Verteidigung)
+## Sektion 2: Kernkonzept — Die '5$ Wrench Attack' Abwehr
 
-Ein professioneller Sicherheitsplan verlässt sich nicht auf nur ein Schloss. Er nutzt Schichten, um sicherzustellen, dass das Ganze auch dann sicher bleibt, wenn ein Teil versagt.
+Physische Sicherheit ist im Jahr 2026 genauso wichtig wie digitale. Wie reagieren Sie auf Drohungen?
 
 <ConceptVisual 
-  src="/images/blog/multi-layer-defense.png" 
-  alt="Mehrschichtiges Verteidigungsdiagramm für Bitcoin Sicherheit" 
-  type="diagram" 
-  caption="Ein robustes Setup besteht aus einer Hardware-Wallet (Schicht 1), einem physischen Stahl-Backup (Schicht 2) und fortgeschrittenen Funktionen wie einer Passphrase oder Multisig (Schicht 3)."
+  src="/images/blog/bitcoin-wallets.png" 
+  alt="Plausible Deniability Illustration" 
+  type="concept" 
+  caption="Nutzen Sie 'Plausible Deniability' (Glaubhafte Abstreitbarkeit). Durch eine zusätzliche Passphrase (25. Wort) können Sie zwei Wallets auf demselben Gerät erstellen: Ein 'Köder-Wallet' mit kleinem Betrag für Notfälle und Ihr echtes Tresor-Wallet, das ohne das geheime Wort unsichtbar bleibt."
 />
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Querschnitt einer High-Tech-Festung: Schicht 1 (Passwörter), Schicht 2 (Hardware-Wallet), Schicht 3 (Stahl-Backup), Schicht 4 (Multisig-Tresor). Jede Schicht leuchtet in bernsteinfarbenem Licht."
-- **Dateiname:** `multi-layer-defense.png`
 
 ---
 
-## Sektion 3: Wie es funktioniert (Der 100% Offline-Workflow)
+## Sektion 3: Funktionsweise — Multisig vs. Shamir Backup
 
-Um Bitcoin sicher zu lagern, dürfen Ihre privaten Schlüssel niemals einen digitalen Bildschirm oder eine Netzwerkverbindung "berühren".
+Wie eliminiert man den 'Single Point of Failure' (eine einzige Schwachstelle)?
 
 <ProcessStep steps={[
   {
-    title: "Offline-Generierung",
-    description: "Initialisieren Sie Ihr Hardware-Wallet. Das Gerät erzeugt intern eine 24-Wörter Seed Phrase mittels eines echten Zufallszahlengenerators."
+    title: "Multisig (2-von-3)",
+    description: "Sie nutzen drei verschiedene Hardware-Wallets. Um Geld zu bewegen, werden zwei Signaturen benötigt. Die Schlüssel liegen an geografisch getrennten Orten (z.B. Bankschließfach, Zuhause, Anwalt)."
   },
   {
-    title: "Analoges Backup",
-    description: "Schreiben Sie die Wörter sofort auf Papier oder stanzen Sie diese in Stahl. Tippen Sie sie niemals in ein anderes Gerät ein."
+    title: "Shamir Backup (SLIP-0039)",
+    description: "Anstatt einer 24-Wörter Liste teilen Sie Ihren Master-Schlüssel in mehrere Shares auf (z.B. 3 von 5). Nur wenn genügend Fragmente zusammenkommen, kann das Wallet wiederhergestellt werden."
   },
   {
-    title: "Test der Wiederherstellung",
-    description: "Löschen Sie das Gerät und stellen Sie es mit Ihren Wörtern wieder her, BEVOR Sie größere Beträge senden. Prüfen Sie, ob Ihr Backup funktioniert."
-  },
-  {
-    title: "Cold-Transaktion",
-    description: "Signieren Sie Ihre Transaktionen über die Hardware-Tasten des Geräts. Der verbundene Computer sieht nur die fertige Signatur, nie den Schlüssel."
+    title: "Collaborative Custody",
+    description: "Sie halten zwei Schlüssel, ein spezialisierter Dienstleister hält einen. Dies bietet Sicherheit gegen Verlust, ohne dass der Dienstleister allein über Ihr Geld verfügen kann."
   }
 ]} />
 
 ---
 
-## Sektion 4: Papier vs. Stahl (Schutz vor Katastrophen)
+## Sektion 4: Physikalische OpSec (Operational Security)
 
-Wenn Ihr Haus brennt oder überflutet wird, überlebt Ihr Bitcoin dann?
-
-| Sicherungsmedium | Feuerschutz | Wasserschutz | Langlebigkeit |
-|---|---|---|---|
-| **Digitale Cloud** | 0/10 (Hackbar) | 10/10 | Gering (Server-Ausfall) |
-| **Papier-Notiz** | 1/10 (Brennbar) | 2/10 | Hoch (Statisch) |
-| **Edelstahl/Titan** | 10/10 | 10/10 | Ewig |
-
-<ConceptVisual 
-  src="/images/blog/steel-vs-paper-test.png" 
-  alt="Katastrophen-Test: Papier-Backup gegen Stahl-Seed-Platte" 
-  type="comparison" 
-  caption="Stahl-Backups widerstehen Temperaturen von Hausbränden (bis zu 1400 °C), die ein Papier-Backup in Sekunden zu Asche verwandeln würden."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Split-Screen: Papier brennt im Feuer vs. eine Metall-Seed-Platte bleibt in denselben Flammen unversehrt. Dramatische Beleuchtung, hoher Kontrast."
-- **Dateiname:** `steel-vs-paper-test.png`
+Ihr Backup ist nur so sicher wie sein Versteck. Wo lagern Sie den 'Stahl'?
+- **Steel Backups:** Verzichten Sie auf Papier. Im Jahr 2026 sind Edelstahl-Platten Standard, da sie Hausbrände und Überschwemmungen überdauern.
+- **Geografische Redundanz:** Lagern Sie niemals die Hardware-Wallet und das Backup am selben Ort. Ein Einbruch oder Brand würde sonst beide vernichten.
+- **Stille:** Die goldene Regel der Sicherheit: Sprechen Sie niemals öffentlich über Ihre Bestände oder Ihre Sicherheitsmaßnahmen. Social Engineering ist oft effektiver als jeder Hack.
 
 ---
 
-## Sektion 5: Die fortgeschrittene Wahl (Multisig)
+## Sektion 5: Experten-Wissen — MPC & Hardware-Härtung
 
-Für institutionelle Sicherheit müssen Sie den "Single Point of Failure" eliminieren.
-- **Singlesig:** Ein Schlüssel. Wird dieser gestohlen, ist das Geld weg.
-- **Multisig (2-von-3):** Drei Schlüssel an verschiedenen geografischen Orten. Man benötigt beliebige zwei, um Geld zu bewegen. Wenn ein Schlüssel gestohlen wird, sind die Bestände immer noch 100 % sicher. Dies ist die ultimative Verteidigung gegen physischen Raub.
-
----
-
-## Sektion 6: Verwandte Themen (Die Landkarte der Souveränität)
-
-Sicherheit ist eine ganzheitliche Praxis. Vertiefen Sie hier Ihr Wissen:
-- [Beste Bitcoin Wallets 2026](/de/blog/beste-bitcoin-wallets/) → Die Wahl der richtigen Hardware.
-- [Public vs Private Keys](/de/blog/public-private-keys/) → Die mathematischen Grundlagen.
-- [Bestätigungen verstehen](/de/blog/bitcoin-bestaetigungen/) → Einzahlungen verifizieren.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Warum der eigene Server der letzte Schritt zur Privatsphäre ist.
-- [Mythen über Bitcoin](/de/blog/bitcoin-mythen-aufgedeckt/) → Gängige Ängste um die Lagerung widerlegt.
+Was ist der Stand der Technik für institutionelle Sicherheit?
+- **MPC (Multi-Party Computation):** Eine moderne Alternative zu Multisig, bei der der Schlüssel nie als Ganzes existiert, sondern in mathematischen Fragmenten berechnet wird.
+- **Secure Elements:** Führende Wallets (wie die [BitBox02](/de/blog/beste-bitcoin-wallets/)) nutzen dedizierte Sicherheitschips, die extrem resistent gegen physisches Auslesen durch spezialisierte Labore sind.
+- **Antiklepto-Protokolle:** Verhindern, dass manipulierte Computer während des Signiervorgangs private Informationen über den künstlichen Zufall der Signatur 'stehlen'.
 
 ---
 
-## Sektion 7: FAQ (Sicherheits-Parodoxa)
+## Sektion 6: Verwandte Themen — Der Sicherheits-Stack
 
-### 1. Enthält das Hardware-Wallet echte Bitcoins?
-Nein. Es enthält die **Privaten Schlüssel**. Bitcoin existiert nur als Datensatz auf der globalen Blockchain. Die Hardware-Wallet ist im Grunde ein hochgesicherter "digitaler Stift", mit dem Sie die Erlaubnis unterschreiben, diese Daten zu bewegen.
-
-### 2. Können Hacker meine BTC stehlen, wenn sie das Gerät finden?
-Nicht ohne Ihre **PIN**. Die meisten Geräte führen nach 3 bis 10 Fehlversuchen einen Werksreset durch. Findet der Dieb jedoch Ihre **Seed Phrase** (die 24 Wörter), braucht er das Gerät nicht – er kann sofort alles stehlen.
-
-### 3. Was ist eine 'Passphrase' (25. Wort)?
-Eine Passphrase ist ein extra Wort, das wie ein "Salz" für Ihre Seed Phrase wirkt. Ohne sie führen die 24 Wörter zu einem völlig leeren Wallet. Dies bietet "glaubhafte Abstreitbarkeit" (Plausible Deniability) bei physischen Drohungen.
+Bauen Sie Ihre Festung Stein für Stein auf:
+- [Beste Bitcoin Wallets](/de/blog/beste-bitcoin-wallets/) → Die Wahl des richtigen Werkzeugs.
+- [Public & Private Keys](/de/blog/public-private-keys/) → Das Fundament der Kryptografie.
+- [Bitcoin Rechtliche Lage](/de/blog/bitcoin-rechtliche-lage-deutschland/) → Rechtlicher Schutz bei Diebstahl.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Warum Privatsphäre Sicherheit bedeutet.
+- [Was ist Bitcoin Mining?](/de/blog/bitcoin-mining-erklaert/) → Warum das Netzwerk Ihren Tresor schützt.
 
 ---
 
-## Sektion 8: Zusammenfassung — Die Zukunft sichern
+## Sektion 7: FAQ — Häufige Fehler bei der Aufbewahrung
 
-Bitcoin sicher zu lagern bedeutet, sich von blindem Vertrauen in Dritte hin zu Vertrauen in sich selbst und die Mathematik zu bewegen. Durch die Nutzung eines Hardware-Wallets, die Sicherung der Schlüssel auf Stahl und den strikten Verzicht auf Digitalisierung Ihrer Recovery-Daten erreichen Sie eine finanzielle Unabhängigkeit, die früher unvorstellbar war. **Wahrer Reichtum zeigt sich nicht darin, was man besitzt, sondern darin, was man sicher halten kann.**
+### 1. Ist eine Cloud-Speicherung mit Passwort sicher?
+**Nein.** Hacker nutzen KI-Tools, um Cloud-Speicher systematisch nach 12- oder 24-Wörter-Mustern zu scannen. Selbst verschlüsselte Dateien können durch Quanten-Computing oder schwache Passwörter in Zukunft geknackt werden. Nur die analoge Lagerung (Stahl/Papier) ist immun gegen Online-Angriffe.
+
+### 2. Was passiert, wenn ich mein Hardware-Wallet verliere?
+Nichts Schlimmes, solange Sie Ihr **Backup (Seed Phrase)** haben. Die Hardware-Wallet ist nur ein Display-Adapter. Sie können Ihre Wörter in jedes neue Gerät eingeben und haben sofort vollen Zugriff auf Ihre Coins.
+
+### 3. Sollte ich mein Backup im Bankschließfach lagern?
+Ein Schließfach ist gut für ein *Teil-Backup* (z.B. einen Share eines Shamir-Backups). Lagern Sie dort niemals das einzige Backup Ihres gesamten Vermögens, da Sie sonst von den Öffnungszeiten und der Kooperation der Bank abhängig sind (Gegenpartei-Risiko).
+
+---
+
+## Sektion 8: Zusammenfassung — Die Zukunft gehört den Vorsichtigen
+
+Bitcoin sicher zu lagern bedeutet, sich von blindem Vertrauen in Dritte hin zu Vertrauen in die Mathematik zu bewegen. Durch die Kombination von Hardware-Isolation, Stahl-Backups und strategischer Passphrasen-Nutzung erreichen Sie ein Sicherheitsniveau, das vor wenigen Jahren noch Großbanken vorbehalten war. 
+
+**Wahre Souveränität ist kein Ziel, sondern ein Prozess. Bleiben Sie wachsam, bleiben Sie offline.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Sicher Aufbewahren
+- **Verwandte Entitäten:** Cold Storage, Air-gapped, Seed Phrase, Shamir Backup, Multisig, MPC, Passphrase, OpSec, 5$ Wrench Attack, BitBox02, Ledger, Trezor.
+llbar war. **Wahrer Reichtum zeigt sich nicht darin, was man besitzt, sondern darin, was man sicher halten kann.**
 
 ---
 

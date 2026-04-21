@@ -32,122 +32,118 @@ export const faqSchema = {
 
 ## 🎯 Einleitung: Finanzen in Lichtgeschwindigkeit
 
-Im Jahr 2026 hat sich Bitcoins "Layer 1" (die Haupt-Blockchain) zur ultimativen globalen Abrechnungsschicht entwickelt – das digitale Äquivalent eines massiven Goldtresors. Aber man geht nicht zu einem Goldtresor, um einen Kaffee zu bezahlen. Das **Lightning Network** ist die Hochgeschwindigkeitsstadt, die auf diesem Tresor erbaut wurde. Es erlaubt Bitcoin, auf Milliarden täglicher Transaktionen zu skalieren, die in Millisekunden und für Bruchteile eines Cents abgewickelt werden.
+Im Jahr 2026 hat sich Bitcoins "Layer 1" (die Haupt-Blockchain) zur ultimativen globalen Abrechnungsschicht entwickelt – das digitale Äquivalent einer massiven Goldreserve. 
+
+Aber man geht nicht zu einer Goldreserve, um einen Kaffee zu bezahlen. Das **Lightning Network** ist die Hochgeschwindigkeitsstadt, die auf diesem Fundament erbaut wurde. Es erlaubt Bitcoin, auf Milliarden täglicher Transaktionen zu skalieren, die in Millisekunden und für Gebühren im Sub-Cent-Bereich abgewickelt werden. In diesem Guide dekonstruieren wir die Magie hinter den Zahlungskanälen und zeigen Ihnen, wie Bitcoin heute den Alltag von Millionen Menschen revolutioniert.
 
 ---
 
-## Sektion 1: Definition & der geschichtete Ansatz
+## Sektion 1: Definition — Was ist ein 'Layer 2'?
 
-Warum Bitcoin ein "zweites Stockwerk" benötigt.
+Warum Bitcoin ein "zweites Stockwerk" benötigt, um die Welt zu erobern.
 
-<DefinitionBlock term="Layer 2 Skalierung" icon="🏗️">
-  **Layer 2** bezeichnet sekundäre Protokolle, die *auf* einer Blockchain aufbauen. Das Lightning Network nutzt die Sicherheit der Bitcoin-Blockchain (Layer 1), um Streitigkeiten zu schlichten, wickelt aber die eigentlichen Zahlungen abseits der Kette ab. Dies ermöglicht unendliche Geschwindigkeit, ohne das öffentliche Kassenbuch zu überlasten.
+<DefinitionBlock term="Skalierungs-Layer" icon="🏗️">
+  **Layer 2** bezeichnet Protokolle, die *auf* einer bestehenden Blockchain aufbauen. Das Lightning Network nutzt die Sicherheit der Bitcoin-Hauptkette als Anker, wickelt aber die eigentliche Transaktionslast abseits der Kette (Off-Chain) ab. Dies ermöglicht theoretisch unbegrenzte Skalierbarkeit, ohne die Dezentralität des Fundaments zu gefährden.
 </DefinitionBlock>
 
-Durch das Auslagern kleiner Zahlungen bewahrt Lightning die Dezentralität von Bitcoin und ermöglicht gleichzeitig den weltweiten Handel.
-
 ---
 
-## Sektion 2: Das Kernkonzept (Wolkenkratzer auf Fels)
+## Sektion 2: Kernkonzept — Zahlungskanäle & HTLCs
 
-Die Visualisierung der Beziehung zwischen dem langsamen, sicheren Fundament und der schnellen, agilen Stadt.
+Die Sicherheit von Lightning basiert nicht auf Vertrauen, sondern auf ausgeklügelten Smart Contracts.
 
 <ConceptVisual 
-  src="/images/blog/lightning-architecture-concept.png" 
-  alt="Bitcoin Layer 1 vs Layer 2 Architektur" 
+  src="/images/blog/lightning-network.png" 
+  alt="Lightning Zahlungskanal Visualisierung" 
   type="concept" 
-  caption="Die Bitcoin-Blockchain ist das 'Fundament' – langsam, schwer und unzerstörbar. Das Lightning Network ist der 'Wolkenkratzer' – darauf gebaut, aber optimiert für Geschwindigkeit, Höhe und massiven Durchsatz."
+  caption="Ein Zahlungskanal ist wie ein digitaler Abakus zwischen zwei Parteien. Die Perlen (Sats) werden hin und her geschoben. Durch Hashed Timelock Contracts (HTLCs) wird sichergestellt, dass eine Zahlung entweder komplett ankommt oder nach einer Zeitfrist an den Sender zurückfällt – Diebstahl ist mathematisch ausgeschlossen."
 />
 
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Architektonische Visualisierung: Ein solides Felsfundament (Bitcoin Layer 1) mit Runen. Darauf ein futuristischer Glas-Wolkenkratzer (Lightning) mit elektrischen Adern."
-- **Dateiname:** `lightning-architecture-concept.png`
+Das Besondere: Sie müssen nicht mit jedem einen Kanal haben. Das Netzwerk nutzt das "Small World" Prinzip, um Zahlungen über mehrere Zwischenstationen (Hops) zu routen.
 
 ---
 
-## Sektion 3: Wie es funktioniert (Die Bierdeckel-Analogie)
+## Sektion 3: Funktionsweise — Der Weg eines 'Sats'
 
-Lightning funktioniert über **Zahlungskanäle**. Der beste Vergleich ist der klassische "Bierdeckel" in der Kneipe.
+Wie findet eine Zahlung ihren Weg durch ein Netz von über 100.000 Nodes?
 
 <ProcessStep steps={[
   {
-    title: "Kanal öffnen",
-    description: "Sie und ein Partner sperren BTC in einen Smart Contract auf der Blockchain. Das ist das Öffnen des 'Bierdeckels'."
+    title: "Kanal-Finanzierung",
+    description: "Sie senden BTC in einen Multi-Sig-Safe auf der Blockchain. Dies ist die Kapazität, die Sie im Netzwerk bewegen können."
   },
   {
-    title: "Off-Chain Zahlungen",
-    description: "Sie senden digitale Schuldscheine hin und her. Sie bezahlen ein Bier, dann noch eins. Keine Transaktion belastet bisher die Blockchain."
+    title: "Onion Routing",
+    description: "Wie bei Tor wird die Route verschlüsselt. Jede Zwischen-Node sieht nur, von wem sie Geld bekommt und an wen sie es weitergeben soll – aber nicht den Absender oder Empfänger."
   },
   {
-    title: "Geroutete Zahlungen",
-    description: "Sie können jeden im Netzwerk bezahlen, indem Sie über die Kanäle anderer Leute 'hüpfen' – wie in einem Vertrauensnetzwerk."
+    title: "Gossip Protokoll",
+    description: "Nodes tauschen ständig Informationen über neue Kanäle und Gebühren aus, damit Ihr Wallet immer den günstigsten und schnellsten Weg findet."
   },
   {
-    title: "Finale Abrechnung",
-    description: "Wenn der Deckel geschlossen wird, wird der Endstand auf der Blockchain festgehalten. Tausende Zahlungen werden zu einer einzigen."
+    title: "Settlement (Abrechnung)",
+    description: "Wenn Sie den Kanal schließen, wird der Endgehalt aller Transaktionen in einem einzigen Block auf der Haupt-Blockchain verewigt."
   }
 ]} />
 
 ---
 
-## Sektion 4: Der Netzwerkeffekt (Onion-Routing)
+## Sektion 4: Die Herausforderung — Liquidity Management
 
-Eine der größten Stärken von Lightning ist seine inhärente Privatsphäre.
+Im Jahr 2026 ist das Management von "Inbound Liquidity" die wichtigste Fähigkeit für Lightning-Nutzer.
 
-<ConceptVisual 
-  src="/images/blog/lightning-bar-tab.png" 
-  alt="Diagramm: Lightning Network Bierdeckel-Analogie" 
-  type="comparison" 
-  caption="So wie ein physischer Bierdeckel viele kleine Getränke in eine einzige Abrechnung zusammenfasst, bündelt Lightning Millionen kleinster Zahlungen in ein einziges On-Chain Settlement."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Geteilter Bildschirm: Links ein Bierdeckel mit Bleistiftstrichen. Rechts ein Smartphone mit offenem Lightning-Kanal. Verbindung von Tradition und Protokoll."
-- **Dateiname:** `lightning-bar-tab.png`
-
----
-
-## Sektion 5: Layer 1 vs. Layer 2 Vergleich
-
-Entscheiden Sie, welchen "Zug" Ihr Geld für die Reise nehmen soll.
-
-| Merkmal | Bitcoin On-Chain (L1) | Lightning Network (L2) |
+| Konzept | Bedeutung | Lösung 2026 |
 |---|---|---|
-| **Abrechnungszeit** | 10 - 60 Minuten | Millisekunden |
-| **Gebühren** | 1,00 € - 100,00 €+ | 0,0001 € - 0,05 € |
-| **Kapazität** | ~7 pro Sekunde | Millionen pro Sekunde |
-| **Privatsphäre** | Öffentlich (Transparent) | Privat (Verschlüsselt) |
-| **Anwendung** | Hauskauf / Vermögensspeicher | Kaffee / Trinkgeld / Abos |
+| **Outbound Liquidity** | Ihr Vermögen, das Sie senden können. | Einfaches Aufladen des Kanals. |
+| **Inbound Liquidity** | Platz in Ihrem Kanal, um Geld zu empfangen. | Nutzung von 'LSP' (Lightning Service Providers). |
+| **Routing Fees** | Kleine Gebühren für die Nutzung fremder Kanäle. | Automatische Routenoptimierung im Wallet. |
 
 ---
 
-## Sektion 6: Verwandte Themen (Der Skalierungs-Stack)
+## Sektion 5: Das Ökosystem — LSPs und Super-Nodes
 
-Lightning ist Teil einer größeren Evolution des Bitcoin-Netzwerks:
-- [Ist Bitcoin anonym?](/de/blog/ist-bitcoin-anonym/) → Wie Lightning den Datenschutz verbessert.
-- [Public & Private Keys](/de/blog/public-private-keys/) → Die Schlüssel, die Ihre Kanäle kontrollieren.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Warum ein eigener Lightning-Node dem Netzwerk hilft.
-- [Beste Wallets 2026](/de/blog/beste-bitcoin-wallets/) → Welche Wallets unterstützen Lightning nativ?
-- [Das 21 Millionen Limit](/de/blog/bitcoin-21-millionen-limit/) → Warum wir nicht einfach die Blockgröße erhöhen.
+Um Lightning massentauglich zu machen, hat sich 2026 eine neue Infrastruktur gebildet: **Lightning Service Provider (LSPs)**.
+- Sie öffnen automatisch Kanäle für neue Nutzer (Just-in-Time Channels).
+- Sie sorgen für ausreichend Liquidität, damit Zahlungen niemals fehlschlagen.
+- Sie bieten "Watchtower"-Dienste an, die Ihren Kanal schützen, während Ihr Handy offline ist.
 
 ---
 
-## Sektion 7: FAQ (Risiken & Realitäten)
+## Sektion 6: Verwandte Themen — Der Skalierungs-Stack
 
-### 1. Kann jemand mein Geld bei Lightning stehlen?
-Wenn Sie ein **Non-Custodial** Wallet nutzen (wie Phoenix), ist Ihr Geld durch Smart Contracts geschützt. Das einzige Risiko besteht, wenn Sie monatelang offline sind und ein Partner versucht, den Kanal mit einem alten Stand zu schließen. 2026 verhindern **Watchtowers** dies vollautomatisch.
-
-### 2. Warum sind manche Lightning-Wallets 'Custodial'?
-Custodial Wallets (wie Wallet of Satoshi) sind einfacher für Anfänger, weil die Firma die Kanäle für Sie verwaltet. Das bedeutet aber auch, dass sie Ihre Schlüssel halten. Für echte Sicherheit sollten Sie zu einem Non-Custodial Wallet wechseln, sobald Sie sich sicher fühlen.
-
-### 3. Was ist 'Liquidität' bei Lightning?
-Stellen Sie sich einen Kanal wie eine Röhre mit Kugeln vor. Um Geld zu empfangen, müssen Kugeln auf der Seite des Senders liegen. Wenn alle Kugeln schon auf Ihrer Seite sind, haben Sie keine "Inbound Liquidity" und können nichts mehr empfangen. Diesen Fluss zu managen, ist die Hauptaufgabe für Lightning-Nutzer.
+Lightning ist nur ein Puzzleteil der Bitcoin-Evolution:
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Warum Ihre Node das Herz von Lightning ist.
+- [Public & Private Keys](/de/blog/public-private-keys/) → Die kryptografische Basis.
+- [Ist Bitcoin anonym?](/de/blog/ist-bitcoin-anonym/) → Warum Lightning privater ist als On-Chain.
+- [Beste Bitcoin Wallets](/de/blog/beste-bitcoin-wallets/) → Die besten Lightning-Apps (Phoenix, Mutiny).
+- [Bitcoin 21 Millionen Limit](/de/blog/bitcoin-21-millionen-limit/) → Warum L2 die einzige Lösung ist.
 
 ---
 
-## Sektion 8: Zusammenfassung — Die Zukunft ist sofort
+## Sektion 7: FAQ — Experten-Wissen zu Layer 2
 
-Das Lightning Network hat Satoshis Vision eines "elektronischen Cash-Systems" wahr gemacht. Im Jahr 2026 ist Bitcoin sowohl das härteste Sparkonto der Welt (Layer 1) als auch das schnellste Zahlungssystem (Layer 2). Durch die Trennung von **Sicherheit** und **Geschwindigkeit** hat Bitcoin das Skalierungs-Trilemma gelöst und den Weg in eine hyper-bitcoinisierte Zukunft geebnet.
+### 1. Muss ich online sein, um Geld zu empfangen?
+Früher war das ein Problem. Im Jahr 2026 ermöglichen Protokolle wie **VLS (Validating Lightning Signer)** und mobile LSPs den Empfang von Zahlungen, auch wenn das eigentliche Wallet-Gerät offline ist.
+
+### 2. Was sind 'Submarine Swaps'?
+Dies ist eine Technik, um Bitcoin nahtlos zwischen der Haupt-Blockchain und dem Lightning Network zu verschieben, ohne eine Börse nutzen zu müssen. Es ist ein "Vertrauensloser Tausch", der direkt im Wallet stattfindet.
+
+### 3. Sterben kleine Transaktionen auf Layer 1 aus?
+Ja. Im Jahr 2026 ist die Haupt-Blockchain für Transaktionen unter 500 € oft zu teuer. Lightning ist nicht nur eine Option, sondern die notwendige Antwort auf Bitcoins Erfolg als globales Asset.
+
+---
+
+## Sektion 8: Zusammenfassung — Die Hyper-Bitcoinisierung startet hier
+
+Das Lightning Network hat Satoshis Vision eines "elektronischen Cash-Systems" wahr gemacht. Im Jahr 2026 ist Bitcoin sowohl die härteste Reservewährung der Welt (Layer 1) als auch das effizienteste Zahlungssystem der Geschichte (Layer 2). Durch die perfekte Balance zwischen **Sicherheit** und **Geschwindigkeit** hat Bitcoin sein Skalierungs-Problem gelöst.
+
+**Die Zukunft des Geldes ist nicht nur digital — sie ist sofort.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Lightning Network
+- **Verwandte Entitäten:** Layer 2, HTLC, Onion Routing, Inbound Liquidity, LSP, Gossip Protocol, Submarine Swaps, Skalierungs-Trilemma, Mikrozahlungen, Phoenix Wallet, Watchtowers.
 
 ---
 

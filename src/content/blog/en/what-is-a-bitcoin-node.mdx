@@ -30,127 +30,126 @@ export const faqSchema = {
 
 ---
 
-## 🎯 What is a Bitcoin Node? (Definition & Importance)
+## 🎯 Introduction: The Audience of the Ledger
 
-At its heart, Bitcoin is a system of **"Don't Trust, Verify."** In traditional finance, you trust a bank to tell you how much money is in your account. In Bitcoin, there represents no CEO, no central bank, and no IT administrator. Instead, tens of thousands of computers worldwide maintain the network's state simultaneously. These computers are the **Nodes**.
+Imagine a world where you can send any amount of money to anyone across the globe instantly, for a fraction of a cent, without asking permission from a bank or a government. Launching in 2009 by the anonymous [Satoshi Nakamoto](/en/blog/who-is-satoshi-nakamoto/), Bitcoin represents the first time in history that humans have created a purely digital, decentralized, and scarce asset.
+
+At its heart, Bitcoin is a system of **"Don't Trust, Verify."** In the legacy financial system, you are forced to trust a bank's internal database to tell you how much money is in your account. In Bitcoin, there represents no CEO, no central bank, and no IT administrator. Instead, tens of thousands of computers worldwide maintain the network's state simultaneously. These computers are the **Nodes**.
+
+---
+
+## Section 1: Definition & The Auditor’s Role
+
+Bitcoin is often described as a "distributed ledger," but that ledger only remains honest because people are checking it.
 
 <DefinitionBlock term="Bitcoin Node" icon="🖥️">
-  A **Bitcoin Node** is any computer that connects to the Bitcoin peer-to-peer network and follows the consensus rules of the protocol. A **Full Node** downloads the entire history of the blockchain (the ledger) and verifies every single transaction from Day 1 (2009) to ensure total rule compliance.
+  A **Bitcoin Node** is any computer that connects to the Bitcoin peer-to-peer network and follows the consensus rules of the protocol. A **Full Node** downloads the entire history of the blockchain (the ledger) and verifies every single transaction from Day 1 (2009) to ensure total compliance with rules like the [21 Million Limit](/en/blog/bitcoin-supply-21-million/).
 </DefinitionBlock>
 
-Why is this important? If you do not run your own node, you are choosing to trust someone else's node. When you check your balance on a mobile app or a hardware wallet interface, you are asking their server for the truth. **True financial sovereignty only begins when you audit the network yourself.**
+Why does this role matter? Because Bitcoin is "permissionless," anyone can try to broadcast a transaction. However, without Nodes to act as "Economic Architects," a malicious actor could try to spend money twice or create coins out of thin air. Nodes ensure that the "Physical Laws" of the Bitcoin protocol are never broken. **True financial sovereignty only begins when you audit the network yourself.**
 
 ---
 
-## Technical Duties of a Node (Routing & The Mempool)
+## Section 2: Core Concept: Separation of Powers (Nodes vs. Miners)
 
-When you switch on a Bitcoin Full Node (often running on a small Raspberry Pi or an old laptop), it begins the **Initial Block Download (IBD)**. Your computer traces every movement of Bitcoin ever made, performing the cryptographic math for over 800,000 blocks. 
-
-Once synchronized, your node exists in a state of constant auditing:
-
-1.  **Routing:** Your node receives new transaction broadcasts from users and passes them into the global **Mempool** (the waiting room for transactions).
-2.  **Executive Rule Check:** Your node receives newly mined blocks from miners and "dissects" them down to the last decimal. If a miner tries to spend Bitcoin they don't have, or tries to bypass the [21 Million Limit](/en/blog/bitcoin-supply-21-million/), your node rejects the block instantly.
-3.  **Private Access:** Your node allows you to query your [Private Keys](/en/blog/public-private-keys/) securely without ever leaking your IP address or wallet history to a third-party company.
-
----
-
-## 🧠 Core Concept: Separation of Powers (Nodes vs. Miners)
-
-One of the most profound aspects of Bitcoin is its system of "Checks and Balances." It is common for beginners to confuse Nodes with [Miners](/en/blog/bitcoin-mining/). To understand the difference, think of a legal system:
+One of the most profound aspects of Bitcoin is its system of "Checks and Balances." It is common for beginners to confuse Nodes with [Miners](/en/blog/bitcoin-mining/). To understand the difference, think of a legal system with specific divisions of labor:
 
 <ConceptVisual 
   src="/images/blog/node-vs-miner.png" 
   alt="The Auditor vs The Writer Analogy" 
   type="comparison" 
-  caption="Miners act as the Executive Branch (producing blocks), while Nodes act as the Judicial Branch (auditing and rejecting invalid work)."
+  caption="Miners act as the Executive Branch (producing blocks/data), while Nodes act as the Judicial Branch (auditing and rejecting invalid work). One creates, the other validates."
 />
 
-*   **The Miners (The Producers):** Usually large corporations with massive server farms. They spend electricity to "write" the ledger and are paid in Bitcoin for this service.
-*   **The Nodes (The Auditors):** Ordinary people with $200 computers in their basements. They get paid $0. They simply check the work of the miners.
+*   **The Miners (The Producers):** Usually large corporations with massive server farms. They spend electricity to "write" the ledger. They compete to solve mathematical puzzles and are paid in newly issued Bitcoin.
+*   **The Nodes (The Auditors):** Ordinary people with $200 computers in their basements. They get paid nothing. They simply check the work of the miners.
 
-**Who has the real power?** The Nodes. In the 2017 "Blocksize War," over 80% of miners tried to change Bitcoin's rules to benefit themselves. The global network of independent node operators rebelled, refused to install the update, and essentially "fired" the miners. Bitcoin users set the law; miners must follow it.
+**Who has the real power?** The Nodes. In the 2017 "Blocksize War," centralized mining giants tried to change Bitcoin's rules for profit. The global network of independent node operators rebelled, refused to install the update, and essentially "fired" the miners by making their blocks worthless. In Bitcoin, users set the law; miners must follow it.
 
 ---
 
-## Step-by-Step: Initial Block Download (IBD)
+## Section 3: How It Works: The Lifecycle of a Node
 
-Starting a node is a rite of passage. Here is how your node joins the global consensus:
+When you switch on a Bitcoin Full Node for the first time, it begins the **Initial Block Download (IBD)**. Your computer reaches out to the network and begins downloading every movement of Bitcoin ever made.
 
 <ProcessStep steps={[
   {
     title: "Genesis Connection",
-    description: "Your node discovers peers and downloads the first block (The Genesis Block) from January 2009."
+    description: "Your node discovers peers and downloads the first-ever block from January 2009. It starts from zero trust."
   },
   {
-    title: "The Historical Slog",
-    description: "It re-calculates 15+ years of cryptographic signatures to ensure every 'spent' coin was actually owned by the sender."
+    title: "Historical Auditing",
+    description: "It re-calculates 17+ years of cryptographic signatures to ensure every 'spent' coin was actually owned by the sender."
   },
   {
-    title: "Rule Enforcement",
-    description: "It checks that no miner ever cheated and that the 21 million supply schedule has been strictly enforced."
+    title: "Mempool Monitoring",
+    description: "Once synced, your node listens for new transactions worldwide, holding them in the 'Mempool' waiting room for miners."
   },
   {
-    title: "The Chaintip Sync",
-    description: "Once finished, your node reaches the 'tip' of the chain and begins auditing new transactions in real-time."
+    title: "Chaintip Sync",
+    description: "Your node finally reaches the 'tip' of the chain, receiving new blocks every 10 minutes and verifying them instantly."
   }
 ]} />
 
-*Note: Depending on your internet speed and hardware (SSD vs HDD), this process can take anywhere from 2 days to 2 weeks.*
+*Note: Depending on your hardware (SSD vs HDD), this process can take anywhere from 2 days to 2 weeks. It is the cost of becoming a sovereign peer.*
 
 ---
 
-## Node Archetypes (Which one do you need?)
+## Section 4: Technical Specs & Node Archetypes
+
+Not every participant needs to store the entire 600GB+ blockchain. The network utilizes different types of nodes for different environments:
 
 | Type | Data Stored | Validation | Best For |
 |------|-------------|------------|----------|
-| **Full Node** | 600GB+ | 100% Autarky | Sovereign Users |
-| **Pruned Node** | ~10GB | 100% Autarky (Space Saver) | Laptops / Small SSDs |
-| **SPV (Light Node)** | Headers Only | Partial (Trusts others) | Mobile Apps |
-| **Archival Node** | Everything + Indices | 100% + Full History | Block Explorers |
+| **Full Node** | 600GB+ | 100% Autarky | Sovereign Home Users |
+| **Pruned Node** | ~10GB | 100% Autarky (Space Saver) | Laptops & Small SSDs |
+| **SPV (Light Node)** | Headers Only | Partial (Trusts others) | Mobile Wallets |
+| **Archival Node** | Everything + Indices | 100% + Searchable History | Block Explorers |
+
+Light nodes (SPV) are what most people use on their phones. While convenient, they "leak" information because they have to ask a third-party Full Node for their balance. For true privacy, a Full Node is the only way.
 
 ---
 
-## ⚡ The Umbrel Experience: Your Sovereign Server
+## Section 5: The Blockchain Trilemma & Decentralization
 
-In 2026, running a node is no longer just about auditing money. With operating systems like **UmbrelOS** or **Start9**, your node becomes a "Sovereign Server" in your home. With one click, your node can host:
+Why doesn't Bitcoin just make blocks bigger or faster like Solana? This gets to the **Blockchain Trilemma**—the trade-off between Security, Scalability, and Decentralization.
 
-1.  **Lightning Network Hub:** Open your own channels and route payments.
-2.  **Mempool.space:** Your own visual interface for transaction fees.
-3.  **Personal Cloud:** Replace Google Drive or Dropbox with your own encrypted storage.
-4.  **Nostr Relays:** Host your own server for decentralized social media.
+High-speed networks require incredibly expensive hardware (data centers). If only rich corporations can run nodes, the network becomes centralized and easy to censor. Bitcoin's core promise is that its rules are "cheap to verify." Even a student with a used laptop must be able to run a node to check their government and the miners. **If an ordinary person cannot run a node, the network is not truly decentralized.**
 
 ---
 
-## Decentralization & The Blockchain Trilemma
+## Section 6: Practical Benefits: Why Run Your Own?
 
-Why doesn't Bitcoin just make blocks bigger or faster like Solana? This gets to the **Blockchain Trilemma** (Security, Scalability, and Decentralization). 
+In 2026, running a node is no longer just for "techies." It provides massive tangible benefits:
 
-High-speed networks require incredibly expensive hardware, which means only data centers can run nodes. This leads back to centralization. Bitcoin's core promise is that even a student with a used laptop in a developing country must be able to run a node to check their government and the miners. **If a normal person cannot run a node, the network is not decentralized.**
+1.  **Peer-to-Peer Privacy:** When you check your balance on a third-party app, you tell that company your IP address and every Bitcoin address you own. A node hides this from the world.
+2.  **Unstoppable Transactions:** When you broadcast a transaction from your own node, you don't need to ask an exchange for permission. Your transaction is sent directly to the global network.
+3.  **Sovereign Hosting:** Modern OS like **Umbrel** or **Start9** allow your node to host your own encrypted cloud, password manager, and private social media (Nostr) relays.
 
 ---
 
-## FAQ: Sovereignty and Legality
+## Section 7: FAQ: Sovereignty and Technicalities
 
 ### 1. Does my Node hold my Bitcoin?
-No. Your Node holds the *ledger* (the list of all accounts). Your **[private keys](/en/blog/public-private-keys/)** (the password to your money) remain in your wallet. Your node simply provides a private way for your wallet to check the ledger.
+No. Your Node holds the *ledger* (the record book). Your **[private keys](/en/blog/public-private-keys/)** (the password to your money) remain in your physical wallet. Your node simply provides a private, independent way for your wallet to read the book.
 
 ### 2. Is it legal to run a node?
-In almost all democratic countries, yes. Because nodes don't transmit money for others (like a bank) but simply run open-source software to verify information, they are generally protected as a form of free speech.
+In almost all democratic countries, yes. Because nodes don't transmit money for others but simply run open-source software to verify mathematical information, they are generally protected as a form of "Code as Speech."
 
-### 3. What happens if my Node goes offline?
-Nothing happens to your funds. When you turn it back on, it will simply download the missed blocks and catch up to the "Chaintip."
+### 3. What if my Node goes offline?
+Nothing happens to your funds. When you turn it back on, it will simply catch up to the rest of the network. However, while your node is off, you cannot verify incoming payments with 100% certainty.
 
 ---
 
-## 🚀 Summary: The Immune System of Money
+## Section 8: Summary — The Immune System of Money
 
-Nodes are the immune system of Bitcoin. By running your own node, you stop being a "customer" of a financial service and become a "peer" in the global monetary network. 
+Nodes are the immune system of Bitcoin. They are the thousands of independent "eyes" that ensure no one is cheating. By running your own node, you stop being a "customer" of a financial service and become a "peer" in the global monetary network. 
 
 **Don't Trust, Verify.**
 
 ---
 **Explore more:**
-- [How to store Bitcoin safely](/en/blog/how-to-store-bitcoin-safely/)
+- [How to store Bitcoin safely](/en/blog/best-bitcoin-wallets/)
 - [Is Bitcoin truly anonymous?](/en/blog/is-bitcoin-anonymous/)
-- [History of the Blocksize War](/en/blog/history-of-bitcoin/)
+- [Understanding the 21 Million Limit](/en/blog/bitcoin-supply-21-million/)
 - [What are Bitcoin Confirmations?](/en/blog/what-are-bitcoin-confirmations/)

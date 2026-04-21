@@ -24,130 +24,127 @@ export const faqSchema = {
   "mainEntity": [
     { "@type": "Question", "name": "Was ist der Hauptunterschied zwischen Bitcoin und Fiatgeld?", "acceptedAnswer": { "@type": "Answer", "text": "Der Kernunterschied liegt in der Kontrolle und dem Angebot. Fiatgeld wird von Zentralbanken ohne Obergrenze ausgegeben, während Bitcoin durch ein dezentrales Protokoll auf maximal 21 Millionen Einheiten begrenzt ist. Fiat basiert auf Vertrauen in Institutionen; Bitcoin auf Vertrauen in Mathematik." } },
     { "@type": "Question", "name": "Warum wird Bitcoin oft als 'digitales Gold' bezeichnet?", "acceptedAnswer": { "@type": "Answer", "text": "Weil es die Eigenschaften von Gold (Knappheit, Beständigkeit, Teilbarkeit) teilt, diese aber digital verbessert: Bitcoin ist portabel, sofort prüfbar und programmierbar. Wie Gold kann Bitcoin nicht aus dem Nichts 'gedruckt' werden." } },
-    { "@type": "Question", "name": "Wird Bitcoin den Euro ersetzen?", "acceptedAnswer": { "@type": "Answer", "text": "Im Jahr 2026 wird Bitcoin primär als 'Basisschicht' für Wertaufbewahrung (wie Gold) gesehen, während Fiatwährungen (oft als CBDCs) weiterhin für Steuern und den täglichen Handel dienen. Beide Systeme existieren derzeit parallel." } }
-  ]
-};
+    { "@type": "Question", "name": "Wird Bitcoin den Euro ersetzen?", "acceptedAnswer": { "@type": "Answer", "text": "Im Jahr 2026 wird Bitcoin primär als 'Basisschicht' für Wertaufbewahrung (wie Gold) gesehen, während Fiatwährungen (oft als CBDCs) weiterhin für Steuern und den täglichen Handel dienen. Beide Systeme existieren derzeit parallel."## 🎯 Einleitung: Die große monetäre Divergenz
+
+Zum ersten Mal in der Geschichte hat die Welt zwei konkurrierende Wertesysteme, die auf völlig unterschiedlichen ersten Prinzipien basieren. Das eine basiert auf **staatlichem Dekret (Fiat)** und menschlicher Ermessensfreiheit; das andere basiert auf **kryptografischem Beweis (Bitcoin)** und physikalischen Realitäten. 
+
+Im Jahr 2026, während globale Schuldenzyklen die Stabilität von Dollar und Euro herausfordern, ist das Verständnis der physikalischen Grundlagen dieser zwei Geldarten unerlässlich. Es geht nicht nur um "Preise", sondern um die fundamentale Frage: Wer kontrolliert die Zeit und die Energie Ihres Lebens? Dieser Guide dekonstruiert die anatomischen Unterschiede zwischen dem Geld der Regierung und dem Geld der Mathematik.
 
 ---
 
-## 🎯 Einleitung: Die große monetäre Divergenz
+## Sektion 1: Definition — Was ist Geld eigentlich?
 
-Zum ersten Mal in der Geschichte hat die Welt zwei konkurrierende Wertesysteme. Das eine basiert auf **staatlichem Dekret (Fiat)** und menschlichen Entscheidungen; das andere basiert auf **kryptografischem Beweis (Bitcoin)** und mathematischem Konsens. Im Jahr 2026, während globale Inflation die Stabilität von Dollar und Euro herausfordert, ist das Verständnis der physikalischen Grundlagen dieser zwei Geldarten unerlässlich, um die eigene Kaufkraft zu schützen.
+Geld ist primär eine Technologie, um ökonomischen Wert (menschliche Zeit und Mühe) über Zeit und Raum zu transportieren.
 
----
-
-## Sektion 1: Definition & das Vertrauens-Paradoxon
-
-Geld ist eine Technologie, um Wert über Zeit und Raum zu transportieren. Der Unterschied liegt im "Anker".
-
-<DefinitionBlock term="Hartes Geld vs. Weiches Geld" icon="⚖️">
-  **Hartes Geld** (wie Gold oder Bitcoin) ist ein Gut, das physisch oder mathematisch schwer zu produzieren ist. Dies sichert den Werterhalt über die Zeit. **Weiches Geld** (Fiat) kann per Knopfdruck fast ohne Kosten erschaffen werden. Die Geschichte zeigt: Sobald eine Gesellschaft zu weichem Geld wechselt, entwertet sich die Währung unweigerlich durch die Ausweitung der Geldmenge.
+<DefinitionBlock term="Fiat-Währung (Befehlsgeld)" icon="🏦">
+  **Fiatgeld** (vom lateinischen *fiat* - "es werde") ist Geld, das keinen inneren Wert besitzt und nur existiert, weil eine Regierung es als gesetzliches Zahlungsmittel vorschreibt. Sein Angebot ist theoretisch unendlich und seine Stabilität hängt vollständig vom Vertrauen in politische Institutionen und deren Fähigkeit ab, Steuern einzutreiben (Gewaltmonopol).
 </DefinitionBlock>
 
-Fiatgeld bezieht seinen Wert aus dem "Gesetz"; Bitcoin bezieht seinen Wert aus dem "Code".
+<DefinitionBlock term="Synthetische Knappheit (Bitcoin)" icon="₿">
+  **Bitcoin** ist das erste "absolut harte" Geld der Welt. Seine Knappheit ist nicht physikalisch (wie bei Gold) oder politisch (wie bei Fiat), sondern informatisch. Es ist ein geschlossenes mathematisches System, bei dem die Produktion reale Energie erfordert und das Gesamtangebot unwiderruflich bei 21 Millionen Einheiten gedeckelt ist. 
+</DefinitionBlock>
 
 ---
 
-## Sektion 2: Das Kernkonzept (Wertes-Dichte)
+## Sektion 2: Kernkonzept — Der Cantillon-Effekt & Moral Hazard
 
-Der Vergleich der "Physis" von Werten. Einer bleibt solide, während der andere mit der Zeit dünner wird.
+Der größte technische Fehler im Fiat-System ist die ungleiche Verteilung von neu erschaffenem Geld und das daraus resultierende Risiko-Paradoxon.
 
 <ConceptVisual 
-  src="/images/blog/hard-vs-soft-money.png" 
-  alt="Kontrast zwischen hartem Geld (Bitcoin) und weichem Geld (Fiat)" 
-  type="comparison" 
-  caption="Eine Einheit Bitcoin behält ihren proportionalen Anteil am Netzwerk bei (1 von 21 Mio.). Im Gegensatz dazu wird eine Einheit Fiatgeld ständig verwässert, wenn die Zentralbanken die Geldmenge ausweiten."
+  src="/images/blog/bitcoin-vs-fiat.png" 
+  alt="Illustration des Cantillon-Effekts" 
+  type="concept" 
+  caption="Der Cantillon-Effekt beschreibt die schleichende Umverteilung: Wer der 'Geldquelle' (Zentralbanken) am nächsten steht, profitiert von niedrigen Preisen. Wer am Ende der Kette steht (Sparer, Lohnempfänger), erhält das Geld erst, wenn die Inflation bereits die Kaufkraft gefressen hat. Bitcoin eliminiert diese Hierarchie durch ein für alle gleiches Regelwerk."
 />
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Kontrast-Visualisierung: Ein solider, dichter metallischer Würfel (Bitcoin) vs. ein wolkenartiger, expandierender, poröser Würfel (Fiat). Pfeile zeigen, wie der solide Würfel gleich groß bleibt, während die Wolke dünner wird."
-- **Dateiname:** `hard-vs-soft-money.png`
 
 ---
 
-## Sektion 3: Wie Systeme evolvieren (Der geschichtete Pfad)
+## Sektion 3: Funktionsweise — S2F & Zeitpräferenz
 
-Geld ist 2026 kein einzelnes "Ding" mehr, sondern ein Stapel (Stack) von Technologien.
+Um die Qualität eines Geldes zu messen, blickt man im Jahr 2026 auf das **Stock-to-Flow-Verhältnis (S2F)**.
 
 <ProcessStep steps={[
   {
-    title: "Layer 0: Basis-Settlement",
-    description: "Gold und Bitcoin. Dies sind die 'Final Assets'. Sie haben kein Gegenpartei-Risiko und werden weltweit in Minuten oder Stunden endgültig abgerechnet."
+    title: "Fiat (Ewige Entwertung)",
+    description: "Zentralbanken müssen die Geldmenge ausweiten, um Schulden zu bedienen. Dies führt zu einer 'hohen Zeitpräferenz': Man konsumiert sofort, da das Geld morgen weniger wert ist."
   },
   {
-    title: "Layer 1: Programmierung",
-    description: "Stablecoins und CBDCs. Digitale Schichten, die Fiatgeld mit Internet-Geschwindigkeit bewegen, aber zentral gesteuert bleiben."
+    title: "Gold (Physische Grenze)",
+    description: "Gold hat ein S2F von ca. 60. Es ist schwer zu produzieren, aber technischer Fortschritt im Bergbau kann das Angebot erhöhen. Es ist 'mittelhartes' Geld."
   },
   {
-    title: "Layer 2: Sofort-Zahlungen",
-    description: "Das Lightning Network und Visa. Diese Protokolle verarbeiten Millionen Transaktionen pro Sekunde – für Kaffee, Steuern und Rechnungen."
+    title: "Bitcoin (Mathematische Endgültigkeit)",
+    description: "Nach dem Halving 2024 stieg Bitcoins S2F auf über 100. Es ist nun das härteste Gut der Geschichte. Dies fördert eine 'niedrige Zeitpräferenz': Man spart für die Zukunft, da der Wert der Arbeit erhalten bleibt."
+  },
+  {
+    title: "Der thermodynamische Anker",
+    description: "Fiat basiert auf einem 'Versprechen'; Bitcoin auf den Gesetzen der Thermodynamik. Bitcoin verankert das digitale Ledger in der physischen Welt durch den Proof-of-Work."
   }
 ]} />
 
 ---
 
-## Sektion 4: Die Hierarchie des Geldes
+## Sektion 4: Experten-Wissen — Die 'Austrian School' Perspektive
 
-Eine visuelle Darstellung des modernen Finanz-Stacks im Jahr 2026.
-
-<ConceptVisual 
-  src="/images/blog/monetary-hierarchy.png" 
-  alt="Die monetäre Hierarchie-Pyramide 2026" 
-  type="diagram" 
-  caption="In der neuen Finanzordnung dient Bitcoin als 'digitales Fundament' – eine neutrale Abrechnungsschicht, die die flexibleren digitalen Währungen darüber stützt."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Eine Glaspyramide: Die Basis ist solides Gold und Bitcoin (Settlement), die mittlere Schicht sind Apps/Stablecoins, die Spitze ist Lightning/Visa. Leuchtende Kanten, premium Design."
-- **Dateiname:** `monetary-hierarchy.png`
+Warum kollabieren Fiat-Währungen historisch gesehen immer?
+- **Die Österreichische Schule:** Ökonomen wie Mises und Hayek argumentieren, dass künstlich niedrige Zinsen (Geldrucken) zu Fehlallokationen von Kapital führen. Es entstehen 'Zombie-Unternehmen' und Blasen.
+- **Bitcoin als 'Opt-out':** Bitcoin ist das erste Mal in der Geschichte, dass Individuen aus dem staatlichen Geldmonopol 'aussteigen' können, ohne das Land verlassen zu müssen. Es ist der friedliche Wettbewerb der Währungen.
 
 ---
 
-## Sektion 5: Eigenschaften im Vergleich
+## Sektion 5: Kapital-Effizienz — Ein System-Vergleich 2026
 
-Warum der Code von Bitcoin oft als "besseres Geld" gilt als die Excel-Tabelle einer Zentralbank.
+Warum Institutionen im Jahr 2026 massiv umschichten:
 
-| Eigenschaft | Bitcoin (BTC) | Fiatgeld (USD / EUR) |
+| Merkmal | Fiatgeld (EUR/USD) | Bitcoin (BTC) |
 |---|---|---|
-| **Knappheit** | Absolut (Max. 21 Mio.) | Nicht vorhanden (Unendlich) |
-| **Ausgabe** | Vordefinierter Algorithmus | Menschliches Komitee (EZB) |
-| **Zensur** | Resistent (Erlaubnisfrei) | Hoch (Konten können gesperrt werden)|
-| **Prüfbarkeit** | Transparent (Public Ledger) | Undurchsichtig (Zentralbank-Geheimnis)|
-| **Portabilität** | Hoch (Global in Sekunden) | Mittel (Überweisung dauert Tage) |
-| **Kontrolle** | Sie (Private Keys) | Dritte (Banken) |
+| **Zentralisierung** | Total (Zentralbank gesteuert) | Keine (Dezentral) |
+| **Angebots-Cap** | Keiner (Beliebig ausweitbar) | Absolut (21 Millionen) |
+| **Abwicklung** | Langsam (Korrespondenzbanken) | Schnell (On-Chain / Instant Lightning) |
+| **Verifizierbarkeit** | Teuer (Auditoren/Banken) | Kostenlos (Eigene Node) |
+| **Zensurresistenz** | Gering (Kontensperrungen möglich) | Absolut (Unaufhaltsam) |
 
 ---
 
-## Sektion 6: Verwandte Themen (Die Landkarte der Souveränität)
+## Sektion 6: Verwandte Themen — Der monetäre Übergang
 
-Der Wettbewerb der Währungen ist die Geschichte unseres Jahrzehnts:
-- [Das 21-Millionen-Limit](/de/blog/bitcoin-21-millionen-limit/) → Die technische Basis der Knappheit.
-- [Inflation verstehen](/de/blog/was-bestimmt-den-bitcoin-preis/) → Warum Fiat-Preise ständig steigen.
-- [Die Geschichte des Geldes](/de/blog/geschichte-von-bitcoin/) → Von Muscheln und Gold zu Bits.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie Sie selbst die Regeln überwachen.
-- [Das Lightning Network](/de/blog/lightning-network/) → Bitcoin so schnell wie eine Kreditkarte machen.
-
----
-
-## Sektion 7: FAQ (Das CBDC-Paradoxon)
-
-### 1. Sind CBDCs einfach 'digitaler Bitcoin'?
-Nein. Eine digitale Zentralbankwährung (CBDC) ist das Gegenteil von Bitcoin. Während Bitcoin dezentral und privat ist, ist eine CBDC **zentralisiert und programmierbar.** Sie erlaubt es dem Staat, jede Transaktion zu tracken, "Ablaufdaten" für Erspartes festzulegen oder Käufe zu blockieren.
-
-### 2. Scheitert Bitcoin, wenn das Internet ausfällt?
-Wenn das gesamte globale Internet für immer ausfällt, hat die Welt größere Probleme als Geld. Dennoch kann Bitcoin bereits via **Satellit (Blockstream)** und Funk übertragen werden. Solange ein Weg existiert, ein paar Byte Daten zu senden, überlebt das Netzwerk.
-
-### 3. Warum sind noch nicht alle zu Bitcoin gewechselt?
-Monetisierung braucht Zeit. Bitcoin wandelt sich gerade von einer "Hochrisiko-Spekulation" (2010er) zu einem "Wertspeicher" (2020er). Meist wechseln Menschen erst, wenn der Schmerz im alten System (Inflation/Zensur) größer wird als die Hürde, das neue System zu erlernen.
+Der Kampf der Systeme findet auf vielen Ebenen statt:
+- [Das 21-Millionen-Limit](/de/blog/bitcoin-21-millionen-limit/) → Das mathematische Rückgrat.
+- [Was bestimmt den Bitcoin-Preis?](/de/blog/was-bestimmt-den-bitcoin-preis/) → Marktpsychologie vs. Realität.
+- [Geschichte von Bitcoin](/de/blog/geschichte-von-bitcoin/) → Vom Whitepaper zum Weltstandard.
+- [Bitcoin rechtliche Lage](/de/blog/bitcoin-rechtliche-lage-deutschland/) → Die Rolle von MiCA und Steuern.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Werden Sie Ihre eigene Zentralbank.
 
 ---
 
-## Sektion 8: Zusammenfassung — Das Fundament wählen
+## Sektion 7: FAQ — Die Moral der Währung
 
-Im Jahr 2026 haben Sie die Wahl. Sie können Ihr Vermögen in einem System halten, das darauf ausgelegt ist, sich nach politischem Belieben auszuweiten (und somit zu entwerten), oder Sie vertrauen einem System, das mathematisch fixiert ist. Fiatgeld ist ein System des **Vertrauens in Autorität**; Bitcoin ist ein System der **Verifizierung durch Mathematik**. Das eine ist das Geld der Vergangenheit; das andere das Geld der Zukunft. **Auf welchem Fundament bauen Sie?**
+### 1. Ist Inflation nicht notwendig für Wirtschaftswachstum?
+Das ist eine keynesianische Dogmatik des 20. Jahrhunderts. In einem Bitcoin-System sinken die Preise tendenziell über die Zeit, da die Produktivität steigt (Deflation durch Fortschritt). Dies belohnt Effizienz und ehrliches Sparen, anstatt Schuldenmachen und Verschwendung zu fördern.
+
+### 2. Was passiert bei einer 'Hyperbitcoinization'?
+Sollte Bitcoin zur primären Rechenkapazität der Welt werden, würden Fiat-Währungen rasant an Wert verlieren (Thiers'sches Gesetz). Im Jahr 2026 beobachten wir diesen Prozess bereits in Schwellenländern, wo Bitcoin die lokale Währung als primären Wertspeicher ersetzt hat.
+
+### 3. Braucht Bitcoin nicht 'echten' Wert (wie Gold)?
+Der Wert von Gold liegt in seiner Knappheit und Beständigkeit, nicht in seiner Schmuckfunktion (die nur einen Bruchteil ausmacht). Bitcoin bietet die *reinen* monetären Eigenschaften von Gold, aber ohne die physischen Nachteile (Gewicht, Transportkosten, Zentralisierung in Tresoren).
+
+---
+
+## Sektion 8: Zusammenfassung — Das Fundament Ihrer Souveränität
+
+Fiatgeld ist ein System des **Vertrauens in Autorität**; Bitcoin ist ein System der **Verifizierung durch Mathematik**. Im Jahr 2026 ist die Wahl zwischen diesen Systemen eine Wahl der eigenen Lebensphilosophie. 
+
+Jede Entscheidung, Bitcoin zu halten, ist eine Abstimmung für eine Welt, in der Regeln für alle gleich gelten — unabhängig von Herkunft oder politischer Macht. **Auf welchem Fundament bauen Sie Ihre finanzielle Zukunft?**
 
 ---
 
 ## 🧬 Semantische Entity-Map
-- **Haupt-Entität:** Währungssysteme
-- **Verwandte Entitäten:** Bitcoin, Fiatgeld, Zentralbanken (Fed/EZB), Hartes Geld, Inflation, CBDC, Geldpolitik, Knappheit, Finanzielle Souveränität, 21-Millionen-Limit.
+- **Haupt-Entität:** Kampf der Währungssysteme
+- **Verwandte Entitäten:** Fiatgeld, Cantillon-Effekt, Stock-to-Flow (S2F), Zeitpräferenz, Österreichische Schule der Nationalökonomie, Proof-of-Work, Thiers'sches Gesetz, Hyperbitcoinization, 21-Millionen-Limit.
+stimmung für eine Welt, in der Regeln für alle gleich gelten. **Auf welchem Fundament bauen Sie Ihre Zukunft?**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Kampf der Währungssysteme
+- **Verwandte Entitäten:** Bitcoin (BTC), Fiatgeld, Cantillon-Effekt, Inflation, Kaufkraftentwertung, Stock-to-Flow, Thermodynamik, EZB, CBDC, Österreichische Schule der Nationalökonomie, 21-Millionen-Limit.

@@ -32,117 +32,128 @@ export const faqSchema = {
 
 ## 🎯 Introduction: A New Paradigm for Money
 
-Imagine a world where you can send any amount of money to anyone across the globe instantly, for a fraction of a cent, without asking permission from a bank or a government. This is not science fiction—it is **Bitcoin**. Launched in 2009 by the anonymous [Satoshi Nakamoto](/en/blog/who-is-satoshi-nakamoto/), Bitcoin represents the first time in history that humans have created a purely digital, decentralized, and scarcitied asset.
+Imagine a world where you can send any amount of money to anyone across the globe instantly, for a fraction of a cent, without asking permission from a bank or a government. This is not science fiction—it is the reality of the Bitcoin protocol. 
+
+Launched in 2009 by the anonymous [Satoshi Nakamoto](/en/blog/who-is-satoshi-nakamoto/), Bitcoin represents the first time in human history that we have created a purely digital, decentralized, and absolutely scarce asset. It is the marriage of computer science and monetary theory, designed to solve the problem of central bank inflation and financial censorship forever.
 
 ---
 
-## Section 1: Definition & Overview
+## Section 1: Definition & Mathematical Basis
 
-At its simplest level, Bitcoin is a digital protocol for the transfer of value. Unlike a credit card payment which relies on a "trusted" third party to verify the balance, Bitcoin relies on mathematics and physics.
+At its core, Bitcoin is not "coins" or "files"; it is a digital protocol for the global transfer of value. Unlike a credit card payment which relies on a "trusted" bank to verify a balance, Bitcoin relies on the laws of mathematics and physics.
 
 <DefinitionBlock term="Bitcoin (BTC)" icon="₿">
-  **Bitcoin** is a decentralized, peer-to-peer digital currency that uses a public ledger (the Blockchain) to record transactions. It is "Permissionless," meaning anyone can join the network, and "Immutable," meaning once a transaction is recorded, it can never be erased or altered.
+  **Bitcoin** is a decentralized, peer-to-peer digital currency that uses a public, distributed ledger (the Blockchain) to record transactions. It is **Permissionless** (anyone can join), **Censorship-Resistant** (no one can stop a transaction), and **Immutable** (once recorded, it can never be changed).
 </DefinitionBlock>
 
-Why does this matter? For the first time, we have a financial system with no "Single point of failure." There is no head office to raid, no server to shut down, and no CEO to arrest.
+Why is this revolutionary? Because for the first time, we have a financial system with no "Single Point of Failure." There is no head office to raid, no central server to shut down, and no CEO to arrest. Bitcoin exists everywhere and nowhere at once.
 
 ---
 
-## Section 2: The Core Concept (Digital Scarcity)
+## Section 2: The Core Concept — absolute Digital Scarcity
 
-The most important concept to grasp about Bitcoin is its **Absolute Scarcity**. Most things in the digital world can be copied (like photos or MP3s). Bitcoin solved the "Double Spend" problem without a central bank.
+The most important concept to grasp about Bitcoin is its **Absolute Scarcity**. Most digital items (like photos or MP3s) can be copied for free. Bitcoin solved the "Double Spend" problem without a central authority, creating the world's first scarce digital object.
 
 <ConceptVisual 
   src="/images/blog/bitcoin-scarcity-analogy.png" 
   alt="Digital Gold vs Fiat Printing Infographic" 
   type="comparison" 
-  caption="Unlike fiat currencies (USD/EUR) which can be printed at will, Bitcoin's supply is mathematically capped at 21 million units."
+  caption="Unlike fiat currencies (USD/EUR) which can be printed in unlimited quantities by central banks, Bitcoin's supply is mathematically capped at exactly 21,000,000 units. It is the hardest money ever discovered."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Professional comparison infographic, left side: stack of colorful paper bills losing their color, right side: a single polished Bitcoin coin made of digital orange energy, dark slate background, high-end 3D rendering."
-- **File Name:** `bitcoin-scarcity-analogy.png`
+Since the supply of Bitcoin is fixed, as demand for the network grows, the value of each unit must increase. This makes it a powerful hedge against the devaluation of traditional currencies.
 
 ---
 
-## Section 3: How It Works (The Lifecycle of a Transaction)
+## Section 3: How It Works — The Machine of Truth
 
-Bitcoin doesn't exist as a "file." It exists as a record of unspent transaction outputs (UTXOs). When you send Bitcoin, you are essentially "signing over" those records to a new owner.
+Bitcoin doesn't exist as a "file." It exists as a record of unspent transaction outputs (UTXOs) on the blockchain. The integrity of this record is maintained by a process called **Proof-of-Work**.
 
 <ProcessStep steps={[
   {
-    title: "The Digital Signature",
-    description: "You use your private key to sign a transaction, proving you own the funds without revealing your password."
+    title: "Cryptographic Signing",
+    description: "You use your [Private Key](/en/blog/public-private-keys/) to sign a transaction, proving ownership of funds without revealing your secret password."
   },
   {
-    title: "The Mempool (Waiting Room)",
-    description: "Your transaction is broadcast to the network and sits in the 'Mempool' with thousands of others."
+    title: "Mempool Propagation",
+    description: "Your transaction is broadcast to thousands of independent [Nodes](/en/blog/what-is-a-bitcoin-node/) who verify it against the rules of the network."
   },
   {
-    title: "Proof-of-Work (Mining)",
-    description: "Specialized miners compete to solve a cryptographic puzzle to bundle your transaction into a new 'Block'."
+    title: "Proof-of-Work Mining",
+    description: "Miners compete to solve a quadrillion-hash-per-second puzzle. The winner 'anchors' your transaction into a new block using massive amounts of physical energy."
   },
   {
-    title: "Blockchain Integration",
-    description: "Once confirmed, your transaction becomes a permanent part of the chain, visible to everyone but changeable by no one."
+    title: "Global Settlement",
+    description: "Once confirmed in a block, your transaction is permanent. It has achieved 'finality' and is now part of the history of the world."
   }
 ]} />
 
 ---
 
-## Section 4: Data & Real-World Comparison
+## Section 4: Bitcoin vs. The Old World
 
-To understand why institutions like BlackRock and Fidelity have adopted Bitcoin, we must look at how it compares to traditional assets.
+To understand why multi-trillion dollar institutions like BlackRock have adopted Bitcoin, we must look at how it compares to traditional assets in terms of monetary properties:
 
-| Feature / Asset | Bitcoin (BTC) | Fiat Money (USD/EUR) | Gold |
+| Property | Bitcoin (BTC) | Fiat Money (USD) | Gold |
 |-----------------|---------------|----------------------|------|
-| **Total Supply** | 21 Million (Fixed) | Infinite (Decreasing Value) | Limited (Mining dependent) |
-| **Portability** | Instant & Global | Slow & Bordered | Heavy & Expensive |
-| **Transparency** | 100% Audit-able | Opaque (Banking Secrets) | Hard to Verify |
-| **Sovereignty** | Self-Custody Possible | Dependent on Banks | Physical Storage Required |
+| **Hard Scarcity** | Absolute (21M) | None (Infinite) | Natural (Uncertain) |
+| **Divisibility** | High (100M sats) | Low (Cents) | Medium |
+| **Portability** | Infinite (Digital) | Limited (Bank Rails) | Very Low (Physical) |
+| **Verifiability**| High (Anyone) | Opaque (Trusted) | Hard (Assay needed) |
+| **Censorship** | Resistant | Easy (Freezing) | Moderate |
 
 ---
 
-## Section 5: Practical Use Cases & Adoption
+## Section 5: Practical Use Cases — Beyond Speculation
 
-In 2026, Bitcoin utility has moved beyond speculation:
-1. **Inflation Hedge:** Residents in countries with failing currencies use BTC to preserve their life savings.
-2. **Remittances:** Migrant workers use the [Lightning Network](/en/blog/lightning-network/) to send money home without bank fees.
-3. **Institutional Layer:** Corporations now hold Bitcoin on their balance sheets as a "Reserve Asset."
-4. **Censorship Resistance:** Dissidents and activists use Bitcoin to fund operations when their bank accounts are frozen by governments.
+By 2026, Bitcoin's utility has matured far beyond simple price speculation. It serves four distinct roles in the global economy:
 
----
-
-## Section 6: Related Concepts (Deep Dives)
-
-To truly master Bitcoin, you must understand the components of its "Immune System":
-- [Who is Satoshi Nakamoto?](/en/blog/who-is-satoshi-nakamoto/) → The origin mystery.
-- [How to Store Bitcoin Safely](/en/blog/best-bitcoin-wallets/) → Mastering self-custody.
-- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → Why you should audit the network.
-- [Understanding the 21 Million Cap](/en/blog/bitcoin-supply-21-million/) → The math of scarcity.
-- [Public vs Private Keys](/en/blog/public-private-keys/) → The cryptography of ownership.
+1.  **A Global Settlement Layer:** Financial institutions use Bitcoin to settle massive amounts of value across borders instantly without waiting for 3-day bank transfers.
+2.  **Sound Savings:** Ordinary people use it to escape the "Inflation Tax" that slowly eats away at the value of their labor.
+3.  **Remittances:** Using the [Lightning Network](/en/blog/lightning-network/), migrant workers send value home instantly for less than a cent in fees.
+4.  **Energy Arbitrage:** Bitcoin mining transforms "stranded" energy (like methane flaring or excess hydro) into digital value, making renewable energy projects more profitable.
 
 ---
 
-## Section 7: FAQs (Understanding the Details)
+## Section 6: The Evolution — Layers and Scaling
 
-### 1. Is Bitcoin legal?
-Yes, in almost all democratic nations. In 2026, most countries have moved away from bans and toward regulating Bitcoin as a legal commodity or "Digital Property."
+One of the common criticisms of Bitcoin is that it is "too slow" for buying coffee. This misunderstands the architecture. Bitcoin's base layer is designed for **Security and Finality**, not high-frequency trading.
 
-### 2. Can Bitcoin be hacked?
-The Bitcoin network itself has never been hacked. Its security is guaranteed by the combined electricity of millions of miners worldwide (Proof-of-Work). Individual *wallets* can be hacked, but only if the user mismanages their [private keys](/en/blog/public-private-keys/).
+For speed, we use **Layer 2** solutions:
+- **The Lightning Network:** Enables millions of transactions per second off-chain.
+- **Ecash & Ark:** Emerging protocols for even greater privacy and scalability.
+These layers allow Bitcoin to be "Digital Gold" on the base layer and "Digital Cash" on the second layer.
+
+---
+
+## Section 7: FAQ — Addressing Common Concerns
+
+### 1. Is Bitcoin legal in 2026?
+Yes. In the vast majority of developed nations (USA, EU, UK), Bitcoin is regulated as a legal commodity or "Digital Property." Many countries even allow it for tax payments and government reserves.
+
+### 2. Can the 21 Million limit be changed?
+While the code is open-source, the **Nodes** (run by the users) set the rules. To change the 21 million limit, you would need to convince tens of thousands of independent operators to voluntarily devalue their own wealth. It is economically impossible.
 
 ### 3. What is a "Satoshi"?
-A Satoshi (or "Sat") is the smallest unit of a Bitcoin. One Bitcoin can be divided into 100,000,000 Satoshis, allowing for tiny payments even if the price of 1 BTC is very high.
+The units of Bitcoin are remarkably small. One Bitcoin is composed of 100,000,000 "Satoshis" (Sats). This ensures that even if one Bitcoin is worth $10 million, you can still buy everyday items using tiny fractions of it.
 
-### 4. Who controls Bitcoin?
-No one. Bitcoin is governed by a set of rules (the protocol) that can only be changed if the majority of independent [Node operators](/en/blog/what-is-a-bitcoin-node/) agree. It is the first truly leaderless financial system.
+### 4. Does Bitcoin use too much electricity?
+Bitcoin uses electricity to provide **Security**. It is the most secure computing network in history. Furthermore, because Bitcoin mining can be moved to where energy is cheapest, it is the primary driver for new green energy infrastructure globally.
 
 ---
 
-## Section 8: Summary — The Future of Value
+## Section 8: Summary — The Future of Sound Money
 
-Bitcoin is not just a stock or a currency; it is a fundamental discovery. Just as the internet changed how we share information, Bitcoin is changing how we share value. By combining extreme scarcity, absolute security, and global accessibility, Bitcoin has become the "Base Layer" for a new, fairer global economy.
+Bitcoin is the first monetary system in history that operates entirely on **Truth**, not **Trust**. By combining absolute scarcity, cryptographic security, and borderless accessibility, it has created a flat, fair financial world. Whether you see it as "Digital Gold" or a "Global Reserve Asset," one thing is clear: Bitcoin is the fundamental technology of a new era of human sovereignty.
+
+**Don't Trust, Verify.**
+
+---
+**Deepen your knowledge:**
+- [How to run your own Node](/en/blog/what-is-a-bitcoin-node/)
+- [Mastering the Lightning Network](/en/blog/lightning-network/)
+- [Understanding Self-Custody](/en/blog/best-bitcoin-wallets/)
+- [The History of Satoshi Nakamoto](/en/blog/who-is-satoshi-nakamoto/)
 
 ---
 **Explore further topics:**

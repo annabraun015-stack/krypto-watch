@@ -24,154 +24,115 @@ export const faqSchema = {
   "mainEntity": [
     { "@type": "Question", "name": "Was genau ist eine Bitcoin Node?", "acceptedAnswer": { "@type": "Answer", "text": "Eine Bitcoin Node (ein Knotenpunkt) ist ein Computer, auf dem die Bitcoin-Software läuft. Er verbindet sich mit anderen Computern im Netzwerk, lädt das gesamte Blockchain-Kassenbuch herunter und überprüft jede einzelne Transaktion streng auf die Einhaltung der Bitcoin-Regeln." } },
     { "@type": "Question", "name": "Verdiene ich Geld, wenn ich eine Node betreibe?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Im Gegensatz zu den Minern, welche das stromintensive Schürfen nach neuen Bitcoins übernehmen und dafür belohnt werden, agieren Nodes ehrenamtlich als Wirtschaftsprüfer. Man betreibt eine Node rein aus Gründen des Eigennutzes für Privatsphäre, Sicherheit und Souveränität." } },
-    { "@type": "Question", "name": "Was ist der Unterschied zwischen einem Miner und einer Node?", "acceptedAnswer": { "@type": "Answer", "text": "Miner sind die 'Schöpfer'. Sie investieren enorm viel Energie, um neue Blöcke vorzuschlagen und neue Coins zu finden. Nodes hingegen sind die 'Kontrolleure'. Wenn ein Miner versucht zu betrügen, wird sein Block vom Kollektiv der Nodes schlichtweg abgelehnt und aus dem Netzwerk geworfen." } }
-  ]
-};
+    { "@type": "Question", "name": "Was ist der Unterschied zwischen einem Miner und einer Node?", "acceptedAnswer": { "@type": "Answer", "text": "Miner sind die 'Schöpfer'. Sie investieren enorm viel Energie, um neue Blöcke vorzuschlagen und neue Coins zu finden. Nodes hingegen sind die 'Kontrolleure'. Wenn ein Miner versucht zu betrügen, wird sein Block vom Kollektiv der Nodes schlichtweg abgelehnt und aus dem Netzwerk geworf## 🎯 Einleitung: Die Wächter der Dezentralität
+
+In einem System ohne Chef ist die Wahrheit das Ergebnis eines globalen Abgleichs. Ein **Bitcoin Node** (Knotenpunkt) ist der physische Anker dieser Wahrheit. Während Miner die Geschichte *vorschlagen*, sind es die Nodes, die sie *genehmigen*. 
+
+Im Jahr 2026, in einer Welt zunehmender finanzieller Überwachung und algorithmischer Kontrolle, ist das Betreiben einer eigenen Node der ultimative Akt digitaler Selbstverteidigung. Es geht nicht nur darum, "Teil des Netzwerks" zu sein — es geht darum, die Spielregeln von Bitcoin (wie die 21 Millionen Obergrenze) für sich selbst physisch durchzusetzen. In diesem Guide dekonstruieren wir die Anatomie eines Knotens und erklären, warum "Don't trust, verify" nur mit eigener Hardware möglich ist.
 
 ---
 
-## 🎯 Was ist ein Bitcoin Node? (Definition & Bedeutung)
+## Sektion 1: Definition — Was ist ein 'Full Node'?
 
-Ein **Bitcoin Node** (Knotenpunkt) ist ein beliebiger Computer, der an das dezentrale Peer-to-Peer-Netzwerk von Bitcoin angeschlossen ist. Da Bitcoin keinen Geschäftsführer, Hauptstandort oder IT-Administrator besitzt, müssen Zehntausende Rechner weltweit den Zustand des Netzwerks fortlaufend untereinander abgleichen. Diese Rechner sind die Nodes.
+Eine Full Node ist ein Wirtschaftsprüfer, der niemals schläft und niemals bestochen werden kann.
 
-<DefinitionBlock term="Bitcoin Node" icon="🖥️">
-  Ein **Bitcoin Node** ist das Herzstück der dezentralen "Wirtschaftsprüfung" des Bitcoin-Netzwerks. Eine sogenannte **Full Node** lädt die gesamte Blockchain (das Kassenbuch) vom ersten Tag an herunter und verifiziert autonom, ob alle Regeln eingehalten werden. Ohne Nodes gibt es kein Vertrauen in die Echtheit digitaler Vermögenswerte.
+<DefinitionBlock term="Autarke Validierung" icon="🖥️">
+  Eine **Full Node** ist ein Computer, der das gesamte Bitcoin-Protokoll ausführt. Er lädt jeden Block seit dem Genesis-Block (2009) herunter und prüft autonom jede einzelne Signatur, jede Gebühr und jedes UTXO gegen das unveränderliche Regelwerk. Im Gegensatz zu 'Light Clients' vertraut eine Full Node niemandem — sie berechnet die gesamte Geschichte der Weltwährung von Grund auf neu.
 </DefinitionBlock>
 
-Versucht ein Hacker, Bitcoins aus dem Nichts zu drucken, oder verstößt ein Miner gegen das [21 Millionen Limit](/blog/bitcoin-21-millionen-limit/), schlägt die Node Alarm und löscht diesen Block. 
+---
 
-Souveränität bedeutet in der Krypto-Welt: Wenn Sie sich keine eigene Node hinstellen, müssen Sie bei der Prüfung Ihres Geld-Eingangs blind [einer fremden Node oder einem Hardware-Wallet Unternehmen vertrauen](/blog/beste-bitcoin-wallets/). "Don't Trust, Verify" – Vertraue niemandem, überprüfe es selbst. Diesen Grundsatz erfüllt nur die eigene Node.
+## Sektion 2: Kernkonzept — Die Macht der Judikative
+
+Das Genie von Bitcoin liegt in der Gewaltenteilung zwischen Minern (Exekutive) und Nodes (Judikative).
+
+<ConceptVisual 
+  src="/images/blog/bitcoin-node.png" 
+  alt="Bitcoin Node Netzwerk-Topologie" 
+  type="concept" 
+  caption="Ein Miner kann Billionen für Strom ausgeben, um einen ungültigen Block zu erstellen. Doch eine 150€-Node im Keller eines Nutzers wird diesen Block in Millisekunden ablehnen, wenn er gegen die Regeln verstößt. Die Nodes bilden den 'demokratischen Schutzwall', der verhindert, dass das Geldmonopol jemals wieder zentralisiert wird."
+/>
 
 ---
 
-## Die exakte Aufgabe einer Node (Technik & Mempool)
+## Sektion 3: Funktionsweise — IBD & GOSSIP-Protokoll
 
-Schaltet man eine Bitcoin Full Node (z.B. auf einem kleinen Raspberry Pi im heimischen Netzwerk) ein, beginnt das System mit dem sogenannten **Initial Block Download (IBD)**. Der Minicomputer lädt den allerersten Datenblock aus dem Jahr 2009 herunter, rechnet die Kryptografie nach, lädt Block 2, und führt dies für mehr als 800.000 Blöcke fort.
-
-Sobald die Node "in der Gegenwart" angekommen ist, besteht ihr digitaler Alltag aus drei Dingen:
+Wie findet ein neuer Knoten im Jahr 2026 seinen Platz im globalen Schwarm?
 
 <ProcessStep steps={[
   {
-    title: "Netzwerk-Routing",
-    description: "Sie empfängt neue Transaktionen von Benutzern und leitet sie in den globalen Mempool (das Wartezimmer) weiter."
+    title: "Initial Block Download (IBD)",
+    description: "Nach dem Start lädt die Node hunderte Gigabyte an Daten. Sie verifiziert dabei jede historische Transaktion mathematisch, um den aktuellen 'State' des UTXO-Sets zu ermitteln."
   },
   {
-    title: "Exekutive Regelprüfung",
-    description: "Sie nimmt frischt geschürfte Blöcke der Miner entgegen und seziert sie auf mathematische Korrektheit."
+    title: "Peer Discovery",
+    description: "Über das GOSSIP-Protokoll tauscht sich die Node mit Nachbarn aus. Sie lernt, welche Nodes zuverlässig sind und baut ein Netzwerk aus vertrauenswürdigen Verbindungen auf."
   },
   {
-    title: "Persönlicher Zugang",
-    description: "Sie ermöglicht den sicheren Abgleich Ihrer Wallet-Adressen ohne IP-Leaks an Drittanbieter."
+    title: "Mempool Management",
+    description: "Die Node empfängt unbestätigte Transaktionen, validiert sie nach Standard-Rules und leitet sie weiter. Sie ist der Torwächter für alles, was in die Blockchain will."
+  },
+  {
+    title: "Block Propagation",
+    description: "Sobald ein Miner einen Block findet, verbreitet Ihre Node diesen in Lichtgeschwindigkeit weiter — vorausgesetzt, der Block ist absolut fehlerfrei."
   }
 ]} />
 
-Durch diesen Prozess stellt die Node sicher, dass keine Bitcoins doppelt ausgegeben werden und dass die Versprechen des Protokolls (wie die begrenzte Geldmenge) technologisch garantiert sind.
+---
+
+## Sektion 4: Pruning vs. Archival — Speicher-Strategien
+
+Muss man wirklich die gesamte Geschichte speichern, um sicher zu sein?
+- **Archival Node:** Speichert jeden Byte seit 2009. Benötigt im Jahr 2026 ca. 1-2 Terabyte SSD-Speicher. Essenziell für Block-Explorer und Forscher.
+- **Pruned Node:** Validiert alles wie eine Archival Node, löscht aber alte Blöcke, nachdem sie geprüft wurden. Man behält nur das aktuelle 'UTXO-Set'. Dies ermöglicht volle Souveränität auf Geräten mit wenig Speicherplatz (z.B. 50 GB).
+- **SPV (Simple Payment Verification):** 'Light Clients', die nur Block-Header prüfen. Sie sind bequem als App, aber sie hängen von der Ehrlichkeit fremder Nodes ab.
 
 ---
 
-## Full Nodes vs. Light Nodes (Der Vergleich)
+## Sektion 5: Privatsphäre — Tor, I2P & IP-Leaks
 
-Nicht jedes Programm, das am Netzwerk teilnimmt, muss 600 Gigabyte Daten verarbeiten. Je nach Hardware und Bedarf gibt es verschiedene Ansätze:
-
-| Arten von Nodes | Gespeicherte Daten | Level der Validierung | Hardware-Kosten |
-|-----------------|--------------------|-----------------------|-----------------|
-| **Full Node** | Gesamtes Kassenbuch (~600+ GB) | 100%ige mathematische Autarkie | Niedrig (Mini-PC + 1TB SSD) |
-| **Pruned Node**| Nur die letzten paar Gigabyte | 100%ige Autarkie (Speicher sparend) | Minimal (Kleiner Laptop) |
-| **Archival Node**| Vollständig plus Indexstruktur| Extrem ausführliche Indizierung | Mittel (Große Festplatten) |
-| **Light Node (SPV)**| Nur die Block-Köpfe (Headers) | Partiell (Vertraut der Full Node Dritter)| Keine (Läuft als Handy-App) |
-
-Apps auf Ihrem Smartphone (wie BlueWallet oder Trust Wallet) verwenden im Hintergrund standardmäßig **Light Nodes (SPV)**. Da ein Handy nicht genug Speicherplatz besitzt, lagert das Handy die kryptografische Schwerstarbeit an große Server aus.
+Warum ist eine Node der beste Schutz für Ihre Identität?
+Wenn Sie eine kommerzielle Wallet-App nutzen, erfährt der Anbieter Ihre IP-Adresse und all Ihre Guthaben. Eine eigene Node über **Tor (The Onion Router)** maskiert Ihre Herkunft komplett.
+- **Keine Abfragen an Dritte:** Ihre Wallet fragt nur Ihre eigene Node. Niemand sonst weiß, für welche Adressen Sie sich interessieren.
+- **Sovereign Stack:** Systeme wie 'Umbrel' oder 'RaspiBlitz' ermöglichen es, eine Node als privaten Server für Lightning, Dokumente und Passwörter zu nutzen.
 
 ---
 
-## 🏛️ Das Prinzip der Gewaltenteilung: Nodes vs. Miner
+## Sektion 6: Verwandte Themen — Der Souveränitäts-Stack
 
-Bitcoin-Laien werfen Nodes und [Miner](/blog/bitcoin-mining-erklaert/) fälschlicherweise in einen Topf. Dabei sind sie Kontrahenten in jenem System der "Checks and Balances", das Bitcoin so faszinierend macht. Zur Veranschaulichung dient der Vergleich mit staatlicher Gewaltenteilung:
-
-<ConceptVisual 
-  src="/images/blog/node-vs-miner.png" 
-  alt="Analogie: Wirtschaftsprüfer vs. Produzent" 
-  type="comparison" 
-  caption="Miner fungieren als Exekutive (Produktion von Blöcken), während Nodes als Judikative (Prüfung und Bestätigung der Regeln) agieren."
-/>
-
-- **Die Miner (Produzenten):** Zumeist börsennotierte Großkonzerne in den USA, deren riesige Serverfarmen enorme Strommengen aufwenden, um Blöcke zu generieren und dafür eine finanzielle Vergütung zu bekommen.
-- **Die Nodes (Kontrolleure):** Gewöhnliche Menschen auf der ganzen Welt mit 150-Euro-Computern in ihren Kellern. Sie erhalten null Bezahlung. Sie prüfen lediglich die Arbeit der Miner.
-
-**Wer hat wirklich die Macht?**
-Die Nodes! Ein historisches Beispiel dafür ist der sogenannte "Blocksize War" von 2017. Damals verschworen sich über 80 % der Mining-Firmen mit großen Börsen, um die Spielregeln von Bitcoin zu ihren eigenen Gunsten zu ändern. Die Zehntausende weltweiten Node-Betreiber rebellierten, weigerten sich das Update zu installieren, und blockierten die Blöcke der Miner. Daraufhin brach die Verschwörung in sich zusammen. In Bitcoin bestimmen Nutzer die Regeln, und die Stromerzeuger müssen sich fügen.
+Die Node ist der erste Schritt in ein größeres Universum:
+- [Wie Bitcoin Mining funktioniert](/de/blog/bitcoin-mining-erklaert/) → Warum Miner den Nodes dienen.
+- [Public & Private Keys](/de/blog/public-private-keys/) → Die Schlüssel, die Ihre Node verifiziert.
+- [Das Lightning Network](/de/blog/lightning-network/) → Warum eine eigene Node für L2-Zahlungen Pflicht ist.
+- [Ist Bitcoin anonym?](/de/blog/ist-bitcoin-anonym/) → Die Rolle der Node bei der Anonymisierung.
+- [Beste Bitcoin Wallets](/de/blog/beste-bitcoin-wallets/) → Wie Sie Ihre Hardware mit der Node verbinden.
 
 ---
 
-## Wie man 2026 seine eigene Node startet
+## Sektion 7: FAQ — Experten-Wissen für Node-Betreiber
 
-Früher mussten Sie Linux programmieren können. Heute ist der Start einer Node so einfach wie das Einstecken eines Routers.
+### 1. Kostet das Betreiben einer Node viel Strom?
+Nein. Eine moderne Node auf einem Raspberry Pi oder Mini-PC verbraucht etwa so viel Energie wie eine LED-Glühbirne (5-10 Watt). Die Kosten liegen bei wenigen Euro pro Jahr — ein kleiner Preis für absolute finanzielle Freiheit.
 
-### Was es Ihnen bringt:
-1. **Kein Schnüffeln:** Unternehmen wie Binance oder Ledger können nicht mehr analysieren, wie viele Bitcoins sich auf Ihrer Adresse befinden oder wann Sie kaufen.
-2. **Verifizierung:** Sie müssen niemals eine Hotline anrufen, um zu fragen, ob eine Zahlung durchgegangen ist. Sie fragen Ihren eigenen Tresor.
+### 2. Was passiert, wenn 90% der Miner die Regeln ändern wollen?
+Die Miner können eine eigene Kette starten (Hard Fork), aber sie können *Ihr* Bitcoin-Netzwerk nicht ändern. Wenn Ihre Node die neuen Blöcke ablehnt, bleiben Sie auf der ursprünglichen Kette. Dies passierte im 'Blocksize War' 2017: Die Nodes gewannen gegen die Miner-Giganten.
 
-### Der moderne Weg: Node-Betriebssysteme (Umbrel, Start9)
-1. **Hardware:** Raspberry Pi 5 oder kleiner NUC-PC + eine 1 Terabyte SSD-Festplatte kaufen.
-2. **Software (OS):** Ein Node-Betriebssystem wie *UmbrelOS* oder *Start9 embassyOS* auf eine Speicherkarte laden.
-3. **Starten:** Gerät an den heimischen Router stecken, Stromkabel anschließen.
-
-Fertig. Sie rufen im Browser Ihre eigene Benutzeroberfläche auf und können "Bitcoin Core" per Mausklick wie in einem App-Store herunterladen.
+### 3. Brauche ich eine statische IP-Adresse?
+Nein. Dank Tor und modernen Protokollen kann eine Node hinter jedem Heimrouter betrieben werden, ohne Ports manuell öffnen zu müssen. Die Node findet ihre Peers vollautomatisch.
 
 ---
 
-## Zensurresistenz: Warum Bitcoin unaufhaltsam ist
+## Sektion 8: Zusammenfassung — Don't Trust, Verify
 
-Da das Betreiben einer Node rein privater Natur ist (Sie lagern kein Geld für andere Kunden treuhänderisch, Sie schürfen kein Geld um Gewinne zu verbuchen), unterliegt es in Europa keinerlei Regulierungen (z.B. der BaFin). Wer die freie Software auf seinem Computer ausführt, übt in den Augen vieler Rechtsexperten nichts anderes aus als die Freiheit der Information.
+Das Betreiben einer Node ist der Übergang vom passiven Nutzer zum aktiven Wächter. Im Jahr 2026 ist klar: Bitcoin gehört denen, die es verifizieren. Eine eigene Node gewährt Ihnen Privatsphäre gegenüber Konzernen, Sicherheit gegenüber Angreifern und Souveränität gegenüber Staaten.
 
-In Deutschland, der Schweiz und Österreich gibt es, gemessen an der Gesamtbevölkerung, eine der höchsten Konzentrationen an registrierten Bitcoin-Knotenpunkten weltweit. Dieser "Cyber-Föderalismus" macht es Regierungen faktisch unmöglich, den Bitcoin abzuschalten. 
-
----
-
-## Hardware-Hürden und die Initial Synchronisation (IBD)
-
-Das Node-Leben hat nur wenige Hürden:
-
-- **Bandbreite:** Die Node lauscht 24 Stunden am Tag ins Internet. Dabei fließen im Hintergrund hunderte Gigabyte an Daten durch den Internetanschluss. Achten Sie auf eine gute Heim-WLAN-Verbindung (idealerweise ein LAN-Kabel am Router).
-- **Die Initialisierungsphase:** Wenn Sie eine fabrikneue Node einstecken, muss diese jeden Transfer seit dem Tag 1 berechnen. Selbst mit einer modernen SSD-Festplatte benötigt dies 2 bis 5 Tage, in denen der Prozessor glüht. Dies ist eine einmalige Kraftprobe, danach sinkt die Auslastung auf ein Minimum.
+**Schalten Sie Ihre Node ein. Werden Sie Ihre eigene Zentralbank. Verifizieren Sie Ihre Freiheit.**
 
 ---
 
-## Das Umbrel-Erlebnis & Layer-2 Apps
-
-Wer 2026 eine Node hostet, profitiert vom unglaublichen App-Ökosystem dieses "Sovereign Servers" (Souveräner Server). Mit nur einem Klick können Sie zusätzlich zur Bitcoin-Software folgendes installieren:
-
-- Eine **Lightning Network** App: Betreiben Sie Ihren eigenen Lightning-Hub.
-- **Mempool.space:** Ihr eigener Server zur Visualisierung von Transaktionsgebühren.
-- Nextcloud & Passwort-Tresore (Sie befreien sich komplett aus den Fängen von Google Cloud).
-- Nostr Relays (Das zensurfreie Twitter-Pendant als persönlicher Server).
-
----
-
-## ⛓️ Die Zukunft der Node-Dezentralisierung
-
-Das größte Dilemma im Krypto-Sektor nennt sich das "Blockchain-Trilemma" (Kompromiss aus Dezentralisierung, Sicherheit und Geschwindigkeit). Rivalen wie Solana (SOL) fokussieren sich auf enorme globale Geschwindigkeit. Der Preis dafür: Ihre Nodes benötigen gigantisch teure Hardware, wodurch nur noch IT-Großkonzerne das Netzwerk verwalten. 
-
-Bitcoin verneint das strikt. Das fundamentale Sicherheitsversprechen Bitcoins bleibt: Jeder noch so arme Student mit einem gebrauchten Laptop irgendwo in Südamerika muss technisch in der Lage sein, eine Node zu betreiben, um der Regierung und den Minern auf die Finger zu schauen.
-
----
-
-## Häufig gestellte Fragen (FAQs)
-
-### 1. Speichert meine eigene Node meine Bitcoins?
-Nein, das ist ein weitverbreiteter Irrtum. Ihre Hardware Wallet (der USB-Stick mit der Seed-Phrase) speichert den Zugang zu den Bitcoins. Die Node liefert lediglich der Wallet ein absolut vertrauenswürdiges Instrument ins Haus, um den eigenen Kontostand anonym im globalen Kassenbuch abfragen zu können. 
-
-### 2. Was passiert, wenn meiner Node der WLAN-Anschluss ausfällt?
-Für Ihre Funds: Absolut gar nichts. Sie können nur solange keine Live-Abfragen mehr tätigen. Fahren Sie tagelang in den Urlaub und schalten die Node aus, wird sie in dem Moment, in dem sie wieder Strom hat, hektisch beginnen, die tausenden verpassten Blöcke der fehlenden Tage herunterzuladen, sie zu verifizieren und blitzschnell zur Weltzeit aufschließen ("Chaintip Sync").
-
-### 3. Muss ich Linux für die Node programmieren können?
-Nein. Während dies 2016 noch der Fall war, ist der Startvorgang 2026 dank "Operating Systems" wie UmbrelOS oder Start9 so kinderleicht, als würde man eine Netflix-App auf dem Smart-TV installieren. Ein paar Mausklicks genügen.
-
----
-**Wichtigste Erkenntnisse:**
-> Bitcoin Nodes sind die unabhängigen Wächter des Protokolls. Sie kosten wenig, gewähren absolute Privatsphäre und verhelfen Ihnen zu dem Zustand, in dem Ihnen kein Staat und kein Miner mehr die Krypto-Gesetze diktieren kann. "Schalte deine Node ein, nimm deine Souveränität zurück."
-
-**Mehr Entdecken:**
-- [Wie Mining in Deutschland unrentabel wurde](/blog/bitcoin-mining-erklaert/)
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Node
+- **Verwandte Entitäten:** Full Node, Pruning, IBD, UTXO-Set, GOSSIP-Protokoll, Blocksize War, Umbrel, Tor-Netzwerk, Peer-to-Peer, Validierung vs. Mining.
+/)
 - [Ist Bitcoin anonym? Warum Privatsphäre wichtig ist](/blog/ist-bitcoin-anonym/)
 - [Kryptografische Schlüssel einfach erklärt](/blog/public-private-keys/)

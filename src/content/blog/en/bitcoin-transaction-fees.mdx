@@ -30,123 +30,123 @@ export const faqSchema = {
 
 ---
 
-## 🎯 Introduction: The Market for Block Space
+## 🎯 Introduction: The Economics of Block Space
 
-Unlike credit cards or banks that charge a percentage of your transaction value, Bitcoin charges for the physical space your data occupies on the blockchain. This has created a global, 24/7 **Fee Market**. In 2026, as Bitcoin anchors trillions in value, understanding how to navigate this market is the difference between paying $0.50 and $50.00 for the same transfer.
+Unlike legacy credit card networks that charge a flat percentage of your transaction value, Bitcoin operates as a global, 24/7 **Auction for Block Space**. 
+
+In 2026, as Bitcoin anchors trillions in global value, the competition for a spot in the next block is fierce. Understanding the technical mechanics of this market—from calculating **sat/vB** to mastering fee-bumping protocols—is the difference between a transaction that confirms in minutes and one that hangs in limbo for days. This guide provides the definitive technical roadmap for navigating the world's most secure settlement market.
 
 ---
 
-## Section 1: Definition & The Mempool Auction
+## Section 1: Definition — The Mempool Market Discovery
 
-The process of sending a transaction is effectively a blind auction for space in a digital ledger.
+To send a Bitcoin transaction is to participate in a blind auction.
 
 <DefinitionBlock term="Bitcoin Transaction Fees" icon="🎟️">
-  **Bitcoin Fees** are the payments made by users to [Miners](/en/blog/bitcoin-mining/) to include their transactions in a block. Fees are measured in **sat/vB** (Satoshis per virtual byte). They reflect the current demand for limited block space and ensure the network remains resistant to spam and denial-of-service attacks.
+  **Bitcoin Fees** are the voluntary payments made by users to [Miners](/en/blog/bitcoin-mining/) to incentivize the inclusion of their data in a block. Fees are measured in **sat/vB** (Satoshis per virtual Byte). This structure ensures that the network is resistant to spam while creating a sustainable, long-term security budget for the protocol.
 </DefinitionBlock>
 
-When you send a transaction, it doesn't go onto the blockchain immediately. It first enters the **Mempool**—a decentralized "waiting room" where miners pick the highest bidders first.
+When you broadcast a transaction, it enters the **Mempool**—a decentralized "waiting room" where thousands of independent [Nodes](/en/blog/what-is-a-bitcoin-node/) store it until a miner chooses to include it. Miners are profit-maximizers; they fill their limited 4MB block space with the highest bidders first.
 
 ---
 
-## Section 2: The Core Concept (Fee Lanes & Priority)
+## Section 2: The Core Concept — Data Weight vs. Financial Value
 
-Visualizing the mempool as a digital highway helps explain why some transactions confirm in minutes while others take days.
+In Bitcoin, the "price of admission" is determined by **Digital Mass (Bytes)**, not monetary value.
 
 <ConceptVisual 
-  src="/images/blog/bitcoin-fee-lanes.png" 
-  alt="Bitcoin Mempool Fee Lanes Visualization" 
-  type="diagram" 
-  caption="High-priority transactions pay for the 'Fast Lane' and get picked up in the next block. Low-priority transactions pay for the 'Slow Lane' and wait for periods of lower network activity."
+  src="/images/blog/bitcoin-transaction.png" 
+  alt="Data Size vs Monetary Value Visualization" 
+  type="comparison" 
+  caption="Sending 1,000 BTC from a single 'Input' is cheaper than sending 0.001 BTC compiled from 50 small 'Dust' payments. Miners don't care about the dollars; they only care about how much space your data consumes in their block."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Digital highway with three lanes: 'Fast Lane' glowing bright with few cars (transactions), 'Slow Lane' congested with many cars. Blocks overhead being filled by cranes picking cars from the fast lane. Cyberpunk data-viz style."
-- **File Name:** `bitcoin-fee-lanes.png`
+Think of the blockchain as a cargo plane with a strict weight limit. A diamond (High Value, Low Weight) is cheaper to ship than a crate of lead (Low Value, High Weight). This makes "UTXO Management" a critical skill for high-net-worth holders.
 
 ---
 
-## Section 3: How It Works (The Lifecycle of a Fee)
+## Section 3: How It Works — The Lifecycle of a Fee
 
-Bitcoin fees are deterministic but based on network congestion. Here is how your wallet determines what to pay.
+The fee you pay is a direct function of current network demand.
 
 <ProcessStep steps={[
   {
-    title: "Data Compilation",
-    description: "Your wallet gathers 'Inputs' (previous coins you received). The more inputs you have, the 'heavier' the transaction data becomes."
+    title: "Weight Calculation",
+    description: "Your wallet calculates the virtual size (vBytes) based on inputs, outputs, and [Address Type](/en/blog/how-to-send-receive-bitcoin/)."
   },
   {
     title: "Mempool Bidding",
-    description: "You set a fee (e.g., 50 sat/vB). This is your bid. It is broadcast to the network and enters the mempool."
+    description: "You set your bid (e.g., 85 sat/vB). In 2026, AI-driven fee estimators analyze the last 10 blocks to find the optimal 'Front of Line' price."
   },
   {
-    title: "Miner Selection",
-    description: "A miner finds a block and fills it with the ~2,500 highest-paying transactions currently in the mempool."
+    title: "The Block Auction",
+    description: "Miners find a block and sweep the top-paying transactions. Lower-paying transactions stay in the mempool for the next 'Heartbeat'."
   },
   {
-    title: "Confirmation",
-    description: "Once your transaction is included in a block, it is 'Confirmed'. Subsequent blocks add security layers (Confirmations)."
+    title: "Settlement Finality",
+    description: "Once included, subsequent blocks add 'Security Weight', making it exponentially more expensive for anyone to reverse the fee you paid."
   }
 ]} />
 
 ---
 
-## Section 4: Data vs. Value (The Principal Paradox)
+## Section 4: 2026 Optimization Standards
 
-One of the most confusing parts of Bitcoin is that "weight" is measured in bytes, not dollars.
+Using modern protocols can reduce your transaction costs by over 80%.
 
-| Transaction Type | Financial Value | Data Size | Fee (at 50 sat/vB) |
-|---|---|---|---|
-| **Simple Move** | $1,000,000 (1 input) | ~140 vB | ~$7.00 |
-| **Consolidation**| $10 (50 inputs) | ~3,400 vB | ~$170.00 |
-
-<ConceptVisual 
-  src="/images/blog/data-vs-value-analogy.png" 
-  alt="Bitcoin Transaction Data vs Value Comparison" 
-  type="comparison" 
-  caption="Miners don't see the price of your BTC; they only see the size of your envelope. A $1M check in a small envelope is cheaper to mail than $10 in nickels in a heavy crate."
-/>
-
-*Visual Specs for AI Generation:*
-- **Prompt:** "Minimalist 3D comparison: A small digital envelope carrying '1 BTC' and an identical envelope carrying '1,000 BTC', both weighing the same on a digital scale (showing 250 bytes). Symbolic clean design."
-- **File Name:** `data-vs-value-analogy.png`
+| Optimization | Technical Benefit | Cost Reduction |
+|---|---|---|
+| **Native SegWit (bc1q)** | Separates signature data from block 'weight'. | ~30% - 40% |
+| **Taproot (bc1p)** | Most efficient for complex multisig transactions. | ~10% Additional |
+| **Transaction Batching** | Combining many payments into one large transaction. | Up to 70% |
+| **[Lightning Network](/en/blog/lightning-network/)** | Moves transactions 'Off-Chain' for instant settlement. | ~99.9% |
 
 ---
 
-## Section 5: Optimization (Secrets of Low-Fee Transfers)
+## Section 5: Unsticking Transactions — RBF & CPFP
 
-In 2026, savvy users never pay "High Priority" unless absolutely necessary.
-- **Native SegWit (bc1q...)**: Modern address formats that save ~40% on fee costs.
-- **RBF (Replace-By-Fee)**: Send a low-fee bid. If it's too slow, you can "bump" it later without re-sending.
-- **UTXO Management**: Consolidate your "small change" during the weekend when fees are low (1-2 sat/vB).
-- **The Lightning Network**: For daily spending, pay nearly $0.00 instantly.
+In 2026, a "Stuck" transaction is never a permanent problem. There are two primary technical protocols used to "Bump" a fee.
 
----
-
-## Section 6: Related Concepts (The Network Cluster)
-
-Master the mechanics of transaction processing:
-- [What is Bitcoin Mining?](/en/blog/bitcoin-mining/) → The recipients of your fees.
-- [The Lightning Network](/en/blog/lightning-network/) → Scaling beyond the mempool.
-- [Understanding Confirmations](/en/blog/what-are-bitcoin-confirmations/) → Why you pay for security.
-- [Public vs Private Keys](/en/blog/public-private-keys/) → The signatures that create the data.
-- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → The rules that govern valid transactions.
+- **RBF (Replace-By-Fee):** This allows the sender to broadcast a new version of the same transaction with a higher fee. The miner simply picks the version that pays more, and the old one is discarded.
+- **CPFP (Child-Pays-For-Parent):** If you are the *recipient* of a stuck payment, you can create a new transaction using that pending "change." By attaching a massive fee to the second transaction (the child), you incentivize the miner to process both the child and the parent simultaneously to get the big reward.
 
 ---
 
-## Section 7: FAQ (Stuck Transactions)
+## Section 6: Related Concepts — The Fee Ecosystem
 
-### 1. My transaction has been 'Pending' for 12 hours. Is my money lost?
-No. Your money technically never leaves your wallet until the transaction is confirmed on the blockchain. If a transaction is never picked up, it will eventually be "evicted" from the mempool (usually after 2 weeks) and will simply reappear in your balance.
-
-### 2. Can I cancel a transaction?
-Not exactly, but you can "RBF" it to yourself. By sending a new transaction with a much higher fee that sends the same funds back to your own address, the miner will pick the version that pays more, effectively cancelling the first one.
-
-### 3. Why don't miners process zero-fee transactions?
-Mining consumes energy and costs money. Miners have no incentive to use their valuable block space for a transaction that pays nothing. Always use at least 1 sat/vB.
+Fees are the glue that holds the security of the network together:
+- [Bitcoin Mining](/en/blog/bitcoin-mining/) → Where your fees go and why they matter.
+- [The Lightning Network](/en/blog/lightning-network/) → Escaping the fee market for small payments.
+- [How to Send BTC Safely](/en/blog/how-to-send-receive-bitcoin/) → Managing address formats and vBytes.
+- [Understanding Confirmations](/en/blog/what-are-bitcoin-confirmations/) → The ROI on the fee you paid.
+- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → How your node enforces the minimum relay fee.
 
 ---
 
-## Section 8: Summary — Efficiency is Sovereignty
+## Section 7: FAQ — Professional Troubleshooting
+
+### 1. What happens if I pay a near-zero fee?
+Your transaction will likely be ignored by miners. After a certain period (usually 2 weeks), most nodes will "Purge" the transaction from their mempool. The funds will then reappear as "available" in your wallet as if you never hit send.
+
+### 2. Why are fees higher on certain days?
+Bitcoin fees follow a human cycle. Fees are traditionally highest during US/EU business hours and lowest on weekends. In 2026, large institutional "settlement runs" can cause temporary fee spikes that last for several hours.
+
+### 3. What happens to Bitcoin security when the mining reward goes to zero?
+By the year 2140, new Bitcoin issuance will stop. At that point, the network will be secured **entirely by transaction fees**. The global competition for block space is designed to provide such a massive "fee pool" that mining remains profitable, ensuring the network's immune system stays strong forever.
+
+---
+
+## Section 8: Summary — Efficiency is Financial Sovereignty
+
+Bitcoin fees are the market's way of valuing the most precious digital real estate on Earth. By understanding mempool dynamics, optimizing your vByte weight through SegWit and Taproot, and utilizing fee-bumping protocols like RBF, you can manage your digital wealth with more precision and lower cost than any legacy bank. 
+
+**Knowledge of the fee market is the ultimate tool for the sovereign individual.**
+
+---
+
+## 🧬 Semantic Entity Map
+- **Primary Entity:** Bitcoin Transaction Fees
+- **Related Entities:** Mempool, sat/vB, vBytes, RBF (Replace-By-Fee), CPFP (Child-Pays-For-Parent), SegWit, Taproot, UTXO Management, Block Space, Security Budget.
 
 Bitcoin fees are the market's way of valuing the world's most secure digital space. By understanding mempool dynamics, using modern address formats, and utilizing Layer 2 solutions like Lightning, you can manage your digital wealth with more efficiency and lower cost than any legacy bank. In the decentralized future, **knowledge of fees is power.**
 

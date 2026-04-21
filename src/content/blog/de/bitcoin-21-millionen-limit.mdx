@@ -32,135 +32,117 @@ export const faqSchema = {
 
 ## 🎯 Einleitung: Die Geburt der absoluten Knappheit
 
-In der traditionellen Welt ist "Knappheit" ein relativer Begriff. Steigt der Goldpreis, graben Minen tiefer, um mehr zu finden. Benötigt eine Regierung mehr Geld, druckt sie es einfach. Bitcoin hat diese Spielregeln der Geschichte geändert und die erste **absolute Knappheit** geschaffen. Im Jahr 2026 steht das 21-Millionen-Limit als die wichtigste mathematische Konstante im globalen Finanzsystem.
+In der traditionellen Welt ist "Knappheit" ein relativer Begriff. Steigt der Goldpreis, graben Minen tiefer oder erforschen Asteroiden-Mining, um mehr zu finden. Benötigt eine Regierung mehr Geld, druckt sie es einfach. 
+
+Bitcoin hat diese uralten Spielregeln der Ökonomie geändert und die erste **absolute Knappheit** der Menschheitsgeschichte geschaffen. Im Jahr 2026 steht das 21-Millionen-Limit als die wichtigste mathematische Konstante im globalen Finanzsystem. Es ist der Anker der Stabilität in einem Ozean aus endlos vermehrbaren Fiat-Währungen. Dieser Guide dekonstruiert die Mathematik hinter der Grenze und erklärt, warum dieses Limit unzerstörbar ist.
 
 ---
 
-## Sektion 1: Definition & die Philosophie von "Hartem Geld"
+## Sektion 1: Definition — Was ist 'Absolute Knappheit'?
 
-Bitcoins Angebot ist keine "Schätzung", sondern ein festgeschriebenes, unveränderliches Gesetz im Code.
+Bitcoins Angebot ist keine politische "Schätzung", sondern ein festgeschriebenes, unveränderliches Gesetz im Code.
 
-<DefinitionBlock term="Das 21-Millionen-Limit" icon="🔒">
-  **Das 21-Millionen-Limit** ist die im Code festgeschriebene maximale Anzahl an Bitcoins, die jemals existieren können. Es wird durch dezentralen Konsens tausender [Nodes](/blog/was-ist-ein-bitcoin-node/) weltweit durchgesetzt. Dieses feste Angebot stellt sicher, dass Bitcoin nicht durch Inflation entwertet werden kann, was es zum digitalen Äquivalent eines "festen Landmasses" im Cyberspace macht.
+<DefinitionBlock term="Absolute Knappheit" icon="🔒">
+  **Absolute Knappheit** bedeutet, dass das Angebot eines Gutes perfekt fixiert ist und nicht auf eine steigende Nachfrage reagieren kann. Bei Bitcoin wird dies durch die dezentrale Verifizierung tausender [Nodes](/de/blog/was-ist-ein-bitcoin-node/) erzwungen. Während Gold nur 'relativ knapp' ist (Angebot steigt bei höherem Preis), bleibt Bitcoin bei exakt 21 Millionen — egal wie hoch der Preis oder die Nachfrage ist.
 </DefinitionBlock>
 
-Im Gegensatz zu Fiat-Währungen (USD, EUR, CHF), die beliebig erweitert werden können, ist Bitcoin perfekt begrenzt. Man muss nicht "glauben", man kann den Code selbst verifizieren.
-
 ---
 
-## Sektion 2: Kernkonzept (Der Knappheits-Tresor)
+## Sektion 2: Kernkonzept — Die Mathematik des Limits
 
-Das Ziel von 21 Millionen wird durch eine geometrische Reihe erreicht. Es ist keine willkürliche Zahl, sondern das Ergebnis eines über die Zeit abnehmenden Belohnungssystems.
+Das Ziel von 21 Millionen ist keine willkürliche Zahl, sondern das Ergebnis einer präzisen geometrischen Reihe.
 
 <ConceptVisual 
-  src="/images/blog/bitcoin-supply-vault.png" 
-  alt="Visualisierung der geometrischen Reihe des Bitcoin-Angebots" 
-  type="diagram" 
-  caption="Das Gesamtangebot ist die Summe aller Blockbelohnungen: (50 + 25 + 12,5...) multipliziert mit 210.000 Blöcken. Mathematisch konvergiert dies exakt bei 21.000.000."
+  src="/images/blog/bitcoin-supply.png" 
+  alt="Mathematik des 21 Millionen Limits" 
+  type="concept" 
+  caption="Die Berechnung folgt der Formel: 210.000 Blöcke * (50 + 25 + 12,5 + 6,25...). Mathematisch konvergiert diese Summe exakt bei 20.999.999,9769 BTC. Bitcoins Knappheit ist also ein Resultat purer Arithmetik und der begrenzten Teilbarkeit (8 Nachkommastellen)."
 />
 
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Hochwertige 3D-Visualisierung, eine goldene Säule, die das Bitcoin-Angebot darstellt; progressiv kleinere Scheiben werden hinzugefügt, während sie eine Glasdecke mit der Aufschrift 21.000.000 erreicht. Luxuriöser Fintech-Stil."
-- **Dateiname:** `bitcoin-supply-vault.png`
+Satoshi Nakamoto wählte 21 Millionen, um eine Zahl zu haben, die einerseits groß genug für die Weltwirtschaft ist (2,1 Billiarden kleinste Einheiten) und andererseits perfekt berechenbar bleibt.
 
 ---
 
-## Sektion 3: Wie es funktioniert (Der Emissions-Herzschlag)
+## Sektion 3: Funktionsweise — Wer erzwingt das Gesetz?
 
-Das Limit ist nicht statisch, sondern ein dynamischer Prozess der sich verlangsamenden Ausgabe, gesteuert durch den "Halving"-Zeitplan.
+Ein häufiges Missverständnis ist, dass die Miner das Limit kontrollieren. In Wahrheit sind es die **Nodes**.
 
 <ProcessStep steps={[
   {
-    title: "Die Genesis-Epoche",
-    description: "Von 2009 bis 2012 wurden alle 10 Minuten 50 BTC erschafft. Die frühe Adoption wurde durch hohe Belohnungen subventioniert."
+    title: "Der Konsens-Regelsatz",
+    description: "Jeder Teilnehmer, der eine eigene Node betreibt, hat '21 Millionen' als oberstes Gesetz in seiner Software stehen."
   },
   {
-    title: "Periodische Halbierung",
-    description: "Alle 210.000 Blöcke (~4 Jahre) sinkt die Ausgabe um 50 %. Dies erzwingt die 'S-Kurve' des Angebots."
+    title: "Automatische Ablehnung",
+    description: "Sollte ein Miner (egal wie groß) versuchen, 51 BTC statt der erlaubten Belohnung zu erschaffen, wird dieser Block von allen Nodes weltweit sofort als ungültig abgelehnt."
   },
   {
-    title: "Node-Überprüfung",
-    description: "Jeder Knoten im Netzwerk prüft jeden Block. Versucht ein Miner, 'extra' Bitcoin zu erschaffen, lehnen die Nodes den Block sofort ab."
+    title: "Difficulty Adjustment",
+    description: "Dieses System sorgt dafür, dass Bitcoins alle 10 Minuten ausgegeben werden — unabhängig davon, ob 10 oder 10 Millionen Miner aktiv sind. Es ist der 'Thermostat' der Knappheit."
   },
   {
-    title: "Der finale Satoshi",
-    description: "Die Kurve flacht immer weiter ab, bis die Blockbelohnung um das Jahr 2140 den Wert Null erreicht."
+    title: "Die S-Kurve der Emission",
+    description: "Durch die Halbierungen (Halvings) nähert sich Bitcoin seinem Limit asymptotisch an. Das bedeutet, das Angebot wächst immer langsamer, bis es um das Jahr 2140 stagniert."
   }
 ]} />
 
 ---
 
-## Sektion 4: BTC vs. Gold vs. Fiat (Vergleichsdaten)
+## Sektion 4: S2F-Vergleich 2026 (BTC vs. Gold)
 
-Warum ist ein festes Limit für Anleger wichtig? Es bestimmt das "Stock-to-Flow"-Verhältnis – das Maß für die Härte eines Gutes.
+Warum ist ein festes Limit für Anleger wichtig? Markteffizienz wird oft über das "Stock-to-Flow"-Verhältnis gemessen.
 
-| Asset | Gesamtangebot | Emissionspolitik | Stock-to-Flow (S2F) |
+| Asset | Stock (Bestand) | Flow (Neuproduktion) | S2F-Ratio (Härte) |
 |---|---|---|---|
-| **Fiat (Euro/Dollar)** | Unendlich | Ermessen der Zentralbanken | Extrem niedrig |
-| **Gold** | Unbekannt | Entdeckung & Förderung | ~60 |
-| **Bitcoin (2026)** | **Fest 21 Mio.** | **Algorithmisch abnehmend** | **~120+** |
+| **Fiat (Euro/Dollar)** | Billionen | Endlos (Drucken) | Extrem niedrig |
+| **Gold** | ~200.000 Tonnen | ~3.500 Tonnen/Jahr | ~58 |
+| **Bitcoin (2026)** | **~19,8 Mio. BTC** | **~164.000 BTC/Jahr** | **~120+** |
 
-Im Jahr 2026 ist Bitcoin offiziell doppelt so knapp wie Gold und damit das "härteste" Geld, das die Menschheit je kannte.
-
----
-
-## Sektion 5: Das Paradoxon der "verlorenen Coins"
-
-Obwohl der Code 21 Millionen sagt, ist die Realität noch knapper. Da Bitcoin [Private Keys](/blog/public-private-keys/) benötigt, löscht jeder verlorene Schlüssel diese Coins effektiv aus der Weltwirtschaft.
-
-<ConceptVisual 
-  src="/images/blog/scarcity-vs-liquidity.png" 
-  alt="Vergleich absolute vs. relative Knappheit" 
-  type="comparison" 
-  caption="Theoretisches Angebot (21 Mio.) vs. geschätztes zirkulierendes Angebot (~17 Mio.). Verlorene Coins machen jeden verbleibenden Satoshi wertvoller für die Halter."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Vergleichsgrafik: Ein solider, unveränderlicher Goldwürfel (Bitcoin) neben einem Goldbarren mit unregelmäßigen Kanten (Gold) und einem Haufen im Wind wehendem Papier (Fiat). Professionelle Beleuchtung."
-- **Dateiname:** `scarcity-vs-liquidity.png`
+Im Jahr 2026 ist Bitcoin offiziell das "härteste" Geld, das jemals existiert hat, und lässt Gold in puncto Vorhersehbarkeit weit hinter sich.
 
 ---
 
-## Sektion 6: Teilbarkeit und Nutzen (Die Macht der "Sats")
+## Sektion 5: Das Paradoxon der verlorenen Coins
 
-"Ich kann mir keinen ganzen Bitcoin leisten!" – Dies ist ein häufiger Irrtum. Man benötigt keinen ganzen Coin, um das Netzwerk zu nutzen.
-
-- **Der Satoshi (Sat):** 1 BTC = 100.000.000 Einheiten.
-- **Mikro-Zahlungen:** Über das [Lightning Network](/blog/lightning-network/) können Bruchteile eines Cents versendet werden.
-- **Globale Skalierung:** Selbst bei 21 Millionen Coins gibt es 2,1 Billiarden Satoshis. Genug für jeden Menschen auf der Welt, um hunderttausende Einheiten zu besitzen.
-
----
-
-## Sektion 7: Verwandte Themen (Wirtschafts-Cluster)
-
-Vertiefen Sie Ihr Wissen über Bitcoins Geldpolitik:
-- [Das Bitcoin Halving](/blog/bitcoin-halving/) → Das Ereignis, das die Angebotsreduzierung auslöst.
-- [Was ist Bitcoin Mining?](/blog/bitcoin-mining-erklaert/) → Die Maschinen, die das Angebot produzieren.
-- [Was bestimmt den Bitcoin-Preis?](/blog/was-bestimmt-den-bitcoin-preis/) → Angebot ist fix, aber die Nachfrage schwankt.
-- [Public vs Private Keys](/blog/public-private-keys/) → Warum Schlüsselverlust das Angebot verknappt.
-- [Bitcoin vs. Fiat-Geld](/blog/bitcoin-vs-fiat-geld/) → Digitales vs. traditionelles Geld im Vergleich.
+Obwohl das Limit 21 Millionen beträgt, ist die Realität noch knapper.
+- **Geschätzte Verluste:** Experten gehen davon aus, dass bereits 3 bis 4 Millionen BTC für immer verloren sind (vergessene Keys, tote Halter).
+- **Ökonomischer Effekt:** Da diese Coins niemals verkauft werden können, wirken sie wie eine permanente Vernichtung des Angebots. Dies macht die verbleibenden Sats für alle Halter noch wertvoller.
+- **Deflationäre Kraft:** Im Jahr 2140 wird Bitcoin wahrscheinlich eine **negative Inflation** haben, da mehr Coins verloren gehen, als jemals wieder erschaffen werden können.
 
 ---
 
-## Sektion 8: FAQ (Häufige Fragen)
+## Sektion 6: Verwandte Themen — Das Knappheits-Ökosystem
 
-### 1. Was passiert, wenn die Blockbelohnung endet?
-Das Netzwerk stirbt nicht. Miner werden durch [Transaktionsgebühren](/blog/bitcoin-transaktionsgebuehren/) incentiviert. Da Bitcoin zu einer hochpreisigen Abrechnungsebene für Banken und Staaten wird, wird der Wettbewerb um Blockplatz mehr als genug Einnahmen generieren.
-
-### 2. Kann Bitcoin "gehackt" werden, um mehr zu erschaffen?
-Nein. Um das Limit zu ändern, müssten zehntausende Node-Betreiber gleichzeitig einer Software zustimmen, die ihre eigenen Ersparnisse entwertet. Es ist ein "sozial unmöglicher" Hack.
-
-### 3. Was ist, wenn ich Bitcoins verliere?
-Im Gegensatz zu einem Bank-Passwort gibt es keinen "Passwort vergessen"-Button. Wenn Sie den Zugriff auf Ihr Wallet verlieren, sind diese Bitcoins für immer auf der Blockchain eingefroren. Sie verringern dadurch effektiv das verfügbare Angebot für alle anderen.
+Knappheit ist nur sinnvoll, wenn das Netzwerk sicher ist:
+- [Das Bitcoin Halving](/de/blog/bitcoin-halving/) → Das Event, das die Knappheit physisch umsetzt.
+- [Was ist Bitcoin Mining?](/de/blog/bitcoin-mining-erklaert/) → Warum Arbeit nötig ist, um Knappheit zu erzeugen.
+- [Was bestimmt den Preis?](/de/blog/was-bestimmt-den-bitcoin-preis/) → Wie Knappheit auf Nachfrage trifft.
+- [Public vs. Private Keys](/de/blog/public-private-keys/) → Warum Schlüsselverlust Bitcoin noch knapper macht.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Werden Sie selbst zum Wächter des 21-Millionen-Limits.
 
 ---
 
-## Sektion 9: Zusammenfassung — Die Endgültigkeit der 21 Millionen
+## Sektion 7: FAQ — Experten-Fragen zur Geldpolitik
+
+### 1. Kann man das Limit nicht einfach per Update erhöhen?
+Technisch ja, aber ökonomisch wäre es Selbstmord. Jeder Bitcoin-Halter müsste zustimmen, sein eigenes Geld zu entwerten. Da Bitcoin dezentral ist, kann keine Regierung diesen "Druckbefehl" erteilen. Wer die Regeln ändern will, wird einfach vom Netzwerk "geforkt".
+
+### 2. Was passiert, wenn die letzte Belohnung ausgezahlt wurde?
+Im Jahr 2140 werden Miner ausschließlich durch **Transaktionsgebühren** bezahlt. Da Bitcoin zu diesem Zeitpunkt das globale Fundament für Milliarden von Sekundär-Transaktionen (Lightning) ist, werden die Gebühren ausreichen, um die Sicherheit zu gewährleisten.
+
+### 3. Warum sind 21 Millionen Bitcoins genug für die ganze Welt?
+Wegen der Teilbarkeit. Ein Bitcoin besteht aus 100 Millionen Satoshis. Im Jahr 2026 wird bereits in "Sats" gerechnet. Es gibt 2,1 Billiarden Satoshis — mehr als genug für jede wirtschaftliche Transaktion auf diesem Planeten.
+
+---
+
+## Sektion 8: Zusammenfassung — Die Architektur der Endgültigkeit
 
 Das 21-Millionen-Limit ist der "Friedensvertrag" der modernen Wirtschaft. Es garantiert, dass niemand schummeln kann, niemand mehr drucken kann und niemand Ihnen Ihren Wert durch Inflation rauben kann. In einem Zeitalter endloser digitaler Kopien bietet Bitcoins unveränderliche Mathematik die einzige **absolute Sicherheit** in der Finanzwelt.
+
+**Rechnen Sie nicht mit Versprechen; rechnen Sie mit dem Code.**
 
 ---
 
 ## 🧬 Semantische Entity-Map
-- **Haupt-Entität:** 21 Millionen Limit
-- **Verwandte Entitäten:** Satoshi Nakamoto, Geometrische Reihe, Knappheit, Stock-to-Flow, Halving, Bitcoin Node, Dezentraler Konsens, Satoshi (Sat), Verlorene Coins, Geldpolitik.
+- **Haupt-Entität:** Bitcoin 21 Millionen Limit
+- **Verwandte Entitäten:** Geometrische Reihe, Absolute Knappheit, S2F (Stock-to-Flow), Satoshi Nakamoto, Konsens-Regeln, Node-Verifizierung, Difficulty Adjustment, Deflation, Halving-Zyklus, Teilbarkeit (Satoshis).

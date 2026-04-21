@@ -23,7 +23,7 @@ export const faqSchema = {
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "When is the next Bitcoin halving?", "acceptedAnswer": { "@type": "Answer", "text": "The next Bitcoin halving is projected to occur in early 2028. It will reduce the block reward from 3.125 BTC to 1.5625 BTC. The exact date depends on the network's hash rate and block discovery speed." } },
-    { "@type": { "@type": "Question", "name": "Does the halving increase Bitcoin's price?", "acceptedAnswer": { "@type": "Answer", "text": "Historically, each halving has been followed by a significant price increase within 12-18 months. However, price depends on sustained or growing demand meeting the reduced supply." } } },
+    { "@type": "Question", "name": "Does the halving increase Bitcoin's price?", "acceptedAnswer": { "@type": "Answer", "text": "Historically, each halving has been followed by a significant price increase within 12-18 months. However, price depends on sustained or growing demand meeting the reduced supply." } },
     { "@type": "Question", "name": "How many halvings will there be?", "acceptedAnswer": { "@type": "Answer", "text": "There will be 32 halvings in total. The process will end around the year 2140 when the block reward reaches zero and the supply is capped at 21 million." } }
   ]
 };
@@ -32,123 +32,123 @@ export const faqSchema = {
 
 ## 🎯 Introduction: The Programmatic Heartbeat of Scarcity
 
-The most powerful feature of Bitcoin is not its technology, but its **Monetary Policy**. While central banks around the world change interest rates and print money based on human discretion, Bitcoin operates on a fixed, predictable schedule. This schedule is anchored by the **Halving**—an event that automatically reduces the issuance of new Bitcoin every four years. In 2026, we are living in the post-2024 "ETF Era," where the halving's impact is more profound than ever.
+The most powerful feature of Bitcoin is not its technology, but its **Monetary Policy**. While central banks around the world change interest rates and print money based on human discretion and political pressure, Bitcoin operates on a fixed, predictable, and immutable schedule. 
+
+This schedule is anchored by the **Halving**—an event that automatically reduces the issuance of new Bitcoin every four years. In 2026, we are living in the high-stakes "Post-2024 ETF Era," where the halving's impact on global liquidity is more profound than ever. It is the heartbeat of the world's first digital sound money system.
 
 ---
 
-## Section 1: Definition & The Purpose of Halving
+## Section 1: Definition — Why the Halving Matters
 
-The halving is the network's way of ensuring that Bitcoin mimics the properties of a physical commodity like gold.
+The halving is the primary mechanism that ensures Bitcoin remains a disinflationary asset, eventually becoming perfectly scarce.
 
 <DefinitionBlock term="Bitcoin Halving" icon="⏳">
-  A **Bitcoin Halving** is a pre-programmed event that occurs every 210,000 blocks (approximately every 4 years). It cuts the reward given to miners for securing the network in half. This reduces the rate at which new Bitcoin enters the market, ensuring that the total supply never exceeds 21 million and creating a "Supply Shock" that counters inflation.
+  A **Bitcoin Halving** is a pre-programmed event that occurs every 210,000 blocks (approximately every 4 years). It cuts the reward given to miners for securing the network in half. This reduces the rate at which new Bitcoin enters the market, ensuring that the total supply never exceeds 21 million and creating a "Supply Shock" that counters global fiat inflation.
 </DefinitionBlock>
 
-Without the halving, all 21 million Bitcoins would have been mined in the first few years. By spreading the issuance over 130 years, Satoshi Nakamoto created a "Slow Release" mechanism that allows the network to grow in value as it becomes scarcer.
+Satoshi Nakamoto designed Bitcoin to mimic the extraction of gold: as time goes on, it becomes 50% harder to "extract" the remaining supply. This spreads the issuance over roughly 130 years, giving the network time to grow in value and security while the supply curve flattens.
 
 ---
 
-## Section 2: The Core Concept (The Epoch Clock)
+## Section 2: The Core Concept — The Epoch Clock
 
-Think of the halving as a mechanical countdown that triggers a paradigm shift in the Bitcoin economy.
+Every halving marks the beginning of a new "Epoch." Each epoch represents a specific phase in Bitcoin's monetary maturity.
 
 <ConceptVisual 
   src="/images/blog/halving-epoch-clock.png" 
   alt="Bitcoin Halving Countdown and Reward Shift Visualization" 
   type="flow" 
-  caption="Every 210,000 blocks, a new 'Epoch' begins. Each epoch cuts the reward in half, making the network 50% more difficult to 'extract' value from than the previous one."
+  caption="Every 210,000 blocks (~4 years), the block reward lever is pulled, cutting the issuance in half. This creates a supply squeeze that has historically acted as a catalyst for massive network adoption."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Futuristic digital clock with holographic numbers counting blocks, a mechanical lever clicking down to cut a stream of data in half, high-tech orange and grey aesthetic, cinematic lighting."
-- **File Name:** `halving-epoch-clock.png`
+Think of the halving as a mechanical countdown that triggers a paradigm shift in the Bitcoin economy. It is the moment where the "Flow" of new coins is restricted, increasing the scarcity and "Hardness" of the existing "Stock."
 
 ---
 
-## Section 3: How It Works (The Subsidy Formula)
+## Section 3: How It Works — The Halving Algorithm
 
-The halving is enforced by a simple mathematical formula within the Bitcoin Core code. It doesn't rely on human votes; it relies on logic.
+The halving is not a "Vote"; it is an inevitability enforced by thousands of independent [Bitcoin Nodes](/en/blog/what-is-a-bitcoin-node/). Inside the Bitcoin Core software, a simple "bit-shift" operation executes the reduction.
 
 <ProcessStep steps={[
   {
     title: "Block Height Trigger",
-    description: "The network monitors the 'Block Height'. When it hits a multiple of 210,000, the subsidy reduction is triggered instantly."
+    description: "The network monitors the total count of blocks. When it hits a multiple of 210,000, the reduction rule activates instantly."
   },
   {
-    title: "Subsidy Cut",
-    description: "The code executes a 'bit-shift' operation, dividing the current block reward by two (e.g., from 3.125 to 1.5625 BTC in 2028)."
+    title: "Arithmetic Subsidy Cut",
+    description: "The software takes the current reward (e.g., 3.125 BTC) and shifts it one bit to the right, effectively dividing it by two for all subsequent blocks."
   },
   {
-    title: "Mining Difficulty",
-    description: "If some miners find the new reward too low to stay profitable, they unplug. The network then adjusts its difficulty to ensure blocks still arrive every 10 minutes."
+    title: "Difficulty Adjustment",
+    description: "If the reward cut makes some miners unprofitable, they exit. To compensate, the network automatically adjusts its difficulty to ensure blocks still arrive every 10 minutes."
   },
   {
-    title: "Market Readjustment",
-    description: "With 50% less daily 'Sell Pressure' from miners, the market must find a new equilibrium price based on existing demand."
+    title: "The Fee Transition",
+    description: "As the block reward approaches zero, miners begin to rely more on transaction fees, ensuring the security of the network for 100+ years."
   }
 ]} />
 
 ---
 
-## Section 4: Halving Timeline (History of Scarcity)
+## Section 4: History of Scarcity Timeline
 
-Each halving has historically preceded a massive expansion of the Bitcoin ecosystem.
+Past halvings have proven that Bitcoin's supply shock is the most reliable event in finance.
 
-| Epoch | Year | Block Reward | Total Circulating % | Market Era |
+| Epoch | Year | Block Reward | Supply % Mined | Market Context |
 |---|---|---|---|---|
-| **Genesis** | 2009 | 50 BTC | 0% - 50% | Hobbyist & Cipherpunks |
-| **1st Halving** | 2012 | 25 BTC | 50% - 75% | Early Exchanges |
-| **2nd Halving** | 2016 | 12.5 BTC | 75% - 87.5% | Retail Awareness |
-| **3rd Halving** | 2020 | 6.25 BTC | 87.5% - 93.75% | Institutional Entry |
-| **4th Halving** | 2024 | 3.125 BTC | 93.75% - 96.8% | **The ETF Era** |
-| **5th Halving** | 2028 | 1.5625 BTC | 96.8% - 98.4% | Strategic Reserves |
+| **Genesis** | 2009 | 50 BTC | 0% - 50% | Cryptographers & Early Dreamers |
+| **1st Halving** | 2012 | 25 BTC | 50% - 75% | Silk Road & First Exchanges |
+| **2nd Halving** | 2016 | 12.5 BTC | 75% - 87.5% | ICO Craze & Global Retail |
+| **3rd Halving** | 2020 | 6.25 BTC | 87.5% - 93.7% | Institutional & Corporate Entry |
+| **4th Halving** | 2024 | 3.125 BTC | 93.7% - 96.8% | **The Spot ETF Revolution** |
+| **5th Halving** | 2028 | 1.56 BTC | 96.8% - 98.4% | Strategic Reserve Era |
 
 ---
 
-## Section 5: The Economics (Stock-to-Flow Comparison)
+## Section 5: Stock-to-Flow — Surpassing Gold
 
-The **Stock-to-Flow (S2F)** ratio measures the "hardness" of an asset. The higher the number, the more difficult it is to inflate the supply.
+The **Stock-to-Flow (S2F)** ratio is the ultimate measure of an asset's "Hardness." Post-2024, Bitcoin's S2F ratio has achieved a historical first.
 
 <ConceptVisual 
   src="/images/blog/s2f-dashboard.png" 
   alt="Bitcoin vs Gold Stock-to-Flow Ratio Comparison" 
   type="diagram" 
-  caption="Post-2024 Halving, Bitcoin's S2F ratio has surpassed that of Gold. By 2028, Bitcoin will be nearly twice as 'hard' as the most successful physical asset in history."
+  caption="In 2026, Bitcoin is officially twice as hard as gold. By the 2028 halving, it will be the hardest asset ever documented, with an S2F ratio approaching 120+."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Data-heavy UI dashboard, showing two bars: one labeled Gold (S2F 60) and one labeled Bitcoin (S2F 120), glowing intensely. Clean white typography on dark background, professional finance look."
-- **File Name:** `s2f-dashboard.png`
+Each halving doubles the S2F ratio. This periodic "Hardening" is what makes Bitcoin a black hole for global liquidity: value flows toward the asset that is most resistant to being inflated away.
 
 ---
 
-## Section 6: Related Concepts (The Scarcity Cluster)
+## Section 6: Related Concepts — The Economic Ecosystem
 
-Deepen your understanding of Bitcoin's supply-side mechanics:
-- [The 21 Million Supply Cap](/en/blog/bitcoin-supply-21-million/) → Why the issuance eventually hits zero.
-- [How Bitcoin Mining Works](/en/blog/bitcoin-mining/) → The machines that receive the block rewards.
-- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → How the rules are enforced.
-- [What Determines BTC Price?](/en/blog/what-determines-bitcoins-price/) → The demand side of the scarcity equation.
-- [History of Bitcoin](/en/blog/history-of-bitcoin/) → How halvings shaped the network's growth.
+The halving doesn't happen in isolation; it interacts with every other part of the protocol:
+- [The 21 Million Limit](/en/blog/bitcoin-supply-21-million/) → The final destination of the halving cycles.
+- [What is Bitcoin Mining?](/en/blog/bitcoin-mining/) → The machines that feel the reward cut first.
+- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → Why miners can't 'skip' the halving.
+- [Bitcoin Wallet Guide](/en/blog/best-bitcoin-wallets/) → Managing your keys as the asset matures.
+- [Is Bitcoin Anonymous?](/en/blog/is-bitcoin-anonymous/) → Why privacy matters in a hyper-scarce economy.
 
 ---
 
-## Section 7: FAQ (Common Investor Myths)
+## Section 7: FAQ — Addressing Investor Myths
 
-### 1. Will miners quit when the reward is halved?
-Some might. This is a "cleaning" of the network. Efficient miners with cheap electricity survive, while inefficient ones fail. The [Difficulty Adjustment](/en/blog/bitcoin-mining/) ensures the network continues regardless.
+### 1. What if miners shut down after the halving?
+The "Miner Capitulation" is a healthy part of the cycle. Inefficient miners with high electricity costs exit, and those with efficient hardware take their place. The **Difficulty Adjustment** ensures the network remains 100% functional throughout the transition.
 
-### 2. Is the halving 'priced in'?
-This is the great debate of 2026. While the schedule is known, the **actual impact** of reduced sell-pressure from miners is felt gradually over months. You cannot "price in" a physical reduction of available supply that hasn't happened yet.
+### 2. Is the halving already 'priced in'?
+While the date is known, the physical reduction of thousands of daily Bitcoins entering the market is a **structural change** that cannot be fully priced in by human sentiment alone. The supply shock is a persistent downward pressure on availability.
 
-### 3. What happens after the last halving in 2140?
-Miners will be paid 100% by [Transaction Fees](/en/blog/bitcoin-transaction-fees/). As Bitcoin settles billions in value per day, the competition for space in a block will provide more than enough revenue to maintain network security.
+### 3. Why is the halving date an estimate?
+Because blocks are mined based on mathematical probability, not a physical clock. If more hash rate joins the network, blocks are found faster, and the halving arrives sooner. If hash rate leaves, it arrives later.
 
 ---
 
 ## Section 8: Summary — The Clockwork of Sound Money
 
-The Bitcoin Halving is the ultimate proof that math is superior to politics. It is a one-way bridge toward a future of absolute scarcity. As the issuance rate falls and the stock-to-flow ratio climbs, Bitcoin matures from a experimental currency into the most stable long-term reserve asset on the planet.
+The Bitcoin Halving is the ultimate proof that math is superior to politics. It is a one-way bridge toward a future of absolute scarcity. As the issuance rate continues to fall and the stock-to-flow ratio climbs, Bitcoin matures from an experimental technology into the most stable and predictable reserve asset on the planet.
+
+**The halving is not just an event; it is the heartbeat of a new financial era.**
 
 ---
 

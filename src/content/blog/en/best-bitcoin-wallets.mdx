@@ -32,125 +32,125 @@ export const faqSchema = {
 
 ## 🎯 Introduction: Sovereignty in Your Pocket
 
-In 2026, Bitcoin has transformed from a speculative asset into a global reserve currency. But with great value comes great responsibility. The most important decision a Bitcoiner makes is choosing where their **Private Keys** live. A wallet is not just a storage device; it is your interface for financial freedom. Whether you are protecting $100 or $100 Million, this guide will help you navigate the 2026 landscape of secure self-custody.
+In 2026, Bitcoin has matured into the world's premier digital reserve asset. But with great value comes the absolute necessity for robust security. Unlike a traditional bank account where you are a "customer," with Bitcoin you are the **Sole Custodian**. 
+
+The most critical decision any participant makes is choosing where their **Private Keys** live. A wallet is not merely a storage device; it is your interface for financial sovereignty. Whether you are protecting $1,000 for a trip or $1 Million for retirement, this guide will help you navigate the highly technical landscape of 2026 self-custody solutions.
 
 ---
 
-## Section 1: Definition & The Hierarchy of Custody
+## Section 1: Definition — The Hierarchy of Custody
 
-A "wallet" is a misnomer. It doesn't hold Bitcoin; it holds the authorization code to move it.
+A "wallet" is a common misnomer. It doesn't actually store Bitcoin; it stores the **mathematical authorization codes** (Private Keys) required to move funds on the blockchain.
 
 <DefinitionBlock term="Bitcoin Wallet" icon="🔑">
-  A **Bitcoin Wallet** is a tool that manages your Private Keys. The gold standard in 2026 is **Self-Custody**, where you—and only you—possess the keys. The hierarchy of security ranges from "Hot Wallets" (connected to the internet) to "Cold Storage" (physically isolated hardware), ensuring that your wealth is protected according to its value.
+  A **Bitcoin Wallet** is a software or hardware tool that manages your cryptographic keys. The gold standard in 2026 is **Self-Custody**, where you—and only you—possess the knowledge of these keys. The hierarchy of security ranges from "Hot Wallets" (connected to the internet) to "Cold Storage" (physically isolated hardware), ensuring that your wealth is protected according to its magnitude.
 </DefinitionBlock>
 
-Remember: *"Not your keys, not your coins."* If you keep your BTC on an exchange, you only own a promise. With a non-custodial wallet, you own the asset.
+The cardinal rule of Bitcoin remains: *"Not your keys, not your coins."* If you keep your funds on an exchange, you are merely a creditor to a company. With a non-custodial wallet, you are the final authority over your wealth.
 
 ---
 
-## Section 2: The Core Concept (Hot vs. Cold)
+## Section 2: The Core Concept — Hot vs. Cold Storage
 
-Understanding the "Air Gap" is the foundation of digital security.
+The foundation of digital security is the concept of the **Air Gap**—the physical isolation of your keys from the vulnerabilities of the internet.
 
 <ConceptVisual 
   src="/images/blog/wallet-hierarchy.png" 
   alt="Bitcoin Wallet Hierarchy: Hot vs Cold Storage" 
   type="diagram" 
-  caption="Hot Wallets are for convenience (spending cash), while Cold Storage is for security (savings). Never keep more than you can afford to lose in a hot wallet."
+  caption="Hot Wallets (Mobile/Desktop) are for convenience and spending cash, while Cold Storage (Hardware) is for absolute security and long-term savings. The goal is to move as much value as possible into the 'Cold' zone."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Modern fintech diagram: Central split between 'Hot' (smartphone, cloud, fast lanes) and 'Cold' (heavy vault, offline device, ice crystals). Minimalist icons, professional orange and grey theme."
-- **File Name:** `wallet-hierarchy.png`
+Think of a Hot Wallet like your physical wallet—it's convenient for daily use but dangerous to carry your entire life savings in. A Cold Wallet is your vault. In 2026, the best practice is to keep 95% of your holdings in cold storage and only 5% in a "spending" hot wallet.
 
 ---
 
-## Section 3: How It Works (The Security Flow)
+## Section 3: How It Works — The Lifecycle of a Key
 
-The journey from generating a key to signing a transaction must be protected from prying eyes.
+Modern wallets use a standard called **BIP-39** to turn complex binary code into something humans can manage: The **Seed Phrase**.
 
 <ProcessStep steps={[
   {
     title: "Entropy Generation",
-    description: "Your wallet generates a truly random 256-bit number. This is converted into a human-readable Seed Phrase (12-24 words)."
-  },
-  {
-    title: "Offline Storage",
-    description: "In a hardware wallet, these keys are stored in a 'Secure Element' chip, physically separated from the device's USB or Bluetooth ports."
-  },
-  {
-    title: "Unsigned Broadcast",
-    description: "When you want to send BTC, your PC sends the 'Unsigned Transaction' to the hardware device."
+    description: "Your device generates a truly random 256-bit number (Entropy). To make this manageable, it is converted into a 12 or 24-word 'Master Seed'."
   },
   {
     title: "Isolated Signing",
-    description: "You verify the details on the device screen. The device signs the transaction internally and sends back ONLY the signature, never the key."
+    description: "When you send BTC, the transaction is prepared on your PC/Phone but sent to the hardware device to be physically 'signed' inside a Secure Element (SE) chip."
+  },
+  {
+    title: "Physical Verification",
+    description: "You must physically press a button on the wallet to approve the transaction. This prevents malware on your computer from draining your funds remotely."
+  },
+  {
+    title: "Cryptographic Broadcast",
+    description: "Only the completed signature is sent back to the internet. Your Private Keys never leave the offline hardware."
   }
 ]} />
 
 ---
 
-## Section 4: 2026 Wallet Comparison Table
+## Section 4: 2026 Hardware Comparison Table
 
-The market has matured. Here are the leaders in every category for 2026.
+The hardware market has split into two camps: General Convenience and Max-Security Performance.
 
-| Model | Category | Best For | Connection | Security Level |
+| Model | Category | Security Chip | Connection | Philosophy |
 |---|---|---|---|---|
-| **BitBox02** | Hardware | Beginners/Europe | USB-C | High (Dual Chip) |
-| **Ledger Flex** | Hardware | UX & Design | USB-C / Bluetooth | High (EAL5+) |
-| **Coldcard Mk4**| Hardware | Bitcoin Maxis | Air-gapped (MicroSD) | Institutional |
-| **Phoenix** | Mobile | Lightning/Spending | Internet | Medium (Hot) |
-| **Sparrow** | Desktop | Advanced/Privacy | Internet / Tor | Expert |
+| **Coldcard Mk4**| Hardware | Dual Secure Element | Air-gapped (MicroSD) | **Maximum Security** |
+| **BitBox02** | Hardware | Dual Chip | USB-C (Direct) | **Privacy & Ease** |
+| **Ledger Flex** | Hardware | EAL5+ Certified | USB-C / Bluetooth | **UX & Modern Design** |
+| **Trezor Safe 5**| Hardware | Open Source SE| USB-C | **Full Transparency** |
+| **Jade** | Hardware | Virtual SE | QR Code / Bluetooth | **Budget Security** |
 
 ---
 
-## Section 5: The Recovery Plan (Seed Phrases)
+## Section 5: The Master Security Block (BIP-39)
 
-The most common way to lose Bitcoin isn't hackers—it's losing your own backup.
+Your 24-word seed phrase is the most important thing you own. If you lose your hardware wallet, you can recreate your entire wallet on any other device using these words.
 
 <ConceptVisual 
   src="/images/blog/seed-recovery-flow.png" 
   alt="Bitcoin Seed Phrase Recovery Visualization" 
   type="flow" 
-  caption="Your Seed Phrase is the master key to your digital existence. If you lose your hardware wallet, these words are the only way to recreate your wealth from the void."
+  caption="A hardware device is just a screen. The Seed Phrase IS the money. In 2026, professional Bitcoiners store their seeds in stamped steel (like CryptoSteel) to protect against fire, water, and physical decay."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Visual flow: A 24-word paper list being scanned by a holographic device, restoring a glowing digital wallet from a void. High-tech, cinematic lighting, purple and orange accents."
-- **File Name:** `seed-recovery-flow.png`
+To further enhance security, many users now use a **Passphrase** (the 25th word). This creates a "hidden" wallet that cannot be accessed even if someone steals your 24-word seed.
 
 ---
 
-## Section 6: Related Concepts (The Security Ecosystem)
+## Section 6: Building the Security Ecosystem
 
-A wallet is only one piece of the puzzle. Connect these dots to stay safe:
-- [How to Store Bitcoin Safely](/en/blog/how-to-store-bitcoin-safely/) → The physical environment for your devices.
-- [Public vs Private Keys](/en/blog/public-private-keys/) → The math behind the wallet.
-- [Understanding Confirmations](/en/blog/what-are-bitcoin-confirmations/) → Why your wallet says 'Pending'.
-- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → Connecting your wallet to your own server for max privacy.
-- [The Lightning Network](/en/blog/lightning-network/) → Using 'Mobile Wallets' for instant payments.
+A wallet is only as strong as the network it communicates with.
+- [Why you need a Node](/en/blog/what-is-a-bitcoin-node/) → Preventing your wallet from leaking data.
+- [Public & Private Keys](/en/blog/public-private-keys/) → The mathematical soul of the wallet.
+- [Lightning Network Guide](/en/blog/lightning-network/) → Instant payments for mobile 'spending' wallets.
+- [How to Store Bitcoin Safely](/en/blog/how-to-store-bitcoin-safely/) → Physical storage and inheritance planning.
+- [Is my Wallet Anonymous?](/en/blog/is-bitcoin-anonymous/) → Privacy trade-offs in different software.
 
 ---
 
-## Section 7: FAQ (Security Best Practices)
+## Section 7: FAQ — Professional Security Standards
 
-### 1. Is it safe to buy a wallet on Amazon?
-No. **Always buy directly from the manufacturer.** Scammers have been known to intercept packages, modify the hardware, or include a "pre-configured" seed phrase to steal your funds the moment you deposit.
+### 1. Can someone hack my hardware wallet?
+Physical attacks on hardware wallets are extremely rare and difficult. Most involve physical possession of the device and expensive lab equipment. In 2026, standard **Secure Elements** (EAL5+ or EAL6+) effectively neutralize these threats for 99.9% of users.
 
-### 2. What happens if the wallet company goes bankrupt?
-Your Bitcoin is safe. Most hardware wallets use the BIP-39 standard. If Ledger or Trezor ends today, you can take your 24 words and restore your wallet on any other open-source software like Sparrow or Electrum.
+### 2. Should I use a 'Bitcoin-only' firmware?
+Yes, if possible. Devices like BitBox02 and Coldcard offering "Bitcoin-only" versions have a smaller "Attack Surface." By removing the code for thousands of other coins, they minimize the potential for software bugs and vulnerabilities.
 
-### 3. Do I need a different wallet for every coin?
-"Multi-currency" hardware wallets can store BTC, ETH, and thousands of others. However, "Bitcoin-only" versions (like BitBox02 BTC-only) are often more secure because they have less code, reducing the "attack surface" for hackers.
+### 3. What is an 'Air-Gapped' wallet?
+An air-gapped wallet (like the Coldcard or Foundation Passport) never touches a computer. It communicates via MicroSD cards or QR codes. This ensures that even if your computer has the worst virus in history, it has no physical path to talk to your keys.
 
 ---
 
 ## Section 8: Summary — Ownership is Responsibility
 
-Choosing a Bitcoin wallet in 2026 is an act of reclaiming your financial power. For small amounts, a mobile wallet is perfect. For your life savings, a hardware wallet is non-negotiable. Don't wait for an exchange hack to learn the importance of self-custody. **Your future self will thank you for taking control today.**
+In 2026, choosing a Bitcoin wallet is the first step toward true financial independence. For small amounts, a mobile wallet (Phoenix/Green) is perfect. For your life savings, a hardware wallet is a non-negotiable requirement. 
+
+**Self-custody is the superpower of the 21st century. Use it wisely.**
 
 ---
 
 ## 🧬 Semantic Entity Map
 - **Primary Entity:** Bitcoin Wallet
-- **Related Entities:** Self-Custody, Hardware Wallet, Hot/Cold Storage, Private Key, Seed Phrase (BIP-39), Secure Element, Ledger, Trezor, BitBox02, Multisig.
+- **Related Entities:** Self-Custody, Hardware Wallet, BIP-39 Seed Phrase, Air-Gap, Secure Element, Entropy, Private Key, Passphrase, Cold Storage, Multisig, Ledger, Trezor, Coldcard.

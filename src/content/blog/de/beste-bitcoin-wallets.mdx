@@ -24,130 +24,118 @@ export const faqSchema = {
   "mainEntity": [
     { "@type": "Question", "name": "Was ist die beste Bitcoin-Wallet für Anfänger?", "acceptedAnswer": { "@type": "Answer", "text": "Für Einsteiger sind die BitBox02 (BTC-only Edition) oder der Trezor Safe 5 ideal, da sie eine sehr intuitive Benutzeroberfläche und höchste Sicherheitsstandards bieten. Wer nur eine App sucht, ist mit Muun oder BlueWallet bestens beraten." } },
     { "@type": "Question", "name": "Was ist der Unterschied zwischen Hot und Cold Storage?", "acceptedAnswer": { "@type": "Answer", "text": "Hot Storage (Software/Handy-Wallets) ist mit dem Internet verbunden – praktisch, aber anfällig für Malware. Cold Storage (Hardware-Wallets) hält die privaten Schlüssel offline, was die einzige wirklich sichere Methode für größere Ersparnisse ist." } },
-    { "@type": "Question", "name": "Verliere ich meine Bitcoins, wenn ich das Gerät verliere?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Ihre Bitcoins liegen auf der Blockchain, nicht im Gerät. Solange Sie Ihre 12 bis 24 Wiederherstellungswörter (Seed Phrase) besitzen, können Sie Ihr Wallet auf jedem anderen kompatiblen Gerät wiederherstellen." } }
-  ]
-};
+    { "@type": "Question", "name": "Verliere ich meine Bitcoins, wenn ich das Gerät verliere?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Ihre Bitcoins liegen auf der Blockchain, nicht im Gerät. Solange Sie Ihre 12 bis 24 Wiederherstellungswörter (Seed Phrase) besitzen, können Sie Ihr Wallet auf jedem anderen kompatiblen Gerät wiederherstell## 🎯 Einleitung: Souveränität in Ihrer Hosentasche
+
+Im Jahr 2026 hat sich Bitcoin von einem spekulativen Nischen-Asset zu einer globalen Reservewährung gewandelt. Doch mit großem Wert kommt große Verantwortung. Die wichtigste Entscheidung eines Bitcoiners ist die Wahl des Ortes, an dem seine **Privaten Schlüssel (Private Keys)** leben. 
+
+Ein Wallet ist nicht nur ein Speichergerät; es ist Ihr Interface für finanzielle Freiheit. Ob Sie 100 € für den Alltag bereithalten oder 100 Millionen € für Generationen schützen – dieser Guide dekonstruiert die Technologie hinter den Wallets und zeigt Ihnen die sichersten Wege zur Eigenverwahrung.
 
 ---
 
-## 🎯 Einleitung: Souveränität in Ihrer Hosentasche
+## Sektion 1: Definition — Was ist eine 'Wallet' wirklich?
 
-Im Jahr 2026 hat sich Bitcoin von einem spekulativen Asset zu einer globalen Reservewährung gewandelt. Doch mit großem Wert kommt große Verantwortung. Die wichtigste Entscheidung eines Bitcoiners ist die Wahl des Ortes, an dem seine **Privaten Schlüssel (Private Keys)** leben. Ein Wallet ist nicht nur ein Speichergerät; es ist Ihr Interface für finanzielle Freiheit. Ob Sie 100 € oder 100 Millionen € schützen – dieser Guide zeigt Ihnen die sichersten Wege zur Eigenverwahrung.
+Der Begriff "Wallet" (Geldbörse) führt oft in die Irre. Er enthält keine Bitcoins, sondern die kryptografischen Schlüssel, um diese auf der Blockchain zu bewegen.
 
----
-
-## Sektion 1: Definition & die Hierarchie der Verwahrung
-
-Der Begriff "Wallet" (Geldbörse) führt oft in die Irre. Er enthält keine Bitcoins, sondern die Autorisierungscodes, um sie zu bewegen.
-
-<DefinitionBlock term="Bitcoin Wallet" icon="🔑">
-  Eine **Bitcoin Wallet** ist ein Werkzeug zur Verwaltung Ihrer Privaten Schlüssel. Der Goldstandard im Jahr 2026 ist die **Eigenverwahrung (Self-Custody)**, bei der Sie – und nur Sie – die Schlüssel besitzen. Die Hierarchie reicht von "Hot Wallets" (online) für den Alltag bis zu "Cold Storage" (offline Hardware) für lebensverändernde Ersparnisse.
+<DefinitionBlock term="Non-Custodial Wallet" icon="🔑">
+  Eine **Non-Custodial Wallet** ist eine Software oder Hardware, die Ihnen die volle Kontrolle über Ihre Private Keys gibt. Im Gegensatz zu Börsen oder Brokern (Custodial), bei denen Sie nur ein Gläubiger sind, fungieren Sie hier als Ihre eigene Bank. Der Goldstandard im Jahr 2026 ist die eigenverantwortliche Verwahrung, die durch den BIP39-Standard (Wiederherstellungswörter) herstellerunabhängig gesichert ist.
 </DefinitionBlock>
 
-Denken Sie an die goldene Regel: *"Not your keys, not your coins."* Wer seine Bitcoins auf einer Börse lässt, besitzt rechtlich nur ein Versprechen. Mit einer Non-Custodial Wallet besitzen Sie das wahre Gut.
-
 ---
 
-## Sektion 2: Das Kernkonzept (Hot vs. Cold)
+## Sektion 2: Kernkonzept — Hot, Warm & Cold Storage
 
-Das Verständnis des "Air Gaps" (Luftspalts) ist das Fundament der digitalen Sicherheit.
+Die Sicherheit Ihres Vermögens hängt davon ab, wie "nah" Ihre Schlüssel dem Internet kommen.
 
 <ConceptVisual 
-  src="/images/blog/wallet-hierarchy.png" 
-  alt="Hierarchie der Bitcoin-Wallets: Hot vs. Cold Storage" 
-  type="diagram" 
-  caption="Hot Wallets sind für Bequemlichkeit (Kleingeld), während Cold Storage für Sicherheit (Ersparnisse) steht. Halten Sie niemals mehr in einem Hot Wallet, als Sie bereit sind zu verlieren."
+  src="/images/blog/bitcoin-wallets.png" 
+  alt="Wallet Sicherheitsstufen Illustration" 
+  type="concept" 
+  caption="Im Jahr 2026 nutzen Profis ein 3-Schichten-Modell: 1. Hot Wallets (Handy) für kleine Beträge. 2. Warm Wallets (Hardware mit USB/Bluetooth) für mittleres Vermögen. 3. Cold Storage (Air-gapped Hardware in Stahl) für das Lebenswerk. Diese Trennung minimiert das Angriffsrisiko massiv."
 />
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Modernes Fintech-Diagramm: Spaltung zwischen 'Hot' (Smartphone, Cloud, schnelle Spuren) und 'Cold' (schwerer Tresor, Offline-Gerät, Eiskristalle). Minimalistische Icons, orange-graues Thema."
-- **Dateiname:** `wallet-hierarchy.png`
 
 ---
 
-## Sektion 3: Wie es funktioniert (Der Sicherheits-Flow)
+## Sektion 3: Funktionsweise — Das Prinzip des 'Air Gaps'
 
-Der Weg von der Schlüsselerzeugung bis zum Signieren einer Transaktion muss vor neugierigen Blicken geschützt sein.
+Wie signiert man eine Transaktion, ohne dass der Schlüssel jemals den offline-Raum verlässt?
 
 <ProcessStep steps={[
   {
-    title: "Entropie-Erzeugung",
-    description: "Ihr Wallet generiert eine echte Zufallszahl. Diese wird in eine für Menschen lesbare Seed Phrase (12-24 Wörter) umgewandelt."
+    title: "Vorbereitung (Online)",
+    description: "Ihr Computer (Watch-only Wallet) erstellt eine Transaktion, kann sie aber nicht unterschreiben. Sie wird als QR-Code oder Datei exportiert."
   },
   {
-    title: "Offline-Speicherung",
-    description: "In einer Hardware-Wallet liegen diese Schlüssel in einem 'Secure Element' Chip, physisch getrennt von USB- oder Bluetooth-Verbindungen."
+    title: "Transfer (Mechanisch)",
+    description: "Sie bringen die Transaktion über eine SD-Karte oder per Kamera-Scan (QR) auf Ihr Offline-Gerät. Es gibt keine elektrische Verbindung zum Internet."
   },
   {
-    title: "Unsignierter Broadcast",
-    description: "Wenn Sie BTC senden, sendet Ihr PC die 'unsignierte Transaktion' an das Hardware-Gerät."
+    title: "Signatur (Offline)",
+    description: "Das Hardware-Wallet zeigt die Details an. Sie bestätigen physisch am Gerät. Der interne Chip nutzt den Private Key zum Signieren."
   },
   {
-    title: "Isoliertes Signieren",
-    description: "Sie prüfen die Details auf dem Gerätedisplay. Das Gerät signiert intern und sendet NUR die Signatur zurück, niemals den Schlüssel."
+    title: "Broadcast (Zurück Online)",
+    description: "Die signierte Transaktion wird zurück auf den PC gebracht und ins Netzwerk gesendet. Der Schlüssel blieb zu jeder Zeit isoliert."
   }
 ]} />
 
 ---
 
-## Sektion 4: Wallet-Vergleich 2026 (Marktführer)
+## Sektion 4: Hardware-Audit 2026 — Die Marktführer
 
-Der Markt ist erwachsen geworden. Hier sind die Spitzenreiter für 2026 im DACH-Raum.
+Welches Gerät passt zu Ihrem Profil? Hier ist der Stand der Technik für den DACH-Raum.
 
-| Modell | Kategorie | Beste Wahl für... | Verbindung | Sicherheitslevel |
-|---|---|---|---|---|
-| **BitBox02** | Hardware | DACH-Region / Anfänger | USB-C | Hoch (Dual Chip) |
-| **Ledger Flex** | Hardware | Design & Multi-Asset | USB-C / Bluetooth | Hoch (EAL5+) |
-| **Coldcard Mk4**| Hardware | Bitcoin-Minimalisten | Air-gapped (MicroSD) | Institutionell |
-| **Muun / Phoenix** | Mobile | Täglicher Gebrauch | Internet | Mittel (Hot) |
-| **Sparrow** | Desktop | Experten / Privatsphäre | Internet / Tor | Experten-Level |
-
----
-
-## Sektion 5: Der Rettungsplan (Seed Phrases)
-
-Der häufigste Grund für Bitcoin-Verluste sind keine Hacker, sondern das Verlieren des eigenen Backups.
-
-<ConceptVisual 
-  src="/images/blog/seed-recovery-flow.png" 
-  alt="Visualisierung des Bitcoin Seed Phrase Wiederherstellungs-Flows" 
-  type="flow" 
-  caption="Ihre Seed Phrase ist der Generalschlüssel zu Ihrer digitalen Existenz. Verlieren Sie Ihr Hardware-Gerät, ist diese Wortliste der einzige Weg, Ihr Vermögen aus dem Nichts wiederherzustellen."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Visueller Flow: Eine 24-Wörter Liste wird von einem holografischen Gerät gescannt, das ein leuchtendes Wallet aus der Leere wiederherstellt. High-Tech, cinematisches Licht."
-- **Dateiname:** `seed-recovery-flow.png`
+| Modell | Philosophie | Verbindung | Hauptmerkmal |
+|---|---|---|---|
+| **BitBox02 (BTC-only)** | Schweizer Präzision | USB-C | Minimalistischer Code, Dual-Chip Architektur |
+| **Ledger Flex** | Massenmarkt-Komfort | Bluetooth / USB | E Ink Display, breite App-Unterstützung |
+| **Trezor Safe 5** | Absolute Transparenz | USB-C | 100% Open Source Hardware & Software |
+| **Seedsigner** | Stateless Security | Air-gapped (QR) | Selbstbau-Kit, speichert keine Daten dauerhaft |
 
 ---
 
-## Sektion 6: Verwandte Themen (Das Sicherheits-Ökosystem)
+## Sektion 5: Das Gesetz der Transparenz (Open Source)
 
-Ein Wallet ist nur ein Teil des Puzzles. Verknüpfen Sie diese Themen für maximale Sicherheit:
-- [Bitcoin sicher aufbewahren](/de/blog/bitcoin-sicher-aufbewahren/) → Die physische Umgebung für Ihre Geräte.
-- [Public vs Private Keys](/de/blog/public-private-keys/) → Die Mathematik hinter Ihrem Wallet.
-- [Bestätigungen verstehen](/de/blog/bitcoin-bestaetigungen/) → Warum Ihr Wallet 'Pending' anzeigt.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Verbinden Sie Ihr Wallet mit Ihrem eigenen Server.
-- [Das Lightning Network](/de/blog/lightning-network/) → Mobile Wallets für blitzschnelle Zahlungen nutzen.
+Warum sollten Sie niemals einem geschlossenen System vertrauen? 
+Im Jahr 2026 ist **Open Source** kein Bonus mehr, sondern eine Voraussetzung. Wenn der Programmcode eines Wallets nicht öffentlich einsehbar ist, könnten Hintertüren (Backdoors) existieren, die es dem Hersteller erlauben, Ihre Coins zu stehlen. Führende Wallets ermöglichen "Reproducible Builds", bei denen Experten beweisen können, dass die Software auf Ihrem Gerät exakt dem veröffentlichten Code entspricht.
 
 ---
 
-## Sektion 7: FAQ (Sicherheits-Best-Practices)
+## Sektion 6: Verwandte Themen — Das Sicherheits-Ökosystem
 
-### 1. Kann ich Wallets sicher bei Amazon kaufen?
-Wir raten dringend davon ab. **Kaufen Sie immer direkt beim Hersteller.** Es gab Fälle, in denen Pakete abgefangen wurden, um Hardware zu manipulieren oder "vorkonfigurierte" Seed Phrases beizulegen, um Gelder direkt nach der Einzahlung zu stehlen.
+Ein Wallet ist nur ein Teil Ihres persönlichen Schutzschildes:
+- [Bitcoin sicher aufbewahren](/de/blog/bitcoin-sicher-aufbewahren/) → Die physische Sicherung Ihres Seeds.
+- [Public & Private Keys](/de/blog/public-private-keys/) → Die Mathematik hinter Ihrem Wallet.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Warum Sie Ihr Wallet mit einer eigenen Node verbinden sollten.
+- [Bitcoin transaktionsgebuehren](/de/blog/bitcoin-transaktionsgebuehren/) → Wie Ihr Wallet die optimalen Gebühren berechnet.
+- [Lightning Network](/de/blog/lightning-network/) → Die besten Wallets für tägliche Kaffee-Zahlungen.
 
-### 2. Was passiert, wenn der Hersteller pleite geht?
-Ihre Bitcoins sind sicher. Die meisten Hardware-Wallets nutzen den BIP-39 Standard. Falls Ledger oder Trezor morgen schließen, können Sie Ihre 24 Wörter nehmen und Ihr Guthaben in jeder anderen Open-Source Software wie Sparrow oder Electrum wiederherstellen.
+---
 
-### 3. Brauche ich für jeden Coin ein anderes Wallet?
-Multi-Asset-Wallets können BTC, ETH und Tausende andere speichern. Dennoch gelten "Bitcoin-only" Versionen (wie die BitBox02) als sicherer, da sie weniger Programmcode enthalten und somit weniger Angriffsfläche für Hacker bieten.
+## Sektion 7: FAQ — Experten-Wissen zur Verwahrung
+
+### 1. Was ist 'Stateless Mining' oder 'Stateless Wallets'?
+Einige Experten nutzen Geräte wie den Seedsigner, die den Private Key nach der Nutzung sofort "vergessen". Man muss den Schlüssel jedes Mal neu aus den 24 Wörtern generieren. Dies verhindert, dass ein Dieb physisch Zugriff auf die Schlüssel im Gerät erhält.
+
+### 2. Sind 'Paper Wallets' noch sicher?
+Nein. Im Jahr 2026 gelten Paper Wallets als veraltet und gefährlich, da das Generieren auf einem normalen Drucker oft Spuren hinterlässt. Nutzen Sie stattdessen **Steel Backups** (Stahlplatten), um Ihre Seed Phrase vor Feuer und Wasser zu schützen.
+
+### 3. Was passiert, wenn mein Wallet-Hersteller pleite geht?
+Dank des BIP39-Standards können Sie Ihre 24 Wörter in fast jedem anderen Wallet eines anderen Herstellers eingeben und Ihre Bitcoins sofort wiederherstellen. Sie sind niemals von einer einzelnen Firma abhängig.
 
 ---
 
 ## Sektion 8: Zusammenfassung — Eigentum bedeutet Verantwortung
 
-Die Wahl einer Bitcoin-Wallet im Jahr 2026 ist ein Akt finanzieller Ermächtigung. Für Kleingeld reicht eine App, für lebenslange Ersparnisse ist eine Hardware-Wallet Pflicht. Warten Sie nicht auf den nächsten Börsen-Hack, um die Bedeutung der Eigenverwahrung zu lernen. **Ihr zukunftiges Ich wird Ihnen danken, dass Sie heute die Kontrolle übernommen haben.**
+Die Wahl einer Bitcoin-Wallet im Jahr 2026 ist ein Akt finanzieller Ermächtigung. Für Kleingeld reicht eine App, für lebenslange Ersparnisse ist eine Hardware-Wallet Pflicht. Warten Sie nicht auf den nächsten Börsen-Hack, um die Bedeutung der Eigenverwahrung zu lernen. 
+
+**Ihr zukünftiges Ich wird Ihnen danken, dass Sie heute die Kontrolle übernommen haben. Werden Sie Ihre eigene Bank — fangen Sie jetzt damit an.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Beste Bitcoin Wallets
+- **Verwandte Entitäten:** Eigenverwahrung, Hardware Wallet, Hot/Cold Storage, BIP39, BIP44, Open Source, Reproducible Builds, Air-gap, Secure Element (SE), Multisig, BitBox02, Ledger, Trezor.
+er Eigenverwahrung zu lernen. **Ihr zukunftiges Ich wird Ihnen danken, dass Sie heute die Kontrolle übernommen haben.**
 
 ---
 

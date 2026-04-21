@@ -26,96 +26,115 @@ export const faqSchema = {
 
 ---
 
-## Protokoll-Evolution verstehen (Definition) <a id="definition"></a>
+## 🎯 Einleitung: Die Evolution des digitalen Protokolls
 
-Bitcoin ist keine statische Software, sondern ein lebendiges Protokoll, das von einer dezentralen globalen Community gewartet wird. Da es keinen "CEO von Bitcoin" gibt, werden Änderungen an den Regeln durch einen Prozess namens **Konsens** (Consensus) abgewickelt.
+Bitcoin ist keine statische Software, sondern ein lebendiges Protokoll, das durch dezentralen Konsens gewartet wird. Da es keinen "CEO von Bitcoin" gibt, erfolgt die Weiterentwicklung durch einen sozialen und technischen Prozess namens **Governance**. 
 
-Ein **Fork** (Gabelung) tritt auf, wenn sich die Regeln des Netzwerks ändern. Ob diese Änderung klein und kompatibel oder groß und spaltend ist, bestimmt den "Typ" des Forks und die Zukunft des Netzwerks.
-
----
-
-## Soft Fork vs. Hard Fork: Die technische Spaltung (Vergleich) <a id="comparison"></a>
-
-Die Unterscheidung zwischen diesen beiden Arten ist das wichtigste Konzept in der Bitcoin-Entwicklung.
-
-
-
-| Merkmal | Soft Fork | Hard Fork |
-|---------|-----------|-----------|
-| **Kompatibilität** | Rückwärtskompatibel | Nicht rückwärtskompatibel |
-| **Netzwerkspaltung** | Nein (Vereinte Kette) | Ja (Kettenspaltung) |
-| **Neue Coins?** | Nein | Ja (Wahrscheinlich) |
-| **Nodes-Anforderung**| Mehrheit der Mining-Power | Nahezu universelle Annahme |
-| **Risiko-Level** | Niedrig | Hoch |
+In der Welt der Softwareentwicklung ist ein **Fork** (Gabelung) ein Moment, in dem sich die Roadmap teilt. Im Jahr 2026 blicken wir auf eine Geschichte voller ideologischer Konflikte und technischer Durchbrüche zurück, die Bitcoin zu dem stabilsten Finanznetzwerk der Erde gemacht haben. In diesem Guide dekonstruieren wir die Natur von Forks — von riskanten Spaltungen bis hin zu eleganten Upgrades.
 
 ---
 
-## Warum Forks entstehen: Konsens und Vision (Governance) <a id="governance"></a>
+## Sektion 1: Definition — Hard Fork vs. Soft Fork
 
-Forks sind der "Abstimmungsmechanismus" des Bitcoin-Netzwerks. Sie entstehen aus verschiedenen Gründen:
+Der Unterschied liegt nicht im Ziel, sondern in der Art der Durchsetzung und der Kompatibilität mit dem bestehenden Netzwerk.
 
-1.  **Technische Upgrades:** Hinzufügen neuer Funktionen wie Schnorr-Signaturen (Taproot) oder besseres Gebührenmanagement.
-2.  **Skalierungsdebatten:** Uneinigkeit darüber, wie mehr Nutzer bewältigt werden sollen (z. B. Erhöhung der Blockgröße vs. Layer 2).
-3.  **Governance-Philosophie:** Debatten über die "essenzielle Natur" von Bitcoin (Digitales Gold vs. Peer-to-Peer Bargeld).
+<DefinitionBlock term="Hard Fork (Symmetrische Spaltung)" icon="🪓">
+  Ein **Hard Fork** ist eine Änderung der Regeln, die alte Blöcke für ungültig erklärt oder neue, zuvor ungültige Regeln zulässt (z. B. eine Erhöhung der Blockgröße). Da alte Nodes diese neuen Regeln nicht verstehen, spaltet sich das Netzwerk dauerhaft in zwei inkompatible Blockchains auf.
+</DefinitionBlock>
 
-Wenn eine Gruppe von Entwicklern und Minern keine Einigung erzielen kann, können sie sich entscheiden, den Code zu "forken" und ihren eigenen Weg zu gehen.
-
----
-
-## Der Blocksize-Krieg 2017 (Historischer Kontext) <a id="history"></a>
-
-Der legendärste Fork der Geschichte fand am **1. August 2017** statt.
-
-Die "Big Blocker" wollten die Blockgröße von 1MB auf 8MB oder mehr erhöhen, um günstigere On-Chain-Transaktionen zu ermöglichen. Die "Small Blocker" argumentierten, dass dies das Netzwerk zentralisieren würde, da nur noch große Rechenzentren Nodes betreiben könnten.
-
-Das Ergebnis war **Bitcoin Cash (BCH)**. Bitcoin (BTC) blieb auf seinem Pfad der kleinen Blöcke und Layer 2 (Lightning), während BCH sich abspaltete. Im Jahr 2026 hat die Geschichte den BTC-Ansatz weitgehend bestätigt, da dieser den Großteil der Netzwerksicherheit und des Wertes hält.
+<DefinitionBlock term="Soft Fork (Asymmetrische Einengung)" icon="🧵">
+  Ein **Soft Fork** ist eine Verschärfung der Regeln. Neue Blöcke sind so gestaltet, dass sie auch von alten Nodes als gültig erkannt werden (Rückwärtskompatibilität). Dies ermöglicht Upgrades, ohne das Netzwerk zu zersplittern, erfordert aber oft kreative technische Kniffe wie 'Witness Data'.
+</DefinitionBlock>
 
 ---
 
-## SegWit und Taproot: Der Erfolg von Soft Forks (Upgrades) <a id="upgrades"></a>
+## Sektion 2: Kernkonzept — Die Macht der Nodes (UASF)
 
-Die erfolgreichsten Änderungen an Bitcoin waren bisher **Soft Forks.**
+Wer entscheidet wirklich über die Zukunft von Bitcoin? Es sind nicht die Miner, sondern die Betreiber von **Full Nodes**.
 
-- **SegWit (2017):** Behob die Transaktions-Malleability und ermöglichte das [Lightning Network](/de/blog/lightning-network/). Es war ein Soft Fork, der neue Daten als "Müll" für alte Nodes tarnte, um die Kette zusammenzuhalten.
-- **Taproot (2021):** Verbesserte die Privatsphäre für komplexe Transaktionen und ebnete den Weg für anspruchsvollere Smart Contracts auf Bitcoin, ohne eine Kettenspaltung zu riskieren.
-
----
-
-## Die Zukunft von Bitcoin Forks: BitVM und Covenants <a id="future"></a>
-
-Im Jahr 2026 hat sich die Diskussion in Richtung **"Covenants" und "BitVM"** bewegt. Dies sind neue Protokollvorschläge, die via Soft Fork hinzugefügt werden könnten.
-- **BitVM:** Ermöglicht komplexe Berechnungen auf Bitcoin, ohne das Protokoll selbst ändern zu müssen.
-- **OP_CAT:** Ein vorgeschlagener Soft Fork zur Wiederherstellung einer alten Funktion, die "Vaults" (Tresore) und sicherere Verwahrungslösungen ermöglichen könnte.
-
-Der Trend ist klar: Die Community bevorzugt langsame, stetige und kompatible Upgrades gegenüber riskanten Hard Forks.
+<ConceptVisual 
+  src="/images/blog/bitcoin-forks.png" 
+  alt="Bitcoin Meta-Governance Illustration" 
+  type="concept" 
+  caption="Der 'Blocksize War' (2017) bewies die Macht des UASF (User Activated Soft Fork). Die Nutzer drohten, Blöcke von Minern abzulehnen, die ein bestimmtes Update nicht unterstützten. Dies zementierte das Prinzip, dass in Bitcoin die ökonomische Mehrheit der Nutzer über die Hardware der Miner triumphiert."
+/>
 
 ---
 
-## Verhalten bei einem strittigen Fork (Sicherheit) <a id="safety"></a>
+## Sektion 3: Funktionsweise — Der Lebenszyklus eines Upgrades
 
-Sollte ein größerer Fork bevorstehen:
-1.  **Eigenverwahrung:** Bewegen Sie Ihre Coins auf ein Wallet, bei dem Sie die privaten Schlüssel besitzen.
-2.  **Keine Transaktionen:** Warten Sie, bis sich der "Staub gelegt hat", damit Sie nicht versehentlich Coins auf der falschen Kette senden (Replay-Attacke).
-3.  **Split-Tools abwarten:** Drittanbieter-Tools werden es schließlich ermöglichen, Ihre Coins sicher zu "splitten", sodass Sie sowohl BTC als auch das neue geforkte Asset besitzen.
+Wie wird eine Änderung im Jahr 2026 sicher in das Netzwerk integriert?
+
+<ProcessStep steps={[
+  {
+    title: "BIP-Drafting",
+    description: "Ein Entwickler schreibt ein Bitcoin Improvement Proposal (BIP) und stellt es der Community zur mathematischen Prüfung vor."
+  },
+  {
+    title: "Signalling (Miner)",
+    description: "Miner setzen ein Bit in ihren Blöcken, um anzuzeigen, dass sie bereit für das Upgrade sind. Dies ist keine Abstimmung, sondern eine Bereitschaftsmeldung."
+  },
+  {
+    title: "Activation Period",
+    description: "Sobald ein Schwellenwert (z.B. 90% der Blöcke) erreicht ist, wird das Upgrade für einen Zeitraum 'locked in' und schließlich aktiviert."
+  },
+  {
+    title: "Enforcement (Nodes)",
+    description: "Ab dem Stichtag lehnen alle Nodes Blöcke ab, die den neuen Regeln nicht entsprechen — das Upgrade ist nun dauerhafter Teil des Protokolls."
+  }
+]} />
 
 ---
 
-## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
+## Sektion 4: Historischer Kontext — Der Blocksize War (2017)
 
-### 1. Erzeugt jeder Fork einen neuen Coin?
-Nur Hard Forks, die auf beiden Seiten Community-Unterstützung haben, erzeugen neue Coins. Wenn ein Hard Fork keine Unterstützung hat, stirbt er einfach aus. Soft Forks erzeugen niemals neue Coins, da die Kette vereint bleibt.
-
-### 2. Kann Bitcoin durch Forken "inflationiert" werden?
-Nein. Man kann Bitcoin forken und "Bitcoin Super" mit 100 Millionen Coins erschaffen, aber man hat die Anzahl der ursprünglichen Bitcoins nicht verändert. Man hat lediglich ein neues, weniger wertvolles Asset erschaffen. Deshalb verwässern Forks nicht das 21-Millionen-Limit von BTC.
-
-### 3. Warum werden Soft Forks bevorzugt?
-Weil sie sicherer sind. Sie zwingen Nutzer nicht zu einem sofortigen Upgrade und sie zersplittern nicht die Liquidität und die Hashpower des Netzwerks.
+Der legendärste Hard Fork der Geschichte fand am **1. August 2017** statt und definierte Bitcoin neu.
+- **Die Visionäre:** 'Big Blocker' wollten die Blockgröße erhöhen, um Bitcoin als billiges Zahlungsmittel (Coffee-Payments) zu skalieren.
+- **Die Konservativen:** 'Small Blocker' priorisierten Dezentralität. Wenn jeder eine Node auf einem billigen PC betreiben kann, bleibt Bitcoin unhackbar.
+- **Das Ergebnis:** **Bitcoin Cash (BCH)** spaltete sich ab. Bitcoin (BTC) implementierte SegWit (Soft Fork) und setzte auf das [Lightning Network](/de/blog/lightning-network/) zur Skalierung. Heute hält BTC über 99 % des kumulierten Wertes beider Ketten.
 
 ---
-**Wichtigste Erkenntnisse:**
-> Forks sind der Evolutionsmechanismus von Bitcoin. Hard Forks repräsentieren einen 'Bürgerkrieg' oder eine Scheidung innerhalb der Community, während Soft Forks ein 'stilles Upgrade' darstellen, das das Netzwerk stark und vereint hält. Das Verständnis dieser Unterschiede ist essenziell, um die Zukunft der Bitcoin-Governance zu navigieren.
 
-**Vertiefen Sie Ihre Recherche:**
-- [Das Lightning Network: Skalierung ohne Forks](/de/blog/lightning-network/)
-- [Das 21-Millionen-Limit von Bitcoin verstehen](/de/blog/bitcoin-21-millionen-limit/)
-- [Bitcoin sicher aufbewahren bei Netzwerkänderungen](/de/blog/bitcoin-sicher-aufbewahren/)
+## Sektion 5: Experten-Wissen — BitVM & die 'No-Fork' Zukunft
+
+Im Jahr 2026 versuchen Entwickler, Upgrades durchzuführen, ohne das Protokoll überhaupt ändern zu müssen.
+- **BitVM:** Ermöglicht komplexe Berechnungen (Pessimistic Smart Contracts) auf Bitcoin, indem vorhandene Funktionen kreativ kombiniert werden. Es ist ein Upgrade ohne Fork.
+- **Covenants:** Ein aktueller Diskurs über neue Funktionen (OP_CAT), die via Soft Fork 'Vaults' (Tresore) ermöglichen könnten. Dies würde Diebstähle unmöglich machen, da Coins nur an vordefinierte Adressen gesendet werden könnten.
+
+---
+
+## Sektion 6: Verwandte Themen — Der Governance-Stack
+
+Forks sind Teil eines größeren Sicherheitsmodells:
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Ihr Werkzeug zum Durchsetzen von Konsensregeln.
+- [Bitcoin Mining erklaert](/de/blog/bitcoin-mining-erklaert/) → Die Rolle der Miner bei Upgrades.
+- [21 Millionen Limit](/de/blog/bitcoin-21-millionen-limit/) → Warum man dieses Limit niemals forken kann.
+- [Wie sicher ist Bitcoin?](/de/blog/wie-sicher-ist-bitcoin/) → Die mathematische Abwehr gegen feindliche Forks.
+- [Zukunft von Bitcoin](/de/blog/zukunft-von-bitcoin/) → Kommende Soft Fork Debatten.
+
+---
+
+## Sektion 7: FAQ — Experten-Fragen zu Forks
+
+### 1. Kann eine Regierung Bitcoin forken, um Überwachung einzubauen?
+Jeder kann den Code kopieren und 'FedCoin' starten. Aber solange die Nutzer von Bitcoin ihre Nodes nicht auf diese neue Software upgraden, bleibt das ursprüngliche Bitcoin unberührt. Forks benötigen die freiwillige Akzeptanz der Nutzer, um Wert zu haben.
+
+### 2. Bekomme ich bei jedem Fork 'Free Money'?
+Nur bei Hard Forks. Wenn Sie Ihre Schlüssel selbst halten, besitzen Sie automatisch Coins auf beiden Ketten. Aber Vorsicht: Die meisten Forks von Bitcoin (wie Bitcoin Diamond oder Gold) sind heute wertlos oder gar Betrugsversuche, um an Ihre Private Keys zu kommen.
+
+### 3. Warum sind Soft Forks restriktiver als Hard Forks?
+Da ein Soft Fork rückwärtskompatibel sein muss, darf er nur Dinge *verbieten*, die vorher erlaubt waren. Ein Hard Fork hingegen darf Dinge *erlauben*, die vorher verboten waren. Das macht Soft Forks technisch anspruchsvoller, aber sozial viel stabiler.
+
+---
+
+## Sektion 8: Zusammenfassung — Einheit durch Dezentralität
+
+Forks sind der Evolutionsmechanismus von Bitcoin. Hard Forks repräsentieren einen 'Bürgerkrieg' oder eine Scheidung innerhalb der Community, während Soft Forks ein 'stilles Upgrade' darstellen, das das Netzwerk stark und vereint hält. In einer Welt voller Spaltungen ist die Fähigkeit von Bitcoin, globalen Konsens über die Zeit zu halten, seine wertvollste Eigenschaft.
+
+**Bitcoin forkst man nicht — man überzeugt die Welt von besseren Regeln.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Forks
+- **Verwandte Entitäten:** Hard Fork vs. Soft Fork, UASF (BIP148), SegWit, Taproot, Blocksize War, Bitcoin Cash (BCH), Konsensus-Regeln, Full Nodes, BIP (Bitcoin Improvement Proposal), BitVM.

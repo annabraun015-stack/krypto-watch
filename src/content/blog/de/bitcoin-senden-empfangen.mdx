@@ -26,113 +26,111 @@ export const faqSchema = {
 
 ---
 
-## Der Transaktionszyklus (Definition) <a id="definition"></a>
+## 🎯 Einleitung: Die Mechanik der digitalen Überweisung
 
-Bitcoin zu senden ist kein Versenden einer E-Mail; es ist eher wie der Transport von digitalem Gold in einen transparenten, fälschungssicheren Tresor.
+Bitcoin zu senden ist kein Versenden einer E-Mail; es ist eher wie der Transport von digitalem Gold in einen transparenten, fälschungssicheren Tresor. Jede Transaktion ist ein Signal an tausende Nodes weltweit, dass ein Wert von **Adresse A** zu **Adresse B** verschoben wurde. 
 
-Jede Transaktion ist ein Signal an tausende Nodes weltweit, dass ein Wert von **Adresse A** zu **Adresse B** verschoben wurde. Sobald ein Miner dieses Signal in einen Block aufnimmt, wird es Teil der unlöschbaren Weltgeschichte.
-
----
-
-## Bitcoin sicher empfangen (Schritt-für-Schritt) <a id="receive"></a>
-
-Das Empfangen ist der einfachste Weg, mit Bitcoin zu interagieren. Sie brauchen kein technisches Vorwissen.
-
-1.  **Wallet öffnen:** Wählen Sie den Bereich "Empfangen" (Receive).
-2.  **Neue Adresse generieren:** Nutzen Sie aus Datenschutzgründen für jede Transaktion eine frische Adresse.
-3.  **Adresse teilen:** Kopieren Sie die Zeichenfolge (z. B. `bc1q...`) oder zeigen Sie dem Absender den **QR-Code**.
-4.  **Sendung abwarten:** Ihr Wallet benachrichtigt Sie, sobald die Transaktion im Mempool erkannt wurde (0 Bestätigungen).
-5.  **Bestätigung abwarten:** Warten Sie 1–3 Bestätigungen ab, bevor Sie das Guthaben als sicher betrachten.
+Im Jahr 2026 hat sich die Art und Weise, wie wir BTC bewegen, professionalisiert. Von blitzschnellen Lightning-Zahlungen bis hin zu komplexen On-Chain-Abwicklungen — das Verständnis der Mechanik hinter den Adressen und Gebühren ist der Schlüssel zur fehlerfreien Selbstverwahrung. In diesem Guide dekonstruieren wir den Lebenszyklus einer Transaktion.
 
 ---
 
-## Bitcoin fehlerfrei senden (Schritt-für-Schritt) <a id="send"></a>
+## Sektion 1: Definition — Was ist eine 'Bitcoin-Transaktion'?
 
-Beim Senden ist Sorgfalt entscheidend, da Fehler unumkehrbar sind.
+Im Kern ist eine Transaktion ein kryptografischer Befehl, der den Besitz von 'Outputs' umschreibt.
 
-
-
-### Das "Double-Check" Protokoll:
-*   **Kopieren, nicht tippen:** Niemals 42+ Zeichen manuell eingeben. Die Fehlerwahrscheinlichkeit ist zu hoch.
-*   **Am Hardware-Wallet prüfen:** Wenn Sie ein Hardware-Wallet nutzen, **müssen** Sie die Adresse auf dem physischen Display des Geräts bestätigen, um Malware-Manipulationen am PC auszuschließen.
-*   **Gebühr kontrollieren:** Achten Sie darauf, nicht versehentlich 100€ Gebühr für eine 10€ Zahlung zu bezahlen.
+<DefinitionBlock term="UTXO (Unspent Transaction Output)" icon="🧱">
+  Bitcoin nutzt keine Kontostände wie eine Bank. Stattdessen besteht Ihr Guthaben aus einer Sammlung von **UTXOs** (nicht ausgegebene Transaktionsausgänge). Wenn Sie BTC senden, kombinieren Sie alte UTXOs als 'Inputs' und erstellen neue 'Outputs' für den Empfänger. Das Wallet verwaltet dies im Hintergrund, aber für die Gebührenberechnung ist die Anzahl dieser 'digitalen Scheine' entscheidend.
+</DefinitionBlock>
 
 ---
 
-## Adresstypen: Legacy vs. SegWit vs. Taproot <a id="addresses"></a>
+## Sektion 2: Kernkonzept — Adresstypen & Evolution
 
-Bitcoin hat sich weiterentwickelt. Moderne Formate senken Ihre Transaktionsgebühren massiv.
+Adressen sind keine Identitäten, sondern kryptografische 'Scripts', die definieren, unter welchen Bedingungen Geld ausgegeben werden darf.
 
-| Typ | Startet mit | Name | Vorteil |
-|------|-------------|------|---------|
-| **Legacy** | `1...` | P2PKH | Maximale Kompatibilität mit uralten Diensten. |
-| **Nested SegWit**| `3...` | P2SH | Gute Mischung aus Kompatibilität und günstigen Gebühren. |
-| **Native SegWit**| `bc1q...` | Bech32 | **Empfohlen.** 30-40% günstigere Gebühren als Legacy. |
-| **Taproot** | `bc1p...` | Bech32m | Modernstes Format. Beste Privatsphäre und komplexes Scripting. |
-
----
-
-## Das UTXO-Modell: Die Logik hinter Bitcoin (Technologie) <a id="utxo"></a>
-
-Bitcoin hat keine "Kontostände" wie eine Bank. Es nutzt **UTXOs** (Unspent Transaction Outputs).
-
-Stellen Sie sich Ihr Wallet wie ein Portemonnaie mit Scheinen vor. Wenn Sie zwei 20€-Scheine haben und etwas für 30€ kaufen:
-1.  Sie geben beide 20€-Scheine (Inputs).
-2.  Der Händler nimmt 30€ (Output an den Empfänger).
-3.  Sie erhalten einen 10€-Schein zurück (Change-Output an Ihr eigenes Wallet).
-
-In Bitcoin verwaltet Ihr Wallet diese "digitalen Scheine" automatisch. Aber: Je mehr kleine "Scheine" (UTXOs) für eine Zahlung genutzt werden, desto größer ist die Datenmenge und desto höher die Gebühr.
+<ConceptVisual 
+  src="/images/blog/bitcoin-transaction.png" 
+  alt="Bitcoin Adress-Evolution Illustration" 
+  type="concept" 
+  caption="Von Legacy (1...) über SegWit (bc1q...) bis hin zu Taproot (bc1p...): Jede Generation von Adressen senkt Ihre Gebühren und erhöht Ihre Privatsphäre. Im Jahr 2026 ist Native SegWit (Bech32) der Standard für Effizienz, während Taproot komplexe Smart Contracts ermöglicht."
+/>
 
 ---
 
-## Gebührenwahl: Die richtige Priorität (Effizienz) <a id="fees"></a>
+## Sektion 3: Funktionsweise — Signieren & PSBT
 
-Gebühren werden an Miner gezahlt und berechnet nach der **Datenmenge** (in Byte), nicht nach dem BTC-Betrag.
+Wie beweist man dem Netzwerk, dass man der rechtmäßige Besitzer ist, ohne den privaten Schlüssel preiszugeben?
 
-| Priorität | Bestätigungszeit | Anwendungsfall |
-|----------|-------------------|----------|
-| **Hoch** | ~10 - 20 Minuten | Dringende Zahlungen, Einzahlungen auf Börsen. |
-| **Mittel** | ~30 - 60 Minuten | Standardüberweisungen, Käufe. |
-| **Niedrig** | 6+ Stunden | Umbuchungen zwischen eigenen Wallets. |
-
-**Profi-Tipp:** Nutzen Sie [mempool.space](https://mempool.space), um den aktuellen "Marktpreis" für den nächsten Block live zu sehen.
-
----
-
-## Verifizierung: Block-Explorer & Bestätigungen <a id="verification"></a>
-
-Sobald eine Transaktion gesendet wurde, ist sie öffentlich. Nutzen Sie die **TXID** (Transaktions-ID).
-
-*   **0 Bestätigungen:** Die Zahlung ist im Mempool (wartend). Sie könnte noch theoretisch überschrieben werden.
-*   **1 Bestätigung:** Die Zahlung ist in einem Block. Sie ist nun Teil der Geschichte.
-*   **6 Bestätigungen:** Der Standard für "totale Endgültigkeit". Selbst Staaten könnten diese Zahlung nicht mehr rückgängig machen.
-
----
-
-## Häufige Fehler & Sicherheits-Best-Practices <a id="pitfalls"></a>
-
-❌ **Adresswiederholung:** Immer die gleiche Adresse zu nutzen, verknüpft all Ihre Finanzen öffentlich.
-❌ **Falscher Chain-Versand:** Bitcoin an eine Ethereum- oder Bitcoin-Cash-Adresse zu senden, führt meist zum Totalverlust.
-❌ **Clipboard-Malware:** Gehen Sie davon aus, dass Ihr PC infiziert sein könnte. Prüfen Sie jedes Zeichen der Adresse auf Ihrem sicheren Gerät.
+<ProcessStep steps={[
+  {
+    title: "PSBT-Erstellung",
+    description: "Ihr Wallet erstellt eine 'Partially Signed Bitcoin Transaction'. Das ist ein Entwurf, der noch keine gültige Signatur enthält."
+  },
+  {
+    title: "Kryptografische Signatur",
+    description: "Ihr Hardware-Wallet nutzt Ihren Private Key (ECDSA oder Schnorr), um den Entwurf mathematisch zu unterschreiben. Der Schlüssel verlässt dabei nie das Gerät."
+  },
+  {
+    title: "Broadcasting",
+    description: "Die nun fertige, signierte Transaktion wird an eine Bitcoin Node gesendet. Die Node prüft die Signatur in Millisekunden gegen Ihren Public Key."
+  },
+  {
+    title: "Mempool-Akzeptanz",
+    description: "Ist alles korrekt, landet die Transaktion im Mempool (Warteraum). Miner sehen sie nun und konkurrieren darum, sie in einen Block aufzunehmen."
+  }
+]} />
 
 ---
 
-## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
+## Sektion 4: Gebühren-Optimierung — RBF & CPFP
 
-### 1. Gibt es einen Mindestbetrag für Bitcoin-Überweisungen?
-Technisch gesehen ist die Untergrenze 1 Satoshi, aber die meisten Nodes erzwingen ein "Dust Limit" (meist ca. 546 Satoshis). Sehr kleine Beträge zu senden ist unpraktisch, da die Gebühr oft höher ist als der Betrag.
-
-### 2. Was passiert bei Versand an eine ungültige Adresse?
-Die meisten modernen Wallets prüfen die Prüfsumme. Wenn Sie sich vertippen, sagt das Wallet "Ungültige Adresse" und sendet nichts ab. Senden Sie jedoch an eine *gültige* Adresse, die Sie nicht kontrollieren, ist das Geld weg.
-
-### 3. Woher weiß ich, ob der Empfänger die BTC erhalten hat?
-Suchen Sie die Adresse oder die TXID in einem Block-Explorer. Sobald "Confirmed" (Bestätigt) dort steht, hat der Empfänger Zugriff auf die Funds.
+Im Jahr 2026 sind Gebührenmärkte dynamisch. Was tun, wenn eine Transaktion hängen bleibt?
+- **RBF (Replace-By-Fee):** Ermöglicht es, eine wartende Transaktion durch eine identische mit höherer Gebühr zu ersetzen. Dies ist der 'Überholspur'-Knopf für den Mempool.
+- **CPFP (Child Pays For Parent):** Wenn Sie eine Zahlung empfangen, die bei 0 Bestätigungen hakt, können Sie das Geld 'ausgeben', bevor es bestätigt ist, und eine extrem hohe Gebühr für die neue Zahlung setzen. Miner nehmen dann beide zusammen auf (Paket-Deal).
+- **UTXO-Consolidation:** In Zeiten niedriger Gebühren sollten Sie viele kleine UTXOs zu einer großen Adresse zusammenfassen, um bei hohen Gebühren später Kosten zu sparen.
 
 ---
-**Wichtigste Erkenntnisse:**
-> Bitcoin senden und empfangen ist ein kryptografisches Protokoll direkt mit dem globalen Ledger. Durch die Nutzung moderner Adressformate (bc1q/bc1p), das Prüfen der Gebühren im Mempool und die strikte Verifizierung auf dem Hardware-Display verwalten Sie Ihr digitales Vermögen mit der Sicherheit einer Zentralbank.
 
-**Weiterführende Themen:**
-- [Bitcoin sicher aufbewahren (Cold Storage Guide)](/blog/bitcoin-sicher-aufbewahren/)
-- [Bitcoin Bestätigungen und Finalität verstehen](/blog/bitcoin-bestaetigungen/)
-- [Das Lightning Network: Instant & Kostenlos bezahlen](/blog/lightning-network/)
+## Sektion 5: Privatsphäre — Change-Adressen & Adress-Reuse
+
+Bitcoin ist ein offenes Buch. Wie schützen Sie Ihre finanzielle Privatsphäre?
+- **Change Addresses (Wechselgeld):** Wenn Sie 1 BTC besitzen und 0,1 BTC senden, schickt das Protokoll 0,9 BTC automatisch an eine neue 'Wechselgeld-Adresse' in Ihrem Wallet zurück. Dies verschleiert, welcher Output der Empfänger und welcher der Sender ist.
+- **Adress-Wiederholung vermeiden:** Nutzen Sie niemals dieselbe Adresse zweimal für den Empfang. Dies verknüpft Ihre Identität mit all Ihren vergangenen und zukünftigen Zahlungen.
+
+---
+
+## Sektion 6: Verwandte Themen — Der Transaktions-Stack
+
+Transaktionen sind das Blut des Netzwerkes:
+- [Bitcoin Bestätigungen](/de/blog/bitcoin-bestaetigungen/) → Warum Sie auf Blöcke warten sollten.
+- [Public & Private Keys](/de/blog/public-private-keys/) → Die Mathematik hinter der Signatur.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie Sie Ihre eigenen Zahlungen unabhängig verifizieren.
+- [Bitcoin Mining erklaert](/de/blog/bitcoin-mining-erklaert/) → Wer Ihre Gebühren erhält.
+- [Beste Bitcoin Wallets](/de/blog/beste-bitcoin-wallets/) → Die besten Werkzeuge zum Senden.
+
+---
+
+## Sektion 7: FAQ — Experten-Wissen zum Senden
+
+### 1. Kann ich Bitcoin an eine falsche Adresse senden?
+Technisch ja, aber moderne Adressen (SegWit/Taproot) haben eine eingebaute **Prüfsumme**. Wenn Sie sich vertippen, wird das Wallet die Adresse als 'ungültig' ablehnen. Geben Sie jedoch eine *gültige* Adresse ein, die Ihnen nicht gehört, ist das Geld unwiderruflich weg.
+
+### 2. Was passiert, wenn ich zu wenig Gebühren bezahle?
+Die Transaktion bleibt im Mempool liegen. Nach ein paar Tagen oder Wochen "vergessen" die meisten Nodes die Transaktion, und das Guthaben erscheint wieder als verfügbar in Ihrem Wallet. Nutzen Sie RBF, um dies zu beschleunigen.
+
+### 3. Muss ich On-Chain senden oder Lightning nutzen?
+Für Beträge unter 100 € ist das **Lightning Network** im Jahr 2026 der Standard: Sofortig, extrem günstig und privat. On-Chain-Zahlungen sind für große Ersparnisse und institutionelle Abwicklungen reserviert.
+
+---
+
+## Sektion 8: Zusammenfassung — Präzision führt zur Sicherheit
+
+Bitcoin senden und empfangen ist ein Akt digitaler Souveränität. Durch die Nutzung moderner Adressformate (bc1q/bc1p), das Verständnis von UTXOs und die strikte Verifizierung auf dem Hardware-Display verwalten Sie Ihr Vermögen mit der Präzision eines Profis.
+
+**Prüfen Sie doppelt, signieren Sie offline und vertrauen Sie nur Ihrer eigenen Node.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Senden & Empfangen
+- **Verwandte Entitäten:** UTXO, PSBT, ECDSA, Schnorr-Signaturen, Native SegWit, Taproot, RBF, CPFP, Change Address, Mempool, Broadcasting, Checksum.

@@ -32,124 +32,124 @@ export const faqSchema = {
 
 ## 🎯 Introduction: The Speed of Trust
 
-In traditional banking, "settlement" can take days. In Bitcoin, settlement is measured in **Confirmations**. A confirmation is a mathematical proof that your transaction is now a permanent part of the global history. In 2026, understanding this metric is crucial for anyone accepting Bitcoin for goods or moving significant wealth across the network.
+In the legacy financial world, "settlement" is often an illusion that can take days or even weeks. In the world of Bitcoin, settlement is transparent, mathematical, and measured in **Confirmations**. 
+
+A confirmation is a cryptographic proof that your transaction has been included in a block and is now a permanent part of global history. In 2026, understanding how to read and trust these confirmations is the difference between a secure transaction and a costly mistake. This guide explores the "concrete" that holds the blockchain together.
 
 ---
 
-## Section 1: Definition & The Block Burial
+## Section 1: Definition — The Block Burial Process
 
-A confirmation is not just a "check mark"; it is a layer of computational work protecting your funds.
+A confirmation is not merely a status update; it is a measurable amount of physical energy protecting your funds.
 
 <DefinitionBlock term="Bitcoin Confirmation" icon="📐">
-  A **Confirmation** occurs when a [Miner](/en/blog/bitcoin-mining/) includes your transaction in a new block. Every subsequent block added to the chain *after* yours counts as an additional confirmation. Each new layer makes it exponentially more difficult for an attacker to re-write the history and reverse your payment.
+  A **Confirmation** occurs when a [Bitcoin Miner](/en/blog/bitcoin-mining/) verifies your transaction and includes it in a new block. Every subsequent block added to the chain *after* yours counts as an additional confirmation. Each new layer (confirmation) makes it exponentially more difficult and expensive for an attacker to re-write the history and reverse your payment.
 </DefinitionBlock>
 
-Think of it like building a house: the first confirmation is the foundation. Every subsequent confirmation is another floor of concrete poured on top. To change the foundation, an attacker would have to destroy the entire building.
+Visualize your transaction as the foundation of a building. The first confirmation is the concrete being poured. Every subsequent confirmation is another floor of the building being constructed on top. To change the foundation, an attacker must demolish the entire skyscraper.
 
 ---
 
-## Section 2: The Core Concept (Security Depth)
+## Section 2: The Core Concept — Security Depth
 
-The "depth" of your transaction determines its finality. The higher the stack, the more "solid" the payment becomes.
+The "depth" of your transaction on the blockchain determines its **Economic Finality**.
 
 <ConceptVisual 
   src="/images/blog/block-burial-depth.png" 
   alt="Bitcoin Confirmation Depth and Finality Diagram" 
   type="diagram" 
-  caption="Six blocks (the gold standard) provide enough economic finality to ensure that the cost of an attack exceeds the value of the transaction."
+  caption="Six blocks (the recognized global standard) provide enough depth to ensure that the cost of a 51% attack to reverse the transaction exceeds any possible profit from the theft."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "A 3D vertical stack of translucent digital blocks. A transaction icon at the bottom. Six blocks stacked on top, each making the bottom more opaque and solid. Label: 'Economic Finality'. Professional data-viz style."
-- **File Name:** `block-burial-depth.png`
+Why do we wait for six? Because the probability of a "natural" split in the blockchain lasting six blocks is effectively zero. By the time a transaction is "buried" six blocks deep, it is considered settled for eternity in the eyes of the protocol.
 
 ---
 
-## Section 3: How It Works (The Lifecycle)
+## Section 3: How It Works — The Probabilistic Lifecycle
 
-The journey from your wallet to being "Buried in Concrete" follows a distinct path.
+Bitcoin settlement is **Probabilistic**, meaning it gets stronger over time but technically never reaches 100.00% "absolute" finality—though it gets close enough for all practical human needs.
 
 <ProcessStep steps={[
   {
-    title: "The Mempool Wait",
-    description: "Your transaction enters the 'Waiting Room'. It has 0 confirmations and is technically reversible via RBF."
+    title: "The Mempool State (0-Conf)",
+    description: "Your transaction is broadcast to the network. It sits in the 'Mempool' with 0 confirmations. It is technically reversible and not yet 'on' the blockchain."
   },
   {
-    title: "The First Block",
-    description: "A miner picks your transaction and finds a block. You now have 1 confirmation. The 'Double Spend' risk drops by 99%."
+    title: "Initial Inclusion (1-Conf)",
+    description: "A miner places your transaction into a block. The 'Double Spend' risk drops by over 99%. Small merchants often accept this as 'Final enough'."
   },
   {
-    title: "Successive Stacking",
-    description: "New miners build on top of your block. By 3 confirmations, most exchanges will credit your account."
+    title: "The Stacking Phase (2-5 Conf)",
+    description: "As new blocks are added, the math of the ledger becomes more rigid. Most exchanges will credit your account after 3 confirmations."
   },
   {
-    title: "Irreversibility",
-    description: "At 6 confirmations (~60 minutes), the transaction is considered settled for eternity in the eyes of the protocol."
+    title: "Institutional Settlement (6+ Conf)",
+    description: "At 6 blocks (~60 minutes), the transaction is considered finalized. Even the most powerful supercomputers cannot practically reverse it."
   }
 ]} />
 
 ---
 
-## Section 4: Risk Thresholds (When to Trust)
+## Section 4: Risk Thresholds in 2026
 
-Not every transaction requires you to wait an hour. Choose your confirmation target based on the stakes.
+How many confirmations do you *actually* need? Match the depth to the value of the trade.
 
-| Value | Target Confirmations | Reason |
+| Transaction Value | Recommended Confirmations | Typical Use Case |
 |---|---|---|
-| **$1 - $50** | 0 to 1 | Low risk, fast convenience. |
-| **$50 - $5,000** | 3 | Standard safety for retail. |
-| **$5,000 - $1M** | 6 | Institutional-grade finality. |
-| **$10M+** | 12+ | Absolute cryptographic certainty. |
+| **$0.01 - $50** | 0 to 1 | Coffee, snacks, micro-payments. |
+| **$50 - $5,000** | 3 | Electronics, retail goods, peer-to-peer. |
+| **$5,000 - $1,000,000** | 6 | High-end cars, house deposits, large business trades. |
+| **$1,000,000+** | 12 to 24 | Institutional settlement, nation-state reserves. |
 
 ---
 
-## Section 5: The Threat Model (The Double Spend Race)
+## Section 5: The Threat Model — Reorgs and Double Spends
 
-Why do we wait at all? To prevent an attacker from sending the same digital coin to two places at once.
+Why do we wait at all? To protect against **Chain Reorganizations (Reorgs)**—brief moments where two blocks are found at the same time and the network must choose a "winner."
 
 <ConceptVisual 
   src="/images/blog/double-spend-race.png" 
   alt="Bitcoin Double Spend Race Visualization" 
   type="flow" 
-  caption="The race between two conflicting transactions. Once the merchant's version is buried under multiple blocks, the attacker's alternative version is rejected by the entire network."
+  caption="The race between two conflicting transactions. Once the legitimate version is buried under multiple blocks, any alternative version is rejected as 'invalid' by every node on the network."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Two data-streams racing: One going to a 'Merchant', one going back to the 'Attacker'. A digital wall (Confirmation) blocking the attacker's path. Dynamic, high speed, neon orange lanes."
-- **File Name:** `double-spend-race.png`
+A 0-confirmation transaction is vulnerable to **RBF (Replace-By-Fee)**, where a sender can "cancel" a payment by sending a higher fee to a different address. This is why 1 confirmation is the bare minimum for any significant trade.
 
 ---
 
-## Section 6: Related Concepts (The Settlement Cluster)
+## Section 6: Related Concepts — The Finality Cluster
 
-Master the mechanics of Bitcoin's finality:
-- [What is Bitcoin Mining?](/en/blog/bitcoin-mining/) → The process that creates confirmations.
-- [Understanding the Mempool](/en/blog/bitcoin-transaction-fees/) → Where transactions wait for their first block.
-- [The Lightning Network](/en/blog/lightning-network/) → Instant settlement without waiting for blocks.
-- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → How you can verify your own confirmations.
-- [How to Send BTC](/en/blog/how-to-send-receive-bitcoin/) → Setting the right fee to get confirmed faster.
+Settlement is a team effort across the entire protocol:
+- [What is Bitcoin Mining?](/en/blog/bitcoin-mining/) → The process that generates the energy for confirmations.
+- [Understanding the Mempool](/en/blog/bitcoin-transaction-fees/) → Why some transactions take longer to get their first confirmation.
+- [The Lightning Network](/en/blog/lightning-network/) → Settlement in milliseconds for small payments.
+- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → How you can audit your own confirmations without trusting a third party.
+- [Public vs Private Keys](/en/blog/public-private-keys/) → The only thing that proves you own a confirmed balance.
 
 ---
 
-## Section 7: FAQ (Stuck Transactions)
+## Section 7: FAQ — Professional Troubleshooting
 
 ### 1. Why is my transaction stuck at 0 confirmations?
-This is almost always due to setting a **Fee** that is too low. In periods of high congestion, miners will ignore low-paying transactions. You can use **RBF (Replace-By-Fee)** to increase the fee and get confirmed.
+This usually means your **Transaction Fee** was too low. Miners prioritize transactions with higher fees. In 2026, you can use "Replace-By-Fee" (RBF) or "Child-Pays-For-Parent" (CPFP) to increase the fee and jump to the front of the line.
 
-### 2. Can a transaction be 'unconfirmed' later?
-In rare cases called "Chain Reorganizations," 1 or 2 confirmations can be undone if two miners find blocks at nearly the same time. This is why businesses wait for at least **3 confirmations** before shipping a product.
+### 2. Can a transaction be 'unconfirmed' after it shows 1?
+It is extremely rare but theoretically possible during a "Chain Reorg." This is why for high-value items, you should always wait for **3-6 confirmations** to be absolutely sure the block is part of the "main" chain.
 
-### 3. Does 1 BTC confirm faster than 0.001 BTC?
-No. The speed of confirmation is determined by the **Fee Rate (sat/vB)** and pure luck, not the amount of Bitcoin being sent. Miners care about the fee you pay them, not the price of the coins.
+### 3. Does the amount of Bitcoin affect confirmation speed?
+No. Whether you send 0.0001 BTC or 1,000 BTC, the time to confirm is purely a function of the **Fee Rate** you offer the miners and the random luck of block discovery.
 
 ---
 
 ## Section 8: Summary — The Weight of Finality
 
-Confirmations are the gravity of the Bitcoin network. They hold the ledger together and ensure that time only moves in one direction. Whether you are buying a coffee via [Lightning](/en/blog/lightning-network/) or settling a million-dollar real estate deal on-chain, the number of confirmations is your ultimate insurance policy. **Wait for the blocks, and trust the math.**
+The Bitcoin confirmation system is the world's most robust security mechanism. It replaces the subjective trust of a bank with the objective weight of the laws of physics. Whether you are using [Lightning](/en/blog/lightning-network/) for speed or on-chain settlement for security, the math of confirmations is your ultimate insurance policy. 
+
+**Wait for the blocks. Trust the math.**
 
 ---
 
 ## 🧬 Semantic Entity Map
 - **Primary Entity:** Bitcoin Confirmations
-- **Related Entities:** Finality, Block Height, Mempool, Miner, Double Spend, RBF (Replace-By-Fee), 51% Attack, Chain Reorganization, Satoshi Nakamoto, Settlement.
+- **Related Entities:** Economic Finality, Block Height, Mempool, Miner, Double Spend, RBF (Replace-By-Fee), Chain Reorganization (Reorg), Satoshi Nakamoto, Settlement, 51% Attack.

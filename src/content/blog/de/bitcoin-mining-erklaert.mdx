@@ -25,129 +25,119 @@ export const faqSchema = {
     { "@type": "Question", "name": "Was ist Bitcoin Mining einfach erklärt?", "acceptedAnswer": { "@type": "Answer", "text": "Bitcoin Mining ist der Prozess der Aktualisierung des dezentralen Kassenbuchs. Miner lösen komplexe mathematische Rätsel, was das Netzwerk sichert und gleichzeitig neue BTC als Belohnung in Umlauf bringt." } },
     { "@type": "Question", "name": "Wie viel Strom verbraucht Mining?", "acceptedAnswer": { "@type": "Answer", "text": "Bitcoin Mining verbraucht eine erhebliche Menge Strom, vergleichbar mit einem kleineren Land. Ein Großteil dieser Energie stammt jedoch aus 'gestrandeten' oder erneuerbaren Quellen wie Wasser-, Solar- und Windkraft, die andernfalls verpuffen würden." } },
     { "@type": "Question", "name": "Was passiert, wenn alle 21 Millionen BTC gemined sind?", "acceptedAnswer": { "@type": "Answer", "text": "Um das Jahr 2140 endet die Ausgabe neuer BTC. Miner werden ab dann ausschließlich durch die Transaktionsgebühren bezahlt, was die Sicherheit des Netzwerks dauerhaft garantiert." } }
-  ]
-};
+ ## 🎯 Einleitung: Das physische Fundament von digitalem Geld
+
+Viele Menschen denken bei Bitcoin an rein "virtuelles" Geld, aber seine Sicherheit ist durch das **Mining** tief in der physischen Welt verankert. Mining ist der Mechanismus, der das digitale Kassenbuch an die unveränderlichen Gesetze der Thermodynamik und die realen Kosten von Energie bindet. 
+
+Im Jahr 2026 hat sich das Mining von einem Hobby-Experiment zu einem globalen Multi-Milliarden-Dollar-Industriezweig entwickelt, der Stromnetze stabilisiert, Methan-Emissionen reduziert und den globalen Wohlstand absichert. In diesem Guide dekonstruieren wir den "Herzschlag" des Netzwerks und erklären, warum Mining die ehrlichste Arbeit des 21. Jahrhunderts ist.
 
 ---
 
-## 🎯 Einleitung: Das physische Fundament von digitalem Geld
+## Sektion 1: Definition — Was ist 'Proof-of-Work'?
 
-Viele Menschen denken bei Bitcoin an rein "virtuelles" Geld, aber seine Sicherheit ist durch das **Mining** tief in der physischen Welt verankert. Mining ist der Mechanismus, der das digitale Kassenbuch an die unveränderlichen Gesetze der Physik und die Kosten von Energie bindet. Im Jahr 2026 hat sich das Mining von einem Hobby-Experiment zu einem Multi-Milliarden-Dollar-Industriezweig entwickelt, der Stromnetze stabilisiert und den globalen Wohlstand absichert.
+Im Kern ist das Mining der Prozess, das Netzwerk ohne eine zentrale Instanz zu prüfen und einen fälschungssicheren Konsens zu finden.
 
----
-
-## Sektion 1: Definition & Übersicht
-
-Im Kern ist das Mining der Prozess, das Netzwerk ohne eine zentrale Instanz zu prüfen und einen Konsens zu finden.
-
-<DefinitionBlock term="Bitcoin Mining" icon="⚒️">
-  **Bitcoin Mining** ist die Nutzung spezialisierter Computer-Hardware (ASICs), um komplexe kryptografische Rätsel zu lösen. Dieser Aufwand verifiziert ausstehende Transaktionen, fügt sie der öffentlichen Blockchain hinzu und sichert die Historie des gesamten Netzwerks. Als Gegenleistung für diesen "Arbeitsnachweis" (Proof-of-Work) erhalten Miner neue Bitcoins sowie Transaktionsgebühren.
+<DefinitionBlock term="Proof-of-Work (PoW)" icon="⚒️">
+  **Bitcoin Mining** ist die Nutzung spezialisierter Computer-Hardware (ASICs), um den Nachweis erbrachter Arbeit zu liefern. Dieser Aufwand ist irreversibel: Man kann das Ergebnis sofort prüfen, aber man kann es nur durch massiven Energieeinsatz erzeugen. Als Gegenleistung erhält der Miner die Block-Belohnung und Transaktionsgebühren.
 </DefinitionBlock>
 
-Warum heißt es "Mining" (Schürfen)? So wie das Schürfen nach Gold physische Anstrengung und Maschinen erfordert, benötigt das "Schürfen" nach Bitcoin elektrischen Aufwand und Rechenleistung. Es ist die einzige Methode, wie neue Bitcoins jemals erschaffen werden.
+Warum heißt es "Mining" (Schürfen)? So wie das Schürfen nach Gold physische Anstrengung und Maschinen erfordert, benötigt das "Schürfen" nach Bitcoin elektrischen Aufwand. Es ist die einzige Methode, wie neue Bitcoins jemals erschaffen werden.
 
 ---
 
-## Sektion 2: Das Kernkonzept (Das SHA-256 Rätsel)
+## Sektion 2: Kernkonzept — Thermodynamische Sicherheit
 
-Miner konkurrieren darum, eine bestimmte Zahl – einen "Hash" – zu finden, die ein vom Netzwerk vorgegebenes Ziel erfüllt.
+Die Sicherheit von Bitcoin basiert nicht auf dem Versprechen einer Bank, sondern auf der Unmöglichkeit, die Gesetze der Physik zu brechen.
 
 <ConceptVisual 
-  src="/images/blog/bitcoin-mining-puzzle.png" 
-  alt="Visualisierung des SHA-256 Hashing-Rätsels" 
-  type="diagram" 
-  caption="Miner raten Billionen von Zahlen pro Sekunde. Jeder Versuch ist ein 'Hash'. Wenn der Hash mit genügend Nullen beginnt, gewinnt der Miner das Recht, den Block zu 'versiegeln' und die Belohnung zu beanspruchen."
+  src="/images/blog/bitcoin-mining.png" 
+  alt="Mining Immunsystem Illustration" 
+  type="concept" 
+  caption="Die 'Hashrate' ist das Immunsystem von Bitcoin. Billionen von SHA-256-Rätseln pro Sekunde bilden einen digitalen Schutzschild. Um eine Transaktion von vor einer Stunde zu ändern, müsste ein Angreifer mehr Energie aufwenden, als ganze Nationen verbrauchen — was den Angriff ökonomisch sinnlos macht."
 />
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Moderne technische UI, eine Serie von 3D-Datenblöcken, die von einem Laser verarbeitet werden; ein Block leuchtet golden mit der korrekten Zielanzahl führender Nullen, digitaler Schaltkreis-Hintergrund."
-- **Dateiname:** `bitcoin-mining-puzzle.png`
 
 ---
 
-## Sektion 3: Wie es funktioniert (Der Lebenszyklus eines Blocks)
+## Sektion 3: Funktionsweise — Der 10-Minuten-Herzschlag
 
-Das Mining ist ein rhythmischer Prozess, der sicherstellt, dass etwa alle 10 Minuten ein neuer Block gefunden wird – völlig unabhängig davon, wie viele Miner aktiv sind.
+Das Mining ist ein rhythmischer Prozess, der sicherstellt, dass die Inflation von Bitcoin planbar bleibt.
 
 <ProcessStep steps={[
   {
-    title: "Mempool-Auswahl",
-    description: "Miner betrachten den 'Mempool' (Warteraum) und wählen unbestätigte Transaktionen aus, um sie in einen Kandidaten-Block zu bündeln."
+    title: "Mempool-Aggreggation",
+    description: "Miner sammeln unbestätigte Transaktionen und prüfen deren Signaturen. Sie bündeln diese in einen Kandidaten-Block."
   },
   {
-    title: "Brute-Force-Hashing",
-    description: "Die Hardware führt Billionen von SHA-256-Rateversuchen pro Sekunde (Hashrate) durch, um einen passenden Hash zu finden."
+    title: "ASIC-Hashing",
+    description: "Hardware führt Billionen von Rateversuchen pro Sekunde durch, um einen 'Hash' zu finden, der mit einer bestimmten Anzahl von Nullen beginnt."
   },
   {
     title: "Difficulty Adjustment",
-    description: "Alle 2.016 Blöcke (~2 Wochen) berechnet das Netzwerk automatisch die Schwierigkeit neu, um den 10-Minuten-Herzschlag zu halten."
+    description: "Alle 2.016 Blöcke berechnet das Netzwerk die Schwierigkeit neu. Wenn mehr Miner einsteigen, wird das Rätsel schwerer. So bleibt der 10-Minuten-Takt immer gleich."
   },
   {
-    title: "Belohnungs-Injektion",
-    description: "Der siegreiche Miner sendet seinen Block aus. Unabhängige [Nodes](/blog/was-ist-ein-bitcoin-node/) verifizieren ihn, und der Miner erhält die Belohnung (aktuell 3,125 BTC)."
+    title: "Propagation & Reward",
+    description: "Der siegreiche Miner sendet den Block ans Netzwerk. Unabhängige Nodes prüfen ihn in Millisekunden. Der Miner erhält die Belohnung (3,125 BTC)."
   }
 ]} />
 
 ---
 
-## Sektion 4: Hardware-Evolution & Daten
+## Sektion 4: Hardware-Evolution — Die ASIC-Kriege
 
-Vom Prozessor zu spezialisierten Chips – das Rennen um Effizienz hat die weltweiten Halbleitermärkte transformiert.
+Vom Heim-PC zu spezialisierten Rechenzentren: Die Entwicklung ist beispiellos in der Computergeschichte.
 
-| Ära | Hardware | Effizienz | Relative Hashpower |
+| Ära | Hardware | J/TH (Effizienz) | Status 2026 |
 |---|---|---|---|
-| **Pionierzeit (2009)** | CPU (Laptop) | Sehr gering | ~0.0001 TH/s |
-| **Expansion (2012)** | GPU (Grafikkarte) | Gering | ~0.01 TH/s |
-| **Industriezeit (2026)** | **ASIC (Bitmain S21+)** | **Extrem hoch** | **200+ TH/s** |
-
-Heute ist eine einzige ASIC-Maschine über eine Million Mal leistungsfähiger als die Computer, die [Satoshi Nakamoto](/blog/wer-ist-satoshi-nakamoto/) zum Start des Netzwerks verwendete.
-
----
-
-## Sektion 5: Ökonomie & Nachhaltigkeit (Energie-Arbitrage)
-
-Ein häufiger Mythos besagt, dass Mining rein umweltschädlich sei. In der Realität fungieren Miner als "Zentralbatterie der Welt".
-
-<ConceptVisual 
-  src="/images/blog/mining-sustainability.png" 
-  alt="Bitcoin Mining als Energiestabilisator" 
-  type="comparison" 
-  caption="Miner verbrauchen 'gestrandete' Energie, die andernfalls ungenutzt bliebe (Wasserkraft, Solar, Wind) und schalten bei Spitzenbedarf sofort ab, um den Strom an zivile Stadtnetze zurückzugeben."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Split-Screen 3D-Illustration. Links: Ein abgelegener Wasserdamm mit einem modularen Rechenzentrum daneben. Rechts: Eine Skyline bei Sonnenuntergang, während das Rechenzentrum abschaltet, um Energie ans Netz abzugeben. Öko-futuristische Ästhetik."
-- **Dateiname:** `mining-sustainability.png`
+| **CPU/GPU Era** | PC-Komponenten | ~500.000 | Veraltet (Hobby) |
+| **Erste ASICs** | Bitmain S1 | ~2.000 | Museumsstück |
+| **Moderne Ära** | Bitmain S21+ | ~15 | Industriestandard |
+| **Zukunft** | Supraleitende Chips | < 5 | In Entwicklung |
 
 ---
 
-## Sektion 6: Verwandte Themen (Mining-Cluster)
+## Sektion 5: Ökonomie — Pool Mining vs. Solo Mining
 
-Erkunden Sie die Komponenten des Bitcoin-Energieschildes:
-- [Die Rolle der Miner für die Sicherheit](/blog/rolle-der-miner-bitcoin-security/) → Warum hohe Hashrate Bitcoin unhackbar macht.
-- [Was ist eine Bitcoin Node?](/blog/was-ist-ein-bitcoin-node/) → Der Unterschied zwischen Verifizieren und Minen.
-- [Das 21-Millionen-Limit verstehen](/blog/bitcoin-21-millionen-limit/) → Warum Belohnungen irgendwann enden müssen.
-- [Was ist eine Bestätigung?](/blog/bitcoin-bestaetigungen/) → Warum Sie auf die Arbeit der Miner warten sollten.
-- [Das Lightning Network](/blog/lightning-network/) → Kleine Zahlungen günstig abwickeln.
+Warum schließt man sich zusammen? Es ist eine Frage der Varianz.
+- **Solo Mining:** Wie Lotterie spielen. Man könnte Billionen verdienen, aber wahrscheinlich findet man in 100 Jahren keinen einzigen Block.
+- **Pool Mining:** Miner kombinieren ihre Rechenleistung. Der Pool findet oft Blöcke, und die Gewinne werden fair nach beigesteuerter Leistung verteilt. Dies glättet das Einkommen und macht das Mining für Unternehmen kalkulierbar.
 
 ---
 
-## Sektion 7: FAQs (Die Perspektive der Miner)
+## Sektion 6: Nachhaltigkeit — Bitcoin als grüne Batterie
 
-### 1. Kann ich zu Hause Bitcoin minen?
-Im Jahr 2026 ist das in Deutschland fast unmöglich. Haushaltsstrom ist zu teuer, und die Geräte sind extrem laut und heiß. Viele Enthusiasten nutzen "Krypto-Heizungen", die Wärme als Nebenprodukt des Minings erzeugen.
+Entgegen der landläufigen Meinung ist Mining im Jahr 2026 ein Treiber der Energiewende.
+- **Methan-Mitigation:** Miner verbrennen austretendes Methan an Ölquellen (Flaring) und wandeln es in Rechenleistung um. Das reduziert die Treibhauswirkung massiv.
+- **Netzstabilisierung:** Miner können in Millisekunden abschalten (Demand Response), wenn Städte Spitzenlasten haben, und nutzen nur den Strom, der sonst "verpuffen" würde.
+- **Gestrandete Energie:** Mining macht Wasserkraftprojekte in abgelegenen Regionen erst profitabel.
 
-### 2. Verschwendet Bitcoin Mining Energie?
-Nicht mehr als ein Banktresor Stahl "verschwendet". Es ist der Preis der Sicherheit. Während Banken globale Gebäude, Geldtransporter und Flugzeuge benötigen, nutzt Bitcoin einen einzigen Energieschild, um Billionen an Vermögen zu schützen.
+---
 
-### 3. Was ist ein "Mining-Pool"?
-Da die Chance, als Einzelner einen Block zu finden, extrem gering ist, schließen sich Miner zu "Pools" zusammen. Der Pool zahlt täglich Anteile an Bitcoin aus, basierend auf der Rechenleistung, die Ihre Maschine beigetragen hat.
+## Sektion 7: FAQ — Experten-Wissen zum Mining
+
+### 1. Was passiert nach dem Jahr 2140?
+Dann sind alle 21 Millionen BTC gemined. Miner werden dann zu **100 % aus Transaktionsgebühren** bezahlt. Da Bitcoin bis dahin die globale Abrechnungsebene ist, werden diese Gebühren ausreichen, um die gewaltigen ASICs weiterhin zu betreiben.
+
+### 2. Können 51%-Angriffe das Netzwerk zerstören?
+In der Theorie ja. In der Praxis ist im Jahr 2026 so viel Rechenleistung im Netzwerk, dass ein Angreifer Milliarden in Hardware investieren und ein halbes Kraftwerk kontrollieren müsste. Selbst dann könnte er nur *seine eigenen* Transaktionen rückgängig machen, aber keine fremden Bitcoins stehlen.
+
+### 3. Sterben Miner beim Halving aus?
+Nur die ineffizienten. Das Halving ist ein "Härtetest". Es zwingt Miner dazu, effizientere Hardware und günstigere (meist erneuerbare) Energiequellen zu finden. Das Netzwerk wird dadurch paradoxerweise stärker.
 
 ---
 
 ## Sektion 8: Zusammenfassung — Der Anker der Wahrheit
 
-Bitcoin Mining ist der Herzschlag des Netzwerks. Es nimmt die subjektive Welt menschlicher Absichten und verankert sie in der objektiven Welt physikalischer Energie. Durch den Einsatz von Elektrizität stellen Miner sicher, dass das Kassenbuch ehrlich, die Geschichte unveränderlich und die Zukunft des Geldes dezentral bleibt.
+Bitcoin Mining nimmt die subjektive Welt menschlicher Gier und verankert sie in der objektiven Welt physikalischer Gesetze. Durch den Einsatz von Elektrizität stellen Miner sicher, dass das Kassenbuch ehrlich, die Geschichte unveränderlich und die Zukunft des Geldes dezentral bleibt.
+
+**Es ist die Umwandlung von Energie in globale Wahrheit.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Mining
+- **Verwandte Entitäten:** Proof-of-Work, ASICs, SHA-256, Hashrate, Difficulty Adjustment, Halving, Pool Mining, Methan-Mitigation, Thermodynamische Sicherheit, Block Reward.
+as Kassenbuch ehrlich, die Geschichte unveränderlich und die Zukunft des Geldes dezentral bleibt.
 
 ---
 **Weitere Themen entdecken:**

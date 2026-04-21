@@ -32,120 +32,131 @@ export const faqSchema = {
 
 ## 🎯 Introduction: The Responsibility of Sovereignty
 
-Owning Bitcoin is fundamentally different from having money in a bank. In a bank, you have a promise of payment. In Bitcoin, you have the **Asset itself**—but only if you control the keys. In 2026, as Bitcoin's value reaches new heights, the incentives for hackers and scammers have never been higher. This guide provides a battle-tested blueprint for securing your Bitcoin against digital and physical threats.
+Owning Bitcoin is fundamentally different from holding money in a traditional bank. In a bank, you are an unsecured creditor holding a promise of payment. In the world of Bitcoin, you hold the **Asset itself**—but only if you control the cryptographic keys. 
+
+In 2026, as Bitcoin's value reaches unprecedented levels, the incentives for sophisticated hackers and physical bad actors have never been higher. This guide provides a battle-tested and technically rigorous blueprint for securing your digital wealth against both remote digital theft and local physical threats.
 
 ---
 
-## Section 1: Definition & The First Rule of Custody
+## Section 1: Definition — What is Self-Custody?
 
-The starting point of all security is understanding who is in control.
+The starting point of all security is the absolute control of the **Private Key**.
 
 <DefinitionBlock term="Cold Storage" icon="🧊">
-  **Cold Storage** refers to the practice of keeping Bitcoin private keys in an environment that is completely disconnected from the internet. By using specialized hardware that never touches "online" systems, you eliminate 99.9% of remote hacking risks. This is the only acceptable way to store life-changing amounts of Bitcoin.
+  **Cold Storage** is the cryptographic practice of keeping Bitcoin private keys in an environment that is 100% disconnected from the internet. By using specialized, air-gapped hardware that never communicates with "online" systems, you eliminate the risk of remote hacks, keyloggers, and malware. This is the only acceptable standard for storing significant wealth.
 </DefinitionBlock>
 
-The mantra of the industry remains: *"Not your keys, not your coins."* If you don't hold the keys, you are simply an unsecured creditor of a custodian.
+The cardinal rule remains: *"Not your keys, not your coins."* If you rely on a third-party exchange to "store" your Bitcoin, you are vulnerable to their bankruptcy, censorship, and security failures.
 
 ---
 
-## Section 2: The Core Concept (Multi-Layer Defense)
+## Section 2: The Core Concept — The Sovereign Storage Hierarchy
 
-A professional security plan doesn't rely on one lock. It uses layers to ensure that even if one part fails, the whole remains secure.
+Security is not binary; it is a spectrum of trade-offs between **Safety** and **Convenience**.
 
 <ConceptVisual 
-  src="/images/blog/multi-layer-defense.png" 
+  src="/images/blog/bitcoin-wallets.png" 
   alt="Bitcoin Security Layered Defense Diagram" 
   type="diagram" 
-  caption="A robust setup involves a Hardware Wallet (Layer 1), a physical Steel Backup (Layer 2), and advanced features like a Passphrase or Multisig (Layer 3) to prevent theft from physical coercion."
+  caption="From 'Hot Wallets' (Daily spending) to 'Cold Wallets' (Long-term savings) and 'Multi-Sig Vaults' (Institutional security). Each layer adds protection against specific failure points."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Cross-section of a high-tech fortress: Layer 1 (Strong Passwords), Layer 2 (Hardware Wallet), Layer 3 (Steel Backup), Layer 4 (Multisig Vault). Each layer glowing in amber light. Depth and perspective."
-- **File Name:** `multi-layer-defense.png`
+A robust strategy uses multiple layers: 
+- **The Foundation:** A high-quality hardware wallet containing a Secure Element (EAL5+). 
+- **The Backup:** A physical steel plate for the BIP-39 recovery seed. 
+- **The Shield:** A hidden passphrase (25th word) for plausible deniability.
 
 ---
 
-## Section 3: How It Works (The 100% Offline Workflow)
+## Section 3: How It Works — The Air-Gapped Signature Protocol
 
-To keep Bitcoin safe, your private keys must never "touch" a digital screen or a network connection.
+To maintain "Cold" status, your private keys must never touch a device with an internet connection. Modern storage uses **PSBTs (Partially Signed Bitcoin Transactions)** to bridge the gap.
 
 <ProcessStep steps={[
   {
-    title: "Offline Generation",
-    description: "Initialize your hardware wallet. The device creates a 24-word seed phrase internally using a true random number generator."
+    title: "Mnemonic Generation",
+    description: "The hardware device creates a 24-word seed phrase (BIP-39) using a high-entropy random number generator inside the secure element."
   },
   {
-    title: "Analog Backup",
-    description: "Write the words down on paper or stamp them into steel immediately. Never type them elsewhere."
+    title: "The Transaction Request",
+    description: "You create a payment on your computer. Your wallet software generates a PSBT file (a 'skeleton' of the transaction)."
   },
   {
-    title: "Testing the Recovery",
-    description: "Wipe the device and restore it using your words BEFORE you send any significant money. Ensure your backup actually works."
+    title: "Offline Signing",
+    description: "You move the PSBT to your device via an SD card or QR code. You physically review and sign it. The keys never leave the hardware."
   },
   {
-    title: "Cold Transaction",
-    description: "Sign your transactions on the device's hardware buttons. The computer only sees the resulting signature, never the key."
+    title: "Broadcast",
+    description: "The signed signature (not the key) is moved back to the computer and sent to the network. Your Bitcoin is moved while your keys stay 100% offline."
   }
 ]} />
 
 ---
 
-## Section 4: Paper vs. Steel (Disaster Recovery)
+## Section 4: Disaster Recovery (Steel vs. Everything Else)
 
-If your house burns down or floods, will your Bitcoin survive?
+If your home faces a fire, a flood, or a natural disaster, will your Bitcoin survive?
 
-| Recovery Medium | Fire Resistance | Water Resistance | Longevity |
+| Recovery Medium | Fire Resistance | Hack Resistance | Digital Rot |
 |---|---|---|---|
-| **Digital (Cloud)** | 0/10 (Hackable) | 10/10 | Low (Server Rot) |
-| **Paper Notebook** | 1/10 (Burnable)| 2/10 | High (Static) |
-| **Stainless Steel**| 10/10 | 10/10 | Eternal |
+| **Cloud / Screenshot**| 0/10 (Deadly) | 0/10 (Critical) | N/A |
+| **Paper Notebook** | 1/10 (Fragile) | 10/10 | Low (Decay) |
+| **Stainless Steel**| **10/10 (1400°C)**| **10/10** | **Eternal** |
 
 <ConceptVisual 
-  src="/images/blog/steel-vs-paper-test.png" 
+  src="/images/blog/bitcoin-wallets.png" 
   alt="Disaster Test: Paper Backup vs Steel Seed Plate" 
   type="comparison" 
-  caption="Steel backups can withstand house fire temperatures (up to 1400°C) that would turn a paper backup into ash in seconds."
+  caption="In 2026, professional holders use Grade 316 Stainless Steel to stamp their 24-word seeds. This protects against the most common physical failure points of the legacy world."
 />
 
-*Visual Specs for AI Generation:*
-- **Prompt:** "Split screen: Paper burning in fire vs. a metal seed plate remaining unscathed in the same flames. Dramatic lighting, high contrast, expert photography style."
-- **File Name:** `steel-vs-paper-test.png`
+---
+
+## Section 5: The Ultimate Vault — Multi-Signature (Multisig)
+
+For "Life-Changing" sums, you should eliminate the **Single Point of Failure**. A 2-of-3 Multisig setup is the gold standard for institutional-grade security.
+- **Key 1:** In your home safe.
+- **Key 2:** In a secure safety deposit box.
+- **Key 3:** Held by a trusted security partner or in a separate geographic location.
+Even if a thief steals one of your hardware wallets, they cannot move your funds. Even if you lose one backup, your wealth is still 100% accessible.
 
 ---
 
-## Section 5: The Advanced Choice (Multisig)
+## Section 6: Related Concepts — The OpSec Cluster
 
-For institutional-grade security, you should eliminate the "Single Point of Failure."
-- **Singlesig:** One key. If stolen, funds are gone.
-- **Multisig (2-of-3):** Three keys in different geographic locations. You need any two to move money. If one key is lost or stolen, your funds are still 100% safe. This is the ultimate defense against physical robbery.
-
----
-
-## Section 6: Related Concepts (The Sovereign Map)
-
-Security is a holistic practice. Scale your knowledge here:
-- [Best Bitcoin Wallets in 2026](/en/blog/best-bitcoin-wallets/) → Choosing the right hardware.
-- [Public vs Private Keys](/en/blog/public-private-keys/) → The foundational math.
-- [Understanding Confirmations](/en/blog/what-are-bitcoin-confirmations/) → Verifying your storage deposits.
-- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → Why running your own server is the final step in privacy.
-- [Bitcoin Security Myths](/en/blog/bitcoin-myths-misconceptions/) → Debunking common storage fears.
+Security is a holistic lifestyle, not a product:
+- [Best Hardware Wallets](/en/blog/best-bitcoin-wallets/) → Reviewing the market's most secure silicon.
+- [Public & Private Keys](/en/blog/public-private-keys/) → The foundational math of ownership.
+- [Understanding Confirmations](/en/blog/what-are-bitcoin-confirmations/) → Knowing when your deposit is final.
+- [Is Bitcoin Anonymous?](/en/blog/is-bitcoin-anonymous/) → Privacy is the first layer of security.
+- [What is a Bitcoin Node?](/en/blog/what-is-a-bitcoin-node/) → Verifying your vault status without trusting a 3rd party.
 
 ---
 
-## Section 7: FAQ (Security Paradoxes)
+## Section 7: FAQ — Professional Security Insights
 
-### 1. Does a hardware wallet hold actual Bitcoins?
-No. It holds the **Private Keys**. Bitcoin only exists as data on the global blockchain. The hardware wallet is essentially a highly secured "digital pen" used to sign the permission slip that moves that data.
+### 1. What happens if the hardware wallet company goes out of business?
+Nothing. Your funds are not "in" the wallet or "with" the company. They are on the blockchain. Your hardware wallet is just a standard computer running BIP-39 logic. You can take your 24 words and recover your funds into **any other** compatible wallet brand.
 
-### 2. Can a hacker steal my BTC if they find my device?
-Not without your **PIN**. Most devices will self-wipe (factory reset) after 3–10 failed PIN attempts. However, if they find your **Seed Phrase** (the 24 words), they don't need the device—they can steal everything instantly.
+### 2. Can a PIN be hacked?
+On a high-quality device (like Column or BitBox), the **Secure Element** is designed to physically destroy its logic if it detects a hardware-level hack attempt or too many failed PIN entries. This makes brute-forcing a PIN practically impossible.
 
-### 3. What is a 'Passphrase' (25th word)?
-A passphrase is an extra word you choose that acts like a "salt" for your seed phrase. Without the passphrase, the 24 words lead to an empty wallet. This provides "Plausible Deniability" during physical threats.
+### 3. Should I use a hardware wallet or a 'Paper Wallet'?
+In 2026, Paper Wallets are considered obsolete and dangerous. They are difficult to generate safely and even harder to "spend" without leaking your private keys. **Always use a hardware wallet** for self-custody.
 
 ---
 
-## Section 8: Summary — Secure the Future
+## Section 8: Summary — The Peace of Self-Sovereignty
+
+Storing Bitcoin safely is a journey from trusting institutions to trusting yourself and universal mathematical constants. By using a hardware wallet, securing your keys on steel, and practicing the discrete workflow of offline signing, you achieve a level of financial security that was historically reserved only for central banks.
+
+**True wealth is not just what you own, but what you have the power to keep.**
+
+---
+
+## 🧬 Semantic Entity Map
+- **Primary Entity:** Bitcoin Storage
+- **Related Entities:** Self-Custody, Cold Storage, Hardware Wallet, Secure Element (EAL5+), BIP-39, Seed Phrase, Multi-Sig (2-of-3), Passphrase, PSBT, Disaster Recovery.
 
 Storing Bitcoin safely is a journey from trusting others to trusting yourself and mathematics. By using a hardware wallet, securing your keys on steel, and never digitizing your recovery data, you achieve a level of financial security that was impossible for even the richest kings of the past. **True wealth is not just what you own, but what you can keep.**
 

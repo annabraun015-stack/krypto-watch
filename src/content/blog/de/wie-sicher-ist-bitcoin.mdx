@@ -32,120 +32,115 @@ export const faqSchema = {
 
 ## 🎯 Einleitung: Das sicherste Netzwerk der Geschichte
 
-Wenn Kritiker fragen, ob Bitcoin "sicher" ist, verwechseln sie oft die Sicherheit eines Nutzers (der sein Passwort verlieren kann) mit der Sicherheit des Netzwerks (das Billionen von Euro schützt). Im Jahr 2026 stellt Bitcoin das robusteste dezentrale Computernetzwerk dar, das jemals von der Menschheit konstruiert wurde. Seine Verteidigung basiert nicht auf Stahl, sondern auf **Mathematik** und **Energie**.
+Wenn Kritiker fragen, ob Bitcoin "sicher" ist, verwechseln sie oft die Sicherheit eines Nutzers (der sein Passwort verlieren kann) mit der Sicherheit des Protokolls (das Billionen von Euro schützt). 
+
+Im Jahr 2026 stellt Bitcoin das robusteste dezentrale Computernetzwerk dar, das jemals von der Menschheit konstruiert wurde. Seine Verteidigung basiert nicht auf Stahl oder Mauern, sondern auf den unumstößlichen Gesetzen der **Mathematik** und der **Thermodynamik**. In diesem Guide dekonstruieren wir die Architektur der "digitalen Festung" und zeigen Ihnen, warum Bitcoin heute als das sicherste Abrechnungssystem der Welt gilt.
 
 ---
 
-## Sektion 1: Definition & die drei Schichten der Sicherheit
+## Sektion 1: Definition — Was bedeutet 'Sicherheit' bei Bitcoin?
 
-Bitcoin-Sicherheit ist ein mehrschichtiges Konzept. Man kann es sich als eine festung vorstellen, die durch physikalische Gesetze statt durch Unternehmens-Firewalls geschützt ist.
+Bitcoin-Sicherheit ist kein einfacher Zustand, sondern ein dynamisches Gleichgewicht aus Kryptografie und Spieltheorie.
 
-<DefinitionBlock term="Netzwerksicherheit" icon="🛡️">
-  **Bitcoin-Sicherheit** bezieht sich auf die Fähigkeit des Protokolls, Doppelausgaben (Double-Spending), Fälschungen und Zensur zu widerstehen. Sie wird durch einen globalen Konsens von Minern (die Energie bereitstellen) und Nodes (die Regeln verifizieren) aufrechterhalten. Diese dezentrale Struktur stellt sicher, dass kein einzelnes Unternehmen, keine Regierung und kein Hacker das System kontrollieren kann.
+<DefinitionBlock term="Kryptografische Souveränität" icon="🛡️">
+  **Bitcoin-Sicherheit** bedeutet, dass das Netzwerk gegen drei primäre Bedrohungen immun ist: die Fälschung von Coins, das doppelte Ausgeben desselben Geldbetrags (Double-Spending) und die Zensur von Transaktionen durch Dritte. Diese Immunität wird durch die Kombination aus asymmetrischer Kryptografie (Private Keys) und der physischen Macht des Proof-of-Work erreicht.
 </DefinitionBlock>
 
-Die drei Säulen dieser Sicherheit sind:
-1. **Kryptografie:** Stellt sicher, dass nur der Besitzer eines Schlüssels Gelder bewegen kann.
-2. **Dezentralisierung:** Verteilt das Kassenbuch auf über 18.000 unabhängige [Nodes](/blog/was-ist-ein-bitcoin-node/).
-3. **Proof-of-Work:** Macht es astronomisch teuer, das Netzwerk zu belügen.
-
 ---
 
-## Sektion 2: Kernkonzept (Die Hash-Festung)
+## Sektion 2: Kernkonzept — Der SHA-256-Abgrund
 
-Die wichtigste "Mauer" von Bitcoin ist der **SHA-256-Hashing-Algorithmus**. Er macht die Blockchain "unveränderlich" (immutable) – das bedeutet, sie kann nicht manipuliert werden.
+Das Herzstück der Bitcoin-Sicherheit ist der Hashing-Algorithmus **SHA-256**. Um die Stärke dieses Schutzes zu verstehen, muss man die schiere Größe des Suchraums erfassen.
 
 <ConceptVisual 
-  src="/images/blog/bitcoin-hash-fortress.png" 
-  alt="SHA-256 Digitales Festungs-Diagramm" 
-  type="diagram" 
-  caption="Jeder Block in der Kette ist über einen kryptografischen Hash mit dem vorherigen verknüpft. Das Ändern auch nur eines einzigen Daten-Bits würde erfordern, dass die Arbeit für jeden nachfolgenden Block neu geleistet wird – eine Leistung, die mehr Energie erfordert, als die Sonne produziert."
+  src="/images/blog/bitcoin-security.png" 
+  alt="SHA-256 Sicherheitsvergleich" 
+  type="concept" 
+  caption="Die Anzahl der möglichen Kombinationen in SHA-256 ist so gewaltig, dass sie die Anzahl der Atome im sichtbaren Universum übersteigt. Eine 'Brute-Force'-Attacke, bei der alle Kombinationen ausprobiert werden, würde mehr Energie erfordern, als alle Sonnen unserer Galaxie während ihrer gesamten Lebensdauer produzieren."
 />
 
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Eine hochtechnologische digitale Festungsmauer aus ineinandergreifenden leuchtenden Würfeln, jeder Würfel durch Lichtketten verbunden, die die Blockchain-Blöcke darstellen, futuristische blau-goldene Beleuchtung, hyperrealistisch."
-- **Dateiname:** `bitcoin-hash-fortress.png`
+Es gibt keine "Abkürzung" durch diese Mauer. Man muss entweder die Energie aufwenden oder man bleibt draußen.
 
 ---
 
-## Sektion 3: Wie es funktioniert (Verteidigung gegen Angriffe)
+## Sektion 3: Funktionsweise — Die unüberwindbare Wand aus Energie
 
-Bitcoin verlässt sich nicht darauf, dass Menschen "gut" sind; es geht davon aus, dass sie böse sein könnten, und macht es zu teuer für sie, erfolgreich zu sein.
+Warum ist es unmöglich, die Vergangenheit der Blockchain zu ändern? Das Geheimnis liegt in der kumulativen Rechenleistung.
 
 <ProcessStep steps={[
   {
-    title: "Validierung durch Nodes",
-    description: "Jeder [Node](/blog/was-ist-ein-bitcoin-node/) prüft unabhängig jede Transaktion gegen das Regelwerk. Wenn ein Miner versucht zu betrügen, ignorieren die Nodes ihn einfach."
+    title: "Der kryptografische Hash",
+    description: "Jeder Block enthält den Fingerabdruck (Hash) des vorherigen Blocks. Dies erzeugt eine Kette, die mathematisch untrennbar ist."
   },
   {
-    title: "Kumulierte Schwierigkeit",
-    description: "Je mehr Miner beitreten, desto höher wird die 'Difficulty'. Im Jahr 2026 wird das Netzwerk durch Rekordwerte an Exahashes pro Sekunde (EH/s) gesichert."
+    title: "Physikalische Kosten",
+    description: "Um einen Block zu ändern, muss man den Beweis (Proof-of-Work) für diesen Block und alle folgenden Blöcke neu erbringen. Im Jahr 2026 ist dies physisch unmöglich."
   },
   {
-    title: "Der 10-Minuten-Zyklus",
-    description: "Alle 10 Minuten wird ein neuer Block durch Proof-of-Work 'versiegelt'. Um eine Transaktion rückgängig zu machen, muss ein Angreifer schneller sein als der Rest der Welt."
+    title: "Die Macht der Nodes",
+    description: "Weltweit prüfen über 100.000 unabhängige [Nodes](/de/blog/was-ist-ein-bitcoin-node/) ständig die Regeln. Wenn ein Miner versucht zu betrügen, wird sein Block sofort abgelehnt."
   },
   {
-    title: "Ökonomische Abschreckung",
-    description: "Ein Angreifer müsste Milliarden für Strom und Hardware (ASICs) ausgeben. Bei einem Angriff sinkt der Wert seiner Hardware auf Null, was ihn sofort in den Ruin treibt."
+    title: "Ehrlichkeit durch Anreize",
+    description: "Miner investieren Milliarden in Hardware. Ein Angriff würde den Wert ihrer Investition zerstören. Ehrlichkeit ist also die profitabelste Strategie."
   }
 ]} />
 
 ---
 
-## Sektion 4: Daten & reales Bedrohungsmodell
+## Sektion 4: Bedrohungsanalyse 2026 — Der 51%-Angriff
 
-Wie schneidet die Sicherheit von Bitcoin im Vergleich zur traditionellen Wertaufbewahrung ab?
+In der Theorie ist ein 51%-Angriff möglich, aber im Jahr 2026 ist er zu einem "ökonomischen Selbstmordkommando" geworden.
 
-| Bedrohungsfaktor | Bitcoin (BTC) | Traditionelle Bank | Physisches Gold |
-|---------------|---------------|------------------|---------------|
-| **System-Hack** | Mathematisch vernachlässigbar | Moderat (SWIFT-Exploits) | N/A |
-| **Beschlagnahmungsrisiko** | Extrem gering (Eigenverwahrung) | Hoch (Kontosperrung) | Hoch (Physische Beschlagnahmung) |
-| **Zensur** | Unmöglich | Moderat (Politikänderungen) | Gering |
-| **Menschliches Versagen** | Hoch (Nutzer verantwortlich) | Gering (Bank hilft) | Moderat (Verlust) |
-
----
-
-## Sektion 5: Vergleich (51%-Angriff: Realität vs. Theorie)
-
-Die am häufigsten diskutierte Schwachstelle ist der **51%-Angriff**. Obwohl theoretisch möglich, haben ihn die ökonomischen Bedingungen im Jahr 2026 in den Bereich von "Mission Impossible" verschoben.
-
-**Kosten-Nutzen-Infografik-Specs:**
-- **Beschreibung:** Ein Dashboard, das die Kosten für alle ASICs der Weltklasse und Strom (Milliarden) gegenüber dem Ertrag aus der Doppelausgabe bei einer Börse (Millionen) zeigt.
-- **Ziel:** Zeigen, dass ein Angriff auf Bitcoin ein garantierter Weg ist, Geld zu verlieren.
+| Metrik | Risiko | Realität 2026 |
+|---|---|---|
+| **Kosten für Hardware** | Hoch | ~$40 Mrd. (unmöglich in kurzer Zeit zu beschaffen) |
+| **Energiekosten** | Extrem | Entspricht der Stromproduktion einer mittelgroßen Industrienation |
+| **Folgen für den Angreifer** | Totalverlust | Der Bitcoin-Preis würde fallen, die Hardware des Angreifers wäre wertlos |
+| **Effektivität** | Gering | Der Angriff kann nur neue Blöcke verzögern, aber keine alten Bitcoins stehlen |
 
 ---
 
-## Sektion 6: Verwandte Themen (Themencluster)
+## Sektion 5: Post-Quantum-Bereitschaft
 
-Um den vollen Umfang der Sicherheit zu verstehen, erkunden Sie diese verwandten Bereiche:
-- [Was ist eine Bitcoin Node?](/blog/was-ist-ein-bitcoin-node/) → Die "Polizei" des Netzwerks.
-- [Public vs Private Keys](/blog/public-private-keys/) → Das Schloss an Ihrem digitalen Tresor.
-- [Wie Bitcoin Mining funktioniert](/blog/bitcoin-mining-erklaert/) → Die Energiewand erklärt.
-- [Was ist eine Bestätigung?](/blog/bitcoin-bestaetigungen/) → Warum Warten Sie sicherer macht.
-- [Ist Bitcoin anonym?](/blog/ist-bitcoin-anonym/) → Sicherheit durch Privatsphäre.
-
----
-
-## Sektion 7: FAQ (Sicherheitsparadoxien)
-
-### 1. Wurde Bitcoin schon einmal gehackt?
-Nein. Zentralisierte Börsen wie FTX oder Mt. Gox wurden "gehackt" (oder betrogen), aber das Bitcoin-Protokoll selbst hat eine Verfügbarkeit von 99,99% und Null erfolgreiche Einbrüche seit 2009.
-
-### 2. Können Quantencomputer Bitcoin zerstören?
-Nicht heute. Während Quantencomputer theoretisch die Mathematik hinter den Schlüsseln lösen könnten, sind heutige Maschinen Jahrzehnte von der nötigen Leistung entfernt. Falls sie kommen, wird Bitcoin durch ein einfaches Software-Update auf "Post-Quantum-Kryptografie" umsteigen.
-
-### 3. Ist mein Bitcoin auf einer Börse sicher?
-Nein. Eine Börse ist eine zentrale Datenbank. Wenn die Börse gehackt wird oder pleitegeht, ist Ihr Guthaben in Gefahr. **Eigenverwahrung** über ein Hardware-Wallet ist der einzige Weg, um 100% sicher zu sein.
+Mit der Entwicklung von Quantencomputern stellt sich die Frage: "Wird Bitcoin unbrauchbar?" 
+Im Jahr 2026 ist der Fahrplan für die **Quanten-Resistenz** klar:
+- Bitcoin kann über ein Software-Update (Softfork) auf gitterbasierte Kryptografie (Lattice-Based) umsteigen.
+- Alte Adressen, die niemals versendet haben, sind bereits heute durch Hashing-Layer geschützt.
+- Die Entwicklung von "Quantum-Resistant" Signaturen wird aktiv in Sidechains getestet.
 
 ---
 
-## Sektion 8: Zusammenfassung — Der unveränderliche Datensatz
+## Sektion 6: Verwandte Themen — Das Sicherheits-Ökosystem
 
-Die Sicherheit von Bitcoin ist der "unsichtbare Schild" des digitalen Zeitalters. Indem Bitcoin Menschen aus dem Verifizierungsprozess entfernt und sie durch universelle mathematische Wahrheiten ersetzt, hat es das erste Eigentumssystem geschaffen, das ohne Waffen verteidigt werden kann. Im Jahr 2026 ist das größte Risiko für Ihren Bitcoin kein Hacker – es ist Ihre eigene [operative Sicherheit](/blog/beste-bitcoin-wallets/).
+Sicherheit ist ein vernetztes System. Entdecken Sie die Details:
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Warum Ihre Node der Richter ist.
+- [Bitcoin Mining erklärt](/de/blog/bitcoin-mining-erklaert/) → Die Maschinen hinter der Wand.
+- [Public vs. Private Keys](/de/blog/was-ist-bitcoin/) → Wie asymmetrische Kryptografie funktioniert.
+- [Das 21-Millionen-Limit](/de/blog/bitcoin-21-millionen-limit/) → Sicherheit der Geldpolitik.
+- [Bitcoin rechtliche Lage](/de/blog/bitcoin-rechtliche-lage-deutschland/) → Regulatorische Sicherheit.
+
+---
+
+## Sektion 7: FAQ — Häufige Sicherheitsfragen
+
+### 1. Wurde die Bitcoin-Blockchain jemals gehackt?
+Nein. Seit dem Start im Jahr 2009 hatte das Bitcoin-Netzwerk eine Verfügbarkeit von über 99,98%. Es gab Vorfälle bei Börsen (Zentralbanken von Krypto), aber das Kernprotokoll blieb zu jeder Sekunde unversehrt.
+
+### 2. Kann eine Regierung die Bitcoin-Server abschalten?
+Bitcoin hat keine Server. Es läuft auf tausenden privaten Computern weltweit. Selbst wenn ein ganzes Land das Internet abschaltet, läuft Bitcoin via Satellit (Blockstream) und in anderen Ländern nahtlos weiter.
+
+### 3. Was ist das größte Risiko für meine Bitcoins?
+Im Jahr 2026 ist das größte Risiko nicht das Netzwerk, sondern Sie selbst. Menschliches Versagen bei der [Verwahrung der Private Keys](/de/blog/wie-sicher-ist-bitcoin/) verursacht 99% aller Verluste. **Eigenverantwortung ist der Preis der Freiheit.**
+
+---
+
+## Sektion 8: Zusammenfassung — Die unbezwingbare Logik
+
+Die Sicherheit von Bitcoin ist der "unsichtbare Schild" des digitalen Zeitalters. Indem Bitcoin Menschen aus dem Verifizierungsprozess entfernt und sie durch universelle mathematische Wahrheiten ersetzt, hat es das erste Eigentumssystem geschaffen, das ohne Waffen verteidigt werden kann. Im Jahr 2026 ist die Erkenntnis gereift: **Man hackt nicht Bitcoin; man hackt die Physik.**
 
 ---
 
 ## 🧬 Semantische Entity-Map
-- **Haupt-Entität:** Bitcoin-Sicherheit
-- **Verwandte Entitäten:** SHA-256, Proof-of-Work, 51%-Angriff, Nodes, Double-Spend, Kryptografie, Unveränderlichkeit, ASICs, Eigenverwahrung, Dezentralisierung.
+- **Haupt-Entität:** Bitcoin Sicherheit
+- **Verwandte Entitäten:** SHA-256, Proof-of-Work, Dezentralität, 51%-Angriff, Lattice-Based Cryptography, Quantenresistenz, Nodes, Double-Spending, Thermodynamischer Schutz, Spieltheorie.

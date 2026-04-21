@@ -32,124 +32,115 @@ export const faqSchema = {
 
 ## 🎯 Einleitung: Die Geschwindigkeit des Vertrauens
 
-Im traditionellen Bankwesen kann eine "Abwicklung" (Settlement) Tage dauern. Bei Bitcoin wird diese Finalität in **Bestätigungen** gemessen. Eine Bestätigung ist der mathematische Beweis, dass Ihre Transaktion nun ein dauerhafter Teil der globalen Geschichte ist. Im Jahr 2026 ist das Verständnis dieser Metrik entscheidend für jeden, der Bitcoin für Waren akzeptiert oder bedeutende Vermögenswerte über das Netzwerk bewegt.
+Im traditionellen Bankwesen kann eine "Abwicklung" (Settlement) Tage oder sogar Wochen dauern, da sie auf menschlicher Bürokratie und zentralen Datenbanken basiert. Bei Bitcoin wird diese Finalität in **Bestätigungen** gemessen — dem ultimativen Maßstab für Unumkehrbarkeit. 
+
+Eine Bestätigung ist der mathematische Beweis, dass Ihre Transaktion nun ein dauerhafter Teil der globalen Geschichte ist. Im Jahr 2026, in einer Welt sekundenschneller digitaler Zahlungen, ist das Verständnis der kryptografischen Finalität entscheidend. In diesem Guide dekonstruieren wir die Schichten der Sicherheit und erklären, warum "Besitz" bei Bitcoin eine Funktion der Zeit und der Rechenleistung ist.
 
 ---
 
-## Sektion 1: Definition & die Block-Schichtung
+## Sektion 1: Definition — Was ist eine 'Bestätigung'?
 
-Eine Bestätigung ist nicht nur ein "Häkchen"; sie ist eine Schicht aus Rechenarbeit, die Ihr Geld schützt.
+Eine Bestätigung ist nicht nur ein Status-Update; sie ist eine physikalische Schicht aus Rechenarbeit, die Ihr Geld schützt.
 
-<DefinitionBlock term="Bitcoin-Bestätigung" icon="📐">
-  Eine **Bestätigung** erfolgt, wenn ein [Miner](/de/blog/bitcoin-mining-erklaert/) Ihre Transaktion in einen neuen Block aufnimmt. Jeder nachfolgende Block, der *nach* Ihrem Block zur Kette hinzugefügt wird, zählt als weitere Bestätigung. Jede neue Schicht macht es für einen Angreifer exponentiell schwieriger, die Historie umzuschreiben und Ihre Zahlung rückgängig zu machen.
+<DefinitionBlock term="Kryptografische Finalität" icon="📐">
+  Eine **Bestätigung** erfolgt, wenn ein Miner Ihre Transaktion in einen neuen Block aufnimmt. Jeder nachfolgende Block, der darauf aufgebaut wird, zählt als weitere Bestätigung. Mit jeder Schicht sinkt die Wahrscheinlichkeit eines Fehlers oder Angriffs exponentiell gegen Null. Ab einer bestimmten Tiefe gilt eine Transaktion als 'ökonomisch final' — ihre Umkehrung würde mehr Energie kosten, als der Angreifer gewinnen könnte.
 </DefinitionBlock>
 
-Stellen Sie es sich wie den Bau eines Hauses vor: Die erste Bestätigung ist das Fundament. Jede weitere Bestätigung ist eine weitere Schicht Beton, die darauf gegossen wird. Um das Fundament zu ändern, müsste ein Angreifer das gesamte Gebäude zerstören.
-
 ---
 
-## Sektion 2: Das Kernkonzept (Finalitätstiefe)
+## Sektion 2: Kernkonzept — Die probabilistische Sicherheit
 
-Die "Tiefe" Ihrer Transaktion bestimmt ihre Endgültigkeit. Je höher der Stapel, desto "solider" wird die Zahlung.
+Bitcoin bietet keine absolute Sicherheit ab der ersten Sekunde, sondern eine **probabilistische** Sicherheit, die mit der Zeit wächst.
 
 <ConceptVisual 
-  src="/images/blog/block-burial-depth.png" 
-  alt="Diagramm zur Bitcoin-Bestätigungstiefe und Finalität" 
-  type="diagram" 
-  caption="Sechs Blöcke (der Goldstandard) bieten genug wirtschaftliche Finalität, um sicherzustellen, dass die Kosten für einen Angriff den Wert der Transaktion bei weitem übersteigen."
+  src="/images/blog/bitcoin-transaction.png" 
+  alt="Bitcoin Schichten der Sicherheit Visualisierung" 
+  type="concept" 
+  caption="Stellen Sie sich vor, Ihre Transaktion wird in Beton gegossen. 1 Bestätigung: Der Beton ist feucht. 3 Bestätigungen: Der Beton ist zäh. 6 Bestätigungen: Der Beton ist massiver Stein. Nach 100 Bestätigungen (Coinbase Maturity) ist die Transaktion so tief im Fundament der Blockchain verankert, dass sie nur durch die Vernichtung des gesamten Netzwerks geändert werden könnte."
 />
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Ein 3D-vertikaler Stapel aus transluzenten digitalen Blöcken. Ein Transaktions-Icon ganz unten. Sechs Blöcke darauf gestapelt, die den Boden immer undurchsichtiger machen. Label: 'Economic Finality'."
-- **Dateiname:** `block-burial-depth.png`
 
 ---
 
-## Sektion 3: Wie es funktioniert (Der Lebenszyklus)
+## Sektion 3: Funktionsweise — Reorgs & Orphaned Blocks
 
-Die Reise von Ihrem Wallet bis zum Zustand "in Beton gegossen" folgt einem klaren Pfad.
+Warum warten wir überhaupt auf mehrere Blöcke? Wegen der Natur der Dezentralität.
 
 <ProcessStep steps={[
   {
-    title: "Warten im Mempool",
-    description: "Ihre Transaktion tritt in den 'Warteraum'. Sie hat 0 Bestätigungen und ist technisch per RBF noch veränderbar."
+    title: "Der Mempool-Zustand",
+    description: "Ihre Transaktion ist bekannt, aber noch nicht im Kassenbuch. Sie hat 0 Bestätigungen und ist noch nicht final."
   },
   {
-    title: "Der erste Block",
-    description: "Ein Miner wählt Ihre Transaktion aus und findet einen Block. Sie haben nun 1 Bestätigung. Das Risiko eines 'Double Spend' sinkt um 99 %."
+    title: "Das Miner-Rennen",
+    description: "Manchmal finden zwei Miner gleichzeitig einen Block. Das Netzwerk spaltet sich für einen Moment (Tip-Split)."
   },
   {
-    title: "Sukzessive Schichtung",
-    description: "Neue Miner bauen auf Ihrem Block auf. Ab 3 Bestätigungen schreiben die meisten Börsen Ihnen den Betrag gut."
+    title: "Chain Reorganization (Reorg)",
+    description: "Sobald ein Miner den nächsten Block findet, gewinnt die längere Kette. Der kürzere Pfad (und seine 1. Bestätigung) wird verworfen. Dies nennt man einen 'Orphaned Block'."
   },
   {
-    title: "Unwiderruflichkeit",
-    description: "Ab 6 Bestätigungen (~60 Minuten) gilt die Transaktion in den Augen des Protokolls als für alle Ewigkeit abgewickelt."
+    title: "Gefestigte Finalität",
+    description: "Ab der 3. Bestätigung ist es extrem unwahrscheinlich, dass eine alternative Kette die aktuelle überholt. Ihre Zahlung ist sicher."
   }
 ]} />
 
 ---
 
-## Sektion 4: Risikoschwellen (Ab wann vertrauen?)
+## Sektion 4: Sicherheitsschwellen 2026
 
-Nicht jede Transaktion erfordert eine Stunde Wartezeit. Wählen Sie Ihr Bestätigungsziel basierend auf dem Einsatz.
+Nicht jeder Kauf benötigt 60 Minuten Wartezeit. Wählen Sie Ihr Ziel basierend auf dem ökonomischen Risiko.
 
-| Wert | Ziel-Bestätigungen | Grund |
+| Betrag | Bestätigungen | Risiko-Einschätzung |
 |---|---|---|
-| **1 € - 50 €** | 0 bis 1 | Geringes Risiko, schnelle Abwicklung. |
-| **50 € - 5.000 €** | 3 | Standard-Sicherheit für den Handel. |
-| **5.000 € - 1 Mio. €** | 6 | Institutionelle Endgültigkeit. |
-| **10 Mio. €+** | 12+ | Absolute kryptografische Gewissheit. |
+| **< 100 €** | 0 (Lightning) | Sofortige Finalität über Layer 2. |
+| **100 € - 1.000 €**| 1 | Sicher genug für den Einzelhandel. |
+| **1.000 € - 50.000 €**| 3 | Standard für die meisten Krypto-Börsen. |
+| **> 100.000 €** | 6 | Globaler Goldstandard für Finalität. |
+| **Mining-Rewards** | 100 | 'Coinbase Maturity' — Miner müssen 100 Blöcke warten, bevor sie Belohnungen ausgeben dürfen. |
 
 ---
 
-## Sektion 5: Das Bedrohungsmodell (Das Double-Spend Rennen)
+## Sektion 5: Das Double-Spend-Modell
 
-Warum warten wir überhaupt? Um zu verhindern, dass ein Angreifer denselben digitalen Coin an zwei Orte gleichzeitig sendet.
-
-<ConceptVisual 
-  src="/images/blog/double-spend-race.png" 
-  alt="Visualisierung des Bitcoin Double-Spend Rennens" 
-  type="flow" 
-  caption="Das Rennen zwischen zwei konkurrierenden Transaktionen. Sobald die Version des Händlers unter mehreren Blöcken begraben ist, wird die alternative Version des Angreifers vom Netzwerk abgelehnt."
-/>
-
-*Visuelle Spezifikationen für die KI:*
-- **Prompt:** "Zwei Datenströme im Rennen: Einer zum 'Händler', einer zurück zum 'Angreifer'. Eine digitale Wand (Bestätigung) blockiert den Pfad des Angreifers. Dynamisch, hohe Geschwindigkeit."
-- **Dateiname:** `double-spend-race.png`
+Was passiert bei einem Angriff?
+Ein "Double-Spend" ist der Versuch, dieselben Bitcoins zweimal auszugeben. Der Angreifer sendet eine Zahlung an einen Händler, wartet auf die Ware und versucht dann, eine alternative Kette zu minen, in der das Geld an ihn selbst zurückgeht. 
+- **Der 51%-Faktor:** Um dies bei 6 Bestätigungen erfolgreich zu tun, müsste der Angreifer über eine Stunde lang mehr Rechenleistung kontrollieren als das restliche Netzwerk zusammen. 
+- **Kosten-Nutzen:** Im Jahr 2026 kostet ein solcher Angriff Milliarden pro Stunde. Daher ist Bitcoin für alle praktischen Belange ab 6 Blöcken unhackbar.
 
 ---
 
-## Sektion 6: Verwandte Themen (Das Abwicklungs-Cluster)
+## Sektion 6: Verwandte Themen — Der Finalitäts-Stack
 
-Meistern Sie die Mechanik der Bitcoin-Finalität:
-- [Was ist Bitcoin Mining?](/de/blog/bitcoin-mining-erklaert/) → Der Prozess, der Bestätigungen erschafft.
-- [Den Mempool verstehen](/de/blog/bitcoin-transaktionsgebuehren/) → Wo Transaktionen auf ihren ersten Block warten.
-- [Das Lightning Network](/de/blog/lightning-network/) → Sofortige Abrechnung ohne Warten auf Blöcke.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie Sie Ihre eigenen Bestätigungen verifizieren.
-- [Bitcoin senden](/de/blog/bitcoin-senden-empfangen/) → Die richtige Gebühr setzen, um schneller bestätigt zu werden.
-
----
-
-## Sektion 7: FAQ (Hängende Transaktionen)
-
-### 1. Warum hängt meine Transaktion bei 0 Bestätigungen fest?
-Das liegt fast immer an einer zu niedrigen **Gebühr**. In Zeiten hoher Auslastung ignorieren Miner schlecht bezahlte Transaktionen. Nutzen Sie **RBF (Replace-By-Fee)**, um die Gebühr zu erhöhen und die Bestätigung zu erzwingen.
-
-### 2. Kann eine Bestätigung später 'rückgängig' gemacht werden?
-In seltenen Fällen, sogenannten "Chain Reorganizations", können 1-2 Bestätigungen hinfällig werden, wenn zwei Miner fast gleichzeitig Blöcke finden. Deshalb warten seriöse Firmen auf mindestens **3 Bestätigungen**.
-
-### 3. Bestätigt 1 BTC schneller als 0,001 BTC?
-Nein. Die Geschwindigkeit hängt von der **Gebührenrate (sat/vB)** und reinem Glück ab, nicht vom versendeten Betrag. Minern ist die Gebühr wichtig, nicht der Kurswert der Coins.
+Finalität ist das Ergebnis des gesamten Systems:
+- [Wie Bitcoin Mining funktioniert](/de/blog/bitcoin-mining-erklaert/) → Der Prozess, der die Schichten baut.
+- [Bitcoin transaktionsgebuehren](/de/blog/bitcoin-transaktionsgebuehren/) → Wie Sie in den nächsten Block kommen.
+- [Das Lightning Network](/de/blog/lightning-network/) → Warum L2 keine Bestätigungen braucht.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie Sie die Kette selbst prüfen.
+- [Bitcoin vs. Fiatgeld](/de/blog/bitcoin-vs-fiat-geld/) → Warum digitale Finalität besser ist als Bank-Vertrauen.
 
 ---
 
-## Sektion 8: Zusammenfassung — Das Gewicht der Finalität
+## Sektion 7: FAQ — Experten-Fragen zu hängenden Transaktionen
 
-Bestätigungen sind die Gravitation des Bitcoin-Netzwerks. Sie halten das Kassenbuch zusammen und sorgen dafür, dass die Zeit nur in eine Richtung fließt. Ob Sie einen Kaffee per [Lightning](/de/blog/lightning-network/) kaufen oder ein Millionengeschäft On-Chain abwickeln – die Anzahl der Bestätigungen ist Ihre ultimative Versicherung. **Warten Sie auf die Blöcke und vertrauen Sie der Mathematik.**
+### 1. Meine Transaktion hat seit 2 Stunden 0 Bestätigungen. Warum?
+Vermutlich war die Gebühr zu niedrig (Mempool-Stau). Miner bevorzugen Transaktionen mit höheren Gebühren. Sie können dies mit **RBF (Replace-By-Fee)** korrigieren, indem Sie die Gebühr nachträglich erhöhen.
+
+### 2. Was ist 'Zero-Conf' und ist es sicher?
+Zero-Conf bedeutet, eine Transaktion ohne Bestätigung zu akzeptieren. Im Jahr 2026 ist dies riskant, es sei denn, man nutzt vertrauenswürdige Zwischeninstanzen oder das Lightning Network. Für echte On-Chain-Zahlungen sollte man niemals auf die erste Bestätigung verzichten.
+
+### 3. Warum dauert ein Block manchmal 30 Minuten?
+Die 10 Minuten sind ein statistischer Durchschnitt. Mining ist wie Würfeln. Manchmal hat das Netzwerk Pech und es dauert länger, manchmal werden drei Blöcke in einer Minute gefunden. Langfristig pendelt es sich immer bei 10 Minuten ein.
+
+---
+
+## Sektion 8: Zusammenfassung — Das Gewicht der Zeit
+
+Bestätigungen sind die Gravitation des Bitcoin-Netzwerks. Sie halten das Kassenbuch zusammen und sorgen dafür, dass die Zeit digital nur in eine Richtung fließt. Ob Sie einen Kaffee kaufen oder das Vermögen eines Staates bewegen — die Anzahl der Bestätigungen ist Ihre ultimative Versicherung. 
+
+**Warten Sie auf die Blöcke. Vertrauen Sie der Mathematik. Genießen Sie die Finalität.**
 
 ---
 
 ## 🧬 Semantische Entity-Map
 - **Haupt-Entität:** Bitcoin Bestätigungen
-- **Verwandte Entitäten:** Finalität, Blockhöhe, Mempool, Miner, Double Spend, RBF (Replace-By-Fee), 51%-Angriff, Chain Reorganization, Satoshi Nakamoto, Settlement.
+- **Verwandte Entitäten:** Ökonomische Finalität, Probabilistische Sicherheit, Tip-Split, Chain Reorganisation (Reorg), Orphaned Block, Coinbase Maturity, RBF, Mempool, Miner, 51%-Angriff.
