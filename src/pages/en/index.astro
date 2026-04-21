@@ -110,6 +110,26 @@ const homepageSchema = [
     </section>
   )}
 
+  <!-- Featured Analysis -->
+  {featuredPosts.length > 0 && (
+    <section class="section featured-section" aria-labelledby="featured-en-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label" aria-hidden="true">⭐ Featured</p>
+          <h2 id="featured-en-heading" class="section-title">{tr.sections.featuredAnalysis}</h2>
+          <p class="section-subtitle">{tr.sections.featuredAnalysisSubtitle}</p>
+        </div>
+        <div class="blog-grid-featured" role="list">
+          {featuredPosts.map((post) => (
+            <div role="listitem">
+              <BlogCard post={post} locale={locale} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Categories -->
   <section class="section" aria-labelledby="cats-en-heading">
     <div class="container">
@@ -250,4 +270,132 @@ const homepageSchema = [
     pointer-events: none;
     z-index: 1;
   }
+
+  /* Market section */
+  .market-section { background: oklch(10% 0.02 260); }
+
+  /* Blog grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .blog-grid-featured {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) { .blog-grid-featured { grid-template-columns: repeat(3, 1fr); } }
+
+  .view-all-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  /* Featured section bg */
+  .featured-section {
+    background: linear-gradient(180deg, transparent, oklch(10% 0.02 260) 50%, transparent);
+  }
+
+  /* Categories */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
+  }
+
+  @media (min-width: 480px) { .categories-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(5, 1fr); } }
+  @media (min-width: 1024px) { .categories-grid { grid-template-columns: repeat(10, 1fr); } }
+
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0.75rem;
+    background: oklch(14% 0.04 260 / 0.5);
+    border: 1px solid oklch(25% 0.05 195 / 0.35);
+    border-radius: 0.875rem;
+    text-decoration: none;
+    transition: all 0.25s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--cat-color, var(--color-brand-500));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .category-card:hover {
+    border-color: color-mix(in oklch, var(--cat-color) 50%, transparent);
+    background: oklch(18% 0.05 260 / 0.7);
+    transform: translateY(-3px);
+  }
+
+  .category-card:hover::before { opacity: 1; }
+
+  .cat-emoji { font-size: 1.75rem; line-height: 1; }
+  .cat-name { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary); }
+
+  /* How it works */
+  .how-section { background: oklch(10% 0.02 260); }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .how-card {
+    background: linear-gradient(135deg, oklch(17% 0.04 260 / 0.6), oklch(12% 0.03 260 / 0.4));
+    border: 1px solid oklch(25% 0.05 195 / 0.35);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .how-card:hover {
+    border-color: var(--color-brand-400);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-neon-cyan);
+  }
+
+  .how-step-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: oklch(45% 0.2 195 / 0.1);
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+  }
+
+  .how-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .how-desc { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.7; }
 </style>
