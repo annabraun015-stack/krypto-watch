@@ -1,143 +1,155 @@
 ---
-title: "Was sind Bitcoin-Bestätigungen? Der definitive technische Guide (2026)"
-description: "Was Bitcoin-Bestätigungen sind, wie viele Sie für absolute Sicherheit brauchen, die Mempool-Mechanik und wie Sie feststeckende Transaktionen durch RBF oder CPFP lösen."
+title: "Was sind Bitcoin-Bestätigungen? Der definitive technische Guide"
+description: "Verstehen Sie Bitcoin-Bestätigungen, Mempool-Mechaniken, wie viele Bestätigungen Sie für absolute Sicherheit brauchen und wie Sie hängende Transaktionen 2026 lösen."
 date: 2026-04-19
 author: "KryptoWatch Redaktion"
 category: "bitcoin"
 tags: ["bitcoin bestätigungen", "btc", "transaktion", "mempool", "double spend", "sicherheit", "rbf"]
 image: "/images/blog/bitcoin-transaction.png"
-imageAlt: "Bitcoin Bestätigungen — abstrakte Visualisierung einer Transaktion die sicher durch mehrere Blockchain-Blöcke fließt"
+imageAlt: "Bitcoin Bestätigungen — abstrakte Visualisierung einer Transaktion, die sicher durch Blockchain-Blöcke fließt"
 coinSymbols: ["BTC"]
-readingTime: 16
+readingTime: 20
 featured: true
 locale: "de"
 ---
+
+import DefinitionBlock from '@/components/blog/DefinitionBlock.astro';
+import ConceptVisual from '@/components/blog/ConceptVisual.astro';
+import ProcessStep from '@/components/blog/ProcessStep.astro';
 
 {/* FAQ Schema */}
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Wie lange dauert eine Bitcoin-Bestätigung?", "acceptedAnswer": { "@type": "Answer", "text": "Im Durchschnitt dauert eine Bitcoin-Bestätigung rund 10 Minuten. Da das Mining ein Wahrscheinlichkeitsprozess ist, kann ein Block nach 2 Minuten gefunden werden, der nächste nach 25. Wenn Ihre Transaktion nach einer Stunde noch nicht bestätigt ist, wurde wahrscheinlich eine zu niedrige Gebühr angehängt." } },
-    { "@type": "Question", "name": "Wie viele Bestätigungen gelten als absolut sicher?", "acceptedAnswer": { "@type": "Answer", "text": "Für kleine Beträge (wie einen Kaffee) sind null bis eine Bestätigung akzeptabel. Börsen verlangen für mittlere Beträge 3 Bestätigungen. Für massive institutionelle Überweisungen (z.B. 10 Millionen Euro) gilt: 6 Bestätigungen als absoluter Goldstandard – das dauert ungefähr eine Stunde." } },
-    { "@type": "Question", "name": "Kann eine bestätigte Bitcoin-Transaktion rückgängig gemacht werden?", "acceptedAnswer": { "@type": "Answer", "text": "Sobald eine Transaktion 6 Bestätigungen hat, wäre es für eine Umkehrung ein 51%-Angriff nötig, der Milliarden von Euro kostet und in der Praxis nicht durchführbar ist. Bitcoin-Transaktionen sind strukturell unwiderruflich – sie stellen eine echte Zahlungsfinalisierung dar." } }
+    { "@type": "Question", "name": "Wie lange dauert eine Bitcoin-Bestätigung?", "acceptedAnswer": { "@type": "Answer", "text": "Im Durchschnitt dauert eine Bestätigung 10 Minuten. Da Mining jedoch ein Wahrscheinlichkeitsprozess ist, kann es zwischen 1 Minute und über 30 Minuten variieren. Warten Sie länger als eine Stunde auf die erste Bestätigung, war die Gebühr vermutlich zu niedrig." } },
+    { "@type": "Question", "name": "Wie viele Bestätigungen sind sicher?", "acceptedAnswer": { "@type": "Answer", "text": "Für kleine Beträge reicht oft 1 Bestätigung. Für typische Zahlungen sind 3 Bestätigungen Standard. Für hohe Werte oder institutionelle Überweisungen gelten 6 Bestätigungen als globaler Goldstandard für wirtschaftliche Finalität." } },
+    { "@type": "Question", "name": "Kann eine bestätigte Transaktion rückgängig gemacht werden?", "acceptedAnswer": { "@type": "Answer", "text": "Theoretisch erfordert dies einen 51%-Angriff. Praktisch gesehen gilt eine Transaktion ab 6 Bestätigungen im globalen Finanzsystem als unumkehrbar und absolut sicher." } }
   ]
 };
 
 ---
 
-## Was ist eine Bitcoin-Bestätigung? (Definition) <a id="definition"></a>
+## 🎯 Einleitung: Die Geschwindigkeit des Vertrauens
 
-Wenn Sie eine Banküberweisung ausführen, aktualisiert Ihre Bank sofort eine private Datenbank und signalisiert, dass das Geld überwiesen wurde. Bitcoin funktioniert anders. Es nutzt ein dezentrales öffentliches Kassenbuch – die [Blockchain](/blog/was-ist-bitcoin/) – das von Tausenden unabhängiger [Nodes](/blog/was-ist-ein-bitcoin-node/) gepflegt wird.
-
-Eine **Bitcoin-Bestätigung** ist ein Maß dafür, wie tief Ihre Transaktion dauerhaft in dieses Kassenbuch eingebettet ist.
-
-Wenn Sie Bitcoin senden, wird Ihre Transaktion ans Netzwerk gesendet, aber ist zunächst "unbestätigt". Sie wartet in einem Wartezimmer. Wenn ein [Miner](/blog/bitcoin-mining-erklaert/) Ihre Transaktion aufnimmt und erfolgreich in einen Datenblock packt, und dieser Block an die Blockchain angehängt wird, erhält Ihre Transaktion ihre **erste (1.) Bestätigung**.
-
-Jeder nachfolgende Block, der nach Ihrem Block hinzugefügt wird, zählt als weitere Bestätigung.
+Im traditionellen Bankwesen kann eine "Abwicklung" (Settlement) Tage dauern. Bei Bitcoin wird diese Finalität in **Bestätigungen** gemessen. Eine Bestätigung ist der mathematische Beweis, dass Ihre Transaktion nun ein dauerhafter Teil der globalen Geschichte ist. Im Jahr 2026 ist das Verständnis dieser Metrik entscheidend für jeden, der Bitcoin für Waren akzeptiert oder bedeutende Vermögenswerte über das Netzwerk bewegt.
 
 ---
 
-## Der schrittweise Transaktionsablauf (Technologie) <a id="technologie"></a>
+## Sektion 1: Definition & die Block-Schichtung
 
-Um Bestätigungszeiten zu verstehen, müssen Sie die Reise einer Transaktion von Ihrer [Hardware Wallet](/blog/beste-bitcoin-wallets/) bis zur globalen Abwicklung kennen.
+Eine Bestätigung ist nicht nur ein "Häkchen"; sie ist eine Schicht aus Rechenarbeit, die Ihr Geld schützt.
 
+<DefinitionBlock term="Bitcoin-Bestätigung" icon="📐">
+  Eine **Bestätigung** erfolgt, wenn ein [Miner](/de/blog/bitcoin-mining-erklaert/) Ihre Transaktion in einen neuen Block aufnimmt. Jeder nachfolgende Block, der *nach* Ihrem Block zur Kette hinzugefügt wird, zählt als weitere Bestätigung. Jede neue Schicht macht es für einen Angreifer exponentiell schwieriger, die Historie umzuschreiben und Ihre Zahlung rückgängig zu machen.
+</DefinitionBlock>
 
-
-**Wichtiges Kernkonzept: Der Gebührenmarkt**
-Miner können nur eine begrenzte Datenmenge (etwa 1 bis 4 Megabyte) in einen einzelnen Block packen. Der Blockplatz ist daher ein hart umkämpfter Markt. Miner wählen vernünftigerweise die Transaktionen aus, die die höchste Gebühr angehängt haben. Wenn Sie eine sehr niedrige Gebühr verwenden, ignorieren Miner Ihre Transaktion zugunsten höher zahlender Transaktionen, und Ihre Transaktion bleibt stundenlang oder tagelang unbestätigt.
-
----
-
-## Wie viele Bestätigungen brauchen Sie wirklich? (Risikoanalyse) <a id="risikoanalyse"></a>
-
-Nicht alle Transaktionen erfordern dasselbe Maß an kryptografischer Vorsicht. Die erforderliche Anzahl an Bestätigungen steigt mit dem finanziellen Wert der Überweisung.
-
-| Transaktionswert | Empfohlene Bestätigungen | Verstrichene Zeit | Anwendungsfall |
-|------------------|--------------------------|-------------------|----------------|
-| **Unter 100 €** | 0 bis 1 (Unbestätigt) | 0 - 10 Min. | Kaffee kaufen, Freund bezahlen. |
-| **100 € bis 10.000 €** | 3 Bestätigungen | ~30 Min. | Standard-Börseneinzahlungen. |
-| **10.000 € bis 1 Mio. €+** | 6 Bestätigungen | ~60 Min. | Das kryptografische "Gold-Standard". |
-| **50 Mio. €+** | 12+ Bestätigungen | ~2 Stunden | Massive institutionelle Überweisungen. |
-
-### Warum ist "6" der Goldstandard?
-Satoshi Nakamoto, der Bitcoin-Erfinder, beschrieb im Whitepaper, dass unter der Annahme, ein Hacker kontrolliert eine moderate Menge an Hashleistung, die mathematische Wahrscheinlichkeit, die Blockchain neu zu schreiben, mit jedem Block exponentiell sinkt. Sobald 6 Blöcke (Bestätigungen) auf einer Transaktion aufgebaut wurden, sinkt die statistische Wahrscheinlichkeit, dass ein Hacker das Netzwerk überwältigen kann, auf faktisch null.
+Stellen Sie es sich wie den Bau eines Hauses vor: Die erste Bestätigung ist das Fundament. Jede weitere Bestätigung ist eine weitere Schicht Beton, die darauf gegossen wird. Um das Fundament zu ändern, müsste ein Angreifer das gesamte Gebäude zerstören.
 
 ---
 
-## Warum 10 Minuten? Das mathematische Ziel (Design) <a id="blockzeiten"></a>
+## Sektion 2: Das Kernkonzept (Finalitätstiefe)
 
-Bitcoin ist mathematisch hardcodiert, um durchschnittlich alle 10 Minuten einen Block zu produzieren.
+Die "Tiefe" Ihrer Transaktion bestimmt ihre Endgültigkeit. Je höher der Stapel, desto "solider" wird die Zahlung.
 
-Dieser genaue Zeitrahmen wurde von Satoshi als Kompromiss gewählt:
-- Wenn Blöcke **1 Minute** dauerten (wie bei Dogecoin), hätte das Netzwerk nicht genug Zeit zur globalen Kommunikation. Zwei Miner in verschiedenen Hemisphären würden ständig gleichzeitig Blöcke finden, was zu Verwirrung und Instabilität führt ("Waisenkinder-Blöcke").
-- Wenn Blöcke **60 Minuten** dauerten, wäre das System zu langsam für die kommerzielle Nutzung.
+<ConceptVisual 
+  src="/images/blog/block-burial-depth.png" 
+  alt="Diagramm zur Bitcoin-Bestätigungstiefe und Finalität" 
+  type="diagram" 
+  caption="Sechs Blöcke (der Goldstandard) bieten genug wirtschaftliche Finalität, um sicherzustellen, dass die Kosten für einen Angriff den Wert der Transaktion bei weitem übersteigen."
+/>
 
-Da Mining eine Lotterie ist (eine Zufallszahl erraten), ist die 10-Minuten-Regel nur ein Durchschnitt. Sie könnten 40 Minuten auf Ihre erste Bestätigung warten und dann drei weitere Bestätigungen in den nächsten 5 Minuten erhalten.
-
----
-
-## Der Mempool & feststeckende Transaktionen (Fehlersuche) <a id="mempool"></a>
-
-Der **Mempool (Memory Pool)** ist die gemeinsame Datenbank aller unbestätigten Transaktionen, die darauf warten, von einem Miner aufgenommen zu werden.
-
-In Zeiten massiver Marktvolatilität oder "Bull Runs" wird der Mempool extrem überfüllt. Millionen von Menschen versuchen gleichzeitig zu transagieren. Wenn Sie eine Transaktion mit einer generischen Gebühr von 2 € starten, aber die Netzwerküberlastung die Wettbewerbsrate auf 15 € getrieben hat, wird Ihre Transaktion sofort "feststecken".
-
-Den aktuellen Zustand des Mempools und die erforderlichen Gebühren können Sie auf Open-Source-Block-Explorern wie `mempool.space` überprüfen.
+*Visuelle Spezifikationen für die KI:*
+- **Prompt:** "Ein 3D-vertikaler Stapel aus transluzenten digitalen Blöcken. Ein Transaktions-Icon ganz unten. Sechs Blöcke darauf gestapelt, die den Boden immer undurchsichtiger machen. Label: 'Economic Finality'."
+- **Dateiname:** `block-burial-depth.png`
 
 ---
 
-## Replace-By-Fee (RBF): Die Lösung für feststeckende Transaktionen <a id="rbf"></a>
+## Sektion 3: Wie es funktioniert (Der Lebenszyklus)
 
-Wenn Ihre Transaktion seit zwei Tagen mit 0 Bestätigungen feststeckt, haben Sie Ihr Geld nicht verloren. Es hat sich schlicht nicht bewegt. Um es zu beschleunigen, können Sie eine native Bitcoin-Funktion namens **Replace-By-Fee (RBF)** nutzen.
+Die Reise von Ihrem Wallet bis zum Zustand "in Beton gegossen" folgt einem klaren Pfad.
 
-**Wie RBF funktioniert:**
-Wenn Ihre Wallet RBF unterstützt (die meisten modernen Wallets wie Electrum, BlueWallet und BitBox tun dies), können Sie der Wallet mitteilen, die *exakt gleiche Transaktion* erneut zu senden, diesmal jedoch mit einer viel höheren Gebühr.
-Der Miner sieht die neue Transaktion, erkennt, dass die Gebühr viel attraktiver ist, und lässt die alte, feststeckende Transaktion fallen, um die neue sofort zu verarbeiten.
-
-*(Alternativmethode: **CPFP – "Child Pays for Parent"**. Wenn Sie der Empfänger einer feststeckenden Transaktion sind, können Sie die unbestätigten eingehenden Gelder ausgeben und dabei eine massive Gebühr an die ausgehende Transaktion anhängen. Ein Miner verarbeitet die feststeckende eingehende Transaktion, nur um Ihre hochbezahlte ausgehende zu beanspruchen).*
-
----
-
-## Das Bedrohungsmodell: Der "Double Spend"-Exploit (Sicherheit) <a id="double-spend"></a>
-
-Warum sind Bestätigungen überhaupt wichtig? Warum eine unbestätigte Transaktion nicht einfach akzeptieren? Wegen des **Double Spend**-Angriffs.
-
-Ein Double Spend ist der Versuch, dasselbe digitale Geld zweimal zu verwenden.
-Stellen Sie sich vor, ein böswilliger Akteur kauft für 50.000 € eine Rolex bei einem Händler mit Bitcoin. Der Händler sieht die Transaktion im Netzwerk (0 Bestätigungen) und überreicht die Uhr.
-
-Der böswillige Akteur nutzt sofort RBF, um genau diesel 50.000 € an eine eigene Wallet zu senden, aber mit einer Gebühr von 5.000 € daran. Da der Miner die 5.000 € Gebühr will, verarbeitet er die zweite Transaktion und löscht die erste. Der Händler hat kein Bitcoin, und der Angreifer hat die Rolex und sein ursprüngliches Geld.
-
-**Die Lösung:** Der Händler wartet einfach auf 3 Bestätigungen. Sobald eine Transaktion bestätigt ist, ist sie im unveränderlichen Kassenbuch gesperrt und RBF kann nicht mehr verwendet werden.
-
----
-
-## Das Ende der Wartezeit: Das Lightning Network (Zukunft) <a id="lightning"></a>
-
-10 bis 30 Minuten auf eine Transaktionsbestätigung zu warten ist vertretbar, wenn Sie ein Haus kaufen. Im Supermarkt an der Kasse 10 Minuten zu warten ist inakzeptabel.
-
-Deshalb wurde das **Lightning Network** entwickelt. Lightning ist ein "Layer-2"-Protokoll, das auf Bitcoin aufgebaut ist. Es nutzt kryptografische Smart Contracts, um Zahlungskanäle zwischen Nutzern zu schaffen. Transaktionen im Lightning Network erfordern keine Miner-Bestätigungen.
-
-Sie werden sofort (in Millisekunden) abgerechnet, mit Gebühren, die Bruchteile eines Cents betragen. El Salvador, viele deutsche Krypto-Cafés und Online-Händler akzeptieren Bitcoin über Lightning genau deshalb, um die Basis-Layer-Bestätigungszeiten vollständig zu umgehen.
+<ProcessStep steps={[
+  {
+    title: "Warten im Mempool",
+    description: "Ihre Transaktion tritt in den 'Warteraum'. Sie hat 0 Bestätigungen und ist technisch per RBF noch veränderbar."
+  },
+  {
+    title: "Der erste Block",
+    description: "Ein Miner wählt Ihre Transaktion aus und findet einen Block. Sie haben nun 1 Bestätigung. Das Risiko eines 'Double Spend' sinkt um 99 %."
+  },
+  {
+    title: "Sukzessive Schichtung",
+    description: "Neue Miner bauen auf Ihrem Block auf. Ab 3 Bestätigungen schreiben die meisten Börsen Ihnen den Betrag gut."
+  },
+  {
+    title: "Unwiderruflichkeit",
+    description: "Ab 6 Bestätigungen (~60 Minuten) gilt die Transaktion in den Augen des Protokolls als für alle Ewigkeit abgewickelt."
+  }
+]} />
 
 ---
 
-## Häufig gestellte Fragen (FAQs) <a id="faqs"></a>
+## Sektion 4: Risikoschwellen (Ab wann vertrauen?)
 
-### 1. Verfällt meine Transaktion, wenn sie nie bestätigt wird?
-Ja. Wenn Ihre Gebühr extrem niedrig ist (z.B. 1 Satoshi/vByte) während einer stark überlasteten Periode, werden Nodes die Transaktion schließlich aus ihrem Arbeitsspeicher löschen, um RAM zu sparen. In den meisten Fällen wird eine Transaktion, die etwa zwei Wochen unbestätigt ist, gelöscht. Die Gelder haben Ihre Wallet nie verlassen, sodass Ihr Guthaben einfach zum Normalzustand zurückkehrt.
+Nicht jede Transaktion erfordert eine Stunde Wartezeit. Wählen Sie Ihr Bestätigungsziel basierend auf dem Einsatz.
 
-### 2. Kann ich eine unbestätigte Transaktion stornieren?
-Bitcoin hat keine "Stornieren"-Schaltfläche. Wenn Ihre Wallet jedoch Replace-By-Fee (RBF) unterstützt, können Sie eine Zahlung funktionell stornieren, indem Sie eine neue RBF-Transaktion ausgeben, die die Gelder zurück an sich selbst sendet, und dabei eine höhere Gebühr verwendetienten – ein "Selbst-Double-Spend" bevor die echte bestätigt wird.
-
-### 3. Warum dauert es bei Binance, Coinbase oder Bison so lange, bis sie meinen Eingang bestätigen?
-Die Geschwindigkeit liegt oftmals nicht am Bitcoin-Netzwerk, sondern an der internen Risikomanagementrichtlinie der Börse. Selbst wenn Ihre Transaktion in 3 Minuten 1 Bestätigung erhält, könnte die Börse intern genau 3 oder 6 Netzwerkbestätigungen verlangen, bevor ihre Datenbank Ihnen den Betrag gutschreibt.
+| Wert | Ziel-Bestätigungen | Grund |
+|---|---|---|
+| **1 € - 50 €** | 0 bis 1 | Geringes Risiko, schnelle Abwicklung. |
+| **50 € - 5.000 €** | 3 | Standard-Sicherheit für den Handel. |
+| **5.000 € - 1 Mio. €** | 6 | Institutionelle Endgültigkeit. |
+| **10 Mio. €+** | 12+ | Absolute kryptografische Gewissheit. |
 
 ---
-**Wichtigste Erkenntnisse:**
-> Eine Bestätigung ist einfach ein Datenblock, der mathematisch auf Ihrer Transaktion gestapelt wird. Je höher der Stapel, desto tiefer ist Ihre Transaktion in den Beton der Blockchain eingegraben und desto unmöglicher ist es, sie zu ändern. Für kleine Beträge nutzen Sie Lightning. Für große Vermögenstransfers warten Sie auf 6 Bestätigungen.
 
-**Mehr Entdecken:**
-- [Bitcoin sicher kaufen und empfangen](/blog/bitcoin-kaufen-anleitung/)
-- [Die Rolle der Bitcoin-Miner verstehen](/blog/bitcoin-mining-erklaert/)
-- [Ist Bitcoin wirklich sicher?](/blog/wie-sicher-ist-bitcoin/)
+## Sektion 5: Das Bedrohungsmodell (Das Double-Spend Rennen)
+
+Warum warten wir überhaupt? Um zu verhindern, dass ein Angreifer denselben digitalen Coin an zwei Orte gleichzeitig sendet.
+
+<ConceptVisual 
+  src="/images/blog/double-spend-race.png" 
+  alt="Visualisierung des Bitcoin Double-Spend Rennens" 
+  type="flow" 
+  caption="Das Rennen zwischen zwei konkurrierenden Transaktionen. Sobald die Version des Händlers unter mehreren Blöcken begraben ist, wird die alternative Version des Angreifers vom Netzwerk abgelehnt."
+/>
+
+*Visuelle Spezifikationen für die KI:*
+- **Prompt:** "Zwei Datenströme im Rennen: Einer zum 'Händler', einer zurück zum 'Angreifer'. Eine digitale Wand (Bestätigung) blockiert den Pfad des Angreifers. Dynamisch, hohe Geschwindigkeit."
+- **Dateiname:** `double-spend-race.png`
+
+---
+
+## Sektion 6: Verwandte Themen (Das Abwicklungs-Cluster)
+
+Meistern Sie die Mechanik der Bitcoin-Finalität:
+- [Was ist Bitcoin Mining?](/de/blog/bitcoin-mining-erklaert/) → Der Prozess, der Bestätigungen erschafft.
+- [Den Mempool verstehen](/de/blog/bitcoin-transaktionsgebuehren/) → Wo Transaktionen auf ihren ersten Block warten.
+- [Das Lightning Network](/de/blog/lightning-network/) → Sofortige Abrechnung ohne Warten auf Blöcke.
+- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie Sie Ihre eigenen Bestätigungen verifizieren.
+- [Bitcoin senden](/de/blog/bitcoin-senden-empfangen/) → Die richtige Gebühr setzen, um schneller bestätigt zu werden.
+
+---
+
+## Sektion 7: FAQ (Hängende Transaktionen)
+
+### 1. Warum hängt meine Transaktion bei 0 Bestätigungen fest?
+Das liegt fast immer an einer zu niedrigen **Gebühr**. In Zeiten hoher Auslastung ignorieren Miner schlecht bezahlte Transaktionen. Nutzen Sie **RBF (Replace-By-Fee)**, um die Gebühr zu erhöhen und die Bestätigung zu erzwingen.
+
+### 2. Kann eine Bestätigung später 'rückgängig' gemacht werden?
+In seltenen Fällen, sogenannten "Chain Reorganizations", können 1-2 Bestätigungen hinfällig werden, wenn zwei Miner fast gleichzeitig Blöcke finden. Deshalb warten seriöse Firmen auf mindestens **3 Bestätigungen**.
+
+### 3. Bestätigt 1 BTC schneller als 0,001 BTC?
+Nein. Die Geschwindigkeit hängt von der **Gebührenrate (sat/vB)** und reinem Glück ab, nicht vom versendeten Betrag. Minern ist die Gebühr wichtig, nicht der Kurswert der Coins.
+
+---
+
+## Sektion 8: Zusammenfassung — Das Gewicht der Finalität
+
+Bestätigungen sind die Gravitation des Bitcoin-Netzwerks. Sie halten das Kassenbuch zusammen und sorgen dafür, dass die Zeit nur in eine Richtung fließt. Ob Sie einen Kaffee per [Lightning](/de/blog/lightning-network/) kaufen oder ein Millionengeschäft On-Chain abwickeln – die Anzahl der Bestätigungen ist Ihre ultimative Versicherung. **Warten Sie auf die Blöcke und vertrauen Sie der Mathematik.**
+
+---
+
+## 🧬 Semantische Entity-Map
+- **Haupt-Entität:** Bitcoin Bestätigungen
+- **Verwandte Entitäten:** Finalität, Blockhöhe, Mempool, Miner, Double Spend, RBF (Replace-By-Fee), 51%-Angriff, Chain Reorganization, Satoshi Nakamoto, Settlement.
