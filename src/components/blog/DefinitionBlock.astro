@@ -24,7 +24,7 @@ const { term, icon = "💡" } = Astro.props;
       <div>
         <h3 class="m-0 text-accent-400 font-display text-sm tracking-widest uppercase font-bold mb-2">Definition</h3>
         <h4 class="m-0 text-text-primary text-2xl font-bold mb-4">{term}</h4>
-        <div class="text-text-secondary leading-relaxed prose-p:m-0">
+        <div class="text-text-secondary leading-relaxed [&_p]:m-0">
           <slot />
         </div>
       </div>
