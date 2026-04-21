@@ -12,12 +12,9 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedPosts from '../../../components/RelatedPosts.astro';
 import { siteConfig } from '../../../config/site';
 
-const { slug } = Astro.params;
-if (!slug) return Astro.redirect('/en/blog/');
+const { post } = Astro.props;
 
-const post = await getEntry('blog', `en/${slug}.mdx`) || await getEntry('blog', `en/${slug}.md`);
-
-if (!post || post.data.draft) {
+if (!post) {
   return new Response(null, { status: 404, statusText: 'Not found' });
 }
 
