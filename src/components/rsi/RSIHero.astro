@@ -9,21 +9,64 @@ const tvSymbol = symbol.toUpperCase().includes('USDT') ? symbol : `BINANCE:${sym
 const coinName = symbol.toUpperCase();
 
 const statusLabel = locale === 'de' ? 'RSI STATUS' : 'RSI STATUS';
+const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYSIS';
 ---
 
 <div class="rsi-hero">
   <div class="hero-main">
-    <div class="coin-info-section">
-      <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
+    <div class="indicator-section">
+      <div class="scanner-header">
+        <div class="scanner-title">
+          <span class="glitch-text" data-text={`${coinName} RSI SCANNER`}>{coinName} RSI SCANNER</span>
+        </div>
+        <div class="scanner-meta">
+          <span class="meta-item">FREQ: 2.4GHz</span>
+          <span class="meta-item">SIG: STABLE</span>
+        </div>
+      </div>
+      
+      <div class="indicator-grid">
+        <div class="main-gauge-wrap">
+          <div class="tradingview-widget-container" id="rsi-hero-gauge">
+            <div class="tradingview-widget-container__widget"></div>
+          </div>
+        </div>
+        
+        <div class="stats-panel">
+          <div class="stat-row">
+            <span class="stat-label">OSCILLATOR</span>
+            <span class="stat-value neon-cyan">ACTIVE</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">MOMENTUM</span>
+            <span class="stat-value neon-purple">TRACKING</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">VOLATILITY</span>
+            <span class="stat-value">HIGH</span>
+          </div>
+          <div class="live-status">
+            <div class="pulse-dot"></div>
+            <span class="status-text">SYSTEM ONLINE</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="rsi-status-section">
-      <div class="status-label">{statusLabel}</div>
-      <div class="status-value pulse-neon">NEUTRAL</div>
-      <div class="live-indicator">
-        <span class="dot"></span> LIVE DATA
+    <div class="hero-sidebar">
+      <div class="sidebar-top">
+        <div class="label">{statusLabel}</div>
+        <div class="value pulse-neon">NEUTRAL</div>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="info-bit">
+          <span class="bit-label">RSI(14)</span>
+          <span class="bit-value">54.21</span>
+        </div>
+        <div class="info-bit">
+          <span class="bit-label">TREND</span>
+          <span class="bit-value">SIDEWAYS</span>
+        </div>
       </div>
     </div>
   </div>
@@ -31,85 +74,179 @@ const statusLabel = locale === 'de' ? 'RSI STATUS' : 'RSI STATUS';
 
 <style>
   .rsi-hero {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
   }
 
   .hero-main {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: center;
-    background: linear-gradient(135deg, oklch(18% 0.05 250 / 0.8), oklch(12% 0.03 250 / 0.6));
-    border: 1px solid oklch(25% 0.05 250 / 0.4);
-    border-radius: 1.5rem;
-    padding: 2rem;
+    gap: 1rem;
+    background: linear-gradient(135deg, oklch(15% 0.04 250 / 0.9), oklch(10% 0.02 250 / 0.7));
+    border: 1px solid oklch(35% 0.1 250 / 0.3);
+    border-radius: 2rem;
+    padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 20px 50px -10px oklch(0% 0 0 / 0.5);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .hero-main {
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 320px;
+      padding: 2rem;
     }
   }
 
-  .coin-info-section {
-    min-width: 0;
+  .indicator-section {
+    background: oklch(12% 0.03 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
-  .rsi-status-section {
+  .scanner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.3);
+    padding-bottom: 1rem;
+  }
+
+  .scanner-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+  }
+
+  .scanner-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-brand-400);
+    opacity: 0.7;
+  }
+
+  .indicator-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .indicator-grid {
+      grid-template-columns: 1fr 200px;
+    }
+  }
+
+  .main-gauge-wrap {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stats-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: oklch(14% 0.04 250 / 0.4);
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-radius: 1rem;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+
+  .stat-label {
+    color: var(--color-text-muted);
+  }
+
+  .stat-value {
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .neon-cyan { color: oklch(75% 0.15 195); text-shadow: 0 0 10px oklch(75% 0.15 195 / 0.3); }
+  .neon-purple { color: oklch(70% 0.2 300); text-shadow: 0 0 10px oklch(70% 0.2 300 / 0.3); }
+
+  .live-status {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid oklch(25% 0.05 250 / 0.2);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ffcc;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
+    letter-spacing: 0.1em;
+  }
+
+  .hero-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sidebar-top {
+    flex: 1;
+    background: linear-gradient(to bottom, var(--color-brand-500), var(--color-brand-600));
+    border-radius: 1.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
-    background: oklch(10% 0.02 250 / 0.5);
-    border-radius: 1rem;
-    border: 1px solid oklch(25% 0.05 250 / 0.2);
     text-align: center;
+    color: white;
+    box-shadow: inset 0 0 40px oklch(0% 0 0 / 0.2);
   }
 
-  .status-label {
+  .label {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--color-text-muted);
+    font-weight: 800;
     letter-spacing: 0.2em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
   }
 
-  .status-value {
+  .value {
     font-family: var(--font-display);
     font-size: 2.5rem;
     font-weight: 900;
+    text-shadow: 0 5px 15px oklch(0% 0 0 / 0.3);
     color: var(--color-brand-400);
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 20px oklch(65% 0.2 195 / 0.3);
-  }
-
-  .live-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.6875rem;
-    font-weight: 800;
-    color: var(--color-text-muted);
-    letter-spacing: 0.05em;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    background: #00ff00;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00ff00;
-    animation: blink 1.5s infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
   }
 
   .pulse-neon {
@@ -117,39 +254,98 @@ const statusLabel = locale === 'de' ? 'RSI STATUS' : 'RSI STATUS';
   }
 
   @keyframes pulse-neon {
-    0%, 100% { text-shadow: 0 0 10px oklch(65% 0.2 195 / 0.2); }
-    50% { text-shadow: 0 0 25px oklch(65% 0.2 195 / 0.5); }
+    0%, 100% { text-shadow: 0 0 10px var(--color-brand-500); opacity: 1; }
+    50% { text-shadow: 0 0 25px var(--color-brand-400); opacity: 0.8; }
   }
 
-  /* Decorative background */
-  .hero-main::before {
-    content: '01010101';
-    position: absolute;
-    top: -10px;
-    right: -10px;
+  .sidebar-bottom {
+    background: oklch(18% 0.05 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .info-bit {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .bit-label {
     font-family: var(--font-mono);
-    font-size: 8rem;
-    color: oklch(45% 0.2 195 / 0.03);
-    pointer-events: none;
-    z-index: 0;
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+  }
+
+  .bit-value {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+  }
+
+  /* Glitch Effect */
+  .glitch-text {
+    position: relative;
+  }
+  
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+
+  .glitch-text::before {
+    color: #ff00ff;
+    z-index: -1;
+    animation: glitch 3s infinite;
+  }
+
+  .glitch-text::after {
+    color: #00ffff;
+    z-index: -2;
+    animation: glitch 2s infinite reverse;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
   }
 </style>
 
 <script is:inline define:vars={{ tvSymbol }}>
-  // Symbol info widget loader
-  const container = document.querySelector('.coin-info-section .tradingview-widget-container__widget');
+  // Technical Analysis widget loader for the hero
+  const container = document.querySelector('#rsi-hero-gauge .tradingview-widget-container__widget');
   if (container) {
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
-      "symbol": tvSymbol,
+      "interval": "1h",
       "width": "100%",
+      "isTransparent": true,
+      "height": "220",
+      "symbol": tvSymbol,
+      "showIntervalTabs": false,
+      "displayMode": "single",
       "locale": "en",
-      "colorTheme": "dark",
-      "isTransparent": true
+      "colorTheme": "dark"
     });
     container.appendChild(script);
   }
 </script>
+

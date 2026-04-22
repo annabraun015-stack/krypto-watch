@@ -56,199 +56,182 @@ const schema = {
       <!-- RSI HERO SECTION -->
       <RSIHero symbol={coin} locale={locale} />
 
-      <!-- RSI TIMEFRAME GRID -->
-      <section class="section-wrap">
-        <div class="section-header-simple">
-          <h2 class="section-title-sm">Multitimeframe RSI Status</h2>
-          <p class="section-desc-sm">Live RSI Analyse über verschiedene Zeitintervalle.</p>
+      <div class="rsi-dashboard-grid">
+        <!-- RSI TIMEFRAME GRID -->
+        <section class="dashboard-section">
+          <div class="section-header-cyber">
+            <div class="header-line"></div>
+            <h2 class="section-title-md">MULTITIMEFRAME_RSI_FLOW</h2>
+            <p class="section-desc-md">Echtzeit-Momenum-Analyse über alle relevanten Zeitintervalle.</p>
+          </div>
+          <RSITimeframeGrid symbol={coin} />
+        </section>
+
+        <div class="rsi-layout-secondary">
+          <main class="rsi-main-content">
+            <!-- TECHNICAL SUMMARY -->
+            <section class="analysis-card">
+              <div class="section-header-simple">
+                <h2 class="section-title-sm">Indikator Zusammenfassung</h2>
+              </div>
+              <RSITechnicalSummary symbol={coin} locale={locale} />
+            </section>
+
+            <!-- MAIN CHART -->
+            <section class="chart-container-wrap">
+              <div class="section-header-cyber">
+                <div class="header-line"></div>
+                <h2 class="section-title-md">INTERACTIVE_CHART_OSCILLATOR</h2>
+              </div>
+              <div class="chart-box">
+                <TradingViewChart symbol={coin} />
+              </div>
+            </section>
+
+            <!-- RSI EDUCATION SECTION -->
+            <section class="education-grid">
+              <div class="edu-card">
+                <div class="edu-icon">⚡</div>
+                <h3>RSI Strategie</h3>
+                <p>Nutzen Sie den RSI, um überkaufte (>70) oder überverkaufte (<30) Phasen zu identifizieren. Divergenzen zwischen Preis und RSI liefern oft starke Umkehrsignale.</p>
+              </div>
+              <div class="edu-card">
+                <div class="edu-icon">🎯</div>
+                <h3>Präzision</h3>
+                <p>Kombinieren Sie RSI-Werte über mehrere Zeitrahmen, um die Wahrscheinlichkeit erfolgreicher Trades zu erhöhen. Ein "Trend-Alignment" ist entscheidend.</p>
+              </div>
+            </section>
+          </main>
+
+          <aside class="rsi-sidebar-v2">
+            <div class="sidebar-widget-wrap">
+              <h3 class="widget-title">MARKET_MOMENTUM</h3>
+              <RSIGauge symbol={coin} />
+            </div>
+            <CoinSidebar locale={locale} />
+          </aside>
         </div>
-        <RSITimeframeGrid symbol={coin} />
-      </section>
-
-      <div class="rsi-layout">
-        <main class="rsi-main">
-          <!-- MAIN CHART -->
-          <section class="chart-section-wrap">
-            <div class="section-header-simple">
-              <h2 class="section-title-sm">Interaktiver RSI Chart</h2>
-            </div>
-            <TradingViewChart symbol={coin} />
-          </section>
-
-          <!-- TECHNICAL SUMMARY -->
-          <section class="chart-section-wrap">
-            <div class="section-header-simple">
-              <h2 class="section-title-sm">Technische Analyse Zusammenfassung</h2>
-            </div>
-            <RSITechnicalSummary symbol={coin} locale={locale} />
-          </section>
-
-          <!-- RSI EDUCATION SECTION -->
-          <section class="info-section">
-            <div class="info-grid">
-              <div class="info-card">
-                <div class="info-icon">🧠</div>
-                <h3>Was ist der RSI?</h3>
-                <p>Der Relative Strength Index (RSI) ist ein Momentum-Indikator, der das Ausmaß der jüngsten Kursveränderungen misst, um überkaufte oder überverkaufte Bedingungen im Kurs eines Assets zu bewerten.</p>
-              </div>
-              <div class="info-card">
-                <div class="info-icon">📊</div>
-                <h3>Interpretation</h3>
-                <p>Ein RSI-Wert über 70 gilt traditionell als überkauft (Verkaufssignal), während ein Wert unter 30 als überverkauft gilt (Kaufsignal).</p>
-              </div>
-            </div>
-          </section>
-        </main>
-
-        <aside class="rsi-sidebar">
-          <RSIGauge symbol={coin} />
-          <CoinSidebar locale={locale} />
-        </aside>
       </div>
     </div>
 </BaseLayout>
 
 <style>
-  .rsi-page {
+  .rsi-dashboard-grid {
     padding-bottom: 5rem;
   }
 
-  .rsi-header {
-    padding-block: 4rem 3rem;
-    background: radial-gradient(circle at 20% 50%, oklch(45% 0.22 195 / 0.05) 0%, transparent 50%);
-    border-bottom: 1px solid oklch(25% 0.05 250 / 0.2);
-    margin-bottom: 3rem;
+  .section-header-cyber {
+    margin-bottom: 2rem;
+    position: relative;
   }
 
-  .header-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  .header-line {
+    width: 60px;
+    height: 4px;
+    background: var(--color-brand-500);
+    margin-bottom: 1rem;
+    border-radius: 2px;
   }
 
-  @media (min-width: 768px) {
-    .header-content {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-  }
-
-  .page-title {
+  .section-title-md {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: 1.75rem;
     font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.1em;
     color: var(--color-text-primary);
     margin-bottom: 0.5rem;
   }
 
-  .page-title .highlight {
-    color: var(--color-brand-400);
-    display: block;
+  .section-desc-md {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    max-width: 800px;
   }
 
-  .page-subtitle {
-    font-size: 1.125rem;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-  }
-
-  .rsi-badges {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .rsi-layout {
+  .rsi-layout-secondary {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding-top: 2rem;
+    gap: 3rem;
+    margin-top: 4rem;
   }
 
-  @media (min-width: 1024px) {
-    .rsi-layout {
-      grid-template-columns: 1fr 340px;
+  @media (min-width: 1200px) {
+    .rsi-layout-secondary {
+      grid-template-columns: 1fr 360px;
     }
   }
 
-  .section-wrap {
+  .analysis-card, .chart-container-wrap {
+    background: oklch(14% 0.04 250 / 0.4);
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-radius: 2rem;
+    padding: 2rem;
     margin-bottom: 3rem;
   }
 
-  .section-header-simple {
-    margin-bottom: 1.5rem;
+  .chart-box {
+    margin-top: 1.5rem;
   }
 
-  .section-title-sm {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin-bottom: 0.25rem;
-  }
-
-  .section-desc-sm {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-  }
-
-  .chart-section-wrap {
-    background: oklch(14% 0.04 250 / 0.3);
-    border: 1px solid oklch(25% 0.05 250 / 0.2);
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .rsi-main {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .rsi-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .info-grid {
+  .education-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
   @media (min-width: 640px) {
-    .info-grid {
+    .education-grid {
       grid-template-columns: 1fr 1fr;
     }
   }
 
-  .info-card {
-    background: oklch(14% 0.04 250 / 0.3);
-    border: 1px solid oklch(25% 0.05 250 / 0.2);
-    border-radius: 1rem;
-    padding: 2rem;
+  .edu-card {
+    background: linear-gradient(145deg, oklch(18% 0.05 250 / 0.6), oklch(12% 0.03 250 / 0.4));
+    border: 1px solid oklch(35% 0.1 250 / 0.2);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
     position: relative;
+    overflow: hidden;
   }
 
-  .info-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+  .edu-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .info-card h3 {
+  .edu-card h3 {
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-brand-300);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
     margin-bottom: 1rem;
   }
 
-  .info-card p {
-    font-size: 0.9375rem;
+  .edu-card p {
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
+  }
+
+  .rsi-sidebar-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .sidebar-widget-wrap {
+    background: oklch(12% 0.03 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .widget-title {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
 </style>
