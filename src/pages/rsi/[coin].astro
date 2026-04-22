@@ -4,6 +4,7 @@ import TradingViewChart from '../../components/rsi/TradingViewChart.astro';
 import RSIGauge from '../../components/rsi/RSIGauge.astro';
 import RSIHero from '../../components/rsi/RSIHero.astro';
 import RSITimeframeGrid from '../../components/rsi/RSITimeframeGrid.astro';
+import RSITechnicalSummary from '../../components/rsi/RSITechnicalSummary.astro';
 import CoinSidebar from '../../components/rsi/CoinSidebar.astro';
 import { t } from '../../i18n';
 import { siteConfig } from '../../config/site';
@@ -79,33 +80,7 @@ const schema = {
             <div class="section-header-simple">
               <h2 class="section-title-sm">Technische Analyse Zusammenfassung</h2>
             </div>
-            <div class="tradingview-widget-container">
-              <div id="tv-technical-summary" class="tv-widget-container"></div>
-              <script is:inline define:vars={{ tvSymbol }}>
-                function loadSummary() {
-                  const container = document.getElementById('tv-technical-summary');
-                  if (!container) return;
-                  const script = document.createElement('script');
-                  script.type = 'text/javascript';
-                  script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
-                  script.async = true;
-                  script.innerHTML = JSON.stringify({
-                    "interval": "1h",
-                    "width": "100%",
-                    "isTransparent": true,
-                    "height": "400",
-                    "symbol": tvSymbol,
-                    "showIntervalTabs": true,
-                    "displayMode": "multiple",
-                    "locale": "de",
-                    "colorTheme": "dark"
-                  });
-                  container.appendChild(script);
-                }
-                if (document.readyState === 'complete') loadSummary();
-                else window.addEventListener('load', loadSummary);
-              </script>
-            </div>
+            <RSITechnicalSummary symbol={coin} locale={locale} />
           </section>
 
           <!-- RSI EDUCATION SECTION -->

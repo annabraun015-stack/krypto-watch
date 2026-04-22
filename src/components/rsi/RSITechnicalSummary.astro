@@ -1,0 +1,44 @@
+---
+interface Props {
+  symbol: string;
+  locale: 'de' | 'en';
+}
+
+const { symbol, locale } = Astro.props;
+const tvSymbol = symbol.toUpperCase().includes('USDT') ? symbol : `BINANCE:${symbol.toUpperCase()}USDT`;
+const containerId = `tv-summary-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="tradingview-widget-container">
+  <div id={containerId} class="tv-widget-container"></div>
+  <script is:inline define:vars={{ tvSymbol, containerId, locale }}>
+    function loadSummary() {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+      script.async = true;
+      script.innerHTML = JSON.stringify({
+        "interval": "1h",
+        "width": "100%",
+        "isTransparent": true,
+        "height": "400",
+        "symbol": tvSymbol,
+        "showIntervalTabs": true,
+        "displayMode": "multiple",
+        "locale": locale,
+        "colorTheme": "dark"
+      });
+      container.appendChild(script);
+    }
+    if (document.readyState === 'complete') loadSummary();
+    else window.addEventListener('load', loadSummary);
+  </script>
+</div>
+
+<style>
+  .tv-widget-container {
+    min-height: 400px;
+  }
+</style>
