@@ -62,8 +62,8 @@ const schema = {
         <section class="dashboard-section">
           <div class="section-header-cyber">
             <div class="header-line"></div>
-            <h2 class="section-title-md">MULTITIMEFRAME_RSI_FLOW</h2>
-            <p class="section-desc-md">Echtzeit-Momenum-Analyse über alle relevanten Zeitintervalle.</p>
+            <h2 class="section-title-md">{tr.rsi.timeframeTitle}</h2>
+            <p class="section-desc-md">{tr.rsi.timeframeDesc}</p>
           </div>
           <RSITimeframeGrid symbol={coin} />
         </section>
@@ -75,7 +75,7 @@ const schema = {
             <section class="chart-container-wrap">
               <div class="section-header-cyber">
                 <div class="header-line"></div>
-                <h2 class="section-title-md">INTERACTIVE_CHART_OSCILLATOR</h2>
+                <h2 class="section-title-md">{tr.rsi.chartTitle}</h2>
               </div>
               <div class="chart-box">
                 <TradingViewChart symbol={coin} />
@@ -86,25 +86,24 @@ const schema = {
             <section class="education-grid">
               <div class="edu-card">
                 <div class="edu-icon">⚡</div>
-                <h3>RSI Strategie</h3>
-                <p>Nutzen Sie den RSI, um überkaufte (>70) oder überverkaufte (<30) Phasen zu identifizieren. Divergenzen zwischen Preis und RSI liefern oft starke Umkehrsignale.</p>
+                <h3>{tr.rsi.strategyTitle}</h3>
+                <p>{tr.rsi.strategyDesc}</p>
               </div>
               <div class="edu-card">
                 <div class="edu-icon">🎯</div>
-                <h3>Präzision</h3>
-                <p>Kombinieren Sie RSI-Werte über mehrere Zeitrahmen, um die Wahrscheinlichkeit erfolgreicher Trades zu erhöhen. Ein "Trend-Alignment" ist entscheidend.</p>
+                <h3>{tr.rsi.precisionTitle}</h3>
+                <p>{tr.rsi.precisionDesc}</p>
               </div>
             </section>
           </main>
 
           <aside class="rsi-sidebar-v2">
             <div class="sidebar-widget-wrap">
-              <h3 class="widget-title">MARKET_MOMENTUM</h3>
+              <h3 class="widget-title">{tr.rsi.momentumTitle}</h3>
               <RSIGauge symbol={coin} />
             </div>
             
             <RSIScreener locale={locale} />
-            
           </aside>
         </div>
       </div>

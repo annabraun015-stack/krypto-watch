@@ -160,5 +160,19 @@
     "accessTerminal": "ACCESS_TERMINAL",
     "terminalText": "REAL-TIME DARK POOL TRACKING & SMART MONEY FLOWS.",
     "initializeSubscription": "INITIALIZE_SUBSCRIPTION"
+  },
+  "rsi": {
+    "dashboardTitle": "RSI DASHBOARD",
+    "timeframeTitle": "MULTITIMEFRAME_RSI_FLOW",
+    "timeframeDesc": "Real-time momentum analysis across all relevant time intervals.",
+    "chartTitle": "INTERACTIVE_CHART_OSCILLATOR",
+    "momentumTitle": "MARKET_MOMENTUM",
+    "strategyTitle": "RSI Strategy",
+    "strategyDesc": "Use RSI to identify overbought (>70) or oversold (<30) phases. Divergences between price and RSI often provide strong reversal signals.",
+    "precisionTitle": "Precision Trading",
+    "precisionDesc": "Combine RSI values across multiple timeframes to increase the probability of successful trades. Trend alignment is key.",
+    "networkTitle": "RSI NETWORK",
+    "networkSubtitle": "Analyze other top assets",
+    "scanningLabel": "RSI SCANNER"
   }
 }
