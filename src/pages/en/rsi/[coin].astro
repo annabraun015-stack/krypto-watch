@@ -5,6 +5,7 @@ import RSIGauge from '../../../components/rsi/RSIGauge.astro';
 import RSIHero from '../../../components/rsi/RSIHero.astro';
 import RSITimeframeGrid from '../../../components/rsi/RSITimeframeGrid.astro';
 import RSITechnicalSummary from '../../../components/rsi/RSITechnicalSummary.astro';
+import RSIScreener from '../../../components/rsi/RSIScreener.astro';
 import CoinSidebar from '../../../components/rsi/CoinSidebar.astro';
 import { t } from '../../../i18n';
 import { siteConfig } from '../../../config/site';
@@ -69,13 +70,6 @@ const schema = {
 
       <div class="rsi-layout-secondary">
         <main class="rsi-main-content">
-          <!-- TECHNICAL SUMMARY -->
-          <section class="analysis-card">
-            <div class="section-header-simple">
-              <h2 class="section-title-sm">Indicator Summary</h2>
-            </div>
-            <RSITechnicalSummary symbol={coin} locale={locale} />
-          </section>
 
           <!-- MAIN CHART -->
           <section class="chart-container-wrap">
@@ -108,6 +102,9 @@ const schema = {
             <h3 class="widget-title">MARKET_MOMENTUM</h3>
             <RSIGauge symbol={coin} />
           </div>
+          
+          <RSIScreener locale={locale} />
+          
           <CoinSidebar locale={locale} />
         </aside>
       </div>

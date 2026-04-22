@@ -45,9 +45,10 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
             <span class="stat-label">VOLATILITY</span>
             <span class="stat-value">HIGH</span>
           </div>
+          <div class="scan-line-v2"></div>
           <div class="live-status">
             <div class="pulse-dot"></div>
-            <span class="status-text">SYSTEM ONLINE</span>
+            <span class="status-text">SIGNAL: STABLE_RSI_LOCKED</span>
           </div>
         </div>
       </div>
@@ -57,6 +58,7 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
       <div class="sidebar-top">
         <div class="label">{statusLabel}</div>
         <div class="value pulse-neon">NEUTRAL</div>
+        <div class="status-glow"></div>
       </div>
       <div class="sidebar-bottom">
         <div class="info-bit">
@@ -67,6 +69,9 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
           <span class="bit-label">TREND</span>
           <span class="bit-value">SIDEWAYS</span>
         </div>
+        <div class="data-stream">
+          <div class="stream-bits">01010111 00110101 11010101</div>
+        </div>
       </div>
     </div>
   </div>
@@ -75,52 +80,88 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
 <style>
   .rsi-hero {
     margin-bottom: 4rem;
+    position: relative;
+  }
+
+  /* Scanline effect */
+  .rsi-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.1;
   }
 
   .hero-main {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    background: linear-gradient(135deg, oklch(15% 0.04 250 / 0.9), oklch(10% 0.02 250 / 0.7));
-    border: 1px solid oklch(35% 0.1 250 / 0.3);
+    background: linear-gradient(135deg, oklch(12% 0.04 250 / 0.95), oklch(8% 0.02 250 / 0.8));
+    border: 1px solid oklch(35% 0.1 250 / 0.4);
     border-radius: 2rem;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 50px -10px oklch(0% 0 0 / 0.5);
+    box-shadow: 0 20px 50px -10px oklch(0% 0 0 / 0.8), 0 0 20px oklch(65% 0.2 250 / 0.05);
   }
 
   @media (min-width: 1024px) {
     .hero-main {
-      grid-template-columns: 1fr 320px;
-      padding: 2rem;
+      grid-template-columns: 1fr 340px;
+      padding: 2.5rem;
     }
   }
 
   .indicator-section {
-    background: oklch(12% 0.03 250 / 0.5);
-    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    background: oklch(10% 0.03 250 / 0.6);
+    border: 1px solid oklch(25% 0.05 250 / 0.5);
     border-radius: 1.5rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    position: relative;
+  }
+
+  .indicator-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-brand-400), transparent);
+    animation: scan-horizontal 3s linear infinite;
+  }
+
+  @keyframes scan-horizontal {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(400px); opacity: 0; }
   }
 
   .scanner-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.4);
     padding-bottom: 1rem;
   }
 
   .scanner-title {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 900;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     color: var(--color-text-primary);
+    text-shadow: 0 0 20px oklch(65% 0.2 195 / 0.4);
   }
 
   .scanner-meta {
@@ -129,7 +170,6 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--color-brand-400);
-    opacity: 0.7;
   }
 
   .indicator-grid {
@@ -140,25 +180,46 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
 
   @media (min-width: 640px) {
     .indicator-grid {
-      grid-template-columns: 1fr 200px;
+      grid-template-columns: 1fr 220px;
     }
   }
 
   .main-gauge-wrap {
-    min-height: 220px;
+    min-height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: radial-gradient(circle at center, oklch(45% 0.2 195 / 0.1) 0%, transparent 70%);
   }
 
   .stats-panel {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1.5rem;
-    background: oklch(14% 0.04 250 / 0.4);
-    border: 1px solid oklch(25% 0.05 250 / 0.3);
-    border-radius: 1rem;
+    padding: 1.75rem;
+    background: oklch(12% 0.03 250 / 0.6);
+    border: 1px solid oklch(35% 0.1 250 / 0.3);
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scan-line-v2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, oklch(65% 0.2 195 / 0.1), transparent);
+    transform: translateY(-100%);
+    animation: scan-v2 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes scan-v2 {
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
   }
 
   .stat-row {
@@ -174,11 +235,10 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
 
   .stat-value {
     font-weight: 700;
-    color: var(--color-text-primary);
   }
 
-  .neon-cyan { color: oklch(75% 0.15 195); text-shadow: 0 0 10px oklch(75% 0.15 195 / 0.3); }
-  .neon-purple { color: oklch(70% 0.2 300); text-shadow: 0 0 10px oklch(70% 0.2 300 / 0.3); }
+  .neon-cyan { color: oklch(75% 0.15 195); text-shadow: 0 0 12px oklch(75% 0.15 195 / 0.5); }
+  .neon-purple { color: oklch(70% 0.2 300); text-shadow: 0 0 12px oklch(70% 0.2 300 / 0.5); }
 
   .live-status {
     margin-top: auto;
@@ -186,30 +246,30 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
     align-items: center;
     gap: 0.75rem;
     padding-top: 1rem;
-    border-top: 1px solid oklch(25% 0.05 250 / 0.2);
+    border-top: 1px solid oklch(25% 0.05 250 / 0.3);
   }
 
   .pulse-dot {
     width: 8px;
     height: 8px;
-    background: #00ffcc;
+    background: var(--color-brand-400);
     border-radius: 50%;
-    box-shadow: 0 0 10px #00ffcc;
+    box-shadow: 0 0 10px var(--color-brand-400);
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
     0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
+    50% { transform: scale(1.6); opacity: 0.4; }
     100% { transform: scale(1); opacity: 1; }
   }
 
   .status-text {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     font-weight: 800;
     color: var(--color-brand-400);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
   }
 
   .hero-sidebar {
@@ -220,77 +280,112 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
 
   .sidebar-top {
     flex: 1;
-    background: linear-gradient(to bottom, var(--color-brand-500), var(--color-brand-600));
+    background: oklch(15% 0.05 250);
+    border: 1px solid var(--color-brand-500);
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white;
-    box-shadow: inset 0 0 40px oklch(0% 0 0 / 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .status-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--color-brand-500 / 0.2) 0%, transparent 70%);
+    animation: pulse-glow 2s infinite ease-in-out;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
   }
 
   .label {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 800;
-    letter-spacing: 0.2em;
-    margin-bottom: 0.75rem;
-    opacity: 0.9;
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+    color: var(--color-brand-400);
+    position: relative;
+    z-index: 2;
   }
 
   .value {
     font-family: var(--font-display);
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 900;
-    text-shadow: 0 5px 15px oklch(0% 0 0 / 0.3);
-    color: var(--color-brand-400);
+    color: white;
+    text-shadow: 0 0 30px var(--color-brand-500);
+    position: relative;
+    z-index: 2;
   }
 
   .pulse-neon {
-    animation: pulse-neon 2s infinite ease-in-out;
+    animation: pulse-neon-v2 2s infinite ease-in-out;
   }
 
-  @keyframes pulse-neon {
-    0%, 100% { text-shadow: 0 0 10px var(--color-brand-500); opacity: 1; }
-    50% { text-shadow: 0 0 25px var(--color-brand-400); opacity: 0.8; }
+  @keyframes pulse-neon-v2 {
+    0%, 100% { transform: scale(1); text-shadow: 0 0 20px var(--color-brand-500); }
+    50% { transform: scale(1.05); text-shadow: 0 0 40px var(--color-brand-400); }
   }
 
   .sidebar-bottom {
-    background: oklch(18% 0.05 250 / 0.5);
-    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    background: oklch(10% 0.03 250 / 0.7);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
     border-radius: 1.5rem;
-    padding: 1.5rem;
+    padding: 1.75rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+    position: relative;
   }
 
   .info-bit {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.35rem;
   }
 
   .bit-label {
     font-family: var(--font-mono);
     font-size: 0.625rem;
     color: var(--color-text-muted);
-    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
   .bit-value {
     font-family: var(--font-display);
-    font-size: 1.125rem;
-    font-weight: 800;
+    font-size: 1.25rem;
+    font-weight: 900;
     color: var(--color-text-primary);
+  }
+
+  .data-stream {
+    grid-column: span 2;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid oklch(25% 0.05 250 / 0.2);
+  }
+
+  .stream-bits {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: var(--color-brand-400 / 0.4);
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   /* Glitch Effect */
   .glitch-text {
     position: relative;
+    display: inline-block;
   }
   
   .glitch-text::before,
@@ -343,7 +438,8 @@ const analysisLabel = locale === 'de' ? 'TECHNISCHE ANALYSE' : 'TECHNICAL ANALYS
       "showIntervalTabs": false,
       "displayMode": "single",
       "locale": "en",
-      "colorTheme": "dark"
+      "colorTheme": "dark",
+      "isTransparent": false
     });
     container.appendChild(script);
   }
