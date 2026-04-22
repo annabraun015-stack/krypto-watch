@@ -106,7 +106,8 @@
     "altcoins": "Altcoins",
     "regulation": "Regulation",
     "exchanges": "Exchanges",
-    "web3": "Web3"
+    "web3": "Web3",
+    "rsi": "RSI"
   },
   "howItWorks": [
     {
@@ -140,7 +141,9 @@
     "contactTitle": "Contact – KryptoWatch",
     "contactDesc": "Get in touch with the KryptoWatch team. We look forward to hearing from you.",
     "privacyTitle": "Privacy Policy – KryptoWatch",
-    "termsTitle": "Terms and Conditions – KryptoWatch"
+    "termsTitle": "Terms and Conditions – KryptoWatch",
+    "rsiTitle": "RSI Indicator: {coin} Relative Strength Index | KryptoWatch",
+    "rsiDesc": "Real-time RSI (Relative Strength Index) for {coin}. Monitor overbought and oversold levels with our professional technical analysis tools."
   },
   "creativeHero": {
     "trendingAlerts": "TRENDING_ALERTS",

@@ -141,7 +141,7 @@ const homepageSchema = [
       <div class="categories-grid" role="list">
         {cryptoCategories.map((cat) => (
           <a
-            href={`/en/blog/?cat=${cat.slug}`}
+            href={cat.slug === 'rsi' ? '/en/rsi/btc/' : `/en/blog/?cat=${cat.slug}`}
             class="category-card"
             role="listitem"
             style={`--cat-color: ${cat.color}`}

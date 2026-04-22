@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TradingViewChart from '../../../components/rsi/TradingViewChart.astro';
+import RSIGauge from '../../../components/rsi/RSIGauge.astro';
+import CoinSidebar from '../../../components/rsi/CoinSidebar.astro';
+import { t } from '../../../i18n';
+import { siteConfig } from '../../../config/site';
+
+export async function getStaticPaths() {
+  const coins = ['btc', 'eth', 'sol', 'bnb', 'xrp', 'ada', 'avax', 'link', 'dot', 'matic'];
+  return coins.map((coin) => ({
+    params: { coin },
+  }));
+}
+
+const { coin } = Astro.params;
+const locale = 'en';
+const tr = t(locale);
+
+const coinName = coin.toUpperCase();
+const title = tr.seo.rsiTitle.replace('{coin}', coinName);
+const description = tr.seo.rsiDesc.replace('{coin}', coinName);
+
+const rsiUrl = `${siteConfig.url}/en/rsi/${coin}/`;
+const altPath = `/rsi/${coin}/`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description: description,
+  url: rsiUrl,
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'KryptoWatch', item: siteConfig.url },
+      { '@type': 'ListItem', position: 2, name: 'RSI Indicator', item: `${siteConfig.url}/en/rsi/btc/` },
+      { '@type': 'ListItem', position: 3, name: coinName }
+    ]
+  }
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  altPath={altPath}
+  schema={schema}
+  canonical={rsiUrl}
+>
+  <div class="rsi-page">
+    <header class="rsi-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="coin-brand">
+            <h1 class="page-title">{coinName} <span class="highlight">RSI Indicator</span></h1>
+            <p class="page-subtitle">Real-time Relative Strength Index analysis for {coinName}.</p>
+          </div>
+          <div class="rsi-badges">
+            <span class="badge badge-outline">Live Data</span>
+            <span class="badge badge-brand">Technical Analysis</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="rsi-layout">
+        <main class="rsi-main">
+          <section class="chart-section">
+            <TradingViewChart symbol={coin} />
+          </section>
+
+          <section class="info-section">
+            <div class="info-grid">
+              <div class="info-card">
+                <h3>What is RSI?</h3>
+                <p>The Relative Strength Index (RSI) is a momentum indicator that measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of an asset.</p>
+              </div>
+              <div class="info-card">
+                <h3>Interpretation</h3>
+                <p>An RSI value above 70 is traditionally considered overbought (sell signal), while a value below 30 is considered oversold (buy signal).</p>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <aside class="rsi-sidebar">
+          <RSIGauge symbol={coin} />
+          <CoinSidebar locale={locale} currentCoin={coin} />
+        </aside>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .rsi-page {
+    padding-bottom: 5rem;
+  }
+
+  .rsi-header {
+    padding-block: 4rem 3rem;
+    background: radial-gradient(circle at 20% 50%, oklch(45% 0.22 195 / 0.05) 0%, transparent 50%);
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.2);
+    margin-bottom: 3rem;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .header-content {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title .highlight {
+    color: var(--color-brand-400);
+    display: block;
+  }
+
+  .page-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+  }
+
+  .rsi-badges {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .rsi-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .rsi-layout {
+      grid-template-columns: 1fr 340px;
+    }
+  }
+
+  .rsi-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .rsi-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .info-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .info-card {
+    background: oklch(14% 0.04 250 / 0.3);
+    border: 1px solid oklch(25% 0.05 250 / 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .info-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-brand-300);
+    margin-bottom: 0.75rem;
+  }
+
+  .info-card p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .badge-outline {
+    background: transparent;
+    border: 1px solid oklch(45% 0.2 195 / 0.4);
+    color: oklch(45% 0.2 195);
+  }
+</style>

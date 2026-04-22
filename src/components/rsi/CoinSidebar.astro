@@ -1,0 +1,123 @@
+---
+import { getLocalizedUrl } from '../../i18n';
+
+interface Props {
+  locale: 'de' | 'en';
+  currentCoin: string;
+}
+
+const { locale, currentCoin } = Astro.props;
+
+const coins = [
+  { symbol: 'BTC', name: 'Bitcoin' },
+  { symbol: 'ETH', name: 'Ethereum' },
+  { symbol: 'SOL', name: 'Solana' },
+  { symbol: 'BNB', name: 'BNB' },
+  { symbol: 'XRP', name: 'XRP' },
+  { symbol: 'ADA', name: 'Cardano' },
+  { symbol: 'AVAX', name: 'Avalanche' },
+  { symbol: 'LINK', name: 'Chainlink' },
+  { symbol: 'DOT', name: 'Polkadot' },
+  { symbol: 'MATIC', name: 'Polygon' },
+];
+
+const title = locale === 'de' ? 'Krypto RSI Liste' : 'Crypto RSI List';
+---
+
+<div class="coin-sidebar">
+  <h3 class="sidebar-title">{title}</h3>
+  <div class="coin-list">
+    {coins.map((coin) => (
+      <a 
+        href={getLocalizedUrl(`rsi/${coin.symbol.toLowerCase()}/`, locale)}
+        class={`coin-item ${currentCoin.toUpperCase() === coin.symbol ? 'active' : ''}`}
+      >
+        <div class="coin-info">
+          <span class="coin-symbol">{coin.symbol}</span>
+          <span class="coin-name">{coin.name}</span>
+        </div>
+        <span class="view-link">→</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .coin-sidebar {
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.35);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .sidebar-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.3);
+  }
+
+  .coin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .coin-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    border: 1px solid transparent;
+  }
+
+  .coin-item:hover {
+    background: oklch(18% 0.05 250 / 0.7);
+    border-color: oklch(25% 0.05 250 / 0.5);
+  }
+
+  .coin-item.active {
+    background: oklch(45% 0.2 250 / 0.15);
+    border-color: var(--color-brand-500);
+  }
+
+  .coin-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .coin-symbol {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+  }
+
+  .coin-name {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .view-link {
+    color: var(--color-text-muted);
+    transition: transform 0.2s;
+  }
+
+  .coin-item:hover .view-link {
+    transform: translateX(3px);
+    color: var(--color-brand-400);
+  }
+
+  .coin-item.active .coin-symbol {
+    color: var(--color-brand-400);
+  }
+</style>

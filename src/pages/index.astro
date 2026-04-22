@@ -147,7 +147,7 @@ const homepageSchema = [
       <div class="categories-grid" role="list">
         {cryptoCategories.map((cat) => (
           <a
-            href={`/blog/?cat=${cat.slug}`}
+            href={cat.slug === 'rsi' ? '/rsi/btc/' : `/blog/?cat=${cat.slug}`}
             class="category-card"
             role="listitem"
             aria-label={`${tr.categories[cat.slug as keyof typeof tr.categories] ?? cat.slug} Artikel anzeigen`}
