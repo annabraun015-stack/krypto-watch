@@ -2,6 +2,8 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import TradingViewChart from '../../../components/rsi/TradingViewChart.astro';
 import RSIGauge from '../../../components/rsi/RSIGauge.astro';
+import RSIHero from '../../../components/rsi/RSIHero.astro';
+import RSITimeframeGrid from '../../../components/rsi/RSITimeframeGrid.astro';
 import CoinSidebar from '../../../components/rsi/CoinSidebar.astro';
 import { t } from '../../../i18n';
 import { siteConfig } from '../../../config/site';
@@ -49,108 +51,94 @@ const schema = {
   schema={schema}
   canonical={rsiUrl}
 >
-  <div class="rsi-page">
-    <header class="rsi-header">
-      <div class="container">
-        <div class="header-content">
-          <div class="coin-brand">
-            <h1 class="page-title">{coinName} <span class="highlight">RSI Indicator</span></h1>
-            <p class="page-subtitle">Real-time Relative Strength Index analysis for {coinName}.</p>
-          </div>
-          <div class="rsi-badges">
-            <span class="badge badge-outline">Live Data</span>
-            <span class="badge badge-brand">Technical Analysis</span>
-          </div>
-        </div>
+  <div class="container">
+    <!-- RSI HERO SECTION -->
+    <RSIHero symbol={coin} locale={locale} />
+
+    <!-- RSI TIMEFRAME GRID -->
+    <section class="section-wrap">
+      <div class="section-header-simple">
+        <h2 class="section-title-sm">Multitimeframe RSI Status</h2>
+        <p class="section-desc-sm">Live RSI analysis across multiple time intervals.</p>
       </div>
-    </header>
+      <RSITimeframeGrid symbol={coin} />
+    </section>
 
-    <div class="container">
-      <div class="rsi-layout">
-        <main class="rsi-main">
-          <section class="chart-section">
-            <TradingViewChart symbol={coin} />
-          </section>
+    <div class="rsi-layout">
+      <main class="rsi-main">
+        <!-- MAIN CHART -->
+        <section class="chart-section-wrap">
+          <div class="section-header-simple">
+            <h2 class="section-title-sm">Interactive RSI Chart</h2>
+          </div>
+          <TradingViewChart symbol={coin} />
+        </section>
 
-          <section class="info-section">
-            <div class="info-grid">
-              <div class="info-card">
-                <h3>What is RSI?</h3>
-                <p>The Relative Strength Index (RSI) is a momentum indicator that measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of an asset.</p>
-              </div>
-              <div class="info-card">
-                <h3>Interpretation</h3>
-                <p>An RSI value above 70 is traditionally considered overbought (sell signal), while a value below 30 is considered oversold (buy signal).</p>
-              </div>
+        <!-- TECHNICAL SUMMARY -->
+        <section class="chart-section-wrap">
+          <div class="section-header-simple">
+            <h2 class="section-title-sm">Technical Analysis Summary</h2>
+          </div>
+          <div class="tradingview-widget-container">
+            <div id="tv-technical-summary" class="tv-widget-container"></div>
+            <script is:inline define:vars={{ tvSymbol }}>
+              function loadSummary() {
+                const container = document.getElementById('tv-technical-summary');
+                if (!container) return;
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+                script.async = true;
+                script.innerHTML = JSON.stringify({
+                  "interval": "1h",
+                  "width": "100%",
+                  "isTransparent": true,
+                  "height": "400",
+                  "symbol": tvSymbol,
+                  "showIntervalTabs": true,
+                  "displayMode": "multiple",
+                  "locale": "en",
+                  "colorTheme": "dark"
+                });
+                container.appendChild(script);
+              }
+              if (document.readyState === 'complete') loadSummary();
+              else window.addEventListener('load', loadSummary);
+            </script>
+          </div>
+        </section>
+
+        <!-- RSI EDUCATION SECTION -->
+        <section class="info-section">
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="info-icon">🧠</div>
+              <h3>What is RSI?</h3>
+              <p>The Relative Strength Index (RSI) is a momentum indicator that measures the magnitude of recent price changes to evaluate overbought or oversold conditions in the price of an asset.</p>
             </div>
-          </section>
-        </main>
+            <div class="info-card">
+              <div class="info-icon">📊</div>
+              <h3>Interpretation</h3>
+              <p>An RSI value above 70 is traditionally considered overbought (sell signal), while a value below 30 is considered oversold (buy signal).</p>
+            </div>
+          </div>
+        </section>
+      </main>
 
-        <aside class="rsi-sidebar">
-          <RSIGauge symbol={coin} />
-          <CoinSidebar locale={locale} currentCoin={coin} />
-        </aside>
-      </div>
+      <aside class="rsi-sidebar">
+        <RSIGauge symbol={coin} />
+        <CoinSidebar locale={locale} />
+      </aside>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .rsi-page {
-    padding-bottom: 5rem;
-  }
-
-  .rsi-header {
-    padding-block: 4rem 3rem;
-    background: radial-gradient(circle at 20% 50%, oklch(45% 0.22 195 / 0.05) 0%, transparent 50%);
-    border-bottom: 1px solid oklch(25% 0.05 250 / 0.2);
-    margin-bottom: 3rem;
-  }
-
-  .header-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .header-content {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-  }
-
-  .page-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
-    margin-bottom: 0.5rem;
-  }
-
-  .page-title .highlight {
-    color: var(--color-brand-400);
-    display: block;
-  }
-
-  .page-subtitle {
-    font-size: 1.125rem;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-  }
-
-  .rsi-badges {
-    display: flex;
-    gap: 0.75rem;
-  }
-
   .rsi-layout {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2.5rem;
+    padding-top: 2rem;
   }
 
   @media (min-width: 1024px) {
@@ -159,10 +147,38 @@ const schema = {
     }
   }
 
+  .section-wrap {
+    margin-bottom: 3rem;
+  }
+
+  .section-header-simple {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title-sm {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .section-desc-sm {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .chart-section-wrap {
+    background: oklch(14% 0.04 250 / 0.3);
+    border: 1px solid oklch(25% 0.05 250 / 0.2);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
   .rsi-main {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
   }
 
   .rsi-sidebar {
@@ -187,26 +203,26 @@ const schema = {
     background: oklch(14% 0.04 250 / 0.3);
     border: 1px solid oklch(25% 0.05 250 / 0.2);
     border-radius: 1rem;
-    padding: 1.5rem;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .info-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
   .info-card h3 {
     font-family: var(--font-display);
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-brand-300);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .info-card p {
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
-  .badge-outline {
-    background: transparent;
-    border: 1px solid oklch(45% 0.2 195 / 0.4);
-    color: oklch(45% 0.2 195);
+    line-height: 1.7;
   }
 </style>

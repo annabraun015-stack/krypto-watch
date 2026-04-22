@@ -1,0 +1,164 @@
+---
+interface Props {
+  symbol: string;
+  locale: 'de' | 'en';
+}
+
+const { symbol, locale } = Astro.props;
+const tvSymbol = symbol.toUpperCase().includes('USDT') ? symbol : `BINANCE:${symbol.toUpperCase()}USDT`;
+const coinName = symbol.toUpperCase();
+
+const statusLabel = locale === 'de' ? 'RSI STATUS' : 'RSI STATUS';
+---
+
+<div class="rsi-hero">
+  <div class="hero-main">
+    <div class="coin-info-section">
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
+          {
+            "symbol": "{tvSymbol}",
+            "width": "100%",
+            "locale": "en",
+            "colorTheme": "dark",
+            "isTransparent": true
+          }
+        </script>
+      </div>
+    </div>
+
+    <div class="rsi-status-section">
+      <div class="status-label">{statusLabel}</div>
+      <div class="status-value pulse-neon">NEUTRAL</div>
+      <div class="live-indicator">
+        <span class="dot"></span> LIVE DATA
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .rsi-hero {
+    margin-bottom: 3rem;
+  }
+
+  .hero-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    background: linear-gradient(135deg, oklch(18% 0.05 250 / 0.8), oklch(12% 0.03 250 / 0.6));
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .hero-main {
+      grid-template-columns: 1fr 300px;
+    }
+  }
+
+  .coin-info-section {
+    min-width: 0;
+  }
+
+  .rsi-status-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: oklch(10% 0.02 250 / 0.5);
+    border-radius: 1rem;
+    border: 1px solid oklch(25% 0.05 250 / 0.2);
+    text-align: center;
+  }
+
+  .status-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+  }
+
+  .status-value {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-brand-400);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 20px oklch(65% 0.2 195 / 0.3);
+  }
+
+  .live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff00;
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .pulse-neon {
+    animation: pulse-neon 2s infinite ease-in-out;
+  }
+
+  @keyframes pulse-neon {
+    0%, 100% { text-shadow: 0 0 10px oklch(65% 0.2 195 / 0.2); }
+    50% { text-shadow: 0 0 25px oklch(65% 0.2 195 / 0.5); }
+  }
+
+  /* Decorative background */
+  .hero-main::before {
+    content: '01010101';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-family: var(--font-mono);
+    font-size: 8rem;
+    color: oklch(45% 0.2 195 / 0.03);
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>
+
+<script is:inline define:vars={{ tvSymbol }}>
+  // Symbol info widget loader
+  const container = document.querySelector('.coin-info-section .tradingview-widget-container__widget');
+  if (container) {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+      "symbol": tvSymbol,
+      "width": "100%",
+      "locale": "en",
+      "colorTheme": "dark",
+      "isTransparent": true
+    });
+    container.appendChild(script);
+  }
+</script>

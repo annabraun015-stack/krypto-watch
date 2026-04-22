@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TradingViewChart from '../../components/rsi/TradingViewChart.astro';
 import RSIGauge from '../../components/rsi/RSIGauge.astro';
+import RSIHero from '../../components/rsi/RSIHero.astro';
+import RSITimeframeGrid from '../../components/rsi/RSITimeframeGrid.astro';
 import CoinSidebar from '../../components/rsi/CoinSidebar.astro';
 import { t } from '../../i18n';
 import { siteConfig } from '../../config/site';
@@ -49,38 +51,75 @@ const schema = {
   schema={schema}
   canonical={rsiUrl}
 >
-  <div class="rsi-page">
-    <header class="rsi-header">
-      <div class="container">
-        <div class="header-content">
-          <div class="coin-brand">
-            <h1 class="page-title">{coinName} <span class="highlight">RSI Indikator</span></h1>
-            <p class="page-subtitle">Relative Strength Index Analyse für {coinName} in Echtzeit.</p>
-          </div>
-          <div class="rsi-badges">
-            <span class="badge badge-outline">Live Daten</span>
-            <span class="badge badge-brand">Technical Analysis</span>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <div class="container">
+      <!-- RSI HERO SECTION -->
+      <RSIHero symbol={coin} locale={locale} />
+
+      <!-- RSI TIMEFRAME GRID -->
+      <section class="section-wrap">
+        <div class="section-header-simple">
+          <h2 class="section-title-sm">Multitimeframe RSI Status</h2>
+          <p class="section-desc-sm">Live RSI Analyse über verschiedene Zeitintervalle.</p>
+        </div>
+        <RSITimeframeGrid symbol={coin} />
+      </section>
+
       <div class="rsi-layout">
         <main class="rsi-main">
-          <section class="chart-section">
+          <!-- MAIN CHART -->
+          <section class="chart-section-wrap">
+            <div class="section-header-simple">
+              <h2 class="section-title-sm">Interaktiver RSI Chart</h2>
+            </div>
             <TradingViewChart symbol={coin} />
           </section>
 
+          <!-- TECHNICAL SUMMARY -->
+          <section class="chart-section-wrap">
+            <div class="section-header-simple">
+              <h2 class="section-title-sm">Technische Analyse Zusammenfassung</h2>
+            </div>
+            <div class="tradingview-widget-container">
+              <div id="tv-technical-summary" class="tv-widget-container"></div>
+              <script is:inline define:vars={{ tvSymbol }}>
+                function loadSummary() {
+                  const container = document.getElementById('tv-technical-summary');
+                  if (!container) return;
+                  const script = document.createElement('script');
+                  script.type = 'text/javascript';
+                  script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+                  script.async = true;
+                  script.innerHTML = JSON.stringify({
+                    "interval": "1h",
+                    "width": "100%",
+                    "isTransparent": true,
+                    "height": "400",
+                    "symbol": tvSymbol,
+                    "showIntervalTabs": true,
+                    "displayMode": "multiple",
+                    "locale": "de",
+                    "colorTheme": "dark"
+                  });
+                  container.appendChild(script);
+                }
+                if (document.readyState === 'complete') loadSummary();
+                else window.addEventListener('load', loadSummary);
+              </script>
+            </div>
+          </section>
+
+          <!-- RSI EDUCATION SECTION -->
           <section class="info-section">
             <div class="info-grid">
               <div class="info-card">
+                <div class="info-icon">🧠</div>
                 <h3>Was ist der RSI?</h3>
                 <p>Der Relative Strength Index (RSI) ist ein Momentum-Indikator, der das Ausmaß der jüngsten Kursveränderungen misst, um überkaufte oder überverkaufte Bedingungen im Kurs eines Assets zu bewerten.</p>
               </div>
               <div class="info-card">
+                <div class="info-icon">📊</div>
                 <h3>Interpretation</h3>
-                <p>Ein RSI-Wert über 70 gilt traditionell als überkauft (sell signal), während ein Wert unter 30 als überverkauft gilt (buy signal).</p>
+                <p>Ein RSI-Wert über 70 gilt traditionell als überkauft (Verkaufssignal), während ein Wert unter 30 als überverkauft gilt (Kaufsignal).</p>
               </div>
             </div>
           </section>
@@ -88,11 +127,10 @@ const schema = {
 
         <aside class="rsi-sidebar">
           <RSIGauge symbol={coin} />
-          <CoinSidebar locale={locale} currentCoin={coin} />
+          <CoinSidebar locale={locale} />
         </aside>
       </div>
     </div>
-  </div>
 </BaseLayout>
 
 <style>
@@ -151,6 +189,7 @@ const schema = {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2.5rem;
+    padding-top: 2rem;
   }
 
   @media (min-width: 1024px) {
@@ -159,10 +198,38 @@ const schema = {
     }
   }
 
+  .section-wrap {
+    margin-bottom: 3rem;
+  }
+
+  .section-header-simple {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title-sm {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .section-desc-sm {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .chart-section-wrap {
+    background: oklch(14% 0.04 250 / 0.3);
+    border: 1px solid oklch(25% 0.05 250 / 0.2);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
   .rsi-main {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
   }
 
   .rsi-sidebar {
@@ -187,26 +254,26 @@ const schema = {
     background: oklch(14% 0.04 250 / 0.3);
     border: 1px solid oklch(25% 0.05 250 / 0.2);
     border-radius: 1rem;
-    padding: 1.5rem;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .info-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
   .info-card h3 {
     font-family: var(--font-display);
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-brand-300);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .info-card p {
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
-  .badge-outline {
-    background: transparent;
-    border: 1px solid oklch(45% 0.2 195 / 0.4);
-    color: oklch(45% 0.2 195);
+    line-height: 1.7;
   }
 </style>
