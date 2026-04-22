@@ -1,0 +1,231 @@
+---
+import SentimentGauge from './SentimentGauge.astro';
+
+interface Props {
+  locale: 'de' | 'en';
+  tr: any;
+}
+
+const { locale, tr } = Astro.props;
+---
+
+<section class="sentiment-hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="header-stack">
+        <div class="scanner-meta">
+          <span class="glitch-text" data-text="SYSTEM_LIVE">SYSTEM_LIVE</span>
+          <span class="meta-separator">|</span>
+          <span>SENSORS: ACTIVE</span>
+        </div>
+        <h1 class="hero-title">{tr.sentiment.title}</h1>
+        <p class="hero-subtitle">{tr.sentiment.subtitle}</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <span class="card-label">FEAR_GREED_INDEX</span>
+          <SentimentGauge locale={locale} />
+        </div>
+        
+        <div class="info-sidebar">
+          <div class="status-panel">
+            <div class="panel-header">
+              <span class="panel-title">SENTIMENT_ANALYSIS</span>
+            </div>
+            <div class="sentiment-desc">
+              <p>{tr.sentiment.seoDesc}</p>
+            </div>
+            <div class="data-stream">
+              <div class="stream-line">0x71C9... SYNCED</div>
+              <div class="stream-line">POLLING_SOCIAL_PIPELINE...</div>
+              <div class="stream-line">VIX_CORRELATION: HIGH</div>
+            </div>
+          </div>
+
+          <div class="mini-stats">
+            <div class="mini-card">
+              <span class="mini-label">VOLATILITY</span>
+              <span class="mini-value neon-cyan">CRITICAL</span>
+            </div>
+            <div class="mini-card">
+              <span class="mini-label">VOLUME</span>
+              <span class="mini-value neon-purple">STABLE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sentiment-hero {
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .header-stack {
+    margin-bottom: 3rem;
+  }
+
+  .scanner-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-brand-400);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--color-text-primary);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 30px oklch(65% 0.2 195 / 0.3);
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    max-width: 700px;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .data-grid {
+      grid-template-columns: 1fr 360px;
+    }
+  }
+
+  .card-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
+    margin-bottom: 1rem;
+    letter-spacing: 0.25em;
+  }
+
+  .info-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .status-panel {
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    flex: 1;
+  }
+
+  .panel-title {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.3);
+  }
+
+  .sentiment-desc p {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .data-stream {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-brand-400 / 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mini-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .mini-card {
+    background: oklch(12% 0.03 250 / 0.6);
+    border: 1px solid oklch(35% 0.1 250 / 0.2);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mini-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .mini-value {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 800;
+  }
+
+  .neon-cyan { color: oklch(75% 0.15 195); text-shadow: 0 0 10px oklch(75% 0.15 195 / 0.4); }
+  .neon-purple { color: oklch(70% 0.2 300); text-shadow: 0 0 10px oklch(70% 0.2 300 / 0.4); }
+
+  /* Glitch Text Effect */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+
+  .glitch-text::before {
+    color: #ff00ff;
+    z-index: -1;
+    animation: glitch 3s infinite;
+  }
+
+  .glitch-text::after {
+    color: #00ffff;
+    z-index: -2;
+    animation: glitch 2s infinite reverse;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
+</style>

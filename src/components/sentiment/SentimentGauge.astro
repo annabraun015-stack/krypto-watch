@@ -1,0 +1,205 @@
+---
+interface Props {
+  locale: 'de' | 'en';
+}
+
+const { locale } = Astro.props;
+
+// Fetch data at build time
+let fngValue = 50;
+let fngClassification = "Neutral";
+let nextUpdate = "00:00:00";
+
+try {
+  const response = await fetch('https://api.alternative.me/fng/');
+  const data = await response.json();
+  if (data.data && data.data[0]) {
+    fngValue = parseInt(data.data[0].value);
+    fngClassification = data.data[0].value_classification;
+    nextUpdate = data.data[0].time_until_update || "00:00:00";
+  }
+} catch (e) {
+  console.error("Failed to fetch F&G Index:", e);
+}
+
+// Calculate angle for the gauge needle (-90 to 90 degrees)
+const needleRotation = (fngValue / 100) * 180 - 90;
+
+// Color mapping
+const getSentimentColor = (val: number) => {
+  if (val <= 25) return 'oklch(60% 0.2 20)'; // Deep Red
+  if (val <= 45) return 'oklch(65% 0.15 40)'; // Orange
+  if (val <= 55) return 'oklch(70% 0.1 80)'; // Yellow
+  if (val <= 75) return 'oklch(75% 0.15 140)'; // Light Green
+  return 'oklch(75% 0.2 160)'; // Neon Green
+};
+
+const mainColor = getSentimentColor(fngValue);
+---
+
+<div class="sentiment-gauge-container">
+  <div class="gauge-header">
+    <div class="status-badge">
+      <div class="pulse-dot" style={`background: ${mainColor}; box-shadow: 0 0 10px ${mainColor};`}></div>
+      <span class="status-label">{fngClassification.toUpperCase()}</span>
+    </div>
+    <div class="update-timer">
+      NEXT_UPDATE: <span class="timer-val">{nextUpdate}</span>
+    </div>
+  </div>
+
+  <div class="gauge-visual">
+    <svg viewBox="0 0 200 120" class="gauge-svg">
+      <!-- Background Track -->
+      <path 
+        d="M20,100 A80,80 0 0,1 180,100" 
+        fill="none" 
+        stroke="oklch(25% 0.05 250 / 0.3)" 
+        stroke-width="12" 
+        stroke-linecap="round"
+      />
+      <!-- Active Progress -->
+      <path 
+        d="M20,100 A80,80 0 0,1 180,100" 
+        fill="none" 
+        stroke={mainColor} 
+        stroke-width="12" 
+        stroke-linecap="round"
+        stroke-dasharray="251.3"
+        stroke-dashoffset={251.3 - (fngValue / 100) * 251.3}
+        class="gauge-progress"
+      />
+      
+      <!-- Center Text -->
+      <text x="100" y="90" text-anchor="middle" class="gauge-value">{fngValue}</text>
+      <text x="100" y="110" text-anchor="middle" class="gauge-label">INDEX</text>
+      
+      <!-- Needle -->
+      <g transform={`rotate(${needleRotation}, 100, 100)`}>
+        <line x1="100" y1="100" x2="100" y2="40" stroke="white" stroke-width="2" />
+        <circle cx="100" cy="100" r="4" fill="white" />
+      </g>
+    </svg>
+    
+    <div class="gauge-overlay"></div>
+  </div>
+
+  <div class="gauge-footer">
+    <div class="marker">0</div>
+    <div class="marker-mid">50</div>
+    <div class="marker">100</div>
+  </div>
+</div>
+
+<style>
+  .sentiment-gauge-container {
+    background: oklch(12% 0.03 250 / 0.6);
+    border: 1px solid oklch(35% 0.1 250 / 0.3);
+    border-radius: 2rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gauge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: oklch(20% 0.05 250 / 0.5);
+    border-radius: 2rem;
+    border: 1px solid oklch(35% 0.1 250 / 0.3);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .status-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: white;
+  }
+
+  .update-timer {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+  }
+
+  .timer-val {
+    color: var(--color-brand-400);
+  }
+
+  .gauge-visual {
+    position: relative;
+    padding: 1rem 0;
+  }
+
+  .gauge-svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 10px oklch(0% 0 0 / 0.3));
+  }
+
+  .gauge-progress {
+    transition: stroke-dashoffset 1s ease-out;
+  }
+
+  .gauge-value {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    fill: white;
+    dominant-baseline: middle;
+  }
+
+  .gauge-label {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 800;
+    fill: var(--color-text-muted);
+    letter-spacing: 0.2em;
+  }
+
+  .gauge-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 80%, var(--color-brand-500 / 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .gauge-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    color: var(--color-text-muted);
+  }
+
+  .marker-mid {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>

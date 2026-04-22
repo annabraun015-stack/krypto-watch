@@ -174,5 +174,20 @@
     "networkTitle": "RSI NETWORK",
     "networkSubtitle": "Analyze other top assets",
     "scanningLabel": "RSI SCANNER"
+  },
+  "sentiment": {
+    "title": "GLOBAL SENTIMENT MONITOR",
+    "subtitle": "Real-time analysis of market psychology & flow",
+    "fearAndGreed": "FEAR & GREED INDEX",
+    "extremeFear": "EXTREME FEAR",
+    "fear": "FEAR",
+    "neutral": "NEUTRAL",
+    "greed": "GREED",
+    "extremeGreed": "EXTREME GREED",
+    "status": "STATUS: SYSTEM_SYNCED",
+    "historyTitle": "HISTORICAL MATRIX",
+    "socialPulse": "SOCIAL MEDIA PULSE",
+    "seoTitle": "Crypto Fear & Greed Index: Live Market Sentiment | KryptoWatch",
+    "seoDesc": "The ultimate Crypto Fear & Greed Index. Analyze market sentiment in real-time with our state-of-the-art cyberpunk dashboard."
   }
 }

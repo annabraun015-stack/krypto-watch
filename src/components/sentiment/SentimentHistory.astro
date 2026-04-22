@@ -1,0 +1,155 @@
+---
+interface Props {
+  locale: 'de' | 'en';
+  tr: any;
+}
+
+const { locale, tr } = Astro.props;
+
+// Mock historical data (in a real app, you'd fetch more from the API)
+const history = [
+  { day: "YESTERDAY", val: 54, status: "NEUTRAL" },
+  { day: "LAST WEEK", val: 62, status: "GREED" },
+  { day: "LAST MONTH", val: 38, status: "FEAR" },
+  { day: "LAST YEAR", val: 74, status: "EXTREME_GREED" }
+];
+---
+
+<section class="sentiment-history">
+  <div class="section-header">
+    <div class="header-line"></div>
+    <h2 class="title">{tr.sentiment.historyTitle}</h2>
+  </div>
+
+  <div class="history-grid">
+    {history.map((item) => (
+      <div class="history-card">
+        <div class="card-glow"></div>
+        <div class="card-header">
+          <span class="day">{item.day}</span>
+          <span class="val">{item.val}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style={`width: ${item.val}%; background: ${item.val > 50 ? 'var(--color-brand-500)' : 'oklch(60% 0.2 20)'};`}></div>
+        </div>
+        <div class="card-footer">
+          <span class="status">{item.status}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .sentiment-history {
+    margin-top: 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .header-line {
+    width: 60px;
+    height: 4px;
+    background: var(--color-brand-500);
+    border-radius: 2px;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--color-text-primary);
+  }
+
+  .history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .history-card {
+    background: oklch(12% 0.03 250 / 0.6);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 1.5rem;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .history-card:hover {
+    border-color: var(--color-brand-400);
+    transform: translateY(-5px);
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--color-brand-500 / 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .history-card:hover .card-glow {
+    opacity: 1;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .day {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .val {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: oklch(20% 0.05 250 / 0.5);
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 0 10px currentColor;
+  }
+
+  .card-footer {
+    position: relative;
+    z-index: 2;
+  }
+
+  .status {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
+    letter-spacing: 0.15em;
+  }
+</style>

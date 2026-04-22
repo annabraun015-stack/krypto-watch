@@ -21,12 +21,14 @@ export const siteConfig = {
 export const navLinks = {
   de: [
     { label: 'RSI', href: '/rsi/btc/' },
+    { label: 'Sentiment', href: '/sentiment/' },
     { label: 'Blog', href: '/blog/' },
     { label: 'Über uns', href: '/about-us/' },
     { label: 'Kontakt', href: '/contact-us/' },
   ],
   en: [
     { label: 'RSI', href: '/en/rsi/btc/' },
+    { label: 'Sentiment', href: '/en/sentiment/' },
     { label: 'Blog', href: '/en/blog/' },
     { label: 'About Us', href: '/en/about-us/' },
     { label: 'Contact', href: '/en/contact-us/' },

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SentimentHero from '../../../components/sentiment/SentimentHero.astro';
+import SentimentHistory from '../../../components/sentiment/SentimentHistory.astro';
+import { t } from '../../../i18n';
+import { siteConfig } from '../../../config/site';
+
+const locale = 'en';
+const tr = t(locale);
+
+const title = tr.sentiment.seoTitle;
+const description = tr.sentiment.seoDesc;
+
+const sentimentUrl = `${siteConfig.url}/en/sentiment/`;
+const altPath = `/sentiment/`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description: description,
+  url: sentimentUrl,
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'KryptoWatch', item: siteConfig.url },
+      { '@type': 'ListItem', position: 2, name: 'Sentiment Monitor' }
+    ]
+  }
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  altPath={altPath}
+  schema={schema}
+  canonical={sentimentUrl}
+>
+  <div class="container">
+    <div class="sentiment-dashboard">
+      <!-- MAIN SENTIMENT MONITOR -->
+      <SentimentHero locale={locale} tr={tr} />
+
+      <!-- HISTORICAL DATA -->
+      <SentimentHistory locale={locale} tr={tr} />
+
+      <!-- INFO SECTION -->
+      <section class="sentiment-info-grid">
+        <div class="info-card">
+          <div class="info-icon">🧠</div>
+          <h3>Market Psychology</h3>
+          <p>The Fear & Greed Index measures the emotions and sentiments of market participants. Periods of extreme fear often present buying opportunities, while extreme greed may indicate a pending correction.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📊</div>
+          <h3>Data Pipeline</h3>
+          <p>Our index aggregates volatility, market volume, social media sentiment, and dominance trends to paint a precise picture of current market psychology.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .sentiment-dashboard {
+    padding-bottom: 5rem;
+  }
+
+  .sentiment-info-grid {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .sentiment-info-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .info-card {
+    background: linear-gradient(145deg, oklch(18% 0.05 250 / 0.6), oklch(12% 0.03 250 / 0.4));
+    border: 1px solid oklch(35% 0.1 250 / 0.2);
+    border-radius: 2rem;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-brand-400);
+    margin-bottom: 1rem;
+  }
+
+  .info-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    font-size: 1.0625rem;
+  }
+</style>
