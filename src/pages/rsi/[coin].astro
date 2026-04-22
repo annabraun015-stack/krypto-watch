@@ -10,7 +10,7 @@ import { t } from '../../i18n';
 import { siteConfig } from '../../config/site';
 
 export async function getStaticPaths() {
-  const coins = ['btc', 'eth', 'sol', 'bnb', 'xrp', 'ada', 'avax', 'link', 'dot', 'matic'];
+  const coins = ['btc', 'eth', 'bnb', 'sol', 'xrp', 'ada', 'avax', 'doge', 'trx', 'dot', 'link', 'matic', 'ton', 'shib', 'ltc', 'bch', 'near', 'uni', 'apt', 'arb'];
   return coins.map((coin) => ({
     params: { coin },
   }));
