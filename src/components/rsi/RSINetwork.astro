@@ -1,0 +1,161 @@
+---
+import { getLocalizedUrl } from '../../i18n';
+
+interface Props {
+  currentCoin: string;
+  locale: 'de' | 'en';
+}
+
+const { currentCoin, locale } = Astro.props;
+
+const coins = [
+  'btc', 'eth', 'bnb', 'sol', 'xrp', 
+  'ada', 'avax', 'doge', 'trx', 'dot', 
+  'link', 'matic', 'ton', 'shib', 'ltc', 
+  'bch', 'near', 'uni', 'apt', 'arb'
+];
+
+const title = locale === 'de' ? 'RSI NETZWERK' : 'RSI NETWORK';
+const subtitle = locale === 'de' ? 'Analysieren Sie andere Top-Assets' : 'Analyze other top assets';
+---
+
+<section class="rsi-network">
+  <div class="network-header">
+    <div class="header-content">
+      <h2 class="network-title">{title}</h2>
+      <p class="network-subtitle">{subtitle}</p>
+    </div>
+    <div class="network-line"></div>
+  </div>
+
+  <div class="coin-grid">
+    {coins.map((coin) => (
+      <a 
+        href={getLocalizedUrl(`/rsi/${coin}/`, locale)}
+        class={`coin-link ${coin === currentCoin ? 'active' : ''}`}
+      >
+        <span class="coin-symbol">{coin.toUpperCase()}</span>
+        {coin === currentCoin && <span class="active-dot"></span>}
+        <div class="link-glow"></div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .rsi-network {
+    margin-top: 5rem;
+    padding: 3rem;
+    background: oklch(12% 0.03 250 / 0.6);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .network-header {
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .network-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: var(--color-text-primary);
+  }
+
+  .network-subtitle {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .network-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-brand-500), transparent);
+    opacity: 0.3;
+  }
+
+  .coin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+
+  .coin-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: oklch(15% 0.05 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .coin-symbol {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    z-index: 2;
+  }
+
+  .coin-link:hover {
+    border-color: var(--color-brand-400);
+    transform: translateY(-3px);
+    background: oklch(18% 0.06 250 / 0.7);
+  }
+
+  .coin-link:hover .coin-symbol {
+    color: var(--color-brand-400);
+  }
+
+  .coin-link.active {
+    border-color: var(--color-brand-500);
+    background: oklch(45% 0.2 195 / 0.1);
+    pointer-events: none;
+  }
+
+  .coin-link.active .coin-symbol {
+    color: var(--color-brand-400);
+  }
+
+  .active-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 4px;
+    height: 4px;
+    background: var(--color-brand-400);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-brand-400);
+  }
+
+  .link-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--color-brand-500 / 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .coin-link:hover .link-glow {
+    opacity: 1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .coin-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

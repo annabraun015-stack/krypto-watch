@@ -6,6 +6,7 @@ import RSIHero from '../../components/rsi/RSIHero.astro';
 import RSITimeframeGrid from '../../components/rsi/RSITimeframeGrid.astro';
 import RSITechnicalSummary from '../../components/rsi/RSITechnicalSummary.astro';
 import RSIScreener from '../../components/rsi/RSIScreener.astro';
+import RSINetwork from '../../components/rsi/RSINetwork.astro';
 import { t } from '../../i18n';
 import { siteConfig } from '../../config/site';
 
@@ -107,6 +108,9 @@ const schema = {
           </aside>
         </div>
       </div>
+
+      <!-- RSI INTERLINKING NETWORK -->
+      <RSINetwork currentCoin={coin} locale={locale} />
     </div>
 </BaseLayout>
 
