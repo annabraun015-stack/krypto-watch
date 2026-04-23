@@ -1,14 +1,14 @@
 ---
-// Static crypto ticker – API-ready structure
+// Static crypto ticker – Euro-based structure
 const coins = [
-  { symbol: 'BTC', name: 'Bitcoin', price: '$98,432', change: '+2.4%', pos: true },
-  { symbol: 'ETH', name: 'Ethereum', price: '$3,218', change: '+1.8%', pos: true },
-  { symbol: 'SOL', name: 'Solana', price: '$182', change: '-0.7%', pos: false },
-  { symbol: 'BNB', name: 'BNB', price: '$412', change: '+0.9%', pos: true },
-  { symbol: 'XRP', name: 'XRP', price: '$0.62', change: '+3.2%', pos: true },
-  { symbol: 'ADA', name: 'Cardano', price: '$0.48', change: '-1.1%', pos: false },
-  { symbol: 'AVAX', name: 'Avalanche', price: '$38', change: '+4.6%', pos: true },
-  { symbol: 'LINK', name: 'Chainlink', price: '$14.2', change: '+2.1%', pos: true },
+  { symbol: 'BTC', name: 'Bitcoin', price: '€91.140', change: '+2.4%', pos: true },
+  { symbol: 'ETH', name: 'Ethereum', price: '€2.980', change: '+1.8%', pos: true },
+  { symbol: 'SOL', name: 'Solana', price: '€168', change: '-0.7%', pos: false },
+  { symbol: 'BNB', name: 'BNB', price: '€381', change: '+0.9%', pos: true },
+  { symbol: 'XRP', name: 'XRP', price: '€0,57', change: '+3.2%', pos: true },
+  { symbol: 'ADA', name: 'Cardano', price: '€0,44', change: '-1.1%', pos: false },
+  { symbol: 'AVAX', name: 'Avalanche', price: '€35', change: '+4.6%', pos: true },
+  { symbol: 'LINK', name: 'Chainlink', price: '€13,1', change: '+2.1%', pos: true },
 ];
 
 // Doubled for seamless loop
@@ -67,23 +67,26 @@ const allCoins = [...coins, ...coins];
 </style>
 
 <script>
-  const symbols = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'XRPUSDT', 'ADAUSDT', 'AVAXUSDT', 'LINKUSDT'];
+  const symbols = ['BTCEUR', 'ETHEUR', 'SOLEUR', 'BNBEUR', 'XRPEUR', 'ADAEUR', 'AVAXEUR', 'LINKEUR'];
   const symbolMap: Record<string, string> = {
-    'BTCUSDT': 'BTC',
-    'ETHUSDT': 'ETH',
-    'SOLUSDT': 'SOL',
-    'BNBUSDT': 'BNB',
-    'XRPUSDT': 'XRP',
-    'ADAUSDT': 'ADA',
-    'AVAXUSDT': 'AVAX',
-    'LINKUSDT': 'LINK'
+    'BTCEUR': 'BTC',
+    'ETHEUR': 'ETH',
+    'SOLEUR': 'SOL',
+    'BNBEUR': 'BNB',
+    'XRPEUR': 'XRP',
+    'ADAEUR': 'ADA',
+    'AVAXEUR': 'AVAX',
+    'LINKEUR': 'LINK'
   };
 
   function formatPrice(price: string, symbol: string) {
     const num = parseFloat(price);
-    if (num > 1000) return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-    if (num > 1) return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+    // Use German locale for Euro formatting (€ 1.234,56)
+    const formatted = num.toLocaleString('de-DE', {
+      minimumFractionDigits: num > 100 ? 0 : (num > 1 ? 2 : 4),
+      maximumFractionDigits: num > 100 ? 0 : (num > 1 ? 2 : 4),
+    });
+    return '€' + formatted;
   }
 
   function initTicker() {
@@ -110,9 +113,12 @@ const allCoins = [...coins, ...coins];
               
               if (oldPrice !== newPriceFormatted) {
                 priceEl.textContent = newPriceFormatted;
-                // Subtle flash effect
+                
+                // Compare numeric values for direction
                 const currentPrice = parseFloat(price);
-                const previousPrice = parseFloat(oldPrice?.replace(/[$,]/g, '') || '0');
+                // Extract number from localized string (replace dot and comma)
+                const previousPriceText = oldPrice?.replace('€', '').replace(/\./g, '').replace(',', '.') || '0';
+                const previousPrice = parseFloat(previousPriceText);
                 
                 if (currentPrice > previousPrice) {
                   priceEl.classList.add('up');
@@ -125,7 +131,14 @@ const allCoins = [...coins, ...coins];
             }
 
             if (changeEl) {
-              changeEl.textContent = (isPos ? '+' : '') + changePercent + '%';
+              // Percentage change usually keeps dot in technical contexts, but we can localize it too
+              const changeFormatted = parseFloat(changePercent).toLocaleString('de-DE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                signDisplay: 'always'
+              }) + '%';
+              
+              changeEl.textContent = changeFormatted;
               changeEl.classList.toggle('pos', isPos);
               changeEl.classList.toggle('neg', !isPos);
             }
@@ -135,13 +148,12 @@ const allCoins = [...coins, ...coins];
     };
 
     ws.onclose = () => {
-      setTimeout(initTicker, 5000); // Reconnect after 5 seconds
+      setTimeout(initTicker, 5000);
     };
   }
 
   // Initialize after page load
   document.addEventListener('astro:page-load', initTicker);
-  // Fallback for initial load
   if (document.readyState === 'complete') {
     initTicker();
   } else {
