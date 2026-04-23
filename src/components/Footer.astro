@@ -87,7 +87,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Categories -->
       <div class="footer-col">
-        <h3 class="footer-col-title">Kategorien</h3>
+        <h3 class="footer-col-title">{locale === 'de' ? 'Kategorien' : 'Categories'}</h3>
         <ul class="footer-links" role="list">
           <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=bitcoin' : '/en/blog/?cat=bitcoin'} class="footer-link">₿ Bitcoin</a></li>
           <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=ethereum' : '/en/blog/?cat=ethereum'} class="footer-link">Ξ Ethereum</a></li>

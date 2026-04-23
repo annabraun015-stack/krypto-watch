@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { siteConfig } from '../../config/site';
+
+const tr = t('en');
+---
+
+<BaseLayout title={tr.seo.privacyTitle} description="Privacy Policy of KryptoWatch according to GDPR." locale="en" robots="index, follow">
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero-title">Privacy Policy</h1>
+      <p class="page-hero-subtitle">Last updated: January 2025</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-content prose-crypto">
+      <h2>1. Controller</h2>
+      <p>KryptoWatch<br />Email: <a href="mailto:datenschutz@krypto-watch.de">datenschutz@krypto-watch.de</a></p>
+
+      <h2>2. Collection and Processing of Personal Data</h2>
+      <p>We collect personal data only to the extent necessary to provide our services. This includes:</p>
+      <ul>
+        <li>Contact data (name, email) when using the contact form</li>
+        <li>Technical data (IP address, browser information) for security and performance</li>
+        <li>Newsletter subscription data with explicit consent</li>
+      </ul>
+
+      <h2>3. Purpose of Processing</h2>
+      <p>The collected data is processed exclusively for the following purposes:</p>
+      <ul>
+        <li>Providing and improving our platform</li>
+        <li>Responding to contact requests</li>
+        <li>Sending the newsletter (only with consent)</li>
+        <li>Analyzing website usage for optimization</li>
+      </ul>
+
+      <h2>4. Cookies and Tracking</h2>
+      <p>This website uses technically necessary cookies. Analytical cookies are only set with your consent. You can disable cookies in your browser at any time.</p>
+
+      <h2>5. Your Rights</h2>
+      <p>According to GDPR, you have the following rights:</p>
+      <ul>
+        <li>Right of access (Art. 15 GDPR)</li>
+        <li>Right to rectification (Art. 16 GDPR)</li>
+        <li>Right to erasure (Art. 17 GDPR)</li>
+        <li>Right to data portability (Art. 20 GDPR)</li>
+        <li>Right to object (Art. 21 GDPR)</li>
+      </ul>
+
+      <h2>6. Data Protection Contact</h2>
+      <p>If you have questions about data protection, please contact: <a href="mailto:datenschutz@krypto-watch.de">datenschutz@krypto-watch.de</a></p>
+
+      <h2>7. Right to Complain</h2>
+      <p>You have the right to lodge a complaint with the competent data protection supervisory authority.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: 4rem 2rem; text-align: center; }
+  .page-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 900; color: var(--color-text-primary); margin-bottom: 0.75rem; }
+  .page-hero-subtitle { color: var(--color-text-muted); }
+  .legal-content { max-width: 800px; }
+</style>

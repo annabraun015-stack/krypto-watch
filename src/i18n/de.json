@@ -6,7 +6,8 @@
     "contact": "Kontakt",
     "privacy": "Datenschutz",
     "terms": "AGB",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "imprint": "Impressum"
   },
   "hero": {
     "badge": "🔥 Krypto-Intelligence-Plattform",
@@ -142,6 +143,7 @@
     "contactDesc": "Nehmen Sie Kontakt mit dem KryptoWatch-Team auf. Wir freuen uns auf Ihre Nachricht.",
     "privacyTitle": "Datenschutzerklärung – KryptoWatch",
     "termsTitle": "Allgemeine Geschäftsbedingungen – KryptoWatch",
+    "imprintTitle": "Impressum – KryptoWatch",
     "rsiTitle": "RSI Indikator: {coin} Relative Strength Index | KryptoWatch",
     "rsiDesc": "Echtzeit-RSI (Relative Strength Index) für {coin}. Überwachen Sie überkaufte und überverkaufte Level mit unseren professionellen Analyse-Tools."
   },

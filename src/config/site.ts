@@ -37,14 +37,18 @@ export const navLinks = {
 
 export const footerLinks = {
   de: [
+    { label: 'Impressum', href: '/impressum/' },
     { label: 'Datenschutz', href: '/privacy/' },
     { label: 'AGB', href: '/terms/' },
+    { label: 'Kontakt', href: '/contact-us/' },
     { label: 'Sitemap', href: '/sitemap/' },
     { label: 'Über uns', href: '/about-us/' },
   ],
   en: [
+    { label: 'Imprint', href: '/en/impressum/' },
     { label: 'Privacy Policy', href: '/en/privacy/' },
     { label: 'Terms', href: '/en/terms/' },
+    { label: 'Contact', href: '/en/contact-us/' },
     { label: 'Sitemap', href: '/sitemap/' },
     { label: 'About Us', href: '/en/about-us/' },
   ],

@@ -6,7 +6,8 @@
     "contact": "Contact",
     "privacy": "Privacy Policy",
     "terms": "Terms",
-    "sitemap": "Sitemap"
+    "sitemap": "Sitemap",
+    "imprint": "Imprint"
   },
   "hero": {
     "badge": "🔥 Crypto Intelligence Platform",
@@ -142,6 +143,7 @@
     "contactDesc": "Get in touch with the KryptoWatch team. We look forward to hearing from you.",
     "privacyTitle": "Privacy Policy – KryptoWatch",
     "termsTitle": "Terms and Conditions – KryptoWatch",
+    "imprintTitle": "Imprint – KryptoWatch",
     "rsiTitle": "RSI Indicator: {coin} Relative Strength Index | KryptoWatch",
     "rsiDesc": "Real-time RSI (Relative Strength Index) for {coin}. Monitor overbought and oversold levels with our professional technical analysis tools."
   },

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { siteConfig } from '../../config/site';
+
+const tr = t('en');
+---
+
+<BaseLayout title={`Imprint – ${siteConfig.name}`} description="Imprint and legal information of KryptoWatch." locale="en" robots="index, follow">
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero-title">Imprint</h1>
+      <p class="page-hero-subtitle">Information according to § 5 TMG</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-content prose-crypto">
+      <h2>Website Operator</h2>
+      <p>
+        <strong>KryptoWatch</strong><br />
+        Digital Intelligence Editorial<br />
+        Musterstraße 123<br />
+        10115 Berlin<br />
+        Germany
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a><br />
+        Website: <a href={siteConfig.url}>{siteConfig.domain}</a>
+      </p>
+
+      <h2>Editorially Responsible</h2>
+      <p>
+        Max Mustermann<br />
+        Musterstraße 123<br />
+        10115 Berlin
+      </p>
+
+      <h2>EU Dispute Resolution</h2>
+      <p>The European Commission provides a platform for online dispute resolution (OS): <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>. Our email address can be found above in the imprint.</p>
+
+      <h2>Consumer Dispute Resolution</h2>
+      <p>We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+
+      <h2>Liability for Content</h2>
+      <p>As a service provider, we are responsible for our own content on these pages in accordance with general laws pursuant to § 7 Para. 1 TMG. However, according to §§ 8 to 10 TMG, we as a service provider are not obliged to monitor transmitted or stored external information or to investigate circumstances that indicate illegal activity.</p>
+
+      <h2>Liability for Links</h2>
+      <p>Our offer contains links to external third-party websites over whose content we have no influence. Therefore, we cannot assume any liability for this external content. The respective provider or operator of the pages is always responsible for the content of the linked pages.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: 4rem 2rem; text-align: center; }
+  .page-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 900; color: var(--color-text-primary); margin-bottom: 0.75rem; }
+  .page-hero-subtitle { color: var(--color-text-muted); }
+  .legal-content { max-width: 800px; }
+</style>

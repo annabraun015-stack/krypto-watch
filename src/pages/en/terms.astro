@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n';
+import { siteConfig } from '../../config/site';
+
+const tr = t('en');
+---
+
+<BaseLayout title={tr.seo.termsTitle} description="Terms and Conditions of KryptoWatch." locale="en" robots="index, follow">
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero-title">Terms and Conditions</h1>
+      <p class="page-hero-subtitle">Last updated: January 2025</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container legal-content prose-crypto">
+      <h2>1. Scope</h2>
+      <p>These Terms and Conditions apply to the use of the KryptoWatch website and all services offered therein.</p>
+
+      <h2>2. Services</h2>
+      <p>KryptoWatch provides information, analysis, and market data in the field of cryptocurrencies. These contents are for informational purposes only and do not constitute investment advice.</p>
+
+      <h2>3. Intellectual Property</h2>
+      <p>All content, including text, graphics, and logos, is the property of KryptoWatch or its licensors and is protected by copyright law.</p>
+
+      <h2>4. User Conduct</h2>
+      <p>Users agree not to use the website for any unlawful purposes or in any way that could damage, disable, or overburden the site.</p>
+
+      <h2>5. Disclaimer</h2>
+      <p>KryptoWatch does not guarantee the accuracy, completeness, or timeliness of the information provided. Use of the information is at the user's own risk.</p>
+
+      <h2>6. Changes to Terms</h2>
+      <p>We reserve the right to modify these terms at any time. The current version will always be available on our website.</p>
+
+      <h2>7. Governing Law</h2>
+      <p>These terms are governed by the laws of Germany. The place of jurisdiction is Berlin, Germany.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero { padding-block: 4rem 2rem; text-align: center; }
+  .page-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 900; color: var(--color-text-primary); margin-bottom: 0.75rem; }
+  .page-hero-subtitle { color: var(--color-text-muted); }
+  .legal-content { max-width: 800px; }
+</style>
