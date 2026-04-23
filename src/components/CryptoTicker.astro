@@ -18,10 +18,10 @@ const allCoins = [...coins, ...coins];
 <div class="ticker-wrap" role="region" aria-label="Crypto Marktpreise" aria-live="polite">
   <div class="ticker-inner" aria-hidden="true">
     {allCoins.map((coin) => (
-      <div class="ticker-item">
+      <div class="ticker-item" data-symbol={coin.symbol}>
         <span class="ticker-symbol">{coin.symbol}</span>
-        <span class="ticker-price">{coin.price}</span>
-        <span class={`ticker-change ${coin.pos ? 'pos' : 'neg'}`}>{coin.change}</span>
+        <span class="ticker-price" data-price>{coin.price}</span>
+        <span class={`ticker-change ${coin.pos ? 'pos' : 'neg'}`} data-change>{coin.change}</span>
       </div>
     ))}
   </div>
@@ -47,7 +47,11 @@ const allCoins = [...coins, ...coins];
     font-size: 0.8125rem;
     color: var(--color-text-primary);
     font-variant-numeric: tabular-nums;
+    transition: color 0.3s ease;
   }
+
+  .ticker-price.up { color: oklch(72% 0.2 145); }
+  .ticker-price.down { color: oklch(65% 0.25 25); }
 
   .ticker-change {
     font-size: 0.75rem;
@@ -61,3 +65,86 @@ const allCoins = [...coins, ...coins];
   .ticker-change.pos { color: oklch(72% 0.2 145); }
   .ticker-change.neg { color: oklch(65% 0.25 25); }
 </style>
+
+<script>
+  const symbols = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'XRPUSDT', 'ADAUSDT', 'AVAXUSDT', 'LINKUSDT'];
+  const symbolMap: Record<string, string> = {
+    'BTCUSDT': 'BTC',
+    'ETHUSDT': 'ETH',
+    'SOLUSDT': 'SOL',
+    'BNBUSDT': 'BNB',
+    'XRPUSDT': 'XRP',
+    'ADAUSDT': 'ADA',
+    'AVAXUSDT': 'AVAX',
+    'LINKUSDT': 'LINK'
+  };
+
+  function formatPrice(price: string, symbol: string) {
+    const num = parseFloat(price);
+    if (num > 1000) return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    if (num > 1) return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return '$' + num.toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+  }
+
+  function initTicker() {
+    const ws = new WebSocket('wss://stream.binance.com:9443/ws/!miniTicker@arr');
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      data.forEach((ticker: any) => {
+        if (symbols.includes(ticker.s)) {
+          const symbol = symbolMap[ticker.s];
+          const price = ticker.c;
+          const open = ticker.o;
+          const changePercent = ((parseFloat(price) - parseFloat(open)) / parseFloat(open) * 100).toFixed(2);
+          const isPos = parseFloat(changePercent) >= 0;
+
+          const elements = document.querySelectorAll(`[data-symbol="${symbol}"]`);
+          elements.forEach(el => {
+            const priceEl = el.querySelector('[data-price]');
+            const changeEl = el.querySelector('[data-change]');
+
+            if (priceEl) {
+              const oldPrice = priceEl.textContent;
+              const newPriceFormatted = formatPrice(price, symbol);
+              
+              if (oldPrice !== newPriceFormatted) {
+                priceEl.textContent = newPriceFormatted;
+                // Subtle flash effect
+                const currentPrice = parseFloat(price);
+                const previousPrice = parseFloat(oldPrice?.replace(/[$,]/g, '') || '0');
+                
+                if (currentPrice > previousPrice) {
+                  priceEl.classList.add('up');
+                  setTimeout(() => priceEl.classList.remove('up'), 500);
+                } else if (currentPrice < previousPrice) {
+                  priceEl.classList.add('down');
+                  setTimeout(() => priceEl.classList.remove('down'), 500);
+                }
+              }
+            }
+
+            if (changeEl) {
+              changeEl.textContent = (isPos ? '+' : '') + changePercent + '%';
+              changeEl.classList.toggle('pos', isPos);
+              changeEl.classList.toggle('neg', !isPos);
+            }
+          });
+        }
+      });
+    };
+
+    ws.onclose = () => {
+      setTimeout(initTicker, 5000); // Reconnect after 5 seconds
+    };
+  }
+
+  // Initialize after page load
+  document.addEventListener('astro:page-load', initTicker);
+  // Fallback for initial load
+  if (document.readyState === 'complete') {
+    initTicker();
+  } else {
+    window.addEventListener('load', initTicker);
+  }
+</script>
