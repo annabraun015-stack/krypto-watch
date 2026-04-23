@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can Bitcoin be hacked by a quantum computer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While quantum computers could theoretically threaten current cryptography, the Bitcoin network can be upgraded to 'Quantum-Resistant' algorithms. Most experts believe this transition will happen long before a viable attack is possible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a 51% attack?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 51% attack occurs if an entity controls more than half of the network's mining power. However, on Bitcoin, the cost of doing this is in the tens of billions of dollars, making it more profitable to mine honestly than to attack."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Bitcoin more secure than a bank?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A bank is a centralized point of failure (it can be hacked or freeze your funds). Bitcoin is a decentralized protocol with no central failure point, though the responsibility of securing private keys shifts to the user."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who controls the Bitcoin network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nobody. Bitcoin is governed by code and consensus. Thousands of independent node operators and miners globally must agree on the rules, making it impossible for any single government or company to take control."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if the internet goes down?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Bitcoin network is globally distributed. If a local internet outage occurs, the rest of the world keeps the network running. There are also satellite and radio-based solutions to transmit Bitcoin transactions without the standard internet."
+      }
+    }
   ]
 };
 
@@ -120,14 +160,20 @@ Explore the components of the Bitcoin energy shield:
 
 ## Section 7: FAQ — Professional Security Audit
 
-### 1. Is Bitcoin 'Quantum proof'?
-While current quantum computers cannot break Bitcoin's encryption, researchers are already developing "Quantum-Resistant" signatures. Bitcoin is a software protocol; if a credible quantum threat emerges, the network can upgrade to new cryptographic standards through a soft fork.
+### 1. Can Bitcoin be hacked by a quantum computer?
+Not in 2026. While theoretical "Shor's Algorithm" could one day attack current keys, Bitcoin's modular design allows it to upgrade to "Post-Quantum Cryptography" (PQC) if necessary. The network is constantly evolving to stay ahead of cryptographic threats.
 
-### 2. Can a government 'Kill' Bitcoin?
-No. Because the ledger is distributed across thousands of independent nodes running in every country on Earth, there is no "OFF" switch. A government could ban its citizens from using it, but they cannot stop the protocol from functioning as long as the internet exists.
+### 2. What is a "51% Attack"?
+This is a scenario where an attacker gains control of more than half of the total [Mining](/en/blog/bitcoin-mining/) power. For Bitcoin, this would require building a data center larger than any nation-state can afford, making the attack economically irrational.
 
-### 3. What is the greatest risk to Bitcoin?
-The greatest risk is not technical—it is **Human Error**. Most Bitcoin "hacks" are actually cases of people losing their [private keys](/en/blog/public-private-keys/) or falling for phishing scams. The protocol itself is the most secure system ever built by man.
+### 3. Is Bitcoin more secure than a bank?
+A bank secures your money behind human walls and centralized databases—both of which have "single points of failure." Bitcoin secures your money behind the laws of mathematics. However, with Bitcoin, you are responsible for your own [Wallet Security](/en/blog/how-to-store-bitcoin-safely/).
+
+### 4. Who controls the Bitcoin network?
+The network is controlled by the consensus of its users. If someone tries to change the rules maliciously, the [Nodes](/en/blog/what-is-a-bitcoin-node/) will simply reject their transactions. There is no CEO to bribe and no headquarters to raid.
+
+### 5. What happens if the internet goes down?
+Because Bitcoin is peer-to-peer, it only requires a way to transmit data. In 2026, transactions are being sent via **Blockstream Satellites**, mesh networks, and even radio. As long as two computers can communicate anywhere on Earth, Bitcoin survives.
 
 ---
 

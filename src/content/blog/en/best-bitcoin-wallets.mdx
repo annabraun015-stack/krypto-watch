@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the best hardware wallet in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The top recommendations for 2026 are the BitBox02 (ease of use), Trezor Safe 3 (open-source standard), and the Coldcard MK4 (maximum security for advanced users)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is MetaMask a good Bitcoin wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. MetaMask is primarily designed for Ethereum and EVM-compatible networks. For Bitcoin, you should use specialized wallets like Sparrow (Desktop), Phoenix (Mobile), or a dedicated hardware wallet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a 'Watch-Only' wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A watch-only wallet allows you to track your balance and transaction history without importing your private keys. This is a great way to monitor your cold storage on your phone without exposing your keys to the internet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use my hardware wallet with my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Most modern hardware wallets (like the Trezor Safe 3 or Ledger Nano X) can connect to Android and iOS devices via USB-C or Bluetooth, allowing you to manage your funds on the go securely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I back up my wallet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The only reliable backup is your 12 to 24-word seed phrase. You should write these words on physical paper or stamp them into a stainless steel plate. Never save them digitally."
+      }
+    }
   ]
 };
 
@@ -120,16 +160,22 @@ A wallet is only as strong as the network it communicates with.
 
 ---
 
-## Section 7: FAQ — Professional Security Standards
+<h2 id="faq">Section 6: FAQ — Choosing Your Sovereignty Tool</h2>
 
-### 1. Can someone hack my hardware wallet?
-Physical attacks on hardware wallets are extremely rare and difficult. Most involve physical possession of the device and expensive lab equipment. In 2026, standard **Secure Elements** (EAL5+ or EAL6+) effectively neutralize these threats for 99.9% of users.
+### 1. What is the best hardware wallet in 2026?
+For the majority of users, the **BitBox02** and **Trezor Safe 3** offer the best balance of open-source security and ease of use. If you are an advanced user who wants "Air-Gapped" security (never plugging into a computer), the **Coldcard MK4** remains the gold standard.
 
-### 2. Should I use a 'Bitcoin-only' firmware?
-Yes, if possible. Devices like BitBox02 and Coldcard offering "Bitcoin-only" versions have a smaller "Attack Surface." By removing the code for thousands of other coins, they minimize the potential for software bugs and vulnerabilities.
+### 2. Is MetaMask a good Bitcoin wallet?
+No. While MetaMask is the king of Ethereum, it does not support native Bitcoin. To manage BTC, you should use wallets designed specifically for the protocol, such as **Sparrow Wallet** for power users or **BlueWallet** for mobile simplicity.
 
-### 3. What is an 'Air-Gapped' wallet?
-An air-gapped wallet (like the Coldcard or Foundation Passport) never touches a computer. It communicates via MicroSD cards or QR codes. This ensures that even if your computer has the worst virus in history, it has no physical path to talk to your keys.
+### 3. What is a "Watch-Only" wallet?
+A Watch-Only wallet (using your xPub) allows you to see your balance and generate new receiving addresses on your phone, while your private keys stay safely inside your hardware wallet at home. It is the best way to track your wealth without risking its security.
+
+### 4. Can I use my hardware wallet with my phone?
+Yes. Most modern hardware wallets are now compatible with mobile devices via **USB-C** or **Bluetooth**. This allows you to sign high-security transactions from anywhere in the world without needing a laptop.
+
+### 5. How do I back up my wallet?
+Your hardware device is just a screen; the real "wallet" is your **12-24 word seed phrase**. You must store this phrase offline. In 2026, we recommend using a **Steel Seed Backup** to protect your words from fire, flood, and physical decay.
 
 ---
 

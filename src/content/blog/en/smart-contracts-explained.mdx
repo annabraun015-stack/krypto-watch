@@ -45,6 +45,22 @@ export const faqSchema = {
         "@type": "Answer",
         "text": "The most common programming language for Ethereum smart contracts is Solidity, an object-oriented language heavily influenced by C++, Python, and JavaScript."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Who can see the code of a smart contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because smart contracts live on a public blockchain, their code is generally transparent and can be viewed by anyone using a block explorer (like Etherscan). This allows users to verify exactly what a contract does before interacting with it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if there is a bug in a smart contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If a bug exists, it can be exploited by hackers to drain funds. Because the blockchain is immutable, the code cannot be easily 'patched' after deployment. This is why professional security audits are critical before a contract goes live."
+      }
     }
   ]
 };
@@ -160,6 +176,25 @@ To mitigate this, high-value smart contracts undergo rigorous **Security Audits*
 ---
 
 
+
+---
+
+<h2 id="faq">Section 7: FAQ — Precision in Code</h2>
+
+### 1. Are smart contracts legally binding?
+It depends on the jurisdiction. In 2026, many legal systems recognize the cryptographically signed execution of a smart contract as a legally binding agreement, though "code is law" primarily applies to the execution on the blockchain itself.
+
+### 2. Can a smart contract be changed or deleted?
+By default, once deployed, a smart contract is **Immutable**. However, developers can use "Proxy Contracts" or "Diamond Standards" to allow for upgrades, but this requires a level of governance and trust that may reduce decentralization.
+
+### 3. What language are smart contracts written in?
+The primary language is **Solidity**. It was designed specifically for the Ethereum Virtual Machine (EVM) and is statically typed, supporting inheritance, libraries, and complex user-defined types.
+
+### 4. Who can see the code of a smart contract?
+Anyone. Since they live on a public ledger, the bytecode and often the verified source code are available to the public. Transparency is a core feature of trustless finance.
+
+### 5. What happens if there is a bug in a smart contract?
+If a bug is exploited, the results are usually permanent. This is why **Auditing** and **Formal Verification** are mandatory steps for any contract handling significant capital.
 
 ---
 

@@ -45,6 +45,22 @@ export const faqSchema = {
         "@type": "Answer",
         "text": "You can significantly reduce fees by using Ethereum Layer 2 solutions (like Arbitrum or Optimism), transacting during off-peak weekend hours, or lowering your maximum base fee in your wallet settings (though this may delay the transaction)."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Ethereum gas fee depend on the amount sent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlike a bank transfer that might charge a percentage, Ethereum gas fees are based on the computational complexity of the transaction. Sending $1 million of ETH costs the same as sending $1."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to my gas fee if a transaction fails?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If a transaction fails (e.g., due to a smart contract error), you still lose the gas fees. This is because validators still had to expend energy and computational resources to process the transaction up to the point where it failed."
+      }
     }
   ]
 };
@@ -152,6 +168,25 @@ For everyday users swapping tokens, buying NFTs, or playing Web3 games, the solu
 ---
 
 
+
+---
+
+<h2 id="faq">Section 6: FAQ — Optimizing Your Network Costs</h2>
+
+### 1. Why are Ethereum gas fees so high?
+Gas fees represent the supply and demand for block space. Since Ethereum can only handle a limited number of transactions per block, users must pay higher fees to prioritize their transactions when the network is busy.
+
+### 2. What is Gwei?
+Gwei (short for Giga-wei) is the unit used to measure gas prices. Instead of saying a transaction costs 0.000000021 ETH, we say it costs 21 Gwei. It is similar to how "cents" are to "dollars."
+
+### 3. How can I avoid paying high Ethereum gas fees?
+The most effective way is to use **Layer 2 (L2)** networks like Arbitrum or Optimism. If you must use the mainnet, try transacting during off-peak hours (usually weekends or late at night UTC) and always check a gas tracker before signing.
+
+### 4. Does Ethereum gas fee depend on the amount sent?
+No. Whether you send 0.1 ETH or 1,000 ETH, the gas cost is identical because the computational work required to update the ledger is the same. However, interacting with complex smart contracts (like DeFi swaps) costs more gas than a simple transfer.
+
+### 5. What happens to my gas fee if a transaction fails?
+If a transaction fails, the gas is **consumed and non-refundable**. Validators have already performed the work to execute the transaction until the point of failure, and they must be compensated for that computational effort.
 
 ---
 

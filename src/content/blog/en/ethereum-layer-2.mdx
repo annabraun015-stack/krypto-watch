@@ -35,7 +35,7 @@ export const faqSchema = {
       "name": "Which is better: Arbitrum or Optimism?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Both use Optimistic Rollup technology and offer highly similar, fast, and cheap user experiences. Arbitrum currently has a larger ecosystem of DeFi applications and total value locked, while Optimism focuses heavily on its 'Superchain' vision (which powers networks like Coinbase's Base)."
+        "text": "Both use Optimistic Rollup technology and offer highly similar experiences. Arbitrum currently has a larger ecosystem of DeFi applications, while Optimism focuses on its 'Superchain' vision which powers networks like Base."
       }
     },
     {
@@ -43,7 +43,23 @@ export const faqSchema = {
       "name": "Do I use ETH to pay for gas on Layer 2?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. While Layer 2 networks like Arbitrum and Optimism have their own governance tokens (ARB and OP), you still pay transaction (gas) fees using bridged Ethereum (ETH)."
+        "text": "Yes. While most Layer 2 networks have their own tokens, you still pay for transaction (gas) fees using bridged Ethereum (ETH) in most cases."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I move my ETH to Layer 2?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can move ETH from the mainnet to an L2 using an 'Ethereum Bridge.' You can use the official native bridges for maximum security, or third-party bridges like Across or Hop for faster transfers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Layer 2 as secure as Ethereum?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Because Layer 2 rollups post their transaction proofs back to the Ethereum mainnet, they inherit the security and decentralization of the world's most secure smart contract platform."
       }
     }
   ]
@@ -149,6 +165,25 @@ Using a Layer 2 is identical to using Ethereum mainnet, just significantly cheap
 ---
 
 
+
+---
+
+<h2 id="faq">Section 6: FAQ — The Future of Scalability</h2>
+
+### 1. What is an Ethereum Layer 2?
+Think of Ethereum Layer 1 as a secure, high-security vault. Layer 2 is like a private airport lane; it processes thousands of people quickly and then delivers them all at once to the vault for final settlement. It provides speed without compromising security.
+
+### 2. Which is better: Arbitrum or Optimism?
+Both are excellent. **Arbitrum** currently leads in total volume and complex DeFi apps. **Optimism** is building the "Superchain" framework used by Coinbase's **Base**, which aims to unify all L2s into a single, seamless network.
+
+### 3. Do I use ETH to pay for gas on Layer 2?
+Yes. On almost every major Rollup (Arbitrum, Optimism, Base, zkSync), ETH is the native gas token. You must bridge your ETH from the mainnet to the L2 to start using it.
+
+### 4. How do I move my ETH to Layer 2?
+The safest way is using the **Native Bridge** (e.g., bridge.arbitrum.io). This process takes about 15 minutes to move to the L2, but "Optimistic" bridges can take up to 7 days to move back to the mainnet. For faster withdrawals, use third-party "Liquidity Bridges" like Across.
+
+### 5. Is Layer 2 as secure as Ethereum?
+Unlike "Sidechains" (which have their own security), Rollups inherit the security of Ethereum. Even if the Layer 2 operator disappears tomorrow, your funds can still be recovered from the Ethereum mainnet using cryptographic proofs.
 
 ---
 

@@ -23,6 +23,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Bitcoin legal in Germany?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Bitcoin is officially recognized by the German Federal Financial Supervisory Authority (BaFin) as a 'Unit of Account' and a legal financial instrument."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is Bitcoin taxed in Germany?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bitcoin is treated as a private asset. If you hold your Bitcoin for more than one year, all capital gains from the sale are 100% tax-free. If sold within a year, gains are taxed at your personal income tax rate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the tax-free limit for short-term gains?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is a 'Freigrenze' (tax-free limit) of €600 per year for private disposal transactions. If your total profit from selling crypto within a year is below €600, you pay no tax. If you exceed it by even €1, the entire amount is taxable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Bitcoin mining taxable in Germany?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Bitcoin mining is generally considered a commercial activity (Gewerbe) in Germany, meaning you must register a business and pay trade tax (Gewerbesteuer) and income tax on your earnings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to report Bitcoin to the Finanzamt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You only need to report your Bitcoin transactions if you sold them within the one-year holding period and your profits exceeded the €600 limit. Long-term holdings (over 1 year) do not need to be reported."
+      }
+    }
   ]
 };
 
@@ -114,16 +154,22 @@ German law is piece of a larger puzzle:
 
 ---
 
-## Section 7: FAQ — Navigating the Finanzamt
+<h2 id="faq">Section 7: FAQ — Legal & Tax Clarity</h2>
 
-### 1. Is 'Staking' or 'Lending' different for taxes?
-Yes. In 2022, the BMF clarified that using your Bitcoin for lending or staking **does not** extend the holding period to 10 years (as previously feared). It remains 1 year, but the *rewards* you earn are taxed as 'Other Income'.
+### 1. Is Bitcoin legal in Germany?
+Yes. Bitcoin has been recognized as a **Unit of Account** (Rechnungseinheit) by the Federal Financial Supervisory Authority (BaFin) since 2013. It is a legal financial instrument that can be used for payments and investments.
 
-### 2. What if I lost my records for the FIFO calculation?
-This is a high-risk scenario. Without records, the tax office may estimate your gains at the highest possible price, resulting in a massive tax bill. Always use automated tax tools like **Cointracking** or **Blockpit** to maintain your audit-readiness.
+### 2. How is Bitcoin taxed in Germany?
+Bitcoin is not subject to the 25% flat withholding tax (Abgeltungssteuer) like stocks. Instead, it is treated as a "Private Disposal Transaction." If you hold your Bitcoin for **more than one year**, the profit from the sale is **100% tax-free**, regardless of the amount.
 
-### 3. Can I pay my taxes in Bitcoin?
-Not yet. Taxes in Germany must be settled in **Euro**. However, many investors sell a small portion of their tax-free "Long-Term" holdings to cover the tax liability of their "Short-Term" trades.
+### 3. What is the tax-free limit for short-term gains?
+If you sell Bitcoin within the one-year holding period, you have a **"Freigrenze" of €600** per year. If your total crypto profits are below this, you pay zero tax. If you earn €601, you must pay tax on the entire €601 at your personal income tax rate.
+
+### 4. Is Bitcoin mining taxable?
+In most cases, the Finanzamt views mining as a **Commercial Activity** (Gewerbliche Tätigkeit). This means you must register a business, pay trade tax (Gewerbesteuer), and you cannot benefit from the one-year tax-free holding rule that applies to private investors.
+
+### 5. Do I have to report Bitcoin to the Finanzamt?
+If you are a "HODLer" and hold your coins for more than 12 months, you generally do **not** need to report them on your tax return. However, if you trade frequently or sell within a year, you must keep meticulous records (using tools like Cointracking) to fulfill your reporting obligations.
 
 ---
 

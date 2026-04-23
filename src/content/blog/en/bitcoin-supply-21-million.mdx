@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can the 21 million limit be changed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Technically, yes, if the majority of global nodes and miners agree to change the code. However, since the 21 million limit is what gives Bitcoin its value, the community has zero incentive to debase their own holdings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after the last Bitcoin is mined?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once all 21 million Bitcoins are in circulation (around the year 2140), miners will be compensated entirely through transaction fees paid by users, ensuring the network remains secure without new issuance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many Bitcoins are lost forever?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chainalysis estimates that approximately 3 to 4 million Bitcoins (including Satoshi's 1.1 million) have been lost due to forgotten private keys or death, making the actual circulating supply much lower than 21 million."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why 21 million exactly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The number 21 million is the result of the mathematical formula used for issuance: 50 BTC per block, halving every 210,000 blocks. It wasn't chosen randomly, but as a way to spread issuance over roughly 130 years."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there enough Bitcoin for everyone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. While there are only 21 million Bitcoins, each Bitcoin is divisible into 100 million 'Satoshis.' This means there are 2.1 quadrillion individual units of account, enough for the entire global population."
+      }
+    }
   ]
 };
 
@@ -135,16 +175,22 @@ The 21 million limit is the anchor for the entire Bitcoin ecosystem:
 
 ---
 
-## Section 8: FAQ — The 2140 Endgame
+## Section 8: FAQ — The Finite Standard
 
-### 1. What happens when all 21 million are mined?
-Around the year 2140, new issuance will stop completely. Miners will then be funded entirely by **Transaction Fees**. As Bitcoin becomes the primary global settlement layer, the fees from millions of daily transactions will provide the necessary incentive to keep the network secure.
+### 1. Can the 21 million limit be changed?
+While Bitcoin is open-source code that *can* be edited, the "Consensus Rules" are enforced by every [Independent Node](/en/blog/what-is-a-bitcoin-node/) globally. If a group of developers tried to increase the supply, the nodes would simply reject their new version of the software. In Bitcoin, the users hold the power, and no user wants to devalue their own money.
 
-### 2. Can't the 21 million limit be changed via a fork?
-Anyone can "Fork" the code and make "Bitcoin-Fixed-60M." But unless you can convince everyone to value your new fork more than the original, it will have zero value. The "Network Effect" of the 21 million limit is Bitcoin's strongest defense.
+### 2. What happens after the last Bitcoin is mined?
+Around the year **2140**, the last Satoshi will be mined. At that point, the network will transition to a **Pure Fee Economy**. Miners will no longer receive new coins; instead, they will be paid entirely by users who want their transactions included in the block.
 
-### 3. Does Satoshi own a dangerous amount?
-Satoshi's estimated 1.1 million BTC have not moved since the very beginning. Most specialists believe these coins are either intentionally "burned" or that the creator is no longer alive to spend them. They are a "Sleeping Giant" that ironically adds to the scarcity by staying still.
+### 3. How many Bitcoins are lost forever?
+It is estimated that between **3 and 4 million BTC** have been permanently removed from circulation. These are coins held in wallets where the [Private Keys](/en/blog/public-private-keys/) have been lost or the owners have passed away without a recovery plan. This makes the effective supply even scarcer than 21 million.
+
+### 4. Why 21 million exactly?
+The 21 million cap is a mathematical convergence. It is the sum of the initial 50 BTC reward halving every 210,000 blocks. (50 * 210,000 * 2 = 21,000,000). It's an elegant piece of programmatic monetary policy.
+
+### 5. Is there enough Bitcoin for everyone?
+Absolutely. Bitcoin is highly divisible. One Bitcoin is composed of **100,000,000 Satoshis**. In a future where Bitcoin is a global reserve asset, most people will measure their wealth in Satoshis (Sats), not whole Bitcoins.
 
 ---
 

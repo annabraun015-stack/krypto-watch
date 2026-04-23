@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I show my public key to others?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Your public key (or the address derived from it) is what you share with others so they can send you Bitcoin. It is like an email address or a bank account number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if someone gets my private key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If someone gains access to your private key, they have full control over your Bitcoin. They can move your funds to their own wallet, and because blockchain transactions are irreversible, you cannot get them back."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a seed phrase the same as a private key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A seed phrase (12-24 words) is a 'Master Key' that can generate many private keys. It is a human-readable way to back up your entire wallet. One seed phrase can manage thousands of different private keys for various assets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can two people randomly generate the same private key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Theoretically possible, but mathematically zero. There are more possible Bitcoin private keys than there are atoms in the known universe. To find the same key would require more computing power than humans currently possess."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How should I store my private key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You should never store your private key or seed phrase on a digital device. The best practice is to use a hardware wallet and keep a physical backup (on paper or steel) in a secure, fireproof location."
+      }
+    }
   ]
 };
 
@@ -133,6 +173,25 @@ No. Your Bitcoin lives on the **Blockchain**. Your "wallet" is simply a keychain
 
 ### 3. What is 'Sweeping' a key?
 Sweeping is the process of taking the funds associated with a specific private key and sending them to a new address inside your main wallet. This is common when recovering funds from a paper wallet to a more secure hardware wallet.
+
+---
+
+<h2 id="faq">Section 6: FAQ — Mastering Cryptographic Security</h2>
+
+### 1. Can I show my public key to others?
+Yes. Think of your Public Key like your IBAN or your PayPal email. Sharing it only allows people to **send** you money. It does not give them any ability to withdraw or see your private information.
+
+### 2. What happens if someone gets my private key?
+If an attacker gets your private key, your funds are gone. They can sign a transaction to move your Bitcoin to their wallet. Because Bitcoin has no "Customer Support" or "Fraud Department," there is no way to reverse the transaction.
+
+### 3. Is a seed phrase the same as a private key?
+A seed phrase is a human-readable "Master Key." Your wallet uses the seed phrase to mathematically calculate your individual private keys. Protecting your seed phrase is even more important than protecting a single private key, as it controls your entire wallet.
+
+### 4. Can two people randomly generate the same private key?
+The "Collision Probability" is practically zero. There are 2^256 possible private keys. To visualize this: if every person on Earth generated a billion keys per second for a trillion years, the chance of a match is still effectively zero.
+
+### 5. How should I store my private key?
+**Never store it on a computer, phone, or cloud drive.** The gold standard is to use a [Hardware Wallet](/en/blog/best-bitcoin-wallets/) which keeps the key in an offline chip. Your backup should be written on paper or stamped in stainless steel and kept in a hidden, secure location.
 
 ---
 

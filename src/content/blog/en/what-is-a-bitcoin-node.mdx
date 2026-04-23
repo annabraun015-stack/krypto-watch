@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does my Node hold my Bitcoin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Your Node holds the ledger (the record book). Your private keys remain in your physical wallet. Your node simply provides a private, independent way for your wallet to read the book."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to run a node?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In almost all democratic countries, yes. Because nodes don't transmit money for others but simply run open-source software to verify mathematical information, they are generally protected as a form of 'Code as Speech'."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my Node goes offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nothing happens to your funds. When you turn it back on, it will simply catch up to the rest of the network. However, while your node is off, you cannot verify incoming payments with 100% certainty."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much storage space does a Bitcoin node need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In 2026, a full Bitcoin node requires approximately 600GB to 800GB of storage. If you use 'Pruning', you can reduce this to as little as 10GB while still maintaining the same level of security and privacy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I run a Bitcoin node on a Raspberry Pi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, running a node on a Raspberry Pi (v4 or v5) with an external SSD is one of the most popular ways to participate in the network. It is energy-efficient and costs very little to run 24/7."
+      }
+    }
   ]
 };
 
@@ -129,6 +169,12 @@ In almost all democratic countries, yes. Because nodes don't transmit money for 
 
 ### 3. What if my Node goes offline?
 Nothing happens to your funds. When you turn it back on, it will simply catch up to the rest of the network. However, while your node is off, you cannot verify incoming payments with 100% certainty.
+
+### 4. How much storage space does a Bitcoin node need?
+In 2026, a full Bitcoin node requires approximately **600GB to 800GB** of storage. If you have limited space, you can run a "Pruned Node," which discards old block data while still maintaining the same level of security and privacy, reducing the storage requirement to as little as 10GB.
+
+### 5. Can I run a Bitcoin node on a Raspberry Pi?
+Yes! Running a node on a **Raspberry Pi 4 or 5** with an external 1TB SSD is one of the most popular and energy-efficient ways to support the network. Modern operating systems like Umbrel make this process as simple as plugging in a few cables.
 
 ---
 

@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it illegal to use privacy tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In most developed nations, privacy tools (like VPNs or CoinJoin) are legal. Privacy is a recognized human right. However, if these tools are used to hide the proceeds of actual crime, they can be used as evidence of money laundering intent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Monero better than Bitcoin for privacy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monero is private by default, whereas Bitcoin is transparent by default. Monero provides better anonymity 'out of the box,' but Bitcoin provides better Global Auditability. For many, Bitcoin's 'Opt-in' privacy is the perfect balance between transparency and freedom."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will Bitcoin ever be 100% anonymous?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bitcoin will likely remain a 'Glass House' to ensure its 21 million supply limit is never broken. The goal is not to hide the money, but to hide the owner of the money through cryptographic tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can someone see my name on a Bitcoin transaction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Bitcoin transactions do not contain names, physical addresses, or ID numbers. They only contain cryptographic addresses. However, if you bought Bitcoin on an exchange that knows your identity, that exchange can link your name to your address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a CoinJoin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A CoinJoin is a collaborative transaction where multiple users combine their inputs into a single large transaction. This breaks the link between the original sender and the final recipient, significantly increasing on-chain privacy."
+      }
+    }
   ]
 };
 
@@ -123,6 +163,12 @@ Monero is private *by default*, whereas Bitcoin is transparent *by default*. Mon
 
 ### 3. Will Bitcoin ever be 100% anonymous?
 Bitcoin will likely remain a "Glass House" to ensure its 21 million supply limit is never broken. The goal is not to hide the money, but to hide the *owner* of the money.
+
+### 4. Can someone see my name on a Bitcoin transaction?
+No. Bitcoin transactions do not contain names, physical addresses, or ID numbers. They only contain cryptographic addresses (like `bc1q...`). However, if you buy Bitcoin from a regulated exchange, that company knows which address belongs to you.
+
+### 5. What is a CoinJoin?
+A CoinJoin is a technical process where multiple users combine their Bitcoin into a single large transaction. This makes it mathematically difficult for an observer to determine which input belongs to which output, effectively "breaking the link" of your transaction history.
 
 ---
 

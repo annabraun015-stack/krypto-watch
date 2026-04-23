@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much should I pay for a Bitcoin transaction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The ideal fee depends on the current state of the 'Mempool' and how quickly you need the transaction to be confirmed. You should check a mempool explorer before sending to see the current 'sat/vB' required for the next block."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the fee depend on how much BTC I send?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Bitcoin fees are based on the data size of the transaction (in bytes), not the financial value. Sending 100 BTC from one address costs the same as sending 0.001 BTC from the same address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'sat/vB'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sat/vB stands for 'Satoshis per virtual Byte.' It is the unit of measurement for Bitcoin fees. It tells the miner how much you are willing to pay for every unit of data your transaction consumes in a block."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I set too low a fee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your transaction will sit in the mempool waiting for fees to drop. If you need to speed it up, you can use 'Replace-By-Fee' (RBF) to send a new version of the transaction with a higher fee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I save on Bitcoin fees?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For small, daily payments, you should use the Lightning Network, which offers near-instant transactions for fractions of a penny. For mainnet transactions, sending during off-peak hours (weekends) can also save significant costs."
+      }
+    }
   ]
 };
 
@@ -114,16 +154,22 @@ Fees are the glue that holds the security of the network together:
 
 ---
 
-## Section 7: FAQ — Professional Troubleshooting
+## Section 7: FAQ — Mastering the Fee Market
 
-### 1. What happens if I pay a near-zero fee?
-Your transaction will likely be ignored by miners. After a certain period (usually 2 weeks), most nodes will "Purge" the transaction from their mempool. The funds will then reappear as "available" in your wallet as if you never hit send.
+### 1. How much should I pay for a Bitcoin transaction?
+You should always check a **Mempool Explorer** (like mempool.space) before sending. If the network is quiet, 1-2 sat/vB might get you into the next block. During "bull market" congestion, you might need to pay 100+ sat/vB.
 
-### 2. Why are fees higher on certain days?
-Bitcoin fees follow a human cycle. Fees are traditionally highest during US/EU business hours and lowest on weekends. In 2026, large institutional "settlement runs" can cause temporary fee spikes that last for several hours.
+### 2. Does the fee depend on how much BTC I send?
+No. This is the biggest difference between Bitcoin and traditional banking. In Bitcoin, a $100 million transfer can be cheaper than a $10 transfer if the $100 million transfer is "lighter" in terms of data bytes.
 
-### 3. What happens to Bitcoin security when the mining reward goes to zero?
-By the year 2140, new Bitcoin issuance will stop. At that point, the network will be secured **entirely by transaction fees**. The global competition for block space is designed to provide such a massive "fee pool" that mining remains profitable, ensuring the network's immune system stays strong forever.
+### 3. What is 'sat/vB'?
+It is the standard unit for Bitcoin fees. It represents the number of **Satoshis** (the smallest unit of BTC) you are paying for every **virtual Byte** of data. A typical simple transaction is around 140 vB.
+
+### 4. What happens if I set too low a fee?
+Your transaction will stay in the **Mempool** (the waiting room) until miners choose it. If the network stays busy, it could sit there for days or weeks. However, you can "bump" the fee using **Replace-By-Fee (RBF)** if your wallet supports it.
+
+### 5. How can I save on Bitcoin fees?
+For transactions that aren't urgent, wait for the weekend when network activity is usually lower. For frequent small payments, use the [Lightning Network](/en/blog/lightning-network/), which allows you to send money for virtually zero cost by avoiding the main blockchain for every transaction.
 
 ---
 

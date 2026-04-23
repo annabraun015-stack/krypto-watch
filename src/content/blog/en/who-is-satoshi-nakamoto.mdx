@@ -21,7 +21,48 @@ import ProcessStep from '@/components/blog/ProcessStep.astro';
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": []
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Satoshi still control Bitcoin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Satoshi gave up control in 2011. Bitcoin is now controlled by decentralized consensus among thousands of independent Node operators and miners."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if Satoshi 'wakes up' and sells?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If the 1.1M BTC were moved, it would cause a major market event. However, every year that passes makes it more likely that those coins are lost or will never be touched by the creator."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was Satoshi a group of companies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unlikely. The code and writing show a very consistent singular 'voice.' Most experts believe it was either a single individual or a very small, two-person partnership like Hal Finney and Nick Szabo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Satoshi dead?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While unproven, many believe candidates like Hal Finney or Len Sassaman were the most likely creators. This would explain why the largest fortune in the world remains untouched."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much Bitcoin does Satoshi Nakamoto own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Blockchain analysis suggests Satoshi Nakamoto mined approximately 1.1 million BTC in the early days of the network across thousands of addresses. At today's prices, this makes Satoshi one of the wealthiest entities on Earth."
+      }
+    }
+  ]
 };
 
 ## 🎯 Introduction: The Architect Who Walked Away
@@ -130,6 +171,9 @@ Unlikely. The code and writing show a very consistent singular "voice." Most exp
 
 ### 4. Is Satoshi dead?
 While unproven, many believe candidates like **Hal Finney** or **Len Sassaman** were the most likely creators. This would explain why the largest fortune in the world remains untouched.
+
+### 5. How much Bitcoin does Satoshi Nakamoto own?
+Through detailed blockchain forensics, researchers have identified a pattern of mining (the "Patoshi pattern") that likely belongs to Satoshi. This pattern suggests Satoshi owns approximately **1.1 million BTC**, distributed across thousands of separate addresses. None of these coins have moved in over 15 years.
 
 ---
 

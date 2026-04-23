@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the safest way to store Bitcoin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The gold standard for safety is 'Cold Storage' using a hardware wallet. Devices like Ledger, Trezor, or BitBox02 keep your private keys isolated from the internet, making it impossible for hackers to steal them remotely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I keep my Bitcoin on an exchange?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Keeping Bitcoin on an exchange means the exchange owns the keys. If the exchange is hacked, goes bankrupt, or freezes your account, you lose access to your funds. Always withdraw your long-term savings to a non-custodial wallet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a 'Seed Phrase'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A seed phrase is a list of 12 to 24 words that acts as a master key for your Bitcoin. If you lose your wallet or device, you can use these words to recover all your funds on a new device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a paper wallet safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paper wallets are generally discouraged in 2026. They are easily damaged by fire or water, and the process of generating them can be compromised by malware on your computer. Hardware wallets are far more secure and user-friendly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if my hardware wallet is stolen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If someone steals your hardware wallet, they cannot access your Bitcoin without your PIN. You can immediately use your seed phrase to restore your wallet on a new device and move the funds to a safe location."
+      }
+    }
   ]
 };
 
@@ -125,16 +165,22 @@ Security is a holistic lifestyle, not a product:
 
 ---
 
-## Section 7: FAQ — Professional Security Insights
+## Section 7: FAQ — The Defense-in-Depth Audit
 
-### 1. What happens if the hardware wallet company goes out of business?
-Nothing. Your funds are not "in" the wallet or "with" the company. They are on the blockchain. Your hardware wallet is just a standard computer running BIP-39 logic. You can take your 24 words and recover your funds into **any other** compatible wallet brand.
+### 1. What is the safest way to store Bitcoin?
+The only professional standard for long-term storage is **Cold Storage**. By using a dedicated hardware device that never connects to the internet, you remove the possibility of digital theft. We recommend the **BitBox02** or **Trezor Safe 3** for their open-source security.
 
-### 2. Can a PIN be hacked?
-On a high-quality device (like Column or BitBox), the **Secure Element** is designed to physically destroy its logic if it detects a hardware-level hack attempt or too many failed PIN entries. This makes brute-forcing a PIN practically impossible.
+### 2. Should I keep my Bitcoin on an exchange?
+Only keep what you intend to trade in the next 24 hours. For everything else, remember the motto: *"Not your keys, not your coins."* When you store on an exchange, you are just holding an IOU in someone else's database.
 
-### 3. Should I use a hardware wallet or a 'Paper Wallet'?
-In 2026, Paper Wallets are considered obsolete and dangerous. They are difficult to generate safely and even harder to "spend" without leaking your private keys. **Always use a hardware wallet** for self-custody.
+### 3. What is a "Seed Phrase"?
+Your seed phrase (12-24 words) is the human-readable version of your **Master Private Key**. If your hardware wallet is destroyed, lost, or stolen, these words are the *only* way to recover your funds. Treat them like the most valuable physical object you own.
+
+### 4. Is a paper wallet safe?
+No. Paper wallets were popular in 2013, but they are obsolete in 2026. They are difficult to spend from safely and can easily be destroyed by environmental factors. A **Hardware Wallet** combined with a **Steel Backup** for your seed phrase is the modern standard.
+
+### 5. What happens if my hardware wallet is stolen?
+The thief would still need your physical **PIN** to access the device. Most hardware wallets will self-destruct (wipe all data) after 3-10 incorrect PIN attempts. As long as you have your seed phrase, you can restore your funds on a new device.
 
 ---
 

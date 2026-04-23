@@ -22,6 +22,46 @@ export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the Lightning Network safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Lightning Network uses 'Hashed Timelock Contracts' (HTLCs) to ensure that funds can never be stolen. If a peer goes offline or tries to cheat, you can always close the channel and recover your funds on the main Bitcoin blockchain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much are fees on Lightning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lightning fees are extremely low, typically ranging from 1 Satoshi to a few cents. This makes it ideal for micro-payments, such as paying for a cup of coffee or tipping content creators online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use Lightning without running a node?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. While running your own node is best for sovereignty, most users use 'Lightning Wallets' (like Phoenix, Wallet of Satoshi, or Strike) which handle the technical channel management for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a 'Payment Channel'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A payment channel is a private connection between two parties on the Lightning Network. It is established by a single transaction on the main blockchain, after which the two parties can send thousands of payments to each other instantly without further bloating the main chain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Lightning more private than Bitcoin L1?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Unlike mainnet transactions which are public forever, Lightning payments are not recorded on the blockchain. They use 'Onion Routing' (similar to Tor), meaning no one in the network knows the source or final destination of a payment except the sender and receiver."
+      }
+    }
   ]
 };
 
@@ -118,16 +158,22 @@ New technologies are solving this:
 
 ---
 
-## Section 7: FAQ: Risks and Realities
+## Section 7: FAQ — The Future of Global Payments
 
-### 1. Is my money safe if I go offline?
-If you use a **Non-Custodial** wallet, your funds are protected. In 2026, most wallets use "Watchtowers"—automated services that monitor the blockchain for you and prevent channel partners from trying to close a channel with an old, incorrect balance.
+### 1. Is the Lightning Network safe?
+Yes. Every Lightning "Channel" is actually a high-security smart contract on the Bitcoin mainnet. If someone tries to cheat you, the protocol allows you to "punish" them by taking the funds in the channel. It is trustless by design.
 
-### 2. Why are the fees so low?
-Since Lightning transactions aren't written to the blockchain, they don't consume "Block Space." You are essentially just using a tiny bit of computing power from the nodes routing your payment, which costs almost nothing.
+### 2. How much are fees on Lightning?
+Unlike the main chain where fees can reach several dollars, Lightning fees are usually measured in single **Satoshis**. In 2026, sending $1,000 across the world via Lightning costs roughly $0.01 and settles in under 2 seconds.
 
-### 3. Can I use Lightning for large transactions?
-While possible, Lightning is optimized for smaller, frequent payments. For moving millions of dollars, the main Bitcoin blockchain (Layer 1) remains the gold standard for finality and security.
+### 3. Can I use Lightning without a node?
+For beginners, "Mobile Lightning Wallets" like **Phoenix** or **Breez** allow you to use the network without managing complex channels yourself. They provide a "non-custodial" experience, meaning you still own your keys.
+
+### 4. What is a "Payment Channel"?
+Think of a payment channel like a tab at a bar. You open the tab with a credit card (L1 transaction), buy ten drinks (Lightning transactions), and only settle the final bill when you leave (final L1 transaction). Only the opening and closing are recorded on the permanent blockchain.
+
+### 5. Is Lightning more private than Bitcoin L1?
+Yes. Because Lightning payments are not recorded on the public blockchain and use "Onion Routing," intermediate nodes only know who sent them the money and who they are sending it to—not the original sender or the final recipient.
 
 ---
 
