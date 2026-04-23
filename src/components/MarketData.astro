@@ -1,7 +1,8 @@
 ---
-// Static market data cards – API-ready structure
+// Static market data cards – Initial values (will be updated by client script)
 const marketData = [
   {
+    id: 'btc-dom',
     label: 'Bitcoin Dominanz',
     labelEn: 'Bitcoin Dominance',
     value: '52.4%',
@@ -12,9 +13,10 @@ const marketData = [
     descEn: 'BTC Market Share',
   },
   {
+    id: 'total-cap',
     label: 'Gesamt-Marktkapitalisierung',
     labelEn: 'Total Market Cap',
-    value: '$2.18T',
+    value: '€2.02T',
     trend: '+3.2%',
     pos: true,
     icon: '📊',
@@ -22,44 +24,48 @@ const marketData = [
     descEn: '24h Change',
   },
   {
+    id: 'fng',
     label: 'Fear & Greed Index',
     labelEn: 'Fear & Greed Index',
     value: '72',
     trend: 'Gier',
     pos: true,
     icon: '🎯',
-    desc: 'Greed',
-    descEn: 'Greed',
+    desc: 'Marktpsychologie',
+    descEn: 'Market Psychology',
   },
   {
+    id: 'defi-tvl',
     label: 'DeFi TVL',
     labelEn: 'DeFi TVL',
-    value: '$98.5B',
+    value: '€91.2B',
     trend: '+1.4%',
     pos: true,
     icon: '🔗',
-    desc: '24h Veränderung',
-    descEn: '24h Change',
+    desc: 'Total Value Locked',
+    descEn: 'Total Value Locked',
   },
   {
+    id: 'volume',
     label: '24h Volumen',
     labelEn: '24h Volume',
-    value: '$142B',
+    value: '€131B',
     trend: '-5.1%',
     pos: false,
     icon: '💱',
-    desc: 'Globales Handelsvolumen',
-    descEn: 'Global Trading Volume',
+    desc: 'Globales Volumen',
+    descEn: 'Global Volume',
   },
   {
+    id: 'gas',
     label: 'ETH Gas Preis',
     labelEn: 'ETH Gas Price',
     value: '12 Gwei',
     trend: '-18%',
     pos: true,
     icon: '⛽',
-    desc: '24h Durchschnitt',
-    descEn: '24h Average',
+    desc: 'Netzwerkauslastung',
+    descEn: 'Network Usage',
   },
 ];
 
@@ -71,14 +77,14 @@ const { locale = 'de' } = Astro.props;
 
 <div class="market-grid" role="list" aria-label={locale === 'de' ? 'Marktdaten' : 'Market Data'}>
   {marketData.map((item) => (
-    <div class="price-card" role="listitem">
+    <div class="price-card" role="listitem" data-indicator={item.id}>
       <div class="market-card-top">
         <span class="market-icon" aria-hidden="true">{item.icon}</span>
-        <span class={`trend-pill ${item.pos ? 'trend-pos' : 'trend-neg'}`}>
+        <span class={`trend-pill ${item.pos ? 'trend-pos' : 'trend-neg'}`} data-trend>
           {item.pos ? '▲' : '▼'} {item.trend}
         </span>
       </div>
-      <div class="coin-price">{item.value}</div>
+      <div class="coin-price" data-value>{item.value}</div>
       <div class="coin-name">{locale === 'de' ? item.label : (item.labelEn ?? item.label)}</div>
       <div class="market-desc">{locale === 'de' ? item.desc : (item.descEn ?? item.desc)}</div>
     </div>
@@ -110,6 +116,7 @@ const { locale = 'de' } = Astro.props;
     padding: 0.15rem 0.4rem;
     border-radius: 999px;
     font-variant-numeric: tabular-nums;
+    transition: all 0.3s ease;
   }
 
   .trend-pos {
@@ -124,9 +131,118 @@ const { locale = 'de' } = Astro.props;
     border: 1px solid oklch(65% 0.25 25 / 0.3);
   }
 
+  .coin-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+    color: var(--color-text-primary);
+  }
+
+  .coin-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+  }
+
   .market-desc {
     font-size: 0.6875rem;
     color: var(--color-text-muted);
     margin-top: 0.2rem;
   }
 </style>
+
+<script>
+  async function updateMarketData() {
+    try {
+      // 1. Fetch Global Data (Dominance, Cap, Volume) from CoinGecko
+      const globalRes = await fetch('https://api.coingecko.com/api/v3/global');
+      const globalData = await globalRes.json();
+      
+      if (globalData && globalData.data) {
+        const data = globalData.data;
+        
+        // BTC Dominance
+        updateIndicator('btc-dom', 
+          data.market_cap_percentage.btc.toFixed(1) + '%', 
+          '0.0%', // No trend provided by this simple endpoint
+          true
+        );
+        
+        // Total Market Cap (Converted to EUR approx)
+        const capEur = data.total_market_cap.usd * 0.92;
+        updateIndicator('total-cap', 
+          '€' + formatLargeNumber(capEur), 
+          (data.market_cap_change_percentage_24h_usd >= 0 ? '+' : '') + data.market_cap_change_percentage_24h_usd.toFixed(1) + '%',
+          data.market_cap_change_percentage_24h_usd >= 0
+        );
+        
+        // 24h Volume (Converted to EUR approx)
+        const volEur = data.total_volume.usd * 0.92;
+        updateIndicator('volume', 
+          '€' + formatLargeNumber(volEur), 
+          'LIVE',
+          true
+        );
+      }
+
+      // 2. Fetch Fear & Greed Index
+      const fngRes = await fetch('https://api.alternative.me/fng/');
+      const fngData = await fngRes.json();
+      if (fngData && fngData.data && fngData.data[0]) {
+        const val = fngData.data[0].value;
+        const classification = fngData.data[0].value_classification;
+        updateIndicator('fng', val, classification, true);
+      }
+
+      // 3. Fetch Gas Price (from beaconcha.in or similar)
+      const gasRes = await fetch('https://beaconcha.in/api/v1/execution/gasnow');
+      const gasData = await gasRes.json();
+      if (gasData && gasData.data) {
+        const gwei = Math.floor(gasData.data.standard / 1e9);
+        updateIndicator('gas', gwei + ' Gwei', 'STD', true);
+      }
+
+      // 4. Fetch DeFi TVL (from DeFiLlama)
+      const tvlRes = await fetch('https://api.llama.fi/tvl/ethereum'); // Using ETH TVL as proxy for speed
+      const tvlData = await tvlRes.json();
+      if (tvlData) {
+        const tvlEur = tvlData * 0.92;
+        updateIndicator('defi-tvl', '€' + formatLargeNumber(tvlEur), 'ETH_BASE', true);
+      }
+
+    } catch (err) {
+      console.error('Failed to update market data:', err);
+    }
+  }
+
+  function updateIndicator(id: string, value: string, trend: string, pos: boolean) {
+    const card = document.querySelector(`[data-indicator="${id}"]`);
+    if (!card) return;
+
+    const valueEl = card.querySelector('[data-value]');
+    const trendEl = card.querySelector('[data-trend]');
+
+    if (valueEl) valueEl.textContent = value;
+    if (trendEl) {
+      trendEl.textContent = (pos ? '▲ ' : '▼ ') + trend;
+      trendEl.classList.toggle('trend-pos', pos);
+      trendEl.classList.toggle('trend-neg', !pos);
+    }
+  }
+
+  function formatLargeNumber(num: number) {
+    if (num >= 1e12) return (num / 1e12).toFixed(2) + 'T';
+    if (num >= 1e9) return (num / 1e9).toFixed(1) + 'B';
+    if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+    return num.toLocaleString();
+  }
+
+  // Initial update
+  updateMarketData();
+
+  // Periodic update every 5 minutes
+  setInterval(updateMarketData, 300000);
+
+  // Re-run on page load (Astro View Transitions)
+  document.addEventListener('astro:page-load', updateMarketData);
+</script>
