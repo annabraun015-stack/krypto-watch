@@ -103,14 +103,7 @@ If a routing node tries to take your money without forwarding it to the recipien
 
 Deciding which "rail" your money should take for the journey depends on your goals:
 
-| Feature | Bitcoin On-Chain (L1) | Lightning Network (L2) |
-|---|---|---|
-| **Settlement Time** | 10 - 60 Minutes | Milliseconds (Instant) |
-| **Fees** | $1.00 - $100.00+ | $0.0001 - $0.05 |
-| **Transaction Capacity**| ~7 per second | Millions per second |
-| **Privacy** | Public (Transparent) | Private (Encrypted Hops) |
-| **Finality** | Absolute (Immutable) | Dependent on L1 Settlement |
-| **Use Case** | Buying a House / Institutional Settlement | Buying Coffee / Streaming Money |
+The choice between moving funds on-chain or over Lightning depends on the specific requirements for speed and finality. While the Bitcoin Base Layer (L1) offers absolute settlement finality and maximum security for large-scale institutional moves, it is limited by 10-60 minute confirmation times and higher fees. In contrast, the Lightning Network (L2) provides near-instant settlement in milliseconds with sub-cent fees, capable of handling millions of transactions per second. This makes Lightning the ideal 'rail' for daily commerce and micro-payments, whereas the main chain remains the global gold standard for immutable settlement.
 
 ---
 
@@ -142,8 +135,4 @@ While possible, Lightning is optimized for smaller, frequent payments. For movin
 
 The Lightning Network has successfully decoupled Bitcoin’s **Security** from its **Transaction Throughput**. By doing so, it has solved the "Scalability Trilemma" and turned Bitcoin into the most efficient payment rail on Earth. In 2026, Bitcoin is not just a digital asset; it is the fundamental protocol for the instant, global transfer of all value.
 
----
 
-## 🧬 Semantic Entity Map
-- **Primary Entity:** Lightning Network
-- **Related Entities:** Layer 2 Scaling, HTLC, Payment Channels, Inbound Liquidity, Onion Routing, Bitcoin Node, Watchtowers, Splicing, Micropayments, Taproot Assets.

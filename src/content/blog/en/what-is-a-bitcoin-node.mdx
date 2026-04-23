@@ -95,12 +95,7 @@ When you switch on a Bitcoin Full Node for the first time, it begins the **Initi
 
 Not every participant needs to store the entire 600GB+ blockchain. The network utilizes different types of nodes for different environments:
 
-| Type | Data Stored | Validation | Best For |
-|------|-------------|------------|----------|
-| **Full Node** | 600GB+ | 100% Autarky | Sovereign Home Users |
-| **Pruned Node** | ~10GB | 100% Autarky (Space Saver) | Laptops & Small SSDs |
-| **SPV (Light Node)** | Headers Only | Partial (Trusts others) | Mobile Wallets |
-| **Archival Node** | Everything + Indices | 100% + Searchable History | Block Explorers |
+The network utilizes several node archetypes to balance data storage with validation needs. A **Full Node** is the gold standard for sovereign users, storing the entire 600GB+ blockchain for 100% independent verification. For those with limited space, a **Pruned Node** offers the same level of autarky while only keeping the most recent ~10GB of data. Mobile wallets typically rely on **SPV (Light Nodes)**, which only download block headers; while convenient, they lack the full privacy of a self-hosted node. Finally, **Archival Nodes** maintain a complete and searchable history of every transaction, serving as the backbone for block explorers and analytical services.
 
 Light nodes (SPV) are what most people use on their phones. While convenient, they "leak" information because they have to ask a third-party Full Node for their balance. For true privacy, a Full Node is the only way.
 

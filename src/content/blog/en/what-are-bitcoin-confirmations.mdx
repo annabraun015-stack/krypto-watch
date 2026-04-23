@@ -90,12 +90,7 @@ Bitcoin settlement is **Probabilistic**, meaning it gets stronger over time but 
 
 How many confirmations do you *actually* need? Match the depth to the value of the trade.
 
-| Transaction Value | Recommended Confirmations | Typical Use Case |
-|---|---|---|
-| **$0.01 - $50** | 0 to 1 | Coffee, snacks, micro-payments. |
-| **$50 - $5,000** | 3 | Electronics, retail goods, peer-to-peer. |
-| **$5,000 - $1,000,000** | 6 | High-end cars, house deposits, large business trades. |
-| **$1,000,000+** | 12 to 24 | Institutional settlement, nation-state reserves. |
+The number of confirmations you require should scale with the financial risk of the transaction. For micro-payments and small retail purchases under $50, such as a coffee or snack, zero or one confirmation is often sufficient. For standard peer-to-peer trades and electronics up to $5,000, waiting for three confirmations is the industry standard for security. However, for significant moves like house deposits or institutional trades exceeding $1 million, waiting for six to twelve confirmations ensures absolute economic finality, protecting the settlement against even the most sophisticated nation-state level attacks.
 
 ---
 
@@ -144,8 +139,4 @@ The Bitcoin confirmation system is the world's most robust security mechanism. I
 
 **Wait for the blocks. Trust the math.**
 
----
 
-## 🧬 Semantic Entity Map
-- **Primary Entity:** Bitcoin Confirmations
-- **Related Entities:** Economic Finality, Block Height, Mempool, Miner, Double Spend, RBF (Replace-By-Fee), Chain Reorganization (Reorg), Satoshi Nakamoto, Settlement, 51% Attack.

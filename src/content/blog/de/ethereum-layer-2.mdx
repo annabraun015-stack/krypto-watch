@@ -51,7 +51,7 @@ export const faqSchema = {
 
 ## 🎯 Einführung: Das Skalierbarkeits-Trilemma
 
-Die größte Kritik an [Ethereum](/de/blog/was-ist-ethereum/) waren immer seine Kosten. In Zeiten hoher Netzwerkaktivität konnte der Kauf eines einfachen NFTs oder das Tauschen von Token bei [DeFi](/de/blog/defi-auf-ethereum/) 50 Dollar oder mehr an [Gasgebühren](/de/blog/was-sind-gas-gebuehren/) kosten.
+Die größte Kritik an [Ethereum](/blog/was-ist-ethereum/) waren immer seine Kosten. In Zeiten hoher Netzwerkaktivität konnte der Kauf eines einfachen NFTs oder das Tauschen von Token bei [DeFi](/blog/defi-auf-ethereum/) 50 Dollar oder mehr an [Gasgebühren](/blog/was-sind-gas-gebuehren/) kosten.
 
 Warum passiert das? Es liegt am **Skalierbarkeits-Trilemma**. Eine Blockchain kann nur in zwei von drei Eigenschaften hervorragend sein: Dezentralisierung, Sicherheit und Skalierbarkeit. Die Basisschicht von Ethereum (Layer 1) hat sich entschieden, maximale Sicherheit und Dezentralisierung zu priorisieren. Infolgedessen verarbeitet es nur 15-30 Transaktionen pro Sekunde (TPS).
 
@@ -77,7 +77,7 @@ Um Milliarden von Benutzern weltweit zu bedienen, benötigte Ethereum einen Weg 
 
 Stellen Sie sich Layer 1 Ethereum als den Obersten Gerichtshof vor. Er ist langsam, bedächtig und hochgradig sicher. Man nutzt den Obersten Gerichtshof nur für endgültige Entscheidungen. Ein Layer-2-Netzwerk agiert wie ein lokales Geschäft, das Tausende von schnellen, täglichen Transaktionen abwickelt und nur die tägliche Abschlussquittung zur Aufzeichnung an den Obersten Gerichtshof weiterleitet.
 
-Diese Architektur ist der Kernfokus des [Ethereum 2.0](/de/blog/ethereum-2-0/) "Surge"-Upgrades.
+Diese Architektur ist der Kernfokus des [Ethereum 2.0](/blog/ethereum-2-0/) "Surge"-Upgrades.
 
 ---
 
@@ -88,7 +88,7 @@ Rollups erzeugen unglaubliche Effizienz durch Datenkomprimierung.
 <ProcessStep steps={[
   {
     title: "Off-Chain Ausführung",
-    description: "Benutzer senden Transaktionen (z.B. Swapping von Token auf einer [DApp](/de/blog/was-sind-dapps/)) an einen L2-Sequencer. Der Sequencer führt die Transaktion sofort aus."
+    description: "Benutzer senden Transaktionen (z.B. Swapping von Token auf einer [DApp](/blog/was-sind-dapps/)) an einen L2-Sequencer. Der Sequencer führt die Transaktion sofort aus."
   },
   {
     title: "Batching & Komprimierung",
@@ -109,7 +109,7 @@ Es gibt zwei primäre Wege, wie eine L2 der Layer 1 beweist, dass ihr Batch von 
 1.  **Optimistic Rollups (Arbitrum, Optimism, Base):** Diese gehen standardmäßig davon aus, dass alle Transaktionen gültig sind (optimistisch). Sie posten die Daten und erlauben eine "Anfechtungsfrist" (Challenge Period, meist 7 Tage). Wenn jemand eine betrügerische Transaktion entdeckt, reicht er einen "Fraud Proof" (Betrugsbeweis) ein, und der böswillige Akteur wird bestraft.
 2.  **ZK-Rollups (zkSync, Starknet):** Diese verwenden Zero-Knowledge-Kryptografie. Sie gehen nicht davon aus, dass Transaktionen gültig sind. Stattdessen erzeugen sie mit jedem Batch einen komplexen mathematischen Beweis (einen "Validity Proof"), der mathematisch garantiert, dass die Transaktionen sofort korrekt sind.
 
-Während ZK-Rollups aufgrund ihrer sofortigen Finalität als ultimative Endgame-Technologie gelten, dominieren Optimistic Rollups den heutigen Markt aufgrund ihrer perfekten Kompatibilität mit [Smart Contracts](/de/blog/was-sind-smart-contracts/), die für die Ethereum Virtual Machine (EVM) entwickelt wurden.
+Während ZK-Rollups aufgrund ihrer sofortigen Finalität als ultimative Endgame-Technologie gelten, dominieren Optimistic Rollups den heutigen Markt aufgrund ihrer perfekten Kompatibilität mit [Smart Contracts](/blog/was-sind-smart-contracts/), die für die Ethereum Virtual Machine (EVM) entwickelt wurden.
 
 ---
 
@@ -141,7 +141,7 @@ Optimism wählte einen anderen architektonischen Ansatz. Anstatt nur ein Netzwer
 
 Die Nutzung einer Layer 2 ist identisch mit der Nutzung des Ethereum Mainnets, nur deutlich billiger.
 
-1.  **Wallet besorgen:** Verwenden Sie ein kompatibles Web3-Wallet wie MetaMask oder Rabby (siehe unseren Leitfaden zu den [besten Ethereum-Wallets](/de/blog/beste-ethereum-wallets/)).
+1.  **Wallet besorgen:** Verwenden Sie ein kompatibles Web3-Wallet wie MetaMask oder Rabby (siehe unseren Leitfaden zu den [besten Ethereum-Wallets](/blog/beste-ethereum-wallets/)).
 2.  **Netzwerk hinzufügen:** Wechseln Sie in Ihrem Wallet das Netzwerk von "Ethereum Mainnet" auf "Arbitrum One" oder "OP Mainnet".
 3.  **Gelder überbrücken (Bridge):** Sie müssen eine "Bridge" (einen spezialisierten Smart Contract) verwenden, um Ihre ETH von Layer 1 zu Layer 2 zu übertragen. Dies erfordert die Zahlung einer normalen L1-Gasgebühr.
 4.  **Transaktionen durchführen:** Sobald Ihre Gelder auf Layer 2 sind, können Sie mit jeder DApp für Cent-Beträge interagieren.
@@ -162,4 +162,4 @@ Die Nutzung einer Layer 2 ist identisch mit der Nutzung des Ethereum Mainnets, n
 ---
 
 **Bereit, tiefer einzutauchen?**
-Da Sie nun wissen, wie Sie hohe Gebühren vermeiden, entdecken Sie in unserem Leitfaden zu [Was sind DApps?](/de/blog/was-sind-dapps/) die dezentralen Anwendungen, die Sie in diesen Hochgeschwindigkeitsnetzwerken nutzen können, oder verstehen Sie die Kernlogik, die sie antreibt, in unserem Deep Dive über [Smart Contracts](/de/blog/was-sind-smart-contracts/).
+Da Sie nun wissen, wie Sie hohe Gebühren vermeiden, entdecken Sie in unserem Leitfaden zu [Was sind DApps?](/blog/was-sind-dapps/) die dezentralen Anwendungen, die Sie in diesen Hochgeschwindigkeitsnetzwerken nutzen können, oder verstehen Sie die Kernlogik, die sie antreibt, in unserem Deep Dive über [Smart Contracts](/blog/was-sind-smart-contracts/).

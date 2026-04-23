@@ -75,7 +75,7 @@ Einer der wichtigsten technischen Aspekte: Ein Miner sieht nicht, ob Sie 1 Euro 
   },
   {
     title: "Mempool-Propagation",
-    description: "Ihre signierte Transaktion verbreitet sich über [Nodes](/de/blog/was-ist-ein-bitcoin-node/) weltweit, bis sie die Miner erreicht."
+    description: "Ihre signierte Transaktion verbreitet sich über [Nodes](/blog/was-ist-ein-bitcoin-node/) weltweit, bis sie die Miner erreicht."
   },
   {
     title: "Block-Inclusion",
@@ -89,10 +89,7 @@ Einer der wichtigsten technischen Aspekte: Ein Miner sieht nicht, ob Sie 1 Euro 
 
 Was passiert, wenn eine Transaktion mit zu niedriger Gebühr im Mempool "hängen bleibt"? Im Jahr 2026 gibt es zwei primäre Rettungsanker.
 
-| Methode | Name | Funktionsweise |
-|---|---|---|
-| **RBF** | **Replace-By-Fee** | Sie senden die identische Transaktion erneut, aber mit einer höheren Gebühr. Die neue Version "ersetzt" die alte im Mempool. |
-| **CPFP** | **Child-Pays-For-Parent** | Der Empfänger (oder Sie selbst) sendet eine neue Transaktion, die das Guthaben der hängenden Transaktion nutzt. Die hohe Gebühr der neuen Transaktion zieht die alte "mit nach oben". |
+Was passiert, wenn eine Transaktion mit zu niedriger Gebühr im Mempool hängen bleibt? Im Jahr 2026 gibt es zwei primäre Rettungsanker. Mit **RBF (Replace-By-Fee)** senden Sie die identische Transaktion erneut, aber mit einer höheren Gebühr; die neue Version ersetzt dann einfach die alte im Mempool. Alternativ ermöglicht **CPFP (Child-Pays-For-Parent)** dem Empfänger (oder Ihnen selbst), eine neue Transaktion zu senden, die das Guthaben der hängenden Zahlung nutzt. Die hohe Gebühr der neuen Transaktion zieht die alte dann wie ein Paket-Deal mit nach oben.
 
 ---
 
@@ -108,18 +105,18 @@ Im Jahr 2026 nutzen professionelle Wallets standardmäßig **Taproot (P2TR)**.
 ## Sektion 6: Verwandte Themen — Das Gebühren-Ökosystem
 
 Gebühren sind der Treibstoff für die Netzwerksicherheit. Entdecken Sie mehr:
-- [Was ist Bitcoin Mining?](/de/blog/bitcoin-mining-erklaert/) → Wer Ihre Gebühren erhält.
-- [Das Lightning Network](/de/blog/lightning-network/) → Wie man Gebühren fast vollständig eliminiert.
-- [Bestätigungen verstehen](/de/blog/bitcoin-bestaetigungen/) → Warum manche Transaktionen Priorität brauchen.
-- [Was ist eine Bitcoin Node?](/de/blog/was-ist-ein-bitcoin-node/) → Wie Nodes den Mempool verwalten.
-- [Bitcoin 21-Millionen-Limit](/de/blog/bitcoin-21-millionen-limit/) → Warum Gebühren nach dem Jahr 2140 die Miner bezahlen müssen.
+- [Was ist Bitcoin Mining?](/blog/bitcoin-mining-erklaert/) → Wer Ihre Gebühren erhält.
+- [Das Lightning Network](/blog/lightning-network/) → Wie man Gebühren fast vollständig eliminiert.
+- [Bestätigungen verstehen](/blog/bitcoin-bestaetigungen/) → Warum manche Transaktionen Priorität brauchen.
+- [Was ist eine Bitcoin Node?](/blog/was-ist-ein-bitcoin-node/) → Wie Nodes den Mempool verwalten.
+- [Bitcoin 21-Millionen-Limit](/blog/bitcoin-21-millionen-limit/) → Warum Gebühren nach dem Jahr 2140 die Miner bezahlen müssen.
 
 ---
 
 ## Sektion 7: FAQ — Expertenfragen zu Gebühren
 
 ### 1. Kann eine Transaktion für immer im Mempool bleiben?
-Nein. Die meisten [Nodes](/de/blog/was-ist-ein-bitcoin-node/) löschen Transaktionen aus ihrem lokalen Mempool, wenn sie nach 14 Tagen (Standardeinstellung) nicht bestätigt wurden. Das Guthaben erscheint dann wieder als "ausgebbar" in Ihrem Wallet.
+Nein. Die meisten [Nodes](/blog/was-ist-ein-bitcoin-node/) löschen Transaktionen aus ihrem lokalen Mempool, wenn sie nach 14 Tagen (Standardeinstellung) nicht bestätigt wurden. Das Guthaben erscheint dann wieder als "ausgebbar" in Ihrem Wallet.
 
 ### 2. Warum sind die Gebühren bei Mempool-Explosionen so extrem?
 Dies geschieht oft bei Marktturbulenzen oder neuen Protokoll-Nutzen (wie Ordinals). Es entsteht ein "Panic Bidding", bei dem Nutzer immer höhere Gebühren zahlen, um ihre Coins schnell auf Börsen zu verschieben. Ruhe bewahren und RBF nutzen ist hier die beste Strategie.
@@ -133,8 +130,4 @@ Absolut nicht. Da Bitcoin ein dezentrales Netzwerk ist, kostet eine Transaktion 
 
 Bitcoin-Gebühren sind der Marktpreis für den sichersten Blockplatz der Welt. Durch das Verständnis der sat/vB-Mechanik, den Einsatz von CPFP und RBF sowie die Nutzung von Layer-2-Lösungen wie dem Lightning Network, erlangen Sie die vollständige Kontrolle über Ihre Transaktionskosten. In einer dezentralen Zukunft bedeutet **Effizienz automatisch Souveränität.**
 
----
 
-## 🧬 Semantische Entity-Map
-- **Haupt-Entität:** Bitcoin Transaktionsgebühren
-- **Verwandte Entitäten:** Mempool, sat/vB, SegWit, Taproot, RBF (Replace-By-Fee), CPFP (Child-Pays-For-Parent), UTXO-Management, Miner, Blockplatz, virtuelle Bytes (vB).

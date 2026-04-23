@@ -91,12 +91,7 @@ Bitcoin fees are not based on the *amount of money* sent; they are based on the 
 
 Using the correct address format is the easiest way to save money and improve privacy.
 
-| Type | Starts With | Technical Name | Benefit |
-|---|---|---|---|
-| **Legacy** | `1...` | P2PKH | Maximum compatibility (Obsolete) |
-| **Nested SegWit** | `3...` | P2SH | Good middle-ground |
-| **Native SegWit** | `bc1q...` | Bech32 | **Current Standard:** Low fees |
-| **Taproot** | `bc1p...` | Bech32m | **High Efficiency:** Best privacy |
+Selecting the correct address format is the primary way to optimize transaction costs and improve privacy. While **Legacy** (starting with 1) and **Nested SegWit** (starting with 3) addresses offer maximum compatibility with older software, they are increasingly obsolete due to higher fees. The current industry standard is **Native SegWit** (bc1q), which significantly reduces data weight and costs. For maximum efficiency and state-of-the-art privacy, users should prioritize **Taproot** (bc1p) addresses, which offer the most compact data footprint for modern Bitcoin transactions.
 
 ---
 
@@ -145,8 +140,4 @@ Sending and receiving Bitcoin is the ultimate exercise in financial freedom. By 
 
 **Double-check the address. Verify the fee. Trust the network.**
 
----
 
-## 🧬 Semantic Entity Map
-- **Primary Entity:** Bitcoin Transaction
-- **Related Entities:** UTXO (Unspent Transaction Output), Mempool, vBytes, sat/vB, RBF (Replace-By-Fee), CPFP, Native SegWit, Taproot, Private Key, Confirmed Transaction.
