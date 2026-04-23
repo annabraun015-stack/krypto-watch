@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: 'KryptoWatch',
-  domain: 'krypto-watch.de',
-  url: 'https://krypto-watch.de',
-  email: 'redaktion@krypto-watch.de',
+  domain: 'kryptowatch.de',
+  url: 'https://kryptowatch.de',
+  email: 'redaktion@kryptowatch.de',
   twitter: '@kryptowatch_de',
   twitterHandle: 'https://twitter.com/kryptowatch_de',
   github: 'https://github.com/kryptowatch',

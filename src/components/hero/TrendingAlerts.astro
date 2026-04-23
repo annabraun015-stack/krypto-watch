@@ -1,10 +1,22 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 interface Props {
-  alerts: { time: string; text: string }[];
+  alerts?: { time: string; text: string }[];
   title: string;
+  posts?: CollectionEntry<'blog'>[];
+  locale?: string;
 }
 
-const { alerts, title } = Astro.props;
+const { alerts, title, posts, locale = 'de' } = Astro.props;
+
+const items = posts 
+  ? posts.map(p => ({
+      time: new Intl.DateTimeFormat(locale === 'de' ? 'de-DE' : 'en-US', { hour: '2-digit', minute: '2-digit' }).format(new Date(p.data.date)) + ' UTC',
+      text: p.data.title,
+      href: locale === 'de' ? `/blog/${p.id.replace(/^de\//, '').replace(/\.mdx?$/, '')}/` : `/en/blog/${p.id.replace(/^en\//, '').replace(/\.mdx?$/, '')}/`
+    }))
+  : alerts?.map(a => ({ ...a, href: '#' }));
 ---
 
 <div class="trending-alerts">
@@ -14,12 +26,12 @@ const { alerts, title } = Astro.props;
   </div>
 
   <div class="alerts-list">
-    {alerts.map((alert) => (
-      <div class="alert-card card-glass">
-        <div class="alert-time">{alert.time}</div>
-        <p class="alert-text">{alert.text}</p>
+    {items?.map((item) => (
+      <a href={item.href} class="alert-card card-glass">
+        <div class="alert-time">{item.time}</div>
+        <p class="alert-text">{item.text}</p>
         <div class="alert-indicator"></div>
-      </div>
+      </a>
     ))}
   </div>
 </div>
@@ -60,6 +72,8 @@ const { alerts, title } = Astro.props;
   }
 
   .alert-card {
+    display: block;
+    text-decoration: none;
     padding: 1.25rem;
     position: relative;
     overflow: hidden;

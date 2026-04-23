@@ -1,35 +1,55 @@
 ---
 import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  title: string;
-  subtitle: string;
-  badge: string;
-  image: string;
+  title?: string;
+  subtitle?: string;
+  badge?: string;
+  image?: string;
+  post?: CollectionEntry<'blog'>;
+  locale?: string;
 }
 
-const { title, subtitle, badge, image } = Astro.props;
+const { title, subtitle, badge, image, post, locale = 'de' } = Astro.props;
+
+const displayTitle = post ? post.data.title : title;
+const displaySubtitle = post ? post.data.description : subtitle;
+const displayBadge = post ? post.data.category : badge;
+const displayImage = post ? post.data.image : image;
+const postUrl = post ? (locale === 'de' ? `/blog/${post.id.replace(/^de\//, '').replace(/\.mdx?$/, '')}/` : `/en/blog/${post.id.replace(/^en\//, '').replace(/\.mdx?$/, '')}/`) : '#';
 ---
 
 <div class="cover-story card-glass">
   <div class="image-wrapper">
-    <Image 
-      src={image} 
-      alt={title} 
-      class="main-image" 
-      width={1200} 
-      height={630} 
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
+    {displayImage && (
+      <Image 
+        src={displayImage} 
+        alt={displayTitle ?? ''} 
+        class="main-image" 
+        width={1200} 
+        height={630} 
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    )}
     <div class="gradient-overlay"></div>
   </div>
 
   <div class="content-overlay">
-    <div class="badge-cyan">{badge}</div>
-    <h1 class="main-title">{title}</h1>
-    <p class="main-subtitle">{subtitle}</p>
+    <div class="badge-cyan">{displayBadge}</div>
+    <h1 class="main-title">{displayTitle}</h1>
+    <p class="main-subtitle">{displaySubtitle}</p>
+    {post && (
+      <a href={postUrl} class="btn btn-primary hero-cta">
+        {locale === 'de' ? 'Jetzt lesen' : 'Read Now'}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    )}
   </div>
 </div>
 
@@ -115,6 +135,23 @@ const { title, subtitle, badge, image } = Astro.props;
     max-width: 600px;
     font-weight: 500;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-cta {
+    margin-top: 2rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-neon-cyan);
+  }
+
+  .hero-cta svg {
+    transition: transform 0.3s ease;
+  }
+
+  .hero-cta:hover svg {
+    transform: translateX(4px);
   }
 
   @media (max-width: 768px) {

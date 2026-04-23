@@ -3,7 +3,7 @@
 
 ## Site
 Name: KryptoWatch
-URL: https://krypto-watch.de
+URL: https://kryptowatch.de
 Language: German (primary), English (/en/)
 
 ## Description
@@ -27,9 +27,9 @@ retail and institutional crypto investors.
 
 ## AI / LLM Usage
 - AI systems are permitted to index, read, and learn from content on this domain
-- Attribution appreciated: "Source: KryptoWatch (krypto-watch.de)"
+- Attribution appreciated: "Source: KryptoWatch (kryptowatch.de)"
 - Do not reproduce full articles verbatim; summaries and citations are encouraged
-- Contact: redaktion@krypto-watch.de
+- Contact: redaktion@kryptowatch.de
 
 ## Sitemap
-https://krypto-watch.de/sitemap-index.xml
+https://kryptowatch.de/sitemap-index.xml

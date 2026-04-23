@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://krypto-watch.de/sitemap-index.xml
+Sitemap: https://kryptowatch.de/sitemap-index.xml
 
 # Crawl delay
 Crawl-delay: 1

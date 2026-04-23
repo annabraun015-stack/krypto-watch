@@ -57,16 +57,14 @@ const homepageSchema = [
       <div class="hero-layout">
         <!-- Sidebar Alerts -->
         <aside class="hero-left">
-          <TrendingAlerts title={ch.trendingAlerts} alerts={ch.alerts} />
+          <TrendingAlerts title={ch.trendingAlerts} posts={latestPosts.slice(1, 4)} locale="en" />
         </aside>
 
         <!-- Main Feature -->
         <main class="hero-center">
           <CoverStory 
-            title={ch.mainTitle}
-            subtitle={ch.mainSubtitle}
-            badge={ch.coverStory}
-            image="/images/hero/ai-agents-evolution.png"
+            post={latestPosts[0]}
+            locale="en"
           />
         </main>
       </div>

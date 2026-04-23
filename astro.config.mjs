@@ -8,7 +8,7 @@ import remarkHeadingId from 'remark-heading-id';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://krypto-watch.de',
+  site: 'https://kryptowatch.de',
   output: 'static',
   integrations: [
     mdx({
