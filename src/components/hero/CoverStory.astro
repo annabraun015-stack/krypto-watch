@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   title: string;
   subtitle: string;
@@ -11,7 +13,16 @@ const { title, subtitle, badge, image } = Astro.props;
 
 <div class="cover-story card-glass">
   <div class="image-wrapper">
-    <img src={image} alt={title} class="main-image" />
+    <Image 
+      src={image} 
+      alt={title} 
+      class="main-image" 
+      width={1200} 
+      height={630} 
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
     <div class="gradient-overlay"></div>
   </div>
 

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { type Locale } from '../i18n';
 
@@ -33,14 +34,14 @@ const catClass = categoryColors[category] ?? 'badge-default';
   <!-- Image -->
   <a href={postUrl} class="blog-card-image-wrap" tabindex="-1" aria-hidden="true">
     {image ? (
-      <img
+      <Image
         src={image}
         alt={imageAlt ?? title}
         class="blog-card-image"
         loading="lazy"
         decoding="async"
-        width="600"
-        height="340"
+        width={600}
+        height={340}
       />
     ) : (
       <div class="blog-card-image-placeholder" aria-hidden="true">
