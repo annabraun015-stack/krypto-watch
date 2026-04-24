@@ -1,0 +1,205 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  author: CollectionEntry<'authors'>;
+}
+
+const { author } = Astro.props;
+const { name, role, bio, avatar, twitter, linkedin, website, credentials } = author.data;
+---
+
+<div class="author-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
+  <div class="author-header">
+    <div class="author-avatar-wrapper">
+      {avatar ? (
+        <img src={avatar} alt={name} class="author-avatar" itemprop="image" />
+      ) : (
+        <div class="author-avatar-placeholder">{name.charAt(0)}</div>
+      )}
+    </div>
+    <div class="author-info">
+      <h3 class="author-name" itemprop="name">{name}</h3>
+      <p class="author-role" itemprop="jobTitle">{role}</p>
+      {credentials && (
+        <div class="author-credentials">
+          {credentials.map((cred) => (
+            <span class="credential-tag">Verified: {cred}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+  
+  <div class="author-bio">
+    <p itemprop="description">{bio}</p>
+  </div>
+
+  <div class="author-footer">
+    <div class="author-socials">
+      {twitter && (
+        <a href={twitter} target="_blank" rel="noopener noreferrer" class="social-link" title={`Follow ${name} on X`}>
+          <span class="social-icon">𝕏</span>
+        </a>
+      )}
+      {linkedin && (
+        <a href={linkedin} target="_blank" rel="noopener noreferrer" class="social-link" title={`${name} on LinkedIn`}>
+          <span class="social-icon">in</span>
+        </a>
+      )}
+      {website && (
+        <a href={website} target="_blank" rel="noopener noreferrer" class="social-link" title="Personal Website">
+          <span class="social-icon">🌐</span>
+        </a>
+      )}
+    </div>
+    <div class="eeat-badge">
+      <span class="badge-icon">🛡️</span>
+      <span class="badge-text">Verified Expert Content</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .author-card {
+    margin-top: 4rem;
+    padding: 2rem;
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .author-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-brand-500), var(--color-brand-700));
+  }
+
+  .author-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .author-avatar-wrapper {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--color-brand-800);
+    flex-shrink: 0;
+    border: 2px solid oklch(45% 0.2 250 / 0.2);
+  }
+
+  .author-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .author-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: white;
+    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
+  }
+
+  .author-name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .author-role {
+    font-size: 0.875rem;
+    color: var(--color-brand-300);
+    font-weight: 600;
+    margin: 0.125rem 0 0.5rem 0;
+  }
+
+  .author-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .credential-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.125rem 0.5rem;
+    background: oklch(45% 0.2 250 / 0.1);
+    border: 1px solid oklch(45% 0.2 250 / 0.3);
+    color: var(--color-brand-200);
+    border-radius: 4px;
+  }
+
+  .author-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .author-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.25rem;
+    border-top: 1px solid oklch(25% 0.05 250 / 0.3);
+  }
+
+  .author-socials {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    background: oklch(18% 0.04 250);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid oklch(28% 0.05 250 / 0.4);
+  }
+
+  .social-link:hover {
+    background: var(--color-brand-900);
+    color: var(--color-brand-300);
+    border-color: var(--color-brand-500);
+    transform: translateY(-2px);
+  }
+
+  .eeat-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    opacity: 0.8;
+  }
+
+  .badge-icon {
+    font-size: 1rem;
+  }
+</style>

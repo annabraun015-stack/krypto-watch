@@ -3,16 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { t } from '../i18n';
 import { siteConfig } from '../config/site';
 
+import { getCollection } from 'astro:content';
+
 const locale = 'de';
 const tr = t(locale);
 
-const teamMembers = [
-  { name: 'Dr. Marcus Richter', role: 'Chefredakteur & Bitcoin-Analyst', avatar: 'M', bio: 'Marcus ist promovierter Ökonom mit über 10 Jahren Erfahrung in der traditionellen Finanzwelt und 7 Jahren im Krypto-Bereich.' },
-  { name: 'Sophia Wagner', role: 'Ethereum & DeFi Expertin', avatar: 'S', bio: 'Sophia hat Blockchain-Technologie an der ETH Zürich studiert und verfolgt das Ethereum-Ökosystem seit dem Genesis-Block.' },
-  { name: 'Dr. Lena Kaufmann', role: 'Regulierung & Compliance', avatar: 'L', bio: 'Lena ist Rechtsanwältin mit Spezialisierung auf Finanzmarktrecht und Krypto-Regulierung.' },
-  { name: 'Alex Turner', role: 'Markt-Analytiker', avatar: 'A', bio: 'Alex kombiniert technische Analyse mit On-Chain-Daten-Interpretation für präzise Markteinschätzungen.' },
-];
+const authors = await getCollection('authors');
+// Filter or sort if needed, here we show all
 ---
+
 
 <BaseLayout
   title={tr.seo.aboutTitle}
@@ -107,15 +106,29 @@ const teamMembers = [
         <h2 id="team-heading" class="section-title">{tr.about.team}</h2>
       </div>
       <div class="team-grid" role="list">
-        {teamMembers.map((member) => (
+        {authors.map((author) => (
           <div class="team-card" role="listitem" itemscope itemtype="https://schema.org/Person">
-            <div class="team-avatar" aria-hidden="true">{member.avatar}</div>
-            <h3 class="team-name" itemprop="name">{member.name}</h3>
-            <p class="team-role" itemprop="jobTitle">{member.role}</p>
-            <p class="team-bio" itemprop="description">{member.bio}</p>
+            <div class="team-avatar" aria-hidden="true">
+              {author.data.avatar ? (
+                <img src={author.data.avatar} alt="" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" />
+              ) : (
+                author.data.name.charAt(0)
+              )}
+            </div>
+            <h3 class="team-name" itemprop="name">{author.data.name}</h3>
+            <p class="team-role" itemprop="jobTitle">{author.data.role}</p>
+            {author.data.credentials && (
+              <div class="team-credentials">
+                {author.data.credentials.map((c) => (
+                  <span class="team-cred-tag">{c}</span>
+                ))}
+              </div>
+            )}
+            <p class="team-bio" itemprop="description">{author.data.bio}</p>
           </div>
         ))}
       </div>
+
     </div>
   </section>
 
@@ -168,7 +181,9 @@ const teamMembers = [
   .team-card:hover { border-color: oklch(45% 0.2 250 / 0.4); transform: translateY(-3px); }
   .team-avatar { width: 4rem; height: 4rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: white; margin: 0 auto 1rem; }
   .team-name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem; }
-  .team-role { font-size: 0.8125rem; color: var(--color-brand-400); font-weight: 500; margin-bottom: 0.75rem; }
+  .team-role { font-size: 0.8125rem; color: var(--color-brand-400); font-weight: 500; margin-bottom: 0.5rem; }
+  .team-credentials { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: center; margin-bottom: 0.75rem; }
+  .team-cred-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; padding: 0.1rem 0.4rem; background: oklch(45% 0.2 250 / 0.1); border: 1px solid oklch(45% 0.2 250 / 0.2); color: var(--color-brand-300); border-radius: 4px; }
   .team-bio { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.65; }
 
   .cta-section { background: oklch(10% 0.025 250); }

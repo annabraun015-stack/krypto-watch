@@ -28,9 +28,15 @@ const currentSlug = post.id.replace(/^(en|de)\//, '').replace(/\.mdx?$/, '');
 const germanSlug = slugMapping[currentSlug] || germanPosts.find(p => p.id.includes(currentSlug.replace('what-is-', 'was-ist-')))?.id.replace('de/', '').replace(/\.mdx?$/, '');
 const altPath = germanSlug ? `/blog/${germanSlug}/` : '/blog/';
 
-const { title, description, date, author, category, tags, image, imageAlt, readingTime, coinSymbols } = post.data;
+const { title, description, date, author: authorId, category, tags, image, imageAlt, readingTime, coinSymbols, factCheckedBy: reviewerId } = post.data;
 const { Content, headings } = await render(post);
+
+// Fetch Author Details
+const authorEntry = await getEntry('authors', authorId);
+const reviewerEntry = reviewerId ? await getEntry('authors', reviewerId) : null;
+
 import TableOfContents from '../../../components/blog/TableOfContents.astro';
+import AuthorCard from '../../../components/blog/AuthorCard.astro';
 
 const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
 const postUrl = `${siteConfig.url}/en/blog/${Astro.params.slug}/`;
@@ -42,8 +48,24 @@ const blogPostSchema = {
   description,
   url: postUrl,
   datePublished: new Date(date).toISOString(),
-  dateModified: new Date(date).toISOString(),
-  author: { '@type': 'Person', name: author },
+  dateModified: post.data.lastUpdated ? new Date(post.data.lastUpdated).toISOString() : new Date(date).toISOString(),
+  author: { 
+    '@type': 'Person', 
+    name: authorEntry?.data.name || authorId,
+    jobTitle: authorEntry?.data.role,
+    url: authorEntry?.data.website || postUrl,
+    sameAs: [
+      authorEntry?.data.twitter,
+      authorEntry?.data.linkedin
+    ].filter(Boolean)
+  },
+  ...(reviewerEntry && {
+    reviewedBy: {
+      '@type': 'Person',
+      name: reviewerEntry.data.name,
+      jobTitle: reviewerEntry.data.role
+    }
+  }),
   publisher: { '@type': 'Organization', name: 'KryptoWatch', logo: { '@type': 'ImageObject', url: `${siteConfig.url}/logo.svg` } },
   image: image ? `${siteConfig.url}${image}` : `${siteConfig.url}${siteConfig.ogImage}`,
   keywords: [...(tags ?? []), ...(coinSymbols ?? [])].join(', '),
@@ -99,10 +121,22 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
         <p class="post-description">{description}</p>
 
         <div class="post-author-row">
-          <div class="post-author-avatar" aria-hidden="true">{author.charAt(0)}</div>
+          <div class="post-author-avatar" aria-hidden="true">
+            {authorEntry?.data.avatar ? (
+              <img src={authorEntry.data.avatar} alt="" class="avatar-img" />
+            ) : (
+              (authorEntry?.data.name || authorId).charAt(0)
+            )}
+          </div>
           <div>
-            <span class="post-author-name" itemprop="author">{author}</span>
-            <time class="post-date" datetime={new Date(date).toISOString()} itemprop="datePublished">{formattedDate}</time>
+            <span class="post-author-name" itemprop="author">{authorEntry?.data.name || authorId}</span>
+            <div class="post-date-row">
+              <time class="post-date" datetime={new Date(date).toISOString()} itemprop="datePublished">Published: {formattedDate}</time>
+              {post.data.lastUpdated && (
+                <span class="post-date-separator">•</span>
+                <time class="post-date" datetime={new Date(post.data.lastUpdated).toISOString()}>Updated: {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(post.data.lastUpdated))}</time>
+              )}
+            </div>
           </div>
           <div class="post-share" aria-label="Share article">
             <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Share on Twitter">𝕏</a>
@@ -111,6 +145,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
         </div>
       </div>
     </header>
+
 
     {image && (
       <div class="post-featured-image">
@@ -124,6 +159,11 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
       <div class="container post-layout">
         <div class="post-content prose-crypto" itemprop="articleBody">
           <Content />
+          
+          {authorEntry && (
+            <AuthorCard author={authorEntry} />
+          )}
+
           <div class="post-disclaimer" role="note">
             <strong>⚠️ Disclaimer:</strong> This article does not constitute investment advice. Cryptocurrencies are highly volatile assets with significant risk of loss.
           </div>
@@ -135,6 +175,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
             </div>
           )}
         </div>
+
 
         <aside class="post-sidebar" aria-label="Sidebar">
           <!-- Table of Contents -->
@@ -180,8 +221,11 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
   .post-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.025em; color: var(--color-text-primary); margin-bottom: 1.125rem; }
   .post-description { font-size: 1.125rem; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 1.75rem; max-width: 700px; }
   .post-author-row { display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; }
-  .post-author-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 1rem; flex-shrink: 0; }
+  .post-author-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 1rem; flex-shrink: 0; overflow: hidden; }
+  .avatar-img { width: 100%; height: 100%; object-fit: cover; }
   .post-author-name { display: block; font-size: 0.9375rem; font-weight: 600; color: var(--color-text-primary); }
+  .post-date-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .post-date-separator { font-size: 0.75rem; color: var(--color-text-muted); }
   .post-date { display: block; font-size: 0.8125rem; color: var(--color-text-muted); }
   .post-share { display: flex; gap: 0.5rem; margin-left: auto; }
   .share-btn { width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; background: oklch(17% 0.04 250); border: 1px solid oklch(28% 0.05 250 / 0.5); border-radius: 0.5rem; color: var(--color-text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.2s; }
