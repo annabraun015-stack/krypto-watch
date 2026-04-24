@@ -152,7 +152,17 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
     {image && (
       <div class="post-featured-image">
         <div class="container">
-          <img src={image} alt={imageAlt ?? title} width="1200" height="630" class="featured-img" itemprop="image" />
+          <img 
+            src={image} 
+            alt={imageAlt ?? title} 
+            width="1200" 
+            height="630" 
+            class="featured-img" 
+            itemprop="image"
+            fetchpriority="high"
+            decoding="async"
+            loading="eager"
+          />
         </div>
       </div>
     )}

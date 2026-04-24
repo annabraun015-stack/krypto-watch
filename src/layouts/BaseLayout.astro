@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { siteConfig } from '../config/site';
+import { siteConfig, navLinks } from '../config/site';
 import { getLangAttribute, type Locale } from '../i18n';
 
 export interface Props {
@@ -64,6 +64,16 @@ const websiteSchema = {
   },
 };
 
+const navSchema = {
+  '@context': 'https://schema.org',
+  '@graph': navLinks[locale].map((link, idx) => ({
+    '@type': 'SiteNavigationElement',
+    '@id': `${siteConfig.url}${link.href}`,
+    name: link.label,
+    url: `${siteConfig.url}${link.href}`
+  }))
+};
+
 const breadcrumbSchema = breadcrumbs
   ? {
       '@context': 'https://schema.org',
@@ -80,14 +90,24 @@ const breadcrumbSchema = breadcrumbs
 const allSchemas = [
   orgSchema,
   websiteSchema,
+  navSchema,
   ...(breadcrumbSchema ? [breadcrumbSchema] : []),
   ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
 ];
 ---
 
+
 <!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BB2M5GPVTG"></script>
     <script is:inline>
@@ -97,10 +117,6 @@ const allSchemas = [
 
       gtag('config', 'G-BB2M5GPVTG');
     </script>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Primary Meta -->
     <title>{title}</title>
@@ -161,10 +177,8 @@ const allSchemas = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    </noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
   </head>
   <body>
     <!-- Skip link -->

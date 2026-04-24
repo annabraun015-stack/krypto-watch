@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site';
+
+const title = "Editorial Guidelines | KryptoWatch";
+const description = "Learn about our editorial standards, our fact-checking process, and our commitment to integrity and transparency in cryptocurrency journalism.";
+
+const guidelines = [
+  {
+    title: "Editorial Independence",
+    content: "Our editorial team operates with complete independence from external influences. We do not accept payments for positive coverage or 'shilling' of tokens. All editorial decisions are made solely based on relevance, accuracy, and value to our readers."
+  },
+  {
+    title: "Strict Fact-Checking Process",
+    content: "Every technical article on KryptoWatch undergoes a two-stage verification process. Content is first drafted by a specialized author and then reviewed by a second expert (e.g., Dr. Marcus Richter for Bitcoin or Sophia Wagner for Ethereum) for technical accuracy and timeliness."
+  },
+  {
+    title: "Transparency & Disclosure",
+    content: "We believe in absolute transparency. Our authors are required to disclose any personal positions in the cryptocurrencies discussed if they could have a significant impact on coverage. We clearly label sponsored content (if any) as such."
+  },
+  {
+    title: "Correction Policy",
+    content: "Despite our best efforts, mistakes can happen. When inaccuracies are brought to our attention, we correct them promptly and transparently. Any significant change to a previously published article is marked with a 'Last Updated' timestamp."
+  },
+  {
+    title: "AI Usage Policy",
+    content: "We utilize modern technologies for data analysis and structuring, but every article is finalized, curated, and verified by human experts. We believe that true Experience & Expertise cannot be replaced by algorithms."
+  }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale="en"
+  canonical={`${siteConfig.url}/en/editorial-guidelines/`}
+  breadcrumbs={[
+    { name: 'KryptoWatch', url: '/en/' },
+    { name: 'Editorial Guidelines', url: '/en/editorial-guidelines/' },
+  ]}
+>
+  <div class="guidelines-page py-16 md:py-24">
+    <div class="container max-w-4xl">
+      <header class="mb-12 text-center">
+        <div class="inline-block px-3 py-1 mb-4 text-xs font-bold tracking-widest uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
+          E-E-A-T Standard
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black mb-6 font-display tracking-tight text-white">
+          Editorial <span class="text-gradient">Guidelines</span>
+        </h1>
+        <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
+          Integrity is the foundation of everything we do. We set the highest standards for the quality and reliability of our information.
+        </p>
+      </header>
+
+      <div class="space-y-8">
+        {guidelines.map((item, index) => (
+          <section class="guideline-card p-8 rounded-2xl bg-slate-900/50 border border-slate-800 hover:border-brand-500/30 transition-colors shadow-xl">
+            <div class="flex items-start gap-5">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-500/20 flex items-center justify-center text-brand-400 font-bold font-display border border-brand-500/30">
+                {index + 1}
+              </div>
+              <div>
+                <h2 class="text-xl font-bold mb-3 text-white font-display">{item.title}</h2>
+                <p class="text-slate-400 leading-relaxed">
+                  {item.content}
+                </p>
+              </div>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <footer class="mt-16 p-8 rounded-2xl bg-brand-900/20 border border-brand-500/20 text-center">
+        <h3 class="text-lg font-bold mb-3 text-white">Have Questions or Corrections?</h3>
+        <p class="text-slate-400 mb-6">
+          Your feedback helps us continuously improve our standards.
+        </p>
+        <a href="/en/contact-us/" class="btn btn-primary inline-flex items-center gap-2">
+          Contact Editorial Team
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.8333 10H4.16667M15.8333 10L10.8333 5M15.8333 10L10.8333 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </footer>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-brand-400), var(--color-brand-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .guideline-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .guideline-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--color-brand-500), transparent);
+    opacity: 0.5;
+  }
+</style>

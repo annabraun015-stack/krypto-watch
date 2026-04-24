@@ -72,17 +72,21 @@ const authors = await getCollection('authors');
         <p class="section-label">👥 Team</p>
         <h2 id="team-en-heading" class="section-title">{tr.about.team}</h2>
       </div>
-      <div class="team-grid" role="list">
+      <div class="team-grid">
         {authors.map((author) => (
-          <div class="team-card" role="listitem" itemscope itemtype="https://schema.org/Person">
-            <div class="team-avatar" aria-hidden="true">
-              {author.data.avatar ? (
-                <img src={author.data.avatar} alt="" style="width:100%; height:100%; border-radius:50%; object-fit:cover;" />
-              ) : (
-                author.data.name.charAt(0)
-              )}
-            </div>
-            <h3 class="team-name" itemprop="name">{author.data.name}</h3>
+          <div class="team-card" itemscope itemtype="https://schema.org/Person">
+            <a href={`/en/authors/${author.id.replace(/\.mdx?$/, '')}/`} class="team-visual-link">
+              <div class="team-visual">
+                {author.data.avatar ? (
+                  <img src={author.data.avatar} alt={author.data.name} class="team-avatar" itemprop="image" />
+                ) : (
+                  <div class="team-placeholder" aria-hidden="true">{author.data.name.charAt(0)}</div>
+                )}
+              </div>
+            </a>
+            <h3 class="team-name" itemprop="name">
+              <a href={`/en/authors/${author.id.replace(/\.mdx?$/, '')}/`}>{author.data.name}</a>
+            </h3>
             <p class="team-role" itemprop="jobTitle">{author.data.role}</p>
             {author.data.credentials && (
               <div class="team-credentials">

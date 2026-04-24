@@ -40,6 +40,7 @@ export const footerLinks = {
     { label: 'Impressum', href: '/impressum/' },
     { label: 'Datenschutz', href: '/privacy/' },
     { label: 'AGB', href: '/terms/' },
+    { label: 'Editorial Guidelines', href: '/editorial-guidelines/' },
     { label: 'Kontakt', href: '/contact-us/' },
     { label: 'Sitemap', href: '/sitemap/' },
     { label: 'Über uns', href: '/about-us/' },
@@ -48,11 +49,13 @@ export const footerLinks = {
     { label: 'Imprint', href: '/en/impressum/' },
     { label: 'Privacy Policy', href: '/en/privacy/' },
     { label: 'Terms', href: '/en/terms/' },
+    { label: 'Editorial Guidelines', href: '/en/editorial-guidelines/' },
     { label: 'Contact', href: '/en/contact-us/' },
     { label: 'Sitemap', href: '/sitemap/' },
     { label: 'About Us', href: '/en/about-us/' },
   ],
 } as const;
+
 
 export const socialLinks = [
   { name: 'Twitter/X', href: 'https://twitter.com/kryptowatch_de', icon: 'twitter' },
