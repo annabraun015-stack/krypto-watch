@@ -1,8 +1,8 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BlogCard from '../../../components/BlogCard.astro';
-import { siteConfig } from '../../../config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import { siteConfig } from '@/config/site';
 
 export async function getStaticPaths() {
   const authors = await getCollection('authors');

@@ -8,9 +8,9 @@ export async function getStaticPaths() {
     props: { post },
   }));
 }
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import RelatedPosts from '../../../components/RelatedPosts.astro';
-import { siteConfig } from '../../../config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import RelatedPosts from '@/components/RelatedPosts.astro';
+import { siteConfig } from '@/config/site';
 
 const { post } = Astro.props;
 
@@ -35,8 +35,8 @@ const { Content, headings } = await render(post);
 const authorEntry = await getEntry('authors', authorId);
 const reviewerEntry = reviewerId ? await getEntry('authors', reviewerId) : null;
 
-import TableOfContents from '../../../components/blog/TableOfContents.astro';
-import AuthorCard from '../../../components/blog/AuthorCard.astro';
+import TableOfContents from '@/components/blog/TableOfContents.astro';
+import AuthorCard from '@/components/blog/AuthorCard.astro';
 
 const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
 const postUrl = `${siteConfig.url}/en/blog/${Astro.params.slug}/`;
