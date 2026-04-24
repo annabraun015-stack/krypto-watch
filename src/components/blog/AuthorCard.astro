@@ -1,25 +1,28 @@
----
-import type { CollectionEntry } from 'astro:content';
-
 interface Props {
   author: CollectionEntry<'authors'>;
+  locale?: 'en' | 'de';
 }
 
-const { author } = Astro.props;
+const { author, locale = 'de' } = Astro.props;
 const { name, role, bio, avatar, twitter, linkedin, website, credentials } = author.data;
+const authorSlug = author.id.replace(/\.mdx?$/, '');
+const authorLink = locale === 'en' ? `/en/authors/${authorSlug}/` : `/authors/${authorSlug}/`;
 ---
 
 <div class="author-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
   <div class="author-header">
-    <div class="author-avatar-wrapper">
+    <a href={authorLink} class="author-avatar-wrapper" aria-label={`View ${name}'s profile`}>
       {avatar ? (
         <img src={avatar} alt={name} class="author-avatar" itemprop="image" />
       ) : (
         <div class="author-avatar-placeholder">{name.charAt(0)}</div>
       )}
-    </div>
+    </a>
     <div class="author-info">
-      <h3 class="author-name" itemprop="name">{name}</h3>
+      <h3 class="author-name" itemprop="name">
+        <a href={authorLink}>{name}</a>
+      </h3>
+
       <p class="author-role" itemprop="jobTitle">{role}</p>
       {credentials && (
         <div class="author-credentials">

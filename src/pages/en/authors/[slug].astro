@@ -1,0 +1,248 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { siteConfig } from '../../../config/site';
+
+export async function getStaticPaths() {
+  const authors = await getCollection('authors');
+  return authors.map((author) => ({
+    params: { slug: author.id.replace(/\.mdx?$/, '') },
+    props: { author },
+  }));
+}
+
+const { author } = Astro.props;
+const { name, role, bio, avatar, twitter, linkedin, website, credentials } = author.data;
+const { Content } = await render(author);
+
+// Get articles by this author
+const allPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en' && p.data.author === author.id);
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const authorUrl = `${siteConfig.url}/en/authors/${Astro.params.slug}/`;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: name,
+  jobTitle: role,
+  description: bio,
+  url: authorUrl,
+  image: avatar ? `${siteConfig.url}${avatar}` : undefined,
+  sameAs: [twitter, linkedin, website].filter(Boolean),
+  worksFor: {
+    '@type': 'Organization',
+    name: 'KryptoWatch'
+  }
+};
+---
+
+<BaseLayout
+  title={`${name} - ${role} | KryptoWatch`}
+  description={bio}
+  locale="en"
+  schema={personSchema}
+  canonical={authorUrl}
+  breadcrumbs={[
+    { name: 'KryptoWatch', url: siteConfig.url },
+    { name: 'Authors', url: '#' },
+    { name: name, url: authorUrl },
+  ]}
+>
+  <div class="author-page">
+    <header class="author-hero">
+      <div class="container">
+        <div class="author-hero-inner">
+          <div class="author-hero-visual">
+            {avatar ? (
+              <img src={avatar} alt={name} class="author-hero-avatar" />
+            ) : (
+              <div class="author-hero-placeholder">{name.charAt(0)}</div>
+            )}
+          </div>
+          <div class="author-hero-content">
+            <h1 class="author-hero-name">{name}</h1>
+            <p class="author-hero-role">{role}</p>
+            {credentials && (
+              <div class="author-hero-credentials">
+                {credentials.map((cred) => (
+                  <span class="cred-tag">Verified: {cred}</span>
+                ))}
+              </div>
+            )}
+            <div class="author-hero-socials">
+              {twitter && <a href={twitter} class="social-icon" target="_blank">𝕏</a>}
+              {linkedin && <a href={linkedin} class="social-icon" target="_blank">in</a>}
+              {website && <a href={website} class="social-icon" target="_blank">🌐</a>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container author-content-grid">
+      <aside class="author-sidebar">
+        <div class="sidebar-card">
+          <h2 class="sidebar-title">About the Author</h2>
+          <p class="sidebar-bio">{bio}</p>
+        </div>
+      </aside>
+
+      <main class="author-main">
+        <section class="author-bio-full prose-crypto">
+          <Content />
+        </section>
+
+        <section class="author-posts">
+          <h2 class="section-title">Articles by {name}</h2>
+          <div class="posts-grid">
+            {sortedPosts.length > 0 ? (
+              sortedPosts.map((post) => (
+                <BlogCard post={post} locale="en" />
+              ))
+            ) : (
+              <p>No articles published yet.</p>
+            )}
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .author-hero {
+    padding-block: 4rem 3rem;
+    background: radial-gradient(circle at 50% -20%, oklch(45% 0.22 250 / 0.15) 0%, transparent 70%);
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.3);
+  }
+  .author-hero-inner {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .author-hero-visual {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: var(--color-brand-900);
+    border: 3px solid oklch(45% 0.2 250 / 0.2);
+    flex-shrink: 0;
+  }
+  .author-hero-avatar { width: 100%; height: 100%; object-fit: cover; }
+  .author-hero-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; font-weight: 900; color: white;
+    background: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
+  }
+  .author-hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    color: var(--color-text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .author-hero-role {
+    font-size: 1.125rem;
+    color: var(--color-brand-300);
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+  .author-hero-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .cred-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    background: oklch(45% 0.2 250 / 0.1);
+    border: 1px solid oklch(45% 0.2 250 / 0.3);
+    color: var(--color-brand-200);
+    border-radius: 6px;
+  }
+  .author-hero-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .social-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: oklch(14% 0.04 250);
+    border: 1px solid oklch(25% 0.05 250 / 0.4);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .social-icon:hover {
+    background: var(--color-brand-800);
+    color: var(--color-brand-300);
+    transform: translateY(-2px);
+  }
+
+  .author-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-block: 4rem;
+  }
+  @media (min-width: 1024px) {
+    .author-content-grid { grid-template-columns: 300px 1fr; }
+  }
+
+  .sidebar-card {
+    background: oklch(14% 0.04 250 / 0.5);
+    border: 1px solid oklch(25% 0.05 250 / 0.3);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    position: sticky;
+    top: 6rem;
+  }
+  .sidebar-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .sidebar-bio {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  .author-bio-full {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid oklch(25% 0.05 250 / 0.3);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: 2rem;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+</style>

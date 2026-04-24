@@ -121,15 +121,17 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
         <p class="post-description">{description}</p>
 
         <div class="post-author-row">
-          <div class="post-author-avatar" aria-hidden="true">
+          <a href={`/en/authors/${authorId.replace(/\.mdx?$/, '')}/`} class="post-author-avatar" aria-hidden="true">
             {authorEntry?.data.avatar ? (
               <img src={authorEntry.data.avatar} alt="" class="avatar-img" />
             ) : (
               (authorEntry?.data.name || authorId).charAt(0)
             )}
-          </div>
+          </a>
           <div>
-            <span class="post-author-name" itemprop="author">{authorEntry?.data.name || authorId}</span>
+            <span class="post-author-name" itemprop="author">
+              <a href={`/en/authors/${authorId.replace(/\.mdx?$/, '')}/`}>{authorEntry?.data.name || authorId}</a>
+            </span>
             <div class="post-date-row">
               <time class="post-date" datetime={new Date(date).toISOString()} itemprop="datePublished">Published: {formattedDate}</time>
               {post.data.lastUpdated && (
@@ -161,8 +163,9 @@ const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month:
           <Content />
           
           {authorEntry && (
-            <AuthorCard author={authorEntry} />
+            <AuthorCard author={authorEntry} locale="en" />
           )}
+
 
           <div class="post-disclaimer" role="note">
             <strong>⚠️ Disclaimer:</strong> This article does not constitute investment advice. Cryptocurrencies are highly volatile assets with significant risk of loss.

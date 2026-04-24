@@ -133,15 +133,17 @@ const formattedDate = new Intl.DateTimeFormat('de-DE', {
         <p class="post-description">{description}</p>
 
         <div class="post-author-row">
-          <div class="post-author-avatar" aria-hidden="true">
+          <a href={`/authors/${authorId.replace(/\.mdx?$/, '')}/`} class="post-author-avatar" aria-hidden="true">
             {authorEntry?.data.avatar ? (
               <img src={authorEntry.data.avatar} alt="" class="avatar-img" />
             ) : (
               (authorEntry?.data.name || authorId).charAt(0)
             )}
-          </div>
+          </a>
           <div>
-            <span class="post-author-name" itemprop="author">{authorEntry?.data.name || authorId}</span>
+            <span class="post-author-name" itemprop="author">
+              <a href={`/authors/${authorId.replace(/\.mdx?$/, '')}/`}>{authorEntry?.data.name || authorId}</a>
+            </span>
             <div class="post-date-row">
               <time class="post-date" datetime={new Date(date).toISOString()} itemprop="datePublished">Veröffentlicht: {formattedDate}</time>
               {post.data.lastUpdated && (
@@ -152,7 +154,7 @@ const formattedDate = new Intl.DateTimeFormat('de-DE', {
           </div>
           <!-- Social share -->
           <div class="post-share" aria-label="Artikel teilen">
-            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Auf Twitter teilen">
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Auf X teilen">
               𝕏
             </a>
             <a href={`https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(title)}`} target="_blank" rel="noopener noreferrer" class="share-btn" aria-label="Auf Telegram teilen">
@@ -187,7 +189,7 @@ const formattedDate = new Intl.DateTimeFormat('de-DE', {
           <Content />
 
           {authorEntry && (
-            <AuthorCard author={authorEntry} />
+            <AuthorCard author={authorEntry} locale="de" />
           )}
 
           <!-- Disclaimer -->
