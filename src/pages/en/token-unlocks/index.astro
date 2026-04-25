@@ -8,9 +8,73 @@ const locale = 'en';
 const tr = t(locale);
 
 // Mock data for Phase 1A (will be replaced by getCollection('unlocks') in next phase)
-// ... (mockUnlocks remain same)
 const mockUnlocks = [
-  // ...
+  {
+    coinId: 'arbitrum',
+    symbol: 'ARB',
+    name: 'Arbitrum',
+    unlockDate: new Date('2026-05-16'),
+    amount: 1111000000,
+    amountUsd: 1250000000,
+    percentOfCirculating: 3.5,
+    category: 'Team',
+    isCliff: true
+  },
+  {
+    coinId: 'worldcoin',
+    symbol: 'WLD',
+    name: 'Worldcoin',
+    unlockDate: new Date('2026-04-28'),
+    amount: 6620000,
+    amountUsd: 32000000,
+    percentOfCirculating: 5.2,
+    category: 'Investors',
+    isCliff: true
+  },
+  {
+    coinId: 'solana',
+    symbol: 'SOL',
+    name: 'Solana',
+    unlockDate: new Date('2026-05-01'),
+    amount: 1000000,
+    amountUsd: 145000000,
+    percentOfCirculating: 0.22,
+    category: 'Ecosystem',
+    isCliff: false
+  },
+  {
+    coinId: 'optimism',
+    symbol: 'OP',
+    name: 'Optimism',
+    unlockDate: new Date('2026-04-30'),
+    amount: 24160000,
+    amountUsd: 58000000,
+    percentOfCirculating: 2.3,
+    category: 'Team',
+    isCliff: true
+  },
+  {
+    coinId: 'sui',
+    symbol: 'SUI',
+    name: 'Sui',
+    unlockDate: new Date('2026-05-03'),
+    amount: 65000000,
+    amountUsd: 78000000,
+    percentOfCirculating: 4.8,
+    category: 'Community',
+    isCliff: true
+  },
+  {
+    coinId: 'celestia',
+    symbol: 'TIA',
+    name: 'Celestia',
+    unlockDate: new Date('2026-04-27'),
+    amount: 950000,
+    amountUsd: 11000000,
+    percentOfCirculating: 0.55,
+    category: 'Advisors',
+    isCliff: true
+  }
 ];
 
 // Sort by date (nearest first)
