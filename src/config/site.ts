@@ -22,6 +22,7 @@ export const navLinks = {
   de: [
     { label: 'RSI', href: '/rsi/btc/' },
     { label: 'Sentiment', href: '/sentiment/' },
+    { label: 'Unlocks', href: '/token-unlocks/' },
     { label: 'Blog', href: '/blog/' },
     { label: 'Über uns', href: '/about-us/' },
     { label: 'Kontakt', href: '/contact-us/' },
@@ -29,6 +30,7 @@ export const navLinks = {
   en: [
     { label: 'RSI', href: '/en/rsi/btc/' },
     { label: 'Sentiment', href: '/en/sentiment/' },
+    { label: 'Unlocks', href: '/en/token-unlocks/' },
     { label: 'Blog', href: '/en/blog/' },
     { label: 'About Us', href: '/en/about-us/' },
     { label: 'Contact', href: '/en/contact-us/' },
@@ -44,6 +46,7 @@ export const footerLinks = {
     { label: 'Kontakt', href: '/contact-us/' },
     { label: 'Sitemap', href: '/sitemap/' },
     { label: 'Über uns', href: '/about-us/' },
+    { label: 'Token Unlocks', href: '/token-unlocks/' },
   ],
   en: [
     { label: 'Imprint', href: '/en/impressum/' },
@@ -51,8 +54,9 @@ export const footerLinks = {
     { label: 'Terms', href: '/en/terms/' },
     { label: 'Editorial Guidelines', href: '/en/editorial-guidelines/' },
     { label: 'Contact', href: '/en/contact-us/' },
-    { label: 'Sitemap', href: '/sitemap/' },
+    { label: 'Sitemap', href: '/en/sitemap/' },
     { label: 'About Us', href: '/en/about-us/' },
+    { label: 'Token Unlocks', href: '/en/token-unlocks/' },
   ],
 } as const;
 
@@ -75,4 +79,5 @@ export const cryptoCategories = [
   { slug: 'exchanges', emoji: '🏦', color: '#14b8a6' },
   { slug: 'web3', emoji: '🌐', color: '#8b5cf6' },
   { slug: 'rsi', emoji: '📈', color: '#00f2ff' },
+  { slug: 'unlocks', emoji: '🔓', color: '#ff003c' },
 ] as const;
