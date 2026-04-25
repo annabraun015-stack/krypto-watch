@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import UnlockCard from '../../../components/unlocks/UnlockCard.astro';
-import { siteConfig } from '../../../config/site';
-import { t } from '../../../i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import UnlockCard from '../../components/unlocks/UnlockCard.astro';
+import { siteConfig } from '../../config/site';
+import { t } from '../../i18n';
 
 const locale = 'de';
 const tr = t(locale);
@@ -88,7 +88,7 @@ const pageDesc = tr.unlocks.seoDesc;
   title={pageTitle}
   description={pageDesc}
   locale={locale}
-  canonical={`${siteConfig.url}/de/token-unlocks/`}
+  canonical={`${siteConfig.url}/token-unlocks/`}
 >
   <div class="unlocks-page">
     <!-- ══ DASHBOARD HEADER ══ -->
