@@ -1,7 +1,9 @@
 ---
 import { calculateSupplyShock } from '../../lib/supabase';
+import { t } from '../../i18n';
 
 interface Props {
+  locale: 'en' | 'de';
   unlock: {
     coinId: string;
     symbol: string;
@@ -15,22 +17,23 @@ interface Props {
   };
 }
 
-const { unlock } = Astro.props;
+const { unlock, locale = 'en' } = Astro.props;
+const tr = t(locale);
 
 const shock = calculateSupplyShock(unlock.amount, (unlock.amount / unlock.percentOfCirculating) * 100);
 
 const isFuture = unlock.unlockDate.getTime() > Date.now();
-const dateStr = unlock.unlockDate.toLocaleDateString('en-US', { 
+const dateStr = unlock.unlockDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE', { 
   month: 'short', 
   day: 'numeric', 
   year: 'numeric' 
 });
 
 const formatCurrency = (val: number) => 
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+  new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'de-DE', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
 
 const formatNumber = (val: number) => 
-  new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 2 }).format(val);
+  new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'de-DE', { notation: 'compact', maximumFractionDigits: 2 }).format(val);
 ---
 
 <div class="unlock-card" style={`--shock-color: ${shock.color}`}>
@@ -50,7 +53,7 @@ const formatNumber = (val: number) =>
 
   <div class="card-body">
     <div class="stat-group">
-      <span class="stat-label">Unlock Amount</span>
+      <span class="stat-label">{tr.unlocks.amount}</span>
       <span class="stat-value">{formatNumber(unlock.amount)} {unlock.symbol}</span>
       <span class="stat-sub">{formatCurrency(unlock.amountUsd)}</span>
     </div>
@@ -69,10 +72,10 @@ const formatNumber = (val: number) =>
   <div class="card-footer">
     <div class="event-meta">
       <span class="category-tag">{unlock.category}</span>
-      <span class="type-tag">{unlock.isCliff ? 'Cliff' : 'Linear'}</span>
+      <span class="type-tag">{unlock.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</span>
     </div>
     <div class="event-date">
-      <span class="date-label">{isFuture ? 'Unlocks in' : 'Unlocked on'}</span>
+      <span class="date-label">{isFuture ? tr.unlocks.nextMajorUnlock : tr.unlocks.date}</span>
       <span class="date-value">{dateStr}</span>
     </div>
   </div>

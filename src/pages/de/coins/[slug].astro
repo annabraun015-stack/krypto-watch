@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { coinData } = Astro.props;
-const locale = 'en';
+const locale = 'de';
 const tr = t(locale);
 
 // Sort unlocks by date
@@ -39,7 +39,7 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
   title={title}
   description={description}
   locale={locale}
-  canonical={`${siteConfig.url}/en/coins/${slug}/`}
+  canonical={`${siteConfig.url}/de/coins/${slug}/`}
 >
   <div class="coin-intelligence-page">
     <div class="container">
@@ -88,17 +88,17 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
               </div>
               <div class="impact-stat shock-stat">
                 <span class="impact-label">{tr.unlocks.supplyShock}</span>
-                <span class="impact-value">EXTREME</span>
+                <span class="impact-value">EXTREM</span>
                 <span class="impact-sub">{tr.unlocks.calculatedViaAI}</span>
               </div>
             </div>
 
             <div class="impact-narrative">
               <p>
-                The upcoming unlock for <strong>{coinData.name}</strong> on <strong>{formatDate(nextUnlock.date)}</strong> 
-                represents a significant liquidity event. As a <strong>{nextUnlock.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</strong> 
-                event categorized for <strong>{nextUnlock.category}</strong>, market participants should anticipate 
-                potential volatility in the 72 hours surrounding the unlock date.
+                Der bevorstehende Unlock für <strong>{coinData.name}</strong> am <strong>{formatDate(nextUnlock.date)}</strong> 
+                stellt ein signifikantes Liquiditätsereignis dar. Als <strong>{nextUnlock.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</strong> 
+                Ereignis für <strong>{nextUnlock.category}</strong> sollten Marktteilnehmer mit einer erhöhten 
+                Volatilität in den 72 Stunden um das Unlock-Datum herum rechnen.
               </p>
             </div>
           </section>
@@ -128,7 +128,7 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
                       <td class="td-amount"><strong>{formatNumber(u.amount)}</strong> {coinData.symbol}</td>
                       <td><span class="tag">{u.category}</span></td>
                       <td>{u.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</td>
-                      <td><span class="shock-indicator low">Low</span></td>
+                      <td><span class="shock-indicator low">Niedrig</span></td>
                     </tr>
                   ))}
                 </tbody>
@@ -142,18 +142,18 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
           <div class="sidebar-widget">
             <h3 class="widget-title">{tr.unlocks.intelFeed}</h3>
             <div class="feed-item">
-              <span class="feed-time">1h ago</span>
-              <p>Volume spike detected on {coinData.symbol} perpetuals.</p>
+              <span class="feed-time">Vor 1 Std.</span>
+              <p>{tr.unlocks.feedSpike.replace('{symbol}', coinData.symbol)}</p>
             </div>
             <div class="feed-item">
-              <span class="feed-time">4h ago</span>
-              <p>Whale movement identified from Team vesting wallet.</p>
+              <span class="feed-time">Vor 4 Std.</span>
+              <p>{tr.unlocks.feedWhale}</p>
             </div>
           </div>
 
           <div class="sidebar-widget promo">
             <h3 class="widget-title">{tr.unlocks.advancedAlerts}</h3>
-            <p>Get notified 24h before any major supply shock hits the market.</p>
+            <p>{tr.unlocks.alertDesc}</p>
             <button class="btn btn-brand w-full">{tr.unlocks.enableSignal}</button>
           </div>
         </aside>
