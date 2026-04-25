@@ -231,7 +231,25 @@
     "seoTitle": "Token Unlock Intelligence Dashboard | KryptoWatch",
     "seoDesc": "Verfolgen Sie Echtzeit-Token-Unlocks, Supply-Shock-Metriken und Markt-Impact-Analysen für führende Krypto-Projekte.",
     "coinSeoTitle": "{coin} ({symbol}) Token Unlock Intelligence | KryptoWatch",
-    "coinSeoDesc": "Detaillierte Tokenomics und anstehender Token-Unlock-Zeitplan für {coin}. Analysieren Sie den Supply-Shock und Markt-Impact für {symbol}."
+    "coinSeoDesc": "Detaillierte Tokenomics und anstehender Token-Unlock-Zeitplan für {coin}. Analysieren Sie den Supply-Shock und Markt-Impact für {symbol}.",
+    "faqTitle": "Token Unlock FAQs",
+    "faqs": [
+      {
+        "q": "Was ist ein Token Unlock Event?",
+        "a": "Ein Token Unlock ist die Freigabe von zuvor gesperrten Token in den zirkulierenden Vorrat. Diese Token werden meist vom Team, frühen Investoren oder Beratern gehalten und unterliegen einem Vesting-Zeitplan."
+      },
+      {
+        "q": "Wie beeinflussen Token Unlocks den Preis?",
+        "a": "Große Unlocks können den Verkaufsdruck erhöhen, da mehr Angebot verfügbar wird. Wenn der Markt das Event jedoch bereits 'eingepreist' hat oder die Nachfrage stark bleibt, kann der Preiseffekt minimal sein."
+      },
+      {
+        "q": "Was ist ein 'Cliff' Unlock vs. 'Lineares' Vesting?",
+        "a": "Ein Cliff ist eine einmalige große Freigabe von Token zu einem bestimmten Datum. Lineares Vesting ist eine schrittweise, meist tägliche Freigabe über einen Zeitraum, was meist weniger unmittelbaren Markteinfluss hat."
+      }
+    ],
+    "tacticalTitle": "Taktische Intelligence",
+    "bullishCase": "Bullish Case",
+    "bearishCase": "Bearish Case"
   }
 }
 

@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "ai-agents",
+    "name": "AI Agents",
+    "description": "The convergence of artificial intelligence and blockchain technology. Focuses on autonomous agents, decentralized compute, and AI-driven market makers.",
+    "strength": 85,
+    "coins": ["WLD", "NEAR", "FET", "RNDR"],
+    "insights": "AI sector continues to dominate DEX volume. Autonomous agent protocols are seeing 40% WoW growth in TVL.",
+    "sentiment": "Strongly Bullish"
+  },
+  {
+    "slug": "rwa",
+    "name": "Real World Assets (RWA)",
+    "description": "Tokenization of tangible assets like real estate, bonds, and credit. Bringing off-chain liquidity to the blockchain.",
+    "strength": 72,
+    "coins": ["ONDO", "LINK", "MKR", "PENDLE"],
+    "insights": "Institutional interest in tokenized treasuries is at an all-time high. BlackRock BUIDL fund success is a major catalyst.",
+    "sentiment": "Bullish"
+  },
+  {
+    "slug": "depin",
+    "name": "DePIN",
+    "description": "Decentralized Physical Infrastructure Networks. Using crypto-incentives to build real-world infrastructure like Wi-Fi, 5G, and GPU clouds.",
+    "strength": 65,
+    "coins": ["SOL", "FIL", "AR", "HNT"],
+    "insights": "GPU shortage is driving massive demand for decentralized compute networks.",
+    "sentiment": "Neutral-Bullish"
+  }
+]

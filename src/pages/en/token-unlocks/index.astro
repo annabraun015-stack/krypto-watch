@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import UnlockCard from '../../../components/unlocks/UnlockCard.astro';
+import FAQ from '../../../components/FAQ.astro';
 import { siteConfig } from '../../../config/site';
 import { t } from '../../../i18n';
 
@@ -18,7 +19,9 @@ const mockUnlocks = [
     amountUsd: 1250000000,
     percentOfCirculating: 3.5,
     category: 'Team',
-    isCliff: true
+    isCliff: true,
+    marketCap: 2500000000,
+    volume24h: 350000000
   },
   {
     coinId: 'worldcoin',
@@ -29,7 +32,9 @@ const mockUnlocks = [
     amountUsd: 32000000,
     percentOfCirculating: 5.2,
     category: 'Investors',
-    isCliff: true
+    isCliff: true,
+    marketCap: 600000000,
+    volume24h: 15000000
   },
   {
     coinId: 'solana',
@@ -40,7 +45,9 @@ const mockUnlocks = [
     amountUsd: 145000000,
     percentOfCirculating: 0.22,
     category: 'Ecosystem',
-    isCliff: false
+    isCliff: false,
+    marketCap: 65000000000,
+    volume24h: 2100000000
   },
   {
     coinId: 'optimism',
@@ -51,7 +58,9 @@ const mockUnlocks = [
     amountUsd: 58000000,
     percentOfCirculating: 2.3,
     category: 'Team',
-    isCliff: true
+    isCliff: true,
+    marketCap: 2500000000,
+    volume24h: 120000000
   },
   {
     coinId: 'sui',
@@ -62,7 +71,9 @@ const mockUnlocks = [
     amountUsd: 78000000,
     percentOfCirculating: 4.8,
     category: 'Community',
-    isCliff: true
+    isCliff: true,
+    marketCap: 1600000000,
+    volume24h: 450000000
   },
   {
     coinId: 'celestia',
@@ -73,12 +84,44 @@ const mockUnlocks = [
     amountUsd: 11000000,
     percentOfCirculating: 0.55,
     category: 'Advisors',
-    isCliff: true
+    isCliff: true,
+    marketCap: 2000000000,
+    volume24h: 85000000
   }
 ];
 
-// Sort by date (nearest first)
 const sortedUnlocks = mockUnlocks.sort((a, b) => a.unlockDate.getTime() - b.unlockDate.getTime());
+
+// SEO: ItemList Schema
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Upcoming Crypto Token Unlocks",
+  "description": "Real-time monitor of major cryptocurrency token unlock events and supply shock analysis.",
+  "itemListElement": sortedUnlocks.map((unlock, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Event",
+      "name": `${unlock.name} Token Unlock`,
+      "startDate": unlock.unlockDate.toISOString()
+    }
+  }))
+};
+
+// SEO: FAQ Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": tr.unlocks.faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }))
+};
 
 const pageTitle = tr.unlocks.seoTitle;
 const pageDesc = tr.unlocks.seoDesc;
@@ -90,6 +133,9 @@ const pageDesc = tr.unlocks.seoDesc;
   locale={locale}
   canonical={`${siteConfig.url}/en/token-unlocks/`}
 >
+  <!-- SEO: Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   <div class="unlocks-page">
     <!-- ══ DASHBOARD HEADER ══ -->
     <header class="dashboard-header">
@@ -143,6 +189,21 @@ const pageDesc = tr.unlocks.seoDesc;
       </div>
     </nav>
 
+    <!-- ══ MONTHLY ARCHIVES (Phase 1B Internal Linking) ══ -->
+    <section class="archive-nav">
+      <div class="container">
+        <div class="archive-flex">
+          <span class="archive-label">Browse by Month:</span>
+          <div class="month-links">
+            <a href="/en/token-unlocks/april-2026/" class="month-link">April 2026</a>
+            <a href="/en/token-unlocks/may-2026/" class="month-link">May 2026</a>
+            <a href="/en/token-unlocks/june-2026/" class="month-link">June 2026</a>
+            <a href="/en/token-unlocks/july-2026/" class="month-link">July 2026</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ══ MAIN CONTENT ══ -->
     <main class="main-content">
       <div class="container">
@@ -158,6 +219,15 @@ const pageDesc = tr.unlocks.seoDesc;
           </p>
           <button class="btn btn-outline">{tr.unlocks.loadMore}</button>
         </div>
+
+        <!-- ══ FAQ SECTION ══ -->
+        <section class="faq-section">
+          <div class="section-header">
+            <h2 class="section-title">{tr.unlocks.faqTitle}</h2>
+            <div class="title-underline"></div>
+          </div>
+          <FAQ faqs={tr.unlocks.faqs} locale={locale} />
+        </section>
       </div>
     </main>
   </div>
@@ -348,6 +418,51 @@ const pageDesc = tr.unlocks.seoDesc;
     min-width: 260px;
   }
 
+  /* ── Archive Nav ── */
+  .archive-nav {
+    background: oklch(12% 0.03 260);
+    padding-block: 1rem;
+    border-bottom: 1px solid oklch(25% 0.05 195 / 0.1);
+  }
+
+  .archive-flex {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .archive-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .month-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .month-link {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    background: oklch(20% 0.04 260);
+    border-radius: 0.5rem;
+    border: 1px solid oklch(25% 0.05 195 / 0.2);
+    transition: all 0.2s;
+  }
+
+  .month-link:hover {
+    color: var(--color-brand-400);
+    border-color: var(--color-brand-400);
+    background: oklch(25% 0.05 195 / 0.1);
+  }
+
   /* ── Main Content ── */
   .main-content {
     padding-block: 4rem 6rem;
@@ -377,5 +492,34 @@ const pageDesc = tr.unlocks.seoDesc;
     color: var(--color-text-secondary);
     margin-bottom: 1.5rem;
     font-style: italic;
+  }
+
+  /* ── FAQ Section ── */
+  .faq-section {
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid oklch(25% 0.05 195 / 0.2);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .title-underline {
+    width: 60px;
+    height: 4px;
+    background: var(--color-brand-400);
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--color-brand-400);
   }
 </style>

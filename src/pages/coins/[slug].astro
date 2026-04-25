@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TimelineChart from '../../components/unlocks/TimelineChart.astro';
+import { calculateUnlockImpactScore } from '../../lib/intelligence';
 import { siteConfig } from '../../config/site';
 import { t } from '../../i18n';
 import fs from 'fs';
@@ -27,12 +29,31 @@ const sortedUnlocks = [...coinData.unlocks].sort((a: any, b: any) =>
 
 const nextUnlock = sortedUnlocks.find((u: any) => new Date(u.date).getTime() > Date.now()) || sortedUnlocks[0];
 
+// Calculate Impact for next unlock
+const impact = calculateUnlockImpactScore({
+  amount: nextUnlock.amount,
+  amountUsd: (nextUnlock.amount * (coinData.marketCap / coinData.circulatingSupply)), // Estimated USD value
+  percentOfCirculating: (nextUnlock.amount / coinData.circulatingSupply) * 100,
+  marketCap: coinData.marketCap,
+  volume24h: coinData.volume24h
+});
+
 // Formatters
 const formatDate = (d: string) => new Date(d).toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE', { month: 'long', day: 'numeric', year: 'numeric' });
 const formatNumber = (n: number) => new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'de-DE', { notation: 'compact' }).format(n);
 
 const title = tr.unlocks.coinSeoTitle.replace('{coin}', coinData.name).replace('{symbol}', coinData.symbol);
 const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).replace('{symbol}', coinData.symbol);
+
+// SEO: JSON-LD
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": `${coinData.name} Token Unlock Event`,
+  "startDate": new Date(nextUnlock.date).toISOString(),
+  "description": impact.description,
+  "location": { "@type": "VirtualLocation", "url": `${siteConfig.url}/coins/${slug}/` }
+};
 ---
 
 <BaseLayout
@@ -41,18 +62,20 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
   locale={locale}
   canonical={`${siteConfig.url}/coins/${slug}/`}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
   <div class="coin-intelligence-page">
     <div class="container">
       
       <!-- ══ COIN HERO ══ -->
       <header class="coin-hero">
         <div class="coin-identity">
-          <div class="coin-icon">{coinData.symbol[0]}</div>
+          <div class="coin-icon" style={`background: ${impact.color}`}>{coinData.symbol[0]}</div>
           <div>
             <h1 class="coin-title">{tr.unlocks.coinIntelligence.replace('{coin}', coinData.name)}</h1>
             <div class="coin-meta">
               <span class="ticker-badge">{coinData.symbol}</span>
-              <span class="status-badge"><span class="live-dot"></span> {tr.unlocks.monitoringLive}</span>
+              <span class="status-badge"><span class="live-dot" style={`background: ${impact.color}`}></span> {tr.unlocks.monitoringLive}</span>
             </div>
           </div>
         </div>
@@ -71,7 +94,7 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
           <!-- Next Unlock Deep Dive -->
           <section class="intel-section highlight">
             <div class="cyber-header">
-              <div class="line"></div>
+              <div class="line" style={`background: ${impact.color}`}></div>
               <h2>{tr.unlocks.impactAnalysis}</h2>
             </div>
             
@@ -86,21 +109,39 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
                 <span class="impact-value">{nextUnlock.category}</span>
                 <span class="impact-sub">{nextUnlock.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</span>
               </div>
-              <div class="impact-stat shock-stat">
+              <div class="impact-stat shock-stat" style={`--impact-color: ${impact.color}`}>
                 <span class="impact-label">{tr.unlocks.supplyShock}</span>
-                <span class="impact-value">EXTREM</span>
-                <span class="impact-sub">{tr.unlocks.calculatedViaAI}</span>
+                <span class="impact-value">{impact.label}</span>
+                <span class="impact-sub">Score: {impact.score}/100</span>
               </div>
             </div>
 
-            <div class="impact-narrative">
-              <p>
-                Der bevorstehende Unlock für <strong>{coinData.name}</strong> am <strong>{formatDate(nextUnlock.date)}</strong> 
-                stellt ein signifikantes Liquiditätsereignis dar. Als <strong>{nextUnlock.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</strong> 
-                Ereignis für <strong>{nextUnlock.category}</strong> sollten Marktteilnehmer mit einer erhöhten 
-                Volatilität in den 72 Stunden um das Unlock-Datum herum rechnen.
-              </p>
+            <div class="intelligence-box">
+              <div class="insight-summary">
+                <h3>Intelligence Insight</h3>
+                <p>{impact.description}</p>
+              </div>
+
+              <div class="tactical-grid">
+                <div class="tactical-case bullish">
+                  <h4>{tr.unlocks.bullishCase}</h4>
+                  <p>Strong OTC demand or proactive "priced-in" behavior. Supply absorbed by institutional bidders.</p>
+                </div>
+                <div class="tactical-case bearish">
+                  <h4>{tr.unlocks.bearishCase}</h4>
+                  <p>Liquidity gap on order books. Team/VC selling pressure outpaces organic retail demand.</p>
+                </div>
+              </div>
             </div>
+          </section>
+
+          <!-- Visual Timeline Chart (Phase 1B) -->
+          <section class="intel-section">
+            <div class="cyber-header">
+              <div class="line"></div>
+              <h2>Unlock Timeline</h2>
+            </div>
+            <TimelineChart unlocks={coinData.unlocks} symbol={coinData.symbol} color={impact.color} />
           </section>
 
           <!-- Unlock Schedule Table -->
@@ -118,7 +159,6 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
                     <th>{tr.unlocks.amount}</th>
                     <th>{tr.unlocks.category}</th>
                     <th>{tr.unlocks.type}</th>
-                    <th>{tr.unlocks.shock}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -128,7 +168,6 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
                       <td class="td-amount"><strong>{formatNumber(u.amount)}</strong> {coinData.symbol}</td>
                       <td><span class="tag">{u.category}</span></td>
                       <td>{u.isCliff ? tr.unlocks.cliffEvent : tr.unlocks.linearVesting}</td>
-                      <td><span class="shock-indicator low">Niedrig</span></td>
                     </tr>
                   ))}
                 </tbody>
@@ -196,7 +235,7 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
     font-size: 2rem;
     font-weight: 900;
     color: black;
-    box-shadow: 0 0 30px var(--color-brand-900 / 0.3);
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
   }
 
   .coin-title {
@@ -228,7 +267,7 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
     gap: 0.4rem;
     font-size: 0.625rem;
     font-weight: 800;
-    color: #00f3ff;
+    color: white;
     text-transform: uppercase;
   }
 
@@ -303,16 +342,43 @@ const description = tr.unlocks.coinSeoDesc.replace('{coin}', coinData.name).repl
   .impact-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: white; }
   .impact-sub { font-size: 0.75rem; color: var(--color-text-muted); }
 
-  .shock-stat .impact-value { color: #ff003c; text-shadow: 0 0 15px #ff003c44; }
+  .shock-stat .impact-value { color: var(--impact-color); text-shadow: 0 0 15px var(--impact-color); }
 
-  .impact-narrative {
-    padding: 1.5rem;
-    background: oklch(20% 0.05 260);
-    border-radius: 1rem;
-    line-height: 1.7;
-    color: var(--color-text-secondary);
-    font-size: 0.9375rem;
+  /* ── Intelligence Box ── */
+  .intelligence-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    background: oklch(10% 0.02 260 / 0.5);
+    border-radius: 1.5rem;
+    border: 1px solid oklch(25% 0.05 195 / 0.2);
   }
+
+  .insight-summary h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-400); margin-bottom: 0.75rem; }
+  .insight-summary p { font-size: 1rem; line-height: 1.6; color: var(--color-text-secondary); margin: 0; }
+
+  .tactical-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .tactical-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .tactical-case {
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid;
+  }
+
+  .tactical-case h4 { font-size: 0.875rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .tactical-case p { font-size: 0.8125rem; line-height: 1.5; margin: 0; color: var(--color-text-muted); }
+
+  .bullish { background: rgba(0, 255, 136, 0.05); border-color: rgba(0, 255, 136, 0.2); color: #00ff88; }
+  .bearish { background: rgba(255, 0, 60, 0.05); border-color: rgba(255, 0, 60, 0.2); color: #ff003c; }
 
   /* ── Table ── */
   .table-wrap { overflow-x: auto; }

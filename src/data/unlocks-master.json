@@ -3,18 +3,42 @@
     "slug": "arbitrum",
     "symbol": "ARB",
     "name": "Arbitrum",
+    "marketCap": 2600000000,
+    "volume24h": 380000000,
+    "circulatingSupply": 2600000000,
     "unlocks": [
       {
         "date": "2026-05-16",
         "amount": 1111000000,
         "category": "Team",
-        "isCliff": true
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 100,
+          "impactLabel": "CRITICAL",
+          "lastUpdated": "2026-04-25T17:58:16.105Z"
+        }
       },
       {
         "date": "2026-06-16",
         "amount": 92000000,
         "category": "Investors",
-        "isCliff": false
+        "isCliff": false,
+        "computedMetrics": {
+          "impactScore": 47,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.106Z"
+        }
+      },
+      {
+        "date": "2026-07-16",
+        "amount": 92000000,
+        "category": "Investors",
+        "isCliff": false,
+        "computedMetrics": {
+          "impactScore": 47,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.106Z"
+        }
       }
     ]
   },
@@ -22,12 +46,31 @@
     "slug": "worldcoin",
     "symbol": "WLD",
     "name": "Worldcoin",
+    "marketCap": 620000000,
+    "volume24h": 18000000,
+    "circulatingSupply": 190000000,
     "unlocks": [
       {
         "date": "2026-04-28",
         "amount": 6620000,
         "category": "Investors",
-        "isCliff": true
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 55,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.106Z"
+        }
+      },
+      {
+        "date": "2026-05-28",
+        "amount": 6620000,
+        "category": "Investors",
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 55,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.106Z"
+        }
       }
     ]
   },
@@ -35,12 +78,31 @@
     "slug": "solana",
     "symbol": "SOL",
     "name": "Solana",
+    "marketCap": 68000000000,
+    "volume24h": 2500000000,
+    "circulatingSupply": 440000000,
     "unlocks": [
       {
         "date": "2026-05-01",
         "amount": 1000000,
         "category": "Ecosystem",
-        "isCliff": false
+        "isCliff": false,
+        "computedMetrics": {
+          "impactScore": 32,
+          "impactLabel": "LOW",
+          "lastUpdated": "2026-04-25T17:58:16.107Z"
+        }
+      },
+      {
+        "date": "2026-06-01",
+        "amount": 1000000,
+        "category": "Ecosystem",
+        "isCliff": false,
+        "computedMetrics": {
+          "impactScore": 32,
+          "impactLabel": "LOW",
+          "lastUpdated": "2026-04-25T17:58:16.107Z"
+        }
       }
     ]
   },
@@ -48,12 +110,31 @@
     "slug": "optimism",
     "symbol": "OP",
     "name": "Optimism",
+    "marketCap": 2400000000,
+    "volume24h": 110000000,
+    "circulatingSupply": 1000000000,
     "unlocks": [
       {
         "date": "2026-04-30",
         "amount": 24160000,
         "category": "Team",
-        "isCliff": true
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 45,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.107Z"
+        }
+      },
+      {
+        "date": "2026-05-30",
+        "amount": 24160000,
+        "category": "Team",
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 45,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.107Z"
+        }
       }
     ]
   },
@@ -61,12 +142,31 @@
     "slug": "sui",
     "symbol": "SUI",
     "name": "Sui",
+    "marketCap": 1700000000,
+    "volume24h": 420000000,
+    "circulatingSupply": 1300000000,
     "unlocks": [
       {
         "date": "2026-05-03",
         "amount": 65000000,
         "category": "Community",
-        "isCliff": true
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 52,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.107Z"
+        }
+      },
+      {
+        "date": "2026-06-03",
+        "amount": 65000000,
+        "category": "Community",
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 52,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-25T17:58:16.107Z"
+        }
       }
     ]
   }

@@ -231,7 +231,25 @@
     "seoTitle": "Token Unlock Intelligence Dashboard | KryptoWatch",
     "seoDesc": "Track real-time token unlocks, supply shock metrics, and market impact analysis for major crypto projects.",
     "coinSeoTitle": "{coin} ({symbol}) Token Unlock Intelligence | KryptoWatch",
-    "coinSeoDesc": "Detailed tokenomics and upcoming token unlock schedule for {coin}. Analyze supply shock and market impact for {symbol}."
+    "coinSeoDesc": "Detailed tokenomics and upcoming token unlock schedule for {coin}. Analyze supply shock and market impact for {symbol}.",
+    "faqTitle": "Token Unlock FAQs",
+    "faqs": [
+      {
+        "q": "What is a token unlock event?",
+        "a": "A token unlock is the release of previously restricted tokens into the circulating supply. These tokens are usually held by the team, early investors, or advisors and are subject to a vesting schedule."
+      },
+      {
+        "q": "How do token unlocks affect the price?",
+        "a": "Large unlocks can increase selling pressure as more supply becomes available. However, if the market has already 'priced in' the event, or if demand remains strong, the price impact may be minimal."
+      },
+      {
+        "q": "What is a 'Cliff' unlock vs 'Linear' vesting?",
+        "a": "A Cliff is a single large release of tokens at a specific date. Linear vesting is a gradual, daily release over a period of time, which usually has less immediate market impact."
+      }
+    ],
+    "tacticalTitle": "Tactical Intelligence",
+    "bullishCase": "Bullish Case",
+    "bearishCase": "Bearish Case"
   }
 }
 

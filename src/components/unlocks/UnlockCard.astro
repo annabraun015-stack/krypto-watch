@@ -1,6 +1,7 @@
----
-import { calculateSupplyShock } from '../../lib/supabase';
+import { calculateUnlockImpactScore } from '../../lib/intelligence';
 import { t } from '../../i18n';
+import fs from 'fs';
+import path from 'path';
 
 interface Props {
   locale: 'en' | 'de';
@@ -14,13 +15,27 @@ interface Props {
     percentOfCirculating: number;
     category: string;
     isCliff: boolean;
+    marketCap?: number;
+    volume24h?: number;
   };
 }
 
 const { unlock, locale = 'en' } = Astro.props;
 const tr = t(locale);
 
-const shock = calculateSupplyShock(unlock.amount, (unlock.amount / unlock.percentOfCirculating) * 100);
+// Phase 1B: Narrative Lookup (Internal Linking Engine)
+const narrativesPath = path.resolve(process.cwd(), 'src/data/narratives-master.json');
+const allNarratives = JSON.parse(fs.readFileSync(narrativesPath, 'utf-8'));
+const coinNarratives = allNarratives.filter((n: any) => n.coins.includes(unlock.symbol));
+
+// Phase 1B Intelligence Layer: Comprehensive Scoring
+const impact = calculateUnlockImpactScore({
+  amount: unlock.amount,
+  amountUsd: unlock.amountUsd,
+  percentOfCirculating: unlock.percentOfCirculating,
+  marketCap: unlock.marketCap,
+  volume24h: unlock.volume24h
+});
 
 const isFuture = unlock.unlockDate.getTime() > Date.now();
 const dateStr = unlock.unlockDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'de-DE', { 
@@ -29,25 +44,69 @@ const dateStr = unlock.unlockDate.toLocaleDateString(locale === 'en' ? 'en-US' :
   year: 'numeric' 
 });
 
+const isoDate = unlock.unlockDate.toISOString();
+
 const formatCurrency = (val: number) => 
   new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'de-DE', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
 
 const formatNumber = (val: number) => 
   new Intl.NumberFormat(locale === 'en' ? 'en-US' : 'de-DE', { notation: 'compact', maximumFractionDigits: 2 }).format(val);
+
+// SEO: JSON-LD Schema (Event)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": `${unlock.name} (${unlock.symbol}) Token Unlock`,
+  "startDate": isoDate,
+  "description": `${impact.description} ${unlock.percentOfCirculating}% of circulating supply will be unlocked.`,
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+  "location": {
+    "@type": "VirtualLocation",
+    "url": `https://kryptowatch.de/coins/${unlock.coinId}/token-unlock/`
+  },
+  "image": `https://kryptowatch.de/images/coins/${unlock.coinId}.png`,
+  "organizer": {
+    "@type": "Organization",
+    "name": "KryptoWatch Intelligence",
+    "url": "https://kryptowatch.de"
+  }
+};
 ---
 
-<div class="unlock-card" style={`--shock-color: ${shock.color}`}>
+<!-- SEO Engine: Injected Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
+<div class="unlock-card" style={`--impact-color: ${impact.color}`}>
   <div class="card-header">
     <div class="coin-info">
       <div class="coin-avatar">{unlock.symbol[0]}</div>
       <div>
         <h3 class="coin-name">{unlock.name}</h3>
-        <span class="coin-ticker">{unlock.symbol}</span>
+        <div class="coin-meta-row">
+          <span class="coin-ticker">{unlock.symbol}</span>
+          {coinNarratives.length > 0 && (
+            <div class="narrative-tags">
+              {coinNarratives.map((n: any) => (
+                <a href={`/narratives/${n.slug}/`} class="narrative-link">#{n.name}</a>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
-    <div class="shock-badge" title="Supply Shock Index">
-      <span class="shock-dot"></span>
-      {shock.label} SHOCK
+    <div class="impact-score-badge" title={impact.description}>
+      <div class="score-circle">
+        <svg viewBox="0 0 36 36" class="circular-chart">
+          <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+          <path class="circle" stroke-dasharray={`${impact.score}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+        </svg>
+        <span class="score-value">{impact.score}</span>
+      </div>
+      <div class="impact-label">
+        <span class="label-text">{impact.label}</span>
+        <span class="impact-sub">IMPACT</span>
+      </div>
     </div>
   </div>
 
@@ -65,8 +124,9 @@ const formatNumber = (val: number) =>
     </div>
   </div>
 
-  <div class="shock-meter">
-    <div class="meter-bar" style={`width: ${Math.min(unlock.percentOfCirculating * 10, 100)}%`}></div>
+  <!-- Intelligence Insight -->
+  <div class="intelligence-insight">
+    <p>{impact.description}</p>
   </div>
 
   <div class="card-footer">
@@ -79,6 +139,11 @@ const formatNumber = (val: number) =>
       <span class="date-value">{dateStr}</span>
     </div>
   </div>
+  
+  <!-- Link to Detail (Phase 1B) -->
+  <a href={`/coins/${unlock.coinId}/token-unlock/`} class="detail-link">
+    Analysis & Charts →
+  </a>
 </div>
 
 <style>
@@ -90,43 +155,45 @@ const formatNumber = (val: number) =>
     position: relative;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
   .unlock-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    border-color: var(--shock-color);
-    box-shadow: 0 10px 30px -10px var(--shock-color);
+    transform: translateY(-4px);
+    border-color: var(--impact-color);
+    box-shadow: 0 10px 30px -15px var(--impact-color);
   }
 
   .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
+    align-items: center;
   }
 
   .coin-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   .coin-avatar {
-    width: 40px;
-    height: 40px;
-    background: var(--shock-color);
+    width: 36px;
+    height: 36px;
+    background: var(--impact-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     color: black;
-    box-shadow: 0 0 15px var(--shock-color);
+    font-size: 0.875rem;
   }
 
   .coin-name {
     font-family: var(--font-display);
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 700;
     margin: 0;
     color: white;
@@ -135,43 +202,107 @@ const formatNumber = (val: number) =>
   .coin-ticker {
     font-size: 0.75rem;
     color: var(--color-text-secondary);
-    letter-spacing: 0.1em;
-  }
-
-  .shock-badge {
-    font-size: 0.625rem;
-    font-weight: 900;
-    padding: 0.35rem 0.75rem;
-    border-radius: 2rem;
-    background: color-mix(in oklch, var(--shock-color) 15%, transparent);
-    color: var(--shock-color);
-    border: 1px solid color-mix(in oklch, var(--shock-color) 30%, transparent);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
     letter-spacing: 0.05em;
   }
 
-  .shock-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--shock-color);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--shock-color);
-    animation: pulse 2s infinite;
+  .coin-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
-  @keyframes pulse {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; }
-    100% { opacity: 0.4; }
+  .narrative-tags {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .narrative-link {
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: var(--color-brand-400);
+    text-decoration: none;
+    background: oklch(25% 0.05 195 / 0.2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 0.3rem;
+    transition: all 0.2s;
+  }
+
+  .narrative-link:hover {
+    background: var(--color-brand-400);
+    color: black;
+  }
+
+  /* Impact Score Badge */
+  .impact-score-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: oklch(20% 0.04 260 / 0.5);
+    padding: 0.4rem 0.75rem;
+    border-radius: 2rem;
+    border: 1px solid oklch(30% 0.05 195 / 0.2);
+  }
+
+  .score-circle {
+    position: relative;
+    width: 28px;
+    height: 28px;
+  }
+
+  .circular-chart {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .circle-bg {
+    fill: none;
+    stroke: oklch(25% 0.05 195 / 0.2);
+    stroke-width: 3.8;
+  }
+
+  .circle {
+    fill: none;
+    stroke: var(--impact-color);
+    stroke-width: 3.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+  }
+
+  .score-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.625rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  .impact-label {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .label-text {
+    font-size: 0.625rem;
+    font-weight: 900;
+    color: var(--impact-color);
+  }
+
+  .impact-sub {
+    font-size: 0.5rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.1em;
   }
 
   .card-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    gap: 1rem;
   }
 
   .stat-group {
@@ -180,16 +311,16 @@ const formatNumber = (val: number) =>
   }
 
   .stat-label {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .stat-value {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 700;
     color: white;
   }
@@ -197,43 +328,43 @@ const formatNumber = (val: number) =>
   .stat-sub {
     font-size: 0.75rem;
     color: var(--color-text-secondary);
-    margin-top: 0.25rem;
   }
 
-  .shock-meter {
-    height: 4px;
-    background: oklch(25% 0.05 195 / 0.3);
-    border-radius: 2px;
-    margin-bottom: 1.5rem;
-    overflow: hidden;
+  .intelligence-insight {
+    background: oklch(15% 0.04 260 / 0.4);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    border-left: 2px solid var(--impact-color);
   }
 
-  .meter-bar {
-    height: 100%;
-    background: var(--shock-color);
-    box-shadow: 0 0 10px var(--shock-color);
+  .intelligence-insight p {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 0;
   }
 
   .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1.25rem;
+    margin-top: auto;
+    padding-top: 1rem;
     border-top: 1px solid oklch(25% 0.05 195 / 0.2);
   }
 
   .event-meta {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 
   .category-tag, .type-tag {
-    font-size: 0.625rem;
-    padding: 0.25rem 0.625rem;
-    border-radius: 0.5rem;
+    font-size: 0.5625rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.4rem;
     background: oklch(20% 0.04 260);
     color: var(--color-text-secondary);
-    border: 1px solid oklch(30% 0.05 195 / 0.3);
+    border: 1px solid oklch(30% 0.05 195 / 0.1);
   }
 
   .event-date {
@@ -242,14 +373,31 @@ const formatNumber = (val: number) =>
 
   .date-label {
     display: block;
-    font-size: 0.625rem;
+    font-size: 0.5625rem;
     color: var(--color-text-secondary);
-    margin-bottom: 0.125rem;
   }
 
   .date-value {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: var(--color-brand-400);
+    color: #00f3ff;
+  }
+
+  .detail-link {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--impact-color);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: color-mix(in oklch, var(--impact-color) 10%, transparent);
+    transition: all 0.2s;
+  }
+
+  .detail-link:hover {
+    background: color-mix(in oklch, var(--impact-color) 20%, transparent);
+    letter-spacing: 0.02em;
   }
 </style>

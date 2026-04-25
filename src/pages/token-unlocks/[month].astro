@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import UnlockCard from '../../components/unlocks/UnlockCard.astro';
+import { siteConfig } from '../../config/site';
+import { t } from '../../i18n';
+import fs from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const dataPath = path.resolve(process.cwd(), 'src/data/unlocks-master.json');
+  const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  
+  // Extract all unique months
+  const months = new Set<string>();
+  masterData.forEach((coin: any) => {
+    coin.unlocks.forEach((u: any) => {
+      const date = new Date(u.date);
+      const monthStr = `${date.toLocaleString('en-US', { month: 'long' }).toLowerCase()}-${date.getFullYear()}`;
+      months.add(monthStr);
+    });
+  });
+
+  return Array.from(months).map(month => ({
+    params: { month },
+    props: { 
+      monthLabel: month.split('-')[0].charAt(0).toUpperCase() + month.split('-')[0].slice(1) + ' ' + month.split('-')[1],
+      monthKey: month
+    }
+  }));
+}
+
+const { month } = Astro.params;
+const { monthLabel, monthKey } = Astro.props;
+const locale = 'de';
+const tr = t(locale);
+
+// Load data and filter for this month
+const dataPath = path.resolve(process.cwd(), 'src/data/unlocks-master.json');
+const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+
+const monthUnlocks: any[] = [];
+masterData.forEach((coin: any) => {
+  coin.unlocks.forEach((u: any) => {
+    const date = new Date(u.date);
+    const mStr = `${date.toLocaleString('en-US', { month: 'long' }).toLowerCase()}-${date.getFullYear()}`;
+    if (mStr === monthKey) {
+      monthUnlocks.push({
+        ...u,
+        coinId: coin.slug,
+        symbol: coin.symbol,
+        name: coin.name,
+        unlockDate: new Date(u.date),
+        marketCap: coin.marketCap,
+        volume24h: coin.volume24h,
+        circulatingSupply: coin.circulatingSupply
+      });
+    }
+  });
+});
+
+const sortedUnlocks = monthUnlocks.sort((a, b) => a.unlockDate.getTime() - b.unlockDate.getTime());
+
+const pageTitle = `${monthLabel} Token Unlocks | KryptoWatch Intelligence`;
+const pageDesc = `Detailed schedule and market impact analysis for all major crypto token unlocks in ${monthLabel}.`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  locale={locale}
+  canonical={`${siteConfig.url}/token-unlocks/${month}/`}
+>
+  <div class="unlocks-page">
+    <header class="archive-header">
+      <div class="container">
+        <div class="badge-row">
+          <span class="tech-tag">MONTHLY_ARCHIVE</span>
+        </div>
+        <h1 class="glitch-title" data-text={monthLabel}>{monthLabel} Unlocks</h1>
+        <p class="header-subtitle">
+          Comprehensive intelligence report for all supply expansion events scheduled for {monthLabel}.
+        </p>
+      </div>
+      <div class="header-grid"></div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="unlock-grid">
+          {sortedUnlocks.map(unlock => (
+            <UnlockCard unlock={unlock} locale={locale} />
+          ))}
+        </div>
+
+        {sortedUnlocks.length === 0 && (
+          <div class="no-results">
+            <p>No major unlocks identified for this period.</p>
+          </div>
+        )}
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .unlocks-page { background: var(--color-surface-950); min-height: 100vh; }
+  
+  .archive-header {
+    position: relative;
+    padding-block: 6rem 4rem;
+    background: radial-gradient(circle at 30% 20%, oklch(25% 0.1 260 / 0.1), transparent 50%);
+    border-bottom: 1px solid oklch(25% 0.05 195 / 0.3);
+    overflow: hidden;
+  }
+
+  .tech-tag {
+    font-size: 0.625rem;
+    font-weight: 800;
+    padding: 0.25rem 0.75rem;
+    background: oklch(20% 0.04 260);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 2rem;
+    color: var(--color-brand-400);
+    letter-spacing: 0.1em;
+  }
+
+  .glitch-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    color: white;
+    margin: 1.5rem 0;
+  }
+
+  .header-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+  }
+
+  .header-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, oklch(25% 0.05 195 / 0.05) 1px, transparent 1px), linear-gradient(to bottom, oklch(25% 0.05 195 / 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    z-index: -1;
+  }
+
+  .main-content { padding-block: 4rem 8rem; }
+
+  .unlock-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) { .unlock-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1200px) { .unlock-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .no-results {
+    text-align: center;
+    padding: 4rem;
+    color: var(--color-text-muted);
+    border: 1px dashed oklch(25% 0.05 195 / 0.3);
+    border-radius: 1.5rem;
+  }
+</style>

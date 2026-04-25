@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site';
+import fs from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const dataPath = path.resolve(process.cwd(), 'src/data/narratives-master.json');
+  const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  
+  return masterData.map((nar: any) => ({
+    params: { slug: nar.slug },
+    props: { narrative: nar }
+  }));
+}
+
+const { slug } = Astro.params;
+const { narrative } = Astro.props;
+
+const pageTitle = `${narrative.name} Narrative Intelligence | KryptoWatch`;
+const pageDesc = `In-depth analysis of the ${narrative.name} crypto narrative, top performing coins, and strategic insights.`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  locale="de"
+  canonical={`${siteConfig.url}/narratives/${slug}/`}
+>
+  <div class="narrative-page">
+    <div class="container">
+      
+      <!-- ══ NARRATIVE HERO ══ -->
+      <header class="narrative-hero">
+        <div class="hero-content">
+          <div class="badge-row">
+            <span class="tech-tag">MARKET_NARRATIVE</span>
+            <span class="strength-tag">STRENGTH: {narrative.strength}%</span>
+          </div>
+          <h1 class="glitch-title">{narrative.name.toUpperCase()}</h1>
+          <p class="hero-desc">{narrative.description}</p>
+          
+          <div class="sentiment-bar">
+            <span class="label">Current Sentiment:</span>
+            <span class="value">{narrative.sentiment}</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="intel-grid">
+        <!-- ══ TOP COINS (Internal Linking) ══ -->
+        <section class="intel-section">
+          <div class="cyber-header">
+            <div class="line"></div>
+            <h2>NARRATIVE LEADERS</h2>
+          </div>
+          
+          <div class="coin-links-grid">
+            {narrative.coins.map((symbol: string) => (
+              <a href={`/coins/${symbol.toLowerCase()}/`} class="coin-link-card">
+                <span class="symbol">{symbol}</span>
+                <span class="action">Analysis →</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <!-- ══ STRATEGIC INSIGHTS ══ -->
+        <section class="intel-section highlight">
+          <div class="cyber-header">
+            <div class="line"></div>
+            <h2>INTELLIGENCE FEED</h2>
+          </div>
+          <div class="insight-box">
+            <p>{narrative.insights}</p>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .narrative-page { background: var(--color-surface-950); padding-block: 4rem 8rem; }
+
+  .narrative-hero {
+    margin-bottom: 4rem;
+    padding: 4rem;
+    background: linear-gradient(135deg, oklch(20% 0.05 260), oklch(12% 0.03 260));
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .badge-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+  
+  .tech-tag, .strength-tag {
+    font-size: 0.625rem;
+    font-weight: 800;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+  }
+
+  .tech-tag { background: oklch(15% 0.04 260); color: var(--color-text-secondary); border: 1px solid oklch(30% 0.05 195 / 0.2); }
+  .strength-tag { background: oklch(30% 0.1 195 / 0.2); color: #00f3ff; border: 1px solid #00f3ff44; }
+
+  .glitch-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 5rem);
+    font-weight: 900;
+    color: white;
+    margin: 0 0 1.5rem;
+    line-height: 1;
+  }
+
+  .hero-desc { font-size: 1.25rem; color: var(--color-text-secondary); max-width: 800px; line-height: 1.6; margin-bottom: 2rem; }
+
+  .sentiment-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: oklch(10% 0.02 260 / 0.5);
+    border-radius: 1rem;
+    width: fit-content;
+  }
+
+  .sentiment-bar .label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; }
+  .sentiment-bar .value { font-size: 1rem; font-weight: 800; color: #00ff88; }
+
+  .intel-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+  @media (min-width: 1024px) { .intel-grid { grid-template-columns: 1fr 1fr; } }
+
+  .intel-section {
+    padding: 2.5rem;
+    background: oklch(14% 0.04 260 / 0.5);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 2rem;
+  }
+
+  .cyber-header { margin-bottom: 2rem; }
+  .cyber-header .line { width: 40px; height: 3px; background: var(--color-brand-400); margin-bottom: 1rem; }
+  .cyber-header h2 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: white; margin: 0; }
+
+  .coin-links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  
+  .coin-link-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background: oklch(10% 0.02 260);
+    border: 1px solid oklch(25% 0.05 195 / 0.2);
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .coin-link-card:hover { border-color: #00f3ff; background: oklch(15% 0.04 260); }
+  .coin-link-card .symbol { font-weight: 800; color: white; }
+  .coin-link-card .action { font-size: 0.75rem; color: #00f3ff; font-weight: 700; }
+
+  .insight-box { font-size: 1.125rem; line-height: 1.7; color: var(--color-text-secondary); }
+</style>

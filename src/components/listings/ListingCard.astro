@@ -1,0 +1,178 @@
+---
+import { calculateListingImpactScore } from '../../lib/intelligence';
+
+interface Props {
+  listing: {
+    coin: string;
+    symbol: string;
+    date: string;
+    priceChange24h: number;
+    volume24h: number;
+    avgVolume: number;
+    tier: number;
+  };
+  exchange: string;
+}
+
+const { listing, exchange } = Astro.props;
+
+const impact = calculateListingImpactScore({
+  exchangeTier: listing.tier,
+  volume24h: listing.volume24h,
+  avgVolume: listing.avgVolume,
+  priceChange24h: listing.priceChange24h
+});
+
+const formatNumber = (n: number) => new Intl.NumberFormat('en-US', { notation: 'compact' }).format(n);
+---
+
+<div class="listing-card" style={`--impact-color: ${impact.color}`}>
+  <div class="card-header">
+    <div class="coin-info">
+      <div class="coin-icon">{listing.symbol[0]}</div>
+      <div>
+        <h3 class="coin-name">{listing.coin}</h3>
+        <span class="coin-ticker">{listing.symbol} / {exchange.toUpperCase()}</span>
+      </div>
+    </div>
+    <div class="impact-badge">
+      {impact.label}
+    </div>
+  </div>
+
+  <div class="card-stats">
+    <div class="stat">
+      <span class="label">Price 24h</span>
+      <span class={`value ${listing.priceChange24h >= 0 ? 'up' : 'down'}`}>
+        {listing.priceChange24h >= 0 ? '+' : ''}{listing.priceChange24h}%
+      </span>
+    </div>
+    <div class="stat">
+      <span class="label">Volume 24h</span>
+      <span class="value">${formatNumber(listing.volume24h)}</span>
+    </div>
+    <div class="stat">
+      <span class="label">Score</span>
+      <span class="value">{impact.score}/100</span>
+    </div>
+  </div>
+
+  <div class="impact-desc">
+    <p>{impact.description}</p>
+  </div>
+
+  <div class="card-footer">
+    <span class="listing-date">Listed on {listing.date}</span>
+    <button class="trade-btn">View Pair →</button>
+  </div>
+</div>
+
+<style>
+  .listing-card {
+    background: linear-gradient(145deg, oklch(17% 0.04 260 / 0.8), oklch(12% 0.03 260 / 0.6));
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--impact-color);
+    box-shadow: 0 10px 30px -15px var(--impact-color);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .coin-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .coin-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--impact-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: black;
+    font-size: 0.875rem;
+  }
+
+  .coin-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+  }
+
+  .coin-ticker {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .impact-badge {
+    font-size: 0.625rem;
+    font-weight: 900;
+    padding: 0.25rem 0.625rem;
+    border-radius: 2rem;
+    background: color-mix(in oklch, var(--impact-color) 20%, transparent);
+    color: var(--impact-color);
+    border: 1px solid color-mix(in oklch, var(--impact-color) 40%, transparent);
+  }
+
+  .card-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    background: oklch(10% 0.02 260 / 0.5);
+    border-radius: 0.75rem;
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 0.25rem; }
+  .label { font-size: 0.625rem; color: var(--color-text-muted); text-transform: uppercase; }
+  .value { font-size: 0.875rem; font-weight: 700; color: white; }
+  .value.up { color: #00ff88; }
+  .value.down { color: #ff003c; }
+
+  .impact-desc p {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid oklch(25% 0.05 195 / 0.1);
+  }
+
+  .listing-date { font-size: 0.625rem; color: var(--color-text-muted); }
+  .trade-btn {
+    background: transparent;
+    border: none;
+    color: var(--impact-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .trade-btn:hover { opacity: 0.8; }
+</style>

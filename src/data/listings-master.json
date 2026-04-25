@@ -1,0 +1,53 @@
+[
+  {
+    "exchange": "binance",
+    "listings": [
+      {
+        "coin": "Tensor",
+        "symbol": "TNSR",
+        "date": "2026-04-20",
+        "priceChange24h": 12.5,
+        "volume24h": 85000000,
+        "avgVolume": 15000000,
+        "tier": 1
+      },
+      {
+        "coin": "Saga",
+        "symbol": "SAGA",
+        "date": "2026-04-15",
+        "priceChange24h": -5.2,
+        "volume24h": 120000000,
+        "avgVolume": 45000000,
+        "tier": 1
+      }
+    ]
+  },
+  {
+    "exchange": "coinbase",
+    "listings": [
+      {
+        "coin": "Aerodrome",
+        "symbol": "AERO",
+        "date": "2026-04-18",
+        "priceChange24h": 8.1,
+        "volume24h": 45000000,
+        "avgVolume": 12000000,
+        "tier": 1
+      }
+    ]
+  },
+  {
+    "exchange": "bybit",
+    "listings": [
+      {
+        "coin": "Parcl",
+        "symbol": "PRCL",
+        "date": "2026-04-22",
+        "priceChange24h": 4.5,
+        "volume24h": 25000000,
+        "avgVolume": 10000000,
+        "tier": 2
+      }
+    ]
+  }
+]
