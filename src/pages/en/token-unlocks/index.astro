@@ -1,0 +1,379 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import UnlockCard from '../../../components/unlocks/UnlockCard.astro';
+import { siteConfig } from '../../../config/site';
+
+const locale = 'en';
+
+// Mock data for Phase 1A (will be replaced by getCollection('unlocks') in next phase)
+const mockUnlocks = [
+  {
+    coinId: 'arbitrum',
+    symbol: 'ARB',
+    name: 'Arbitrum',
+    unlockDate: new Date('2026-05-16'),
+    amount: 1111000000,
+    amountUsd: 1250000000,
+    percentOfCirculating: 3.5,
+    category: 'Team',
+    isCliff: true
+  },
+  {
+    coinId: 'worldcoin',
+    symbol: 'WLD',
+    name: 'Worldcoin',
+    unlockDate: new Date('2026-04-28'),
+    amount: 6620000,
+    amountUsd: 32000000,
+    percentOfCirculating: 5.2,
+    category: 'Investors',
+    isCliff: true
+  },
+  {
+    coinId: 'solana',
+    symbol: 'SOL',
+    name: 'Solana',
+    unlockDate: new Date('2026-05-01'),
+    amount: 1000000,
+    amountUsd: 145000000,
+    percentOfCirculating: 0.22,
+    category: 'Ecosystem',
+    isCliff: false
+  },
+  {
+    coinId: 'optimism',
+    symbol: 'OP',
+    name: 'Optimism',
+    unlockDate: new Date('2026-04-30'),
+    amount: 24160000,
+    amountUsd: 58000000,
+    percentOfCirculating: 2.3,
+    category: 'Team',
+    isCliff: true
+  },
+  {
+    coinId: 'sui',
+    symbol: 'SUI',
+    name: 'Sui',
+    unlockDate: new Date('2026-05-03'),
+    amount: 65000000,
+    amountUsd: 78000000,
+    percentOfCirculating: 4.8,
+    category: 'Community',
+    isCliff: true
+  },
+  {
+    coinId: 'celestia',
+    symbol: 'TIA',
+    name: 'Celestia',
+    unlockDate: new Date('2026-04-27'),
+    amount: 950000,
+    amountUsd: 11000000,
+    percentOfCirculating: 0.55,
+    category: 'Advisors',
+    isCliff: true
+  }
+];
+
+// Sort by date (nearest first)
+const sortedUnlocks = mockUnlocks.sort((a, b) => a.unlockDate.getTime() - b.unlockDate.getTime());
+
+const pageTitle = "Token Unlock Intelligence Dashboard | KryptoWatch";
+const pageDesc = "Track real-time token unlocks, supply shock metrics, and market impact analysis for major crypto projects.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  locale={locale}
+  canonical={`${siteConfig.url}/en/token-unlocks/`}
+>
+  <div class="unlocks-page">
+    <!-- ══ DASHBOARD HEADER ══ -->
+    <header class="dashboard-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="badge-row">
+            <span class="pulse-badge"><span class="dot"></span> LIVE MONITOR</span>
+            <span class="tech-tag">PHASE 1A: ALPHA</span>
+          </div>
+          <h1 class="glitch-title" data-text="Unlock Intelligence">Unlock Intelligence</h1>
+          <p class="header-subtitle">
+            Advanced supply shock metrics and predictive market impact tracking for upcoming token release events.
+          </p>
+          
+          <div class="stats-overview">
+            <div class="overview-card">
+              <span class="label">Major Unlocks (7D)</span>
+              <span class="value">12</span>
+            </div>
+            <div class="overview-card">
+              <span class="label">Total Value (7D)</span>
+              <span class="value">$1.48B</span>
+            </div>
+            <div class="overview-card">
+              <span class="label">Highest Impact</span>
+              <span class="value" style="color: #ff003c">WLD (5.2%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Background elements -->
+      <div class="header-grid"></div>
+      <div class="header-glow"></div>
+    </header>
+
+    <!-- ══ FILTER BAR ══ -->
+    <nav class="filter-bar">
+      <div class="container">
+        <div class="filter-flex">
+          <div class="filter-group">
+            <button class="filter-btn active">All Unlocks</button>
+            <button class="filter-btn">Today</button>
+            <button class="filter-btn">This Week</button>
+            <button class="filter-btn">This Month</button>
+          </div>
+          <div class="search-box">
+            <input type="text" placeholder="Search tokens..." />
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══ MAIN CONTENT ══ -->
+    <main class="main-content">
+      <div class="container">
+        <div class="unlock-grid">
+          {sortedUnlocks.map(unlock => (
+            <UnlockCard unlock={unlock} />
+          ))}
+        </div>
+        
+        <div class="load-more">
+          <p class="disclaimer">
+            * Supply shock metrics are calculated based on current circulating supply and 24h volume ratios.
+          </p>
+          <button class="btn btn-outline">Load Historical Data</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .unlocks-page {
+    background-color: var(--color-surface-950);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .dashboard-header {
+    position: relative;
+    padding-block: 6rem 4rem;
+    background: radial-gradient(circle at 70% 20%, oklch(25% 0.1 260 / 0.15), transparent 50%);
+    overflow: hidden;
+    border-bottom: 1px solid oklch(25% 0.05 195 / 0.3);
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pulse-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 800;
+    padding: 0.25rem 0.75rem;
+    background: oklch(20% 0.04 260);
+    border: 1px solid oklch(45% 0.2 195 / 0.3);
+    border-radius: 2rem;
+    color: #00f3ff;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: #00f3ff;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00f3ff;
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .tech-tag {
+    font-size: 0.625rem;
+    font-weight: 800;
+    padding: 0.25rem 0.75rem;
+    background: oklch(20% 0.04 260);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 2rem;
+    color: var(--color-text-secondary);
+  }
+
+  .glitch-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  .header-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  .stats-overview {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .overview-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .overview-card .label {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .overview-card .value {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  /* ── Background Decorations ── */
+  .header-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, oklch(25% 0.05 195 / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(25% 0.05 195 / 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    z-index: 1;
+  }
+
+  .header-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at center, oklch(60% 0.2 195 / 0.05), transparent 70%);
+    z-index: 2;
+  }
+
+  /* ── Filter Bar ── */
+  .filter-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: oklch(10% 0.02 260 / 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid oklch(25% 0.05 195 / 0.3);
+    padding-block: 1rem;
+  }
+
+  .filter-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 0.5rem;
+    background: oklch(15% 0.04 260);
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid oklch(25% 0.05 195 / 0.2);
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .filter-btn.active {
+    background: oklch(25% 0.05 195 / 0.4);
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .search-box input {
+    background: oklch(15% 0.04 260);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 0.75rem;
+    padding: 0.625rem 1.25rem;
+    color: white;
+    font-size: 0.875rem;
+    min-width: 260px;
+  }
+
+  /* ── Main Content ── */
+  .main-content {
+    padding-block: 4rem 6rem;
+  }
+
+  .unlock-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .unlock-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1200px) {
+    .unlock-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .load-more {
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  .disclaimer {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+</style>

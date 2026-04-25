@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "arbitrum",
+    "symbol": "ARB",
+    "name": "Arbitrum",
+    "unlocks": [
+      {
+        "date": "2026-05-16",
+        "amount": 1111000000,
+        "category": "Team",
+        "isCliff": true
+      },
+      {
+        "date": "2026-06-16",
+        "amount": 92000000,
+        "category": "Investors",
+        "isCliff": false
+      }
+    ]
+  },
+  {
+    "slug": "worldcoin",
+    "symbol": "WLD",
+    "name": "Worldcoin",
+    "unlocks": [
+      {
+        "date": "2026-04-28",
+        "amount": 6620000,
+        "category": "Investors",
+        "isCliff": true
+      }
+    ]
+  },
+  {
+    "slug": "solana",
+    "symbol": "SOL",
+    "name": "Solana",
+    "unlocks": [
+      {
+        "date": "2026-05-01",
+        "amount": 1000000,
+        "category": "Ecosystem",
+        "isCliff": false
+      }
+    ]
+  },
+  {
+    "slug": "optimism",
+    "symbol": "OP",
+    "name": "Optimism",
+    "unlocks": [
+      {
+        "date": "2026-04-30",
+        "amount": 24160000,
+        "category": "Team",
+        "isCliff": true
+      }
+    ]
+  },
+  {
+    "slug": "sui",
+    "symbol": "SUI",
+    "name": "Sui",
+    "unlocks": [
+      {
+        "date": "2026-05-03",
+        "amount": 65000000,
+        "category": "Community",
+        "isCliff": true
+      }
+    ]
+  }
+]

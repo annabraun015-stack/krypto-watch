@@ -1,0 +1,34 @@
+name: Token Unlock Intelligence ETL
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run every 24 hours at midnight
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install @supabase/supabase-js dotenv node-fetch tsx
+
+      - name: Run ETL Script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: npx tsx scripts/token-unlock-etl.ts
+
+      - name: Trigger Build (Optional)
+        if: success()
+        run: |
+          # If you have a Vercel/Netlify deploy hook:
+          # curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}

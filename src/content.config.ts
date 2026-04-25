@@ -36,8 +36,38 @@ const blogCollection = defineCollection({
   }),
 });
 
+const coinsCollection = defineCollection({
+  loader: async () => [], // Will be connected to Supabase in the next phase
+  schema: z.object({
+    id: z.string(), // slug (e.g. 'bitcoin')
+    name: z.string(),
+    symbol: z.string(),
+    logo: z.string().url().optional(),
+    totalSupply: z.number(),
+    circulatingSupply: z.number(),
+    marketCapRank: z.number().optional(),
+  }),
+});
+
+const unlocksCollection = defineCollection({
+  loader: async () => [], // Will be connected to Supabase in the next phase
+  schema: z.object({
+    id: z.string(),
+    coinId: z.string(), // Reference to coin slug
+    unlockDate: z.coerce.date(),
+    amount: z.number(),
+    amountUsd: z.number(),
+    percentOfCirculating: z.number(),
+    category: z.enum(['Team', 'Investors', 'Ecosystem', 'Advisors', 'Public', 'Community']),
+    description: z.string().optional(),
+    isCliff: z.boolean().default(true),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   authors: authorsCollection,
+  coins: coinsCollection,
+  unlocks: unlocksCollection,
 };
 

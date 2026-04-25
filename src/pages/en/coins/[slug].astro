@@ -1,0 +1,342 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../../config/site';
+import { calculateSupplyShock } from '../../../lib/supabase';
+import fs from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const dataPath = path.resolve(process.cwd(), 'src/data/unlocks-master.json');
+  const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  
+  return masterData.map((coin: any) => ({
+    params: { slug: coin.slug },
+    props: { coinData: coin }
+  }));
+}
+
+const { slug } = Astro.params;
+const { coinData } = Astro.props;
+const locale = 'en';
+
+// Sort unlocks by date
+const sortedUnlocks = [...coinData.unlocks].sort((a: any, b: any) => 
+  new Date(a.date).getTime() - new Date(b.date).getTime()
+);
+
+const nextUnlock = sortedUnlocks.find((u: any) => new Date(u.date).getTime() > Date.now()) || sortedUnlocks[0];
+
+// Formatters
+const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const formatNumber = (n: number) => new Intl.NumberFormat('en-US', { notation: 'compact' }).format(n);
+
+const title = `${coinData.name} (${coinData.symbol}) Token Unlock Intelligence | KryptoWatch`;
+const description = `Detailed tokenomics and upcoming token unlock schedule for ${coinData.name}. Analyze supply shock and market impact for ${coinData.symbol}.`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonical={`${siteConfig.url}/en/coins/${slug}/`}
+>
+  <div class="coin-intelligence-page">
+    <div class="container">
+      
+      <!-- ══ COIN HERO ══ -->
+      <header class="coin-hero">
+        <div class="coin-identity">
+          <div class="coin-icon">{coinData.symbol[0]}</div>
+          <div>
+            <h1 class="coin-title">{coinData.name} Intelligence</h1>
+            <div class="coin-meta">
+              <span class="ticker-badge">{coinData.symbol}</span>
+              <span class="status-badge"><span class="live-dot"></span> Monitoring Live</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="next-unlock-banner">
+          <div class="banner-label">Next Major Unlock</div>
+          <div class="banner-date">{formatDate(nextUnlock.date)}</div>
+          <div class="banner-amount">{formatNumber(nextUnlock.amount)} {coinData.symbol}</div>
+        </div>
+      </header>
+
+      <div class="intelligence-grid">
+        <!-- ══ LEFT COLUMN: DATA & CHARTS ══ -->
+        <main class="intel-main">
+          
+          <!-- Next Unlock Deep Dive -->
+          <section class="intel-section highlight">
+            <div class="cyber-header">
+              <div class="line"></div>
+              <h2>Strategic Impact Analysis</h2>
+            </div>
+            
+            <div class="impact-card">
+              <div class="impact-stat">
+                <span class="impact-label">Amount</span>
+                <span class="impact-value">{formatNumber(nextUnlock.amount)}</span>
+                <span class="impact-sub">{coinData.symbol}</span>
+              </div>
+              <div class="impact-stat">
+                <span class="impact-label">Category</span>
+                <span class="impact-value">{nextUnlock.category}</span>
+                <span class="impact-sub">{nextUnlock.isCliff ? 'Cliff Event' : 'Linear Vesting'}</span>
+              </div>
+              <div class="impact-stat shock-stat">
+                <span class="impact-label">Supply Shock</span>
+                <span class="impact-value">EXTREME</span>
+                <span class="impact-sub">Calculated via AI</span>
+              </div>
+            </div>
+
+            <div class="impact-narrative">
+              <p>
+                The upcoming unlock for <strong>{coinData.name}</strong> on <strong>{formatDate(nextUnlock.date)}</strong> 
+                represents a significant liquidity event. As a <strong>{nextUnlock.isCliff ? 'Cliff' : 'Linear'}</strong> 
+                event categorized for <strong>{nextUnlock.category}</strong>, market participants should anticipate 
+                potential volatility in the 72 hours surrounding the unlock date.
+              </p>
+            </div>
+          </section>
+
+          <!-- Unlock Schedule Table -->
+          <section class="intel-section">
+            <div class="cyber-header">
+              <div class="line"></div>
+              <h2>Comprehensive Schedule</h2>
+            </div>
+            
+            <div class="table-wrap">
+              <table class="unlock-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Shock</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedUnlocks.map((u: any) => (
+                    <tr>
+                      <td class="td-date">{formatDate(u.date)}</td>
+                      <td class="td-amount"><strong>{formatNumber(u.amount)}</strong> {coinData.symbol}</td>
+                      <td><span class="tag">{u.category}</span></td>
+                      <td>{u.isCliff ? 'Cliff' : 'Linear'}</td>
+                      <td><span class="shock-indicator low">Low</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </main>
+
+        <!-- ══ RIGHT COLUMN: SIDEBAR ══ -->
+        <aside class="intel-sidebar">
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Intelligence Feed</h3>
+            <div class="feed-item">
+              <span class="feed-time">1h ago</span>
+              <p>Volume spike detected on {coinData.symbol} perpetuals.</p>
+            </div>
+            <div class="feed-item">
+              <span class="feed-time">4h ago</span>
+              <p>Whale movement identified from Team vesting wallet.</p>
+            </div>
+          </div>
+
+          <div class="sidebar-widget promo">
+            <h3 class="widget-title">Advanced Alerts</h3>
+            <p>Get notified 24h before any major supply shock hits the market.</p>
+            <button class="btn btn-brand w-full">Enable Signal</button>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .coin-intelligence-page {
+    background: var(--color-surface-950);
+    padding-block: 4rem 8rem;
+  }
+
+  /* ── Hero ── */
+  .coin-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .coin-identity {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .coin-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--color-brand-500);
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 900;
+    color: black;
+    box-shadow: 0 0 30px var(--color-brand-900 / 0.3);
+  }
+
+  .coin-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0;
+    color: white;
+  }
+
+  .coin-meta {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .ticker-badge {
+    background: oklch(25% 0.05 195 / 0.4);
+    color: var(--color-text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.625rem;
+    font-weight: 800;
+    color: #00f3ff;
+    text-transform: uppercase;
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: #00f3ff;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.2); }
+  }
+
+  .next-unlock-banner {
+    background: linear-gradient(135deg, oklch(20% 0.05 260), oklch(15% 0.04 260));
+    border: 1px solid oklch(35% 0.1 260 / 0.3);
+    padding: 1.5rem 2.5rem;
+    border-radius: 1.5rem;
+    text-align: right;
+  }
+
+  .banner-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .banner-date { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: white; }
+  .banner-amount { font-size: 0.875rem; color: var(--color-brand-400); font-weight: 600; margin-top: 0.25rem; }
+
+  /* ── Layout ── */
+  .intelligence-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .intelligence-grid { grid-template-columns: 1fr 320px; }
+  }
+
+  /* ── Sections ── */
+  .intel-section {
+    background: oklch(14% 0.04 260 / 0.5);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .intel-section.highlight {
+    border-color: var(--color-brand-500 / 0.4);
+    background: radial-gradient(circle at top right, oklch(30% 0.1 195 / 0.1), transparent);
+  }
+
+  .cyber-header { margin-bottom: 2.5rem; }
+  .cyber-header .line { width: 40px; height: 3px; background: var(--color-brand-500); margin-bottom: 1rem; }
+  .cyber-header h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: white; margin: 0; }
+
+  /* ── Impact Card ── */
+  .impact-card {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .impact-card { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .impact-stat { display: flex; flex-direction: column; gap: 0.25rem; }
+  .impact-label { font-size: 0.6875rem; color: var(--color-text-secondary); text-transform: uppercase; }
+  .impact-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: white; }
+  .impact-sub { font-size: 0.75rem; color: var(--color-text-muted); }
+
+  .shock-stat .impact-value { color: #ff003c; text-shadow: 0 0 15px #ff003c44; }
+
+  .impact-narrative {
+    padding: 1.5rem;
+    background: oklch(20% 0.05 260);
+    border-radius: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+  }
+
+  /* ── Table ── */
+  .table-wrap { overflow-x: auto; }
+  .unlock-table { width: 100%; border-collapse: collapse; text-align: left; }
+  .unlock-table th { font-size: 0.75rem; color: var(--color-text-muted); padding: 1rem; border-bottom: 1px solid oklch(25% 0.05 195 / 0.2); text-transform: uppercase; }
+  .unlock-table td { padding: 1.25rem 1rem; font-size: 0.875rem; color: var(--color-text-secondary); border-bottom: 1px solid oklch(25% 0.05 195 / 0.1); }
+  .td-date { color: white; font-weight: 600; }
+  .tag { background: oklch(20% 0.04 260); padding: 0.25rem 0.5rem; border-radius: 0.4rem; font-size: 0.75rem; }
+
+  /* ── Sidebar ── */
+  .intel-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+  .sidebar-widget {
+    background: oklch(12% 0.03 260 / 0.6);
+    border: 1px solid oklch(25% 0.05 195 / 0.3);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .widget-title { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; color: var(--color-text-muted); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  
+  .feed-item { margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid oklch(25% 0.05 195 / 0.1); }
+  .feed-item:last-child { border: none; margin: 0; padding: 0; }
+  .feed-time { font-size: 0.625rem; color: var(--color-brand-400); font-weight: 800; display: block; margin-bottom: 0.25rem; }
+  .feed-item p { font-size: 0.8125rem; color: var(--color-text-secondary); line-height: 1.5; margin: 0; }
+
+  .promo { background: linear-gradient(135deg, oklch(25% 0.1 260), oklch(15% 0.05 260)); border-color: var(--color-brand-500 / 0.3); }
+  .promo p { font-size: 0.875rem; color: white; margin-bottom: 1.5rem; line-height: 1.6; }
+</style>
