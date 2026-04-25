@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import TimelineChart from '../../../components/unlocks/TimelineChart.astro';
-import { calculateUnlockImpactScore } from '../../../lib/intelligence';
-import { siteConfig } from '../../../config/site';
-import { t } from '../../../i18n';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import TimelineChart from '../../../../components/unlocks/TimelineChart.astro';
+import { calculateUnlockImpactScore } from '../../../../lib/intelligence';
+import { siteConfig } from '../../../../config/site';
+import { t } from '../../../../i18n';
 import fs from 'fs';
 import path from 'path';
 
@@ -52,7 +52,7 @@ const jsonLd = {
   "name": `${coinData.name} Token Unlock Event`,
   "startDate": new Date(nextUnlock.date).toISOString(),
   "description": impact.description,
-  "location": { "@type": "VirtualLocation", "url": `${siteConfig.url}/en/coins/${slug}/` }
+  "location": { "@type": "VirtualLocation", "url": `${siteConfig.url}/en/coins/${slug}/token-unlock/` }
 };
 ---
 
@@ -60,7 +60,7 @@ const jsonLd = {
   title={title}
   description={description}
   locale={locale}
-  canonical={`${siteConfig.url}/en/coins/${slug}/`}
+  canonical={`${siteConfig.url}/en/coins/${slug}/token-unlock/`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 
