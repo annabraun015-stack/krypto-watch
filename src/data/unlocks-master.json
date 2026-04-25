@@ -15,8 +15,10 @@
         "computedMetrics": {
           "impactScore": 100,
           "impactLabel": "CRITICAL",
-          "lastUpdated": "2026-04-25T17:58:16.105Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.844Z"
+        },
+        "amountUsd": 1111000000,
+        "percentOfCirculating": 42.73076923076923
       },
       {
         "date": "2026-06-16",
@@ -26,8 +28,10 @@
         "computedMetrics": {
           "impactScore": 47,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.106Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.845Z"
+        },
+        "amountUsd": 92000000,
+        "percentOfCirculating": 3.5384615384615383
       },
       {
         "date": "2026-07-16",
@@ -37,8 +41,10 @@
         "computedMetrics": {
           "impactScore": 47,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.106Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.845Z"
+        },
+        "amountUsd": 92000000,
+        "percentOfCirculating": 3.5384615384615383
       }
     ]
   },
@@ -58,8 +64,10 @@
         "computedMetrics": {
           "impactScore": 55,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.106Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.845Z"
+        },
+        "amountUsd": 21602105.263157893,
+        "percentOfCirculating": 3.4842105263157896
       },
       {
         "date": "2026-05-28",
@@ -69,8 +77,10 @@
         "computedMetrics": {
           "impactScore": 55,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.106Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.845Z"
+        },
+        "amountUsd": 21602105.263157893,
+        "percentOfCirculating": 3.4842105263157896
       }
     ]
   },
@@ -90,8 +100,10 @@
         "computedMetrics": {
           "impactScore": 32,
           "impactLabel": "LOW",
-          "lastUpdated": "2026-04-25T17:58:16.107Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.845Z"
+        },
+        "amountUsd": 154545454.54545453,
+        "percentOfCirculating": 0.22727272727272727
       },
       {
         "date": "2026-06-01",
@@ -101,8 +113,10 @@
         "computedMetrics": {
           "impactScore": 32,
           "impactLabel": "LOW",
-          "lastUpdated": "2026-04-25T17:58:16.107Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.845Z"
+        },
+        "amountUsd": 154545454.54545453,
+        "percentOfCirculating": 0.22727272727272727
       }
     ]
   },
@@ -122,8 +136,10 @@
         "computedMetrics": {
           "impactScore": 45,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.107Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.846Z"
+        },
+        "amountUsd": 57984000,
+        "percentOfCirculating": 2.416
       },
       {
         "date": "2026-05-30",
@@ -133,8 +149,10 @@
         "computedMetrics": {
           "impactScore": 45,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.107Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.846Z"
+        },
+        "amountUsd": 57984000,
+        "percentOfCirculating": 2.416
       }
     ]
   },
@@ -154,8 +172,10 @@
         "computedMetrics": {
           "impactScore": 52,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.107Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.846Z"
+        },
+        "amountUsd": 85000000,
+        "percentOfCirculating": 5
       },
       {
         "date": "2026-06-03",
@@ -165,8 +185,10 @@
         "computedMetrics": {
           "impactScore": 52,
           "impactLabel": "MODERATE",
-          "lastUpdated": "2026-04-25T17:58:16.107Z"
-        }
+          "lastUpdated": "2026-04-25T18:02:48.846Z"
+        },
+        "amountUsd": 85000000,
+        "percentOfCirculating": 5
       }
     ]
   }

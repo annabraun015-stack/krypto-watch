@@ -41,16 +41,21 @@ async function runIngestion() {
 
     // Compute metrics for each unlock
     coin.unlocks = coin.unlocks.map((u: any) => {
+      const amountUsd = (u.amount * (market.mcap / market.supply));
+      const percentOfCirculating = (u.amount / market.supply) * 100;
+
       const impact = calculateUnlockImpactScore({
         amount: u.amount,
-        amountUsd: (u.amount * (market.mcap / market.supply)),
-        percentOfCirculating: (u.amount / market.supply) * 100,
+        amountUsd: amountUsd,
+        percentOfCirculating: percentOfCirculating,
         marketCap: market.mcap,
         volume24h: market.vol
       });
 
       return {
         ...u,
+        amountUsd,
+        percentOfCirculating,
         computedMetrics: {
           impactScore: impact.score,
           impactLabel: impact.label,
