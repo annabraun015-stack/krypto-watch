@@ -191,5 +191,28 @@
         "percentOfCirculating": 5
       }
     ]
+  },
+  {
+    "slug": "celestia",
+    "symbol": "TIA",
+    "name": "Celestia",
+    "marketCap": 2000000000,
+    "volume24h": 85000000,
+    "circulatingSupply": 420000000,
+    "unlocks": [
+      {
+        "date": "2026-04-27",
+        "amount": 950000,
+        "category": "Advisors",
+        "isCliff": true,
+        "computedMetrics": {
+          "impactScore": 45,
+          "impactLabel": "MODERATE",
+          "lastUpdated": "2026-04-26T13:45:00.000Z"
+        },
+        "amountUsd": 11000000,
+        "percentOfCirculating": 0.55
+      }
+    ]
   }
 ]

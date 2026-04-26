@@ -64,9 +64,8 @@ const jsonLd = {
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "location": {
     "@type": "VirtualLocation",
-    "url": `https://kryptowatch.de/coins/${unlock.coinId}/token-unlock/`
+    "url": `https://kryptowatch.de/coins/${unlock.coinId}/token-unlock`
   },
-  "image": `https://kryptowatch.de/images/coins/${unlock.coinId}.png`,
   "organizer": {
     "@type": "Organization",
     "name": "KryptoWatch Intelligence",
@@ -142,7 +141,7 @@ const jsonLd = {
   </div>
   
   <!-- Link to Detail (Phase 1B) -->
-  <a href={`${locale === 'en' ? '/en' : ''}/coins/${unlock.coinId}/token-unlock/`} class="detail-link">
+  <a href={`${locale === 'en' ? '/en' : ''}/coins/${unlock.coinId}/token-unlock`} class="detail-link">
     Analysis & Charts →
   </a>
 </div>

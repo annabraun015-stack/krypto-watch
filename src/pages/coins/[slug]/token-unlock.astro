@@ -52,7 +52,7 @@ const jsonLd = {
   "name": `${coinData.name} Token Unlock Event`,
   "startDate": new Date(nextUnlock.date).toISOString(),
   "description": impact.description,
-  "location": { "@type": "VirtualLocation", "url": `${siteConfig.url}/coins/${slug}/token-unlock/` }
+  "location": { "@type": "VirtualLocation", "url": `${siteConfig.url}/coins/${slug}/token-unlock` }
 };
 ---
 
@@ -60,7 +60,7 @@ const jsonLd = {
   title={title}
   description={description}
   locale={locale}
-  canonical={`${siteConfig.url}/coins/${slug}/token-unlock/`}
+  canonical={`${siteConfig.url}/coins/${slug}/token-unlock`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 

@@ -5,92 +5,32 @@ import FAQ from '../../../components/FAQ.astro';
 import { siteConfig } from '../../../config/site';
 import { t } from '../../../i18n';
 
+import fs from 'fs';
+import path from 'path';
+
 const locale = 'en';
 const tr = t(locale);
 
-// Mock data for Phase 1A (will be replaced by getCollection('unlocks') in next phase)
-const mockUnlocks = [
-  {
-    coinId: 'arbitrum',
-    symbol: 'ARB',
-    name: 'Arbitrum',
-    unlockDate: new Date('2026-05-16'),
-    amount: 1111000000,
-    amountUsd: 1250000000,
-    percentOfCirculating: 3.5,
-    category: 'Team',
-    isCliff: true,
-    marketCap: 2500000000,
-    volume24h: 350000000
-  },
-  {
-    coinId: 'worldcoin',
-    symbol: 'WLD',
-    name: 'Worldcoin',
-    unlockDate: new Date('2026-04-28'),
-    amount: 6620000,
-    amountUsd: 32000000,
-    percentOfCirculating: 5.2,
-    category: 'Investors',
-    isCliff: true,
-    marketCap: 600000000,
-    volume24h: 15000000
-  },
-  {
-    coinId: 'solana',
-    symbol: 'SOL',
-    name: 'Solana',
-    unlockDate: new Date('2026-05-01'),
-    amount: 1000000,
-    amountUsd: 145000000,
-    percentOfCirculating: 0.22,
-    category: 'Ecosystem',
-    isCliff: false,
-    marketCap: 65000000000,
-    volume24h: 2100000000
-  },
-  {
-    coinId: 'optimism',
-    symbol: 'OP',
-    name: 'Optimism',
-    unlockDate: new Date('2026-04-30'),
-    amount: 24160000,
-    amountUsd: 58000000,
-    percentOfCirculating: 2.3,
-    category: 'Team',
-    isCliff: true,
-    marketCap: 2500000000,
-    volume24h: 120000000
-  },
-  {
-    coinId: 'sui',
-    symbol: 'SUI',
-    name: 'Sui',
-    unlockDate: new Date('2026-05-03'),
-    amount: 65000000,
-    amountUsd: 78000000,
-    percentOfCirculating: 4.8,
-    category: 'Community',
-    isCliff: true,
-    marketCap: 1600000000,
-    volume24h: 450000000
-  },
-  {
-    coinId: 'celestia',
-    symbol: 'TIA',
-    name: 'Celestia',
-    unlockDate: new Date('2026-04-27'),
-    amount: 950000,
-    amountUsd: 11000000,
-    percentOfCirculating: 0.55,
-    category: 'Advisors',
-    isCliff: true,
-    marketCap: 2000000000,
-    volume24h: 85000000
-  }
-];
+// Phase 1B: Dynamic Data Ingestion
+const dataPath = path.resolve(process.cwd(), 'src/data/unlocks-master.json');
+const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 
-const sortedUnlocks = mockUnlocks.sort((a, b) => a.unlockDate.getTime() - b.unlockDate.getTime());
+const allUnlocks: any[] = [];
+masterData.forEach((coin: any) => {
+  coin.unlocks.forEach((u: any) => {
+    allUnlocks.push({
+      ...u,
+      coinId: coin.slug,
+      symbol: coin.symbol,
+      name: coin.name,
+      unlockDate: new Date(u.date),
+      marketCap: coin.marketCap,
+      volume24h: coin.volume24h
+    });
+  });
+});
+
+const sortedUnlocks = allUnlocks.sort((a, b) => a.unlockDate.getTime() - b.unlockDate.getTime());
 
 // SEO: ItemList Schema
 const itemListSchema = {
@@ -195,10 +135,10 @@ const pageDesc = tr.unlocks.seoDesc;
         <div class="archive-flex">
           <span class="archive-label">Browse by Month:</span>
           <div class="month-links">
-            <a href="/en/token-unlocks/april-2026/" class="month-link">April 2026</a>
-            <a href="/en/token-unlocks/may-2026/" class="month-link">May 2026</a>
-            <a href="/en/token-unlocks/june-2026/" class="month-link">June 2026</a>
-            <a href="/en/token-unlocks/july-2026/" class="month-link">July 2026</a>
+            <a href="/en/token-unlocks/april-2026" class="month-link">April 2026</a>
+            <a href="/en/token-unlocks/may-2026" class="month-link">May 2026</a>
+            <a href="/en/token-unlocks/june-2026" class="month-link">June 2026</a>
+            <a href="/en/token-unlocks/july-2026" class="month-link">July 2026</a>
           </div>
         </div>
       </div>
