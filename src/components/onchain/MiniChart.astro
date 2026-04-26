@@ -1,0 +1,30 @@
+---
+/**
+ * MiniChart.astro — Lightweight sparkline/bar chart using Canvas
+ * No external dependencies — pure Canvas API
+ */
+interface Props {
+  id: string;
+  type?: 'line' | 'bar';
+  height?: number;
+  color?: string;
+}
+const { id, type = 'line', height = 80, color = '#00f2ff' } = Astro.props;
+---
+
+<canvas
+  id={id}
+  class="mini-chart"
+  height={height}
+  data-type={type}
+  data-color={color}
+  aria-hidden="true"
+></canvas>
+
+<style>
+.mini-chart {
+  width: 100%;
+  display: block;
+  border-radius: 0.5rem;
+}
+</style>

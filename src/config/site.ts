@@ -22,6 +22,7 @@ export const navLinks = {
   de: [
     { label: 'RSI', href: '/rsi/btc/' },
     { label: 'Sentiment', href: '/sentiment/' },
+    { label: 'On-Chain', href: '/bitcoin-whale-tracker/' },
     { label: 'Unlocks', href: '/token-unlocks/' },
     { label: 'Blog', href: '/blog/' },
     { label: 'Über uns', href: '/about-us/' },
@@ -30,6 +31,7 @@ export const navLinks = {
   en: [
     { label: 'RSI', href: '/en/rsi/btc/' },
     { label: 'Sentiment', href: '/en/sentiment/' },
+    { label: 'On-Chain', href: '/bitcoin-whale-tracker/' },
     { label: 'Unlocks', href: '/en/token-unlocks/' },
     { label: 'Blog', href: '/en/blog/' },
     { label: 'About Us', href: '/en/about-us/' },

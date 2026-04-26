@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchPrices, fetchSmartWallets, formatUsd, timeAgo } from '../lib/onchain';
+
+const prices  = await fetchPrices();
+const wallets = await fetchSmartWallets(prices);
+const avgWin  = (wallets.reduce((s,w)=>s+w.winRate,0)/wallets.length).toFixed(1);
+---
+
+<BaseLayout
+  title="Smart Money Tracker — Top Krypto-Wallets nach ROI | KryptoWatch"
+  description="Welche Wallets erzielen die besten Renditen? KryptoWatch verfolgt historisch erfolgreiche Bitcoin- und Ethereum-Wallets nach Gewinn und Win-Rate."
+  canonical="https://kryptowatch.de/smart-money/"
+  locale="de"
+  altPath="/en/smart-money/"
+  breadcrumbs={[{ name: 'Home', url: 'https://kryptowatch.de/' }, { name: 'Smart Money', url: 'https://kryptowatch.de/smart-money/' }]}
+>
+  <section class="sm-hero">
+    <div class="container">
+      <div class="sm-badge">🧠 Smart Money Intelligence</div>
+      <h1 class="sm-title">Smart Money Tracker</h1>
+      <p class="sm-sub">Die profitabelsten Wallets in Bitcoin und Ethereum — gerankt nach historischem ROI, Win-Rate und aktueller On-Chain-Aktivität.</p>
+      <div class="stat-row">
+        <div class="sc"><div class="sl">Verfolgte Wallets</div><div class="sv">{wallets.length}</div></div>
+        <div class="sc"><div class="sl">Ø Win-Rate</div><div class="sv">{avgWin}%</div></div>
+        <div class="sc"><div class="sl">Top Profit</div><div class="sv green">{formatUsd(wallets[0]?.totalProfitUsd??0)}</div></div>
+        <div class="sc"><div class="sl">Netzwerke</div><div class="sv">BTC + ETH</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sm-main">
+    <div class="container">
+      <h2 class="sec-h">🏆 Smart Money Leaderboard</h2>
+      <p class="sec-s">Gerankt nach historischem Gesamtgewinn in USD</p>
+      <div class="lb-wrap">
+        <table class="lb-tbl">
+          <thead>
+            <tr><th>#</th><th>Wallet</th><th>Chain</th><th>Profit</th><th>Win-Rate</th><th>Balance</th><th>Aktiv</th></tr>
+          </thead>
+          <tbody>
+            {wallets.map((w) => (
+              <tr class={w.rank<=3?'top':''}><td>
+                  <span class="rnk">{w.rank===1?'🥇':w.rank===2?'🥈':w.rank===3?'🥉':`#${w.rank}`}</span>
+                </td><td>
+                  <div class="wc">
+                    <code class="wa">{w.address}</code>
+                    {w.label&&<span class="wl">{w.label}</span>}
+                  </div>
+                </td><td>
+                  <span class={`cb ${w.chain==='BTC'?'btc':'eth'}`}>{w.chain}</span>
+                </td><td>
+                  <span class="pv">{formatUsd(w.totalProfitUsd)}</span>
+                </td><td>
+                  <div class="wrc">
+                    <div class="wb"><div class="wbf" style={`width:${w.winRate}%`}></div></div>
+                    <span class="wp">{w.winRate}%</span>
+                  </div>
+                </td><td>
+                  <div class="bn">{w.balance.toFixed(2)} {w.chain}</div>
+                  <div class="bu">{formatUsd(w.balanceUsd)}</div>
+                </td><td class="tc">{timeAgo(w.lastActive)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mbox">
+        <h3>📐 Methodik & Disclaimer</h3>
+        <div class="mg">
+          <div class="mi"><strong>ROI-Analyse</strong><p>Wallets gerankt nach realisierten Gewinnen aus historischen On-Chain-Transaktionen.</p></div>
+          <div class="mi"><strong>Win-Rate</strong><p>Anteil profitabler abgeschlossener Positionen an allen Transaktionen.</p></div>
+          <div class="mi"><strong>Transparenz</strong><p>Alle Daten basieren auf öffentlich zugänglichen Blockchain-Daten.</p></div>
+        </div>
+        <p class="disc">⚠️ Keine Anlageberatung. Vergangene Performance ist kein Indikator für zukünftige Ergebnisse.</p>
+      </div>
+
+      <div class="rl-links">
+        <h3>Weitere Analytics</h3>
+        <div class="rlg">
+          <a href="/bitcoin-whale-tracker/" class="rlc"><span>₿</span><div><strong>BTC Whale Tracker</strong><em>Einzelne Großtransaktionen</em></div></a>
+          <a href="/ethereum-whale-tracker/" class="rlc"><span>Ξ</span><div><strong>ETH Whale Tracker</strong><em>Einzelne Großtransaktionen</em></div></a>
+          <a href="/exchange-flows/" class="rlc"><span>⇄</span><div><strong>Exchange Flows</strong><em>Inflow / Outflow</em></div></a>
+          <a href="/exchange-reserves/" class="rlc"><span>🏦</span><div><strong>Exchange Reserves</strong><em>Historische Bestände</em></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.sm-hero{padding:3.5rem 0 2rem;background:radial-gradient(ellipse 60% 50% at 50% -10%,oklch(80% 0.2 300/0.08) 0%,transparent 60%)}
+.sm-badge{display:inline-block;padding:.375rem .875rem;background:oklch(80% 0.2 300/0.12);border:1px solid oklch(80% 0.2 300/0.3);border-radius:100px;font-size:.75rem;font-weight:700;color:oklch(80% 0.2 300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem}
+.sm-title{font-family:var(--font-display);font-size:clamp(1.875rem,5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.sm-sub{font-size:1.0625rem;color:var(--color-text-secondary);max-width:640px;line-height:1.7;margin-bottom:2rem}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.sc{padding:1.25rem 1.5rem;background:oklch(14% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:.875rem}
+.sl{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem}
+.sv{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--color-text-primary)}.sv.green{color:oklch(72% 0.2 145)}
+.sm-main{padding:2rem 0 4rem}.sm-main .container{display:flex;flex-direction:column;gap:2rem}
+.sec-h{font-family:var(--font-display);font-size:1.375rem;font-weight:700}.sec-s{font-size:.875rem;color:var(--color-text-muted);margin-top:.25rem}
+.lb-wrap{overflow-x:auto;border-radius:.75rem;border:1px solid oklch(28% 0.05 250/0.4);background:oklch(12% 0.03 260/0.8)}
+.lb-tbl{width:100%;border-collapse:collapse;font-size:.875rem}
+.lb-tbl thead tr{background:oklch(17% 0.04 260);border-bottom:1px solid oklch(28% 0.05 250/0.4)}
+.lb-tbl th{padding:.75rem 1rem;text-align:left;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);white-space:nowrap}
+.lb-tbl td{padding:.875rem 1rem;border-bottom:1px solid oklch(22% 0.04 250/0.3);vertical-align:middle}
+.lb-tbl tbody tr{transition:background .15s}.lb-tbl tbody tr:hover{background:oklch(17% 0.04 250/0.5)}.lb-tbl tbody tr.top{background:oklch(80% 0.2 300/0.04)}
+.rnk{font-size:1rem}
+.wc{display:flex;flex-direction:column;gap:.25rem}
+.wa{font-family:var(--font-mono);font-size:.8125rem;color:var(--color-brand-300);background:none;padding:0}
+.wl{font-size:.7rem;font-weight:600;color:oklch(80% 0.2 300)}
+.cb{display:inline-block;padding:.175rem .55rem;border-radius:100px;font-size:.7rem;font-weight:700}
+.cb.btc{background:oklch(75% 0.18 60/0.15);color:oklch(75% 0.18 60);border:1px solid oklch(75% 0.18 60/0.3)}
+.cb.eth{background:oklch(68% 0.14 280/0.15);color:oklch(68% 0.14 280);border:1px solid oklch(68% 0.14 280/0.3)}
+.pv{font-weight:700;color:oklch(72% 0.2 145);font-family:var(--font-display);font-size:.9rem}
+.wrc{display:flex;align-items:center;gap:.625rem}
+.wb{flex:1;height:6px;background:oklch(25% 0.05 250/0.4);border-radius:3px;min-width:60px}
+.wbf{height:100%;border-radius:3px;background:linear-gradient(90deg,oklch(72% 0.2 145),oklch(68% 0.14 280))}
+.wp{font-size:.8125rem;font-weight:700;white-space:nowrap}
+.bn{font-family:var(--font-mono);font-size:.8125rem;color:var(--color-text-primary)}.bu{font-size:.75rem;color:var(--color-text-muted)}
+.tc{color:var(--color-text-muted);font-size:.8125rem;white-space:nowrap}
+.mbox{padding:1.75rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem}
+.mbox h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1rem}
+.mi{padding:1rem;background:oklch(17% 0.04 260/0.5);border:1px solid oklch(28% 0.05 250/0.3);border-radius:.75rem;font-size:.875rem;line-height:1.6}
+.mi strong{display:block;margin-bottom:.25rem;color:oklch(80% 0.2 300);font-size:.875rem}
+.mi p{color:var(--color-text-muted);margin:0}
+.disc{font-size:.8125rem;color:var(--color-text-muted);padding:.75rem 1rem;background:oklch(65% 0.25 25/0.06);border:1px solid oklch(65% 0.25 25/0.15);border-radius:.5rem;margin:0}
+.rl-links h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.rlg{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.75rem}
+.rlc{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.35);border-radius:.75rem;text-decoration:none;transition:all .2s}
+.rlc:hover{border-color:var(--color-brand-500);transform:translateY(-1px)}
+.rlc span{font-size:1.5rem;width:2.5rem;text-align:center;flex-shrink:0}
+.rlc strong{display:block;font-size:.875rem;font-weight:700;color:var(--color-text-primary)}
+.rlc em{font-style:normal;font-size:.8125rem;color:var(--color-text-muted)}
+</style>

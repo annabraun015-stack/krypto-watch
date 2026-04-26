@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { fetchPrices, fetchExchangeReserves, formatUsd } from '../lib/onchain';
+
+const prices   = await fetchPrices();
+const reserves = await fetchExchangeReserves(prices);
+const btcRes   = reserves.filter(r => r.token === 'BTC');
+const ethRes   = reserves.filter(r => r.token === 'ETH');
+const totalBtc = btcRes.reduce((s,r)=>s+r.reserveNative,0);
+const totalEth = ethRes.reduce((s,r)=>s+r.reserveNative,0);
+---
+
+<BaseLayout
+  title="Exchange Reserves — BTC & ETH Bestände auf Börsen | KryptoWatch"
+  description="Historische und aktuelle Bitcoin- und Ethereum-Bestände auf den größten Kryptobörsen. Sinkende Reserves = Akkumulation. Steigende Reserves = potentieller Sell-Druck."
+  canonical="https://kryptowatch.de/exchange-reserves/"
+  locale="de"
+  altPath="/en/exchange-reserves/"
+  breadcrumbs={[{ name: 'Home', url: 'https://kryptowatch.de/' }, { name: 'Exchange Reserves', url: 'https://kryptowatch.de/exchange-reserves/' }]}
+>
+  <section class="er-hero">
+    <div class="container">
+      <div class="er-badge">🏦 Exchange Reserve Monitor</div>
+      <h1 class="er-title">Exchange Reserve Dashboard</h1>
+      <p class="er-sub">Sinkende Exchange-Reserves bedeuten: Anleger ziehen Coins ab — ein Akkumulations-Signal. Steigende Reserves = mehr Coins verfügbar für Verkäufe.</p>
+      <div class="er-stats">
+        <div class="es"><div class="el">Gesamte BTC Reserves</div><div class="ev btc">{totalBtc.toLocaleString()} BTC</div><div class="eu">{formatUsd(totalBtc*prices.btc)}</div></div>
+        <div class="es"><div class="el">Gesamte ETH Reserves</div><div class="ev eth">{totalEth.toLocaleString()} ETH</div><div class="eu">{formatUsd(totalEth*prices.eth)}</div></div>
+        <div class="es"><div class="el">Verfolgte Exchanges</div><div class="ev">{btcRes.length}</div></div>
+        <div class="es"><div class="el">BTC Preis</div><div class="ev">{formatUsd(prices.btc)}</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="er-main">
+    <div class="container">
+      <!-- BTC Reserves -->
+      <div class="token-section">
+        <h2 class="ts-title">₿ Bitcoin Exchange Reserves</h2>
+        <div class="res-grid">
+          {btcRes.map((r) => (
+            <div class="res-card">
+              <div class="rc-header">
+                <div class="ex-name">{r.exchange}</div>
+                <span class={`trend-badge ${r.trend}`}>
+                  {r.trend === 'rising' ? '▲ Steigend' : r.trend === 'falling' ? '▼ Fallend' : '◆ Stabil'}
+                </span>
+              </div>
+              <div class="rc-val">{r.reserveNative.toLocaleString(undefined,{maximumFractionDigits:0})} BTC</div>
+              <div class="rc-usd">{formatUsd(r.reserveUsd)}</div>
+              <div class="rc-changes">
+                <div class={`rc-chg ${r.change24h < 0 ? 'pos' : 'neg'}`}>24h: {r.change24h >= 0 ? '+' : ''}{r.change24h.toFixed(2)}%</div>
+                <div class={`rc-chg ${r.change7d < 0 ? 'pos' : 'neg'}`}>7d: {r.change7d >= 0 ? '+' : ''}{r.change7d.toFixed(2)}%</div>
+              </div>
+              <canvas class="res-spark" data-history={JSON.stringify(r.history.slice(-14).map(h=>h.value))} height="50" aria-hidden="true"></canvas>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- ETH Reserves -->
+      <div class="token-section">
+        <h2 class="ts-title">Ξ Ethereum Exchange Reserves</h2>
+        <div class="res-grid">
+          {ethRes.map((r) => (
+            <div class="res-card">
+              <div class="rc-header">
+                <div class="ex-name">{r.exchange}</div>
+                <span class={`trend-badge ${r.trend}`}>
+                  {r.trend === 'rising' ? '▲ Steigend' : r.trend === 'falling' ? '▼ Fallend' : '◆ Stabil'}
+                </span>
+              </div>
+              <div class="rc-val">{r.reserveNative.toLocaleString(undefined,{maximumFractionDigits:0})} ETH</div>
+              <div class="rc-usd">{formatUsd(r.reserveUsd)}</div>
+              <div class="rc-changes">
+                <div class={`rc-chg ${r.change24h < 0 ? 'pos' : 'neg'}`}>24h: {r.change24h >= 0 ? '+' : ''}{r.change24h.toFixed(2)}%</div>
+                <div class={`rc-chg ${r.change7d < 0 ? 'pos' : 'neg'}`}>7d: {r.change7d >= 0 ? '+' : ''}{r.change7d.toFixed(2)}%</div>
+              </div>
+              <canvas class="res-spark" data-history={JSON.stringify(r.history.slice(-14).map(h=>h.value))} height="50" aria-hidden="true"></canvas>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Guide -->
+      <div class="er-guide">
+        <h3>📖 Wie interpretiert man Exchange Reserves?</h3>
+        <div class="eg-grid">
+          <div class="eg-item fall"><strong>▼ Sinkende Reserves — Bullish</strong><p>Coins verlassen Exchanges. Anleger ziehen in private Wallets — ein starkes Akkumulations-Signal und Zeichen von geringem Sell-Druck.</p></div>
+          <div class="eg-item rise"><strong>▲ Steigende Reserves — Bearish</strong><p>Mehr Coins fließen auf Exchanges. Dies deutet auf erhöhte Verkaufsbereitschaft oder Margin-Trading hin.</p></div>
+          <div class="eg-item stable"><strong>◆ Stabile Reserves — Neutral</strong><p>Keine signifikante Veränderung. Markt in Gleichgewichtsphase — weitere Daten nötig für eine Einschätzung.</p></div>
+        </div>
+      </div>
+
+      <div class="rl-links">
+        <h3>Weitere Analytics</h3>
+        <div class="rlg">
+          <a href="/bitcoin-whale-tracker/" class="rlc"><span>₿</span><div><strong>BTC Whale Tracker</strong><em>Einzelne Großtransaktionen</em></div></a>
+          <a href="/ethereum-whale-tracker/" class="rlc"><span>Ξ</span><div><strong>ETH Whale Tracker</strong><em>Einzelne Großtransaktionen</em></div></a>
+          <a href="/exchange-flows/" class="rlc"><span>⇄</span><div><strong>Exchange Flows</strong><em>Inflow / Outflow 24h</em></div></a>
+          <a href="/smart-money/" class="rlc"><span>🧠</span><div><strong>Smart Money</strong><em>Top-Wallets nach ROI</em></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+document.querySelectorAll('.res-spark').forEach(canvas => {
+  const el = canvas as HTMLCanvasElement;
+  const history: number[] = JSON.parse(el.getAttribute('data-history') || '[]');
+  if (!history.length) return;
+  el.width = el.offsetWidth || 200;
+  const ctx = el.getContext('2d')!;
+  const W = el.width, H = el.height;
+  const pad = 4;
+  const maxV = Math.max(...history), minV = Math.min(...history);
+  const range = maxV - minV || 1;
+  const pts = history.map((v, i) => ({
+    x: pad + (i / (history.length - 1)) * (W - pad * 2),
+    y: H - pad - ((v - minV) / range) * (H - pad * 2)
+  }));
+  // gradient fill
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, 'oklch(53% 0.26 195 / 0.3)');
+  grad.addColorStop(1, 'oklch(53% 0.26 195 / 0)');
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+  ctx.lineTo(pts[pts.length-1].x, H);
+  ctx.lineTo(pts[0].x, H);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+  // line
+  ctx.beginPath();
+  pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = 'oklch(63% 0.22 195)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+});
+</script>
+
+<style>
+.er-hero{padding:3.5rem 0 2rem;background:radial-gradient(ellipse 60% 50% at 50% -10%,oklch(53% 0.26 195/0.07) 0%,transparent 60%)}
+.er-badge{display:inline-block;padding:.375rem .875rem;background:oklch(53% 0.26 195/0.12);border:1px solid oklch(53% 0.26 195/0.3);border-radius:100px;font-size:.75rem;font-weight:700;color:var(--color-brand-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem}
+.er-title{font-family:var(--font-display);font-size:clamp(1.875rem,5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.er-sub{font-size:1.0625rem;color:var(--color-text-secondary);max-width:640px;line-height:1.7;margin-bottom:2rem}
+.er-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.es{padding:1.25rem 1.5rem;background:oklch(14% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:.875rem}
+.el{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem}
+.ev{font-family:var(--font-display);font-size:1.25rem;font-weight:800;color:var(--color-text-primary)}.ev.btc{color:oklch(75% 0.18 60)}.ev.eth{color:oklch(68% 0.14 280)}
+.eu{font-size:.8125rem;color:var(--color-text-muted);margin-top:.25rem}
+.er-main{padding:2rem 0 4rem}
+.er-main .container{display:flex;flex-direction:column;gap:2.5rem}
+.token-section{}
+.ts-title{font-family:var(--font-display);font-size:1.375rem;font-weight:700;margin-bottom:1.25rem}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.res-card{padding:1.25rem;background:oklch(13% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem;transition:border-color .2s}
+.res-card:hover{border-color:var(--color-brand-500)}
+.rc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
+.ex-name{font-weight:700;font-size:.9375rem;color:var(--color-text-primary)}
+.trend-badge{font-size:.6875rem;font-weight:700;padding:.2rem .55rem;border-radius:100px;letter-spacing:.04em}
+.trend-badge.rising{background:oklch(65% 0.25 25/0.15);color:oklch(65% 0.25 25);border:1px solid oklch(65% 0.25 25/0.3)}
+.trend-badge.falling{background:oklch(72% 0.2 145/0.15);color:oklch(72% 0.2 145);border:1px solid oklch(72% 0.2 145/0.3)}
+.trend-badge.stable{background:oklch(80% 0.05 195/0.1);color:var(--color-text-secondary);border:1px solid oklch(80% 0.05 195/0.2)}
+.rc-val{font-family:var(--font-display);font-size:1.125rem;font-weight:700;color:var(--color-text-primary)}
+.rc-usd{font-size:.8125rem;color:var(--color-text-muted);margin-bottom:.625rem}
+.rc-changes{display:flex;gap:.75rem;margin-bottom:.75rem}
+.rc-chg{font-size:.75rem;font-weight:600}.rc-chg.pos{color:oklch(72% 0.2 145)}.rc-chg.neg{color:oklch(65% 0.25 25)}
+.res-spark{width:100%;display:block;border-radius:.375rem;background:oklch(10% 0.02 260/0.5)}
+.er-guide{padding:1.75rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem}
+.er-guide h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.eg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+.eg-item{padding:1rem 1.25rem;border-radius:.75rem;font-size:.875rem;line-height:1.6}
+.eg-item strong{display:block;margin-bottom:.3rem;font-size:.875rem}
+.eg-item p{color:var(--color-text-muted);margin:0}
+.fall{background:oklch(72% 0.2 145/0.08);border:1px solid oklch(72% 0.2 145/0.2)}.fall strong{color:oklch(72% 0.2 145)}
+.rise{background:oklch(65% 0.25 25/0.08);border:1px solid oklch(65% 0.25 25/0.2)}.rise strong{color:oklch(65% 0.25 25)}
+.stable{background:oklch(80% 0.05 195/0.06);border:1px solid oklch(80% 0.05 195/0.2)}
+.rl-links h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.rlg{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.75rem}
+.rlc{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.35);border-radius:.75rem;text-decoration:none;transition:all .2s}
+.rlc:hover{border-color:var(--color-brand-500);transform:translateY(-1px)}
+.rlc span{font-size:1.5rem;width:2.5rem;text-align:center;flex-shrink:0}
+.rlc strong{display:block;font-size:.875rem;font-weight:700;color:var(--color-text-primary)}
+.rlc em{font-style:normal;font-size:.8125rem;color:var(--color-text-muted)}
+</style>
