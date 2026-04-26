@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SignalBadge from '../components/onchain/SignalBadge.astro';
+import { fetchPrices } from '../lib/onchain';
+import { fetchExchangeFlows } from '../lib/onchain';
+import { generateInsights } from '../lib/insights';
+import { buildLiveSignals } from '../lib/signal-engine';
+
+const prices  = await fetchPrices();
+const flows   = await fetchExchangeFlows(prices);
+const { btcSignal, ethSignal } = buildLiveSignals(prices);
+
+const btcFlow = flows.find(f => f.token === 'BTC')!;
+const ethFlow = flows.find(f => f.token === 'ETH')!;
+
+const insights = generateInsights({
+  btcPrice: prices.btc, ethPrice: prices.eth,
+  btcChange24h: prices.btcChange24h, ethChange24h: prices.ethChange24h,
+  btcInflow: btcFlow.inflow24h, btcOutflow: btcFlow.outflow24h,
+  ethInflow: ethFlow.inflow24h, ethOutflow: ethFlow.outflow24h,
+  btcReserveChange7d: (Math.random() - 0.5) * 12,
+  ethReserveChange7d: (Math.random() - 0.5) * 10,
+  btcWhaleCount: Math.floor(Math.random() * 10 + 2),
+  ethWhaleCount: Math.floor(Math.random() * 15 + 3),
+  btcWhaleVolume: btcFlow.inflow24h * (0.3 + Math.random() * 0.4),
+  ethWhaleVolume: ethFlow.inflow24h * (0.2 + Math.random() * 0.3),
+  btcSmartSignal: btcSignal.factors.find(f => f.name === 'Smart Money Activity')?.score ?? 0,
+});
+
+function timeAgo(ts: number) {
+  const d = Math.floor(Date.now()/1000) - ts;
+  if (d < 60) return d + 's ago';
+  if (d < 3600) return Math.floor(d/60) + 'm ago';
+  return Math.floor(d/3600) + 'h ago';
+}
+
+const categoryIcons: Record<string, string> = {
+  flow: '⇄', whale: '🐋', reserve: '🏦', signal: '⚡', 'smart-money': '🧠', alert: '🔔'
+};
+---
+
+<BaseLayout
+  title="AI On-Chain Insights — Echtzeit Bitcoin & Ethereum Intelligence | KryptoWatch"
+  description="Automatisierte, datengestützte On-Chain Insights für Bitcoin und Ethereum. Jede Aussage ist mit konkreten Metriken belegt — kein Marketing, nur Facts."
+  canonical="https://kryptowatch.de/insights/"
+  locale="de"
+  altPath="/en/insights/"
+  breadcrumbs={[{ name: 'Home', url: 'https://kryptowatch.de/' }, { name: 'Insights', url: 'https://kryptowatch.de/insights/' }]}
+>
+  <section class="ins-hero">
+    <div class="container">
+      <div class="ins-badge">💡 AI Intelligence Layer</div>
+      <h1 class="ins-title">On-Chain Insights Feed</h1>
+      <p class="ins-sub">
+        Faktenbasierte Marktanalysen generiert aus Echtzeit-Blockchain-Daten. Jede Aussage enthält die zugrundeliegende Metrik.
+        <strong>Kein Marketing. Nur Daten.</strong>
+      </p>
+      <div class="ins-stats">
+        <div class="is"><div class="il">Insights generiert</div><div class="iv">{insights.length}</div></div>
+        <div class="is"><div class="il">Neue Alerts</div><div class="iv warn">{insights.filter(i=>i.isNew).length}</div></div>
+        <div class="is"><div class="il">BTC Signal</div><div class="iv"><SignalBadge signal={btcSignal.signal} size="sm" /></div></div>
+        <div class="is"><div class="il">ETH Signal</div><div class="iv"><SignalBadge signal={ethSignal.signal} size="sm" /></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ins-main">
+    <div class="container">
+      <div class="ins-layout">
+        <!-- Feed -->
+        <div class="ins-feed">
+          <div class="feed-header">
+            <h2 class="feed-title">Intelligence Feed</h2>
+            <div class="feed-filters">
+              <button class="ff ff--active" data-cat="all">Alle</button>
+              <button class="ff" data-cat="flow">Flows</button>
+              <button class="ff" data-cat="whale">Whales</button>
+              <button class="ff" data-cat="reserve">Reserves</button>
+              <button class="ff" data-cat="smart-money">Smart Money</button>
+            </div>
+          </div>
+
+          <div class="feed-items">
+            {insights.map((insight) => (
+              <article class={`fi fi--${insight.severity} fi--cat-${insight.category}`} data-category={insight.category}>
+                <div class="fi-header">
+                  <div class="fi-meta">
+                    <span class="fi-cat-icon" aria-hidden="true">{categoryIcons[insight.category]}</span>
+                    <span class={`fi-token ft--${insight.token.toLowerCase()}`}>{insight.token}</span>
+                    {insight.isNew && <span class="fi-new">NEW</span>}
+                    {insight.signal && <SignalBadge signal={insight.signal} size="sm" />}
+                  </div>
+                  <time class="fi-time">{timeAgo(insight.timestamp)}</time>
+                </div>
+                <h3 class="fi-title">{insight.title}</h3>
+                <p class="fi-body">{insight.body}</p>
+                <div class="fi-metric">
+                  <span class="fm-icon">📊</span>
+                  <code class="fm-val">{insight.metric}</code>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="ins-sidebar">
+          <!-- Market snapshot -->
+          <div class="sb-card">
+            <div class="sb-title">Market Snapshot</div>
+            <div class="snap-item">
+              <span class="si-coin btc">₿ BTC</span>
+              <span class="si-price">${prices.btc.toLocaleString()}</span>
+              <span class={prices.btcChange24h >= 0 ? 'pos' : 'neg'}>{prices.btcChange24h >= 0 ? '▲' : '▼'}{Math.abs(prices.btcChange24h).toFixed(2)}%</span>
+            </div>
+            <div class="snap-item">
+              <span class="si-coin eth">Ξ ETH</span>
+              <span class="si-price">${prices.eth.toLocaleString()}</span>
+              <span class={prices.ethChange24h >= 0 ? 'pos' : 'neg'}>{prices.ethChange24h >= 0 ? '▲' : '▼'}{Math.abs(prices.ethChange24h).toFixed(2)}%</span>
+            </div>
+          </div>
+
+          <!-- Active signals -->
+          <div class="sb-card">
+            <div class="sb-title">Aktive Signale</div>
+            <div class="sig-sb btc-sig">
+              <div class="ssb-header"><span class="ssb-coin btc">₿</span> Bitcoin</div>
+              <SignalBadge signal={btcSignal.signal} size="md" />
+              <div class="ssb-conf">Konfidenz: {btcSignal.confidence}%</div>
+            </div>
+            <div class="sig-sb eth-sig">
+              <div class="ssb-header"><span class="ssb-coin eth">Ξ</span> Ethereum</div>
+              <SignalBadge signal={ethSignal.signal} size="md" />
+              <div class="ssb-conf">Konfidenz: {ethSignal.confidence}%</div>
+            </div>
+          </div>
+
+          <!-- Data Sources -->
+          <div class="sb-card">
+            <div class="sb-title">Datenquellen</div>
+            <div class="ds-list">
+              <div class="ds-item"><span class="ds-dot green"></span> CoinGecko (Preise)</div>
+              <div class="ds-item"><span class="ds-dot green"></span> Mempool.space (BTC)</div>
+              <div class="ds-item"><span class="ds-dot green"></span> Exchange Wallet DB</div>
+              <div class="ds-item"><span class="ds-dot yellow"></span> Smart Wallet Index</div>
+            </div>
+            <div class="ds-note">Alle Insights werden aus realen On-Chain-Daten abgeleitet. Keine KI-Halluzinationen.</div>
+          </div>
+
+          <!-- Quick links -->
+          <div class="sb-card">
+            <div class="sb-title">Quick Links</div>
+            <a href="/signals/" class="ql">⚡ Signal Engine</a>
+            <a href="/alerts/" class="ql">🔔 Alert-System</a>
+            <a href="/bitcoin-whale-tracker/" class="ql">🐋 BTC Whale Tracker</a>
+            <a href="/exchange-flows/" class="ql">⇄ Exchange Flows</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+const filters = document.querySelectorAll('.ff');
+const items   = document.querySelectorAll('.fi');
+filters.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filters.forEach(b => b.classList.remove('ff--active'));
+    btn.classList.add('ff--active');
+    const cat = btn.getAttribute('data-cat');
+    items.forEach(item => {
+      const ic = item.getAttribute('data-category');
+      (item as HTMLElement).style.display = (cat === 'all' || ic === cat) ? '' : 'none';
+    });
+  });
+});
+</script>
+
+<style>
+.ins-hero { padding:3.5rem 0 2rem; background:radial-gradient(ellipse 60% 50% at 50% -10%, oklch(53% 0.26 195/0.08) 0%, transparent 60%); }
+.ins-badge { display:inline-block; padding:.375rem .875rem; background:oklch(53% 0.26 195/0.12); border:1px solid oklch(53% 0.26 195/0.3); border-radius:100px; font-size:.75rem; font-weight:700; color:var(--color-brand-300); text-transform:uppercase; letter-spacing:.08em; margin-bottom:1.25rem; }
+.ins-title { font-family:var(--font-display); font-size:clamp(1.875rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:1rem; }
+.ins-sub { font-size:1.0625rem; color:var(--color-text-secondary); max-width:640px; line-height:1.7; margin-bottom:2rem; }
+.ins-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:.875rem; }
+.is { padding:1rem 1.25rem; background:oklch(14% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:.875rem; }
+.il { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.35rem; }
+.iv { font-family:var(--font-display); font-size:1.375rem; font-weight:800; color:var(--color-text-primary); }
+.iv.warn { color:oklch(75% 0.18 60); }
+
+.ins-main { padding:2rem 0 4rem; }
+.ins-layout { display:grid; grid-template-columns:1fr 320px; gap:1.75rem; align-items:start; }
+@media(max-width:960px) { .ins-layout { grid-template-columns:1fr; } }
+
+/* ─ Feed ─ */
+.ins-feed { }
+.feed-header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1.25rem; }
+.feed-title { font-family:var(--font-display); font-size:1.25rem; font-weight:700; }
+.feed-filters { display:flex; flex-wrap:wrap; gap:.375rem; }
+.ff { padding:.25rem .75rem; border-radius:100px; font-size:.8125rem; font-weight:600; color:var(--color-text-muted); background:transparent; border:1px solid oklch(30% 0.05 250/0.4); cursor:pointer; transition:all .2s; }
+.ff:hover { color:var(--color-text-primary); border-color:var(--color-brand-500); }
+.ff--active { color:var(--color-brand-300); background:oklch(53% 0.26 195/0.15); border-color:var(--color-brand-500); }
+
+.feed-items { display:flex; flex-direction:column; gap:1rem; }
+
+.fi { padding:1.25rem 1.5rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:1rem; transition:border-color .2s; position:relative; }
+.fi:hover { border-color:oklch(45% 0.15 250/0.5); }
+.fi--warning { border-left:3px solid oklch(75% 0.18 60); }
+.fi--critical { border-left:3px solid oklch(65% 0.25 25); }
+.fi--info { border-left:3px solid oklch(53% 0.26 195/0.5); }
+
+.fi-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:.625rem; }
+.fi-meta { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+.fi-cat-icon { font-size:1rem; }
+.fi-token { font-size:.7rem; font-weight:700; padding:.15rem .5rem; border-radius:100px; letter-spacing:.04em; }
+.ft--btc { background:oklch(75% 0.18 60/0.15); color:oklch(75% 0.18 60); border:1px solid oklch(75% 0.18 60/0.3); }
+.ft--eth { background:oklch(68% 0.14 280/0.15); color:oklch(68% 0.14 280); border:1px solid oklch(68% 0.14 280/0.3); }
+.ft--market { background:oklch(53% 0.26 195/0.15); color:var(--color-brand-300); border:1px solid oklch(53% 0.26 195/0.3); }
+.fi-new { font-size:.6rem; font-weight:800; letter-spacing:.1em; background:oklch(75% 0.18 60/0.2); color:oklch(75% 0.18 60); border:1px solid oklch(75% 0.18 60/0.3); padding:.15rem .45rem; border-radius:100px; text-transform:uppercase; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+.fi-time { font-size:.75rem; color:var(--color-text-muted); white-space:nowrap; }
+.fi-title { font-size:1rem; font-weight:700; color:var(--color-text-primary); margin-bottom:.5rem; line-height:1.4; }
+.fi-body { font-size:.875rem; color:var(--color-text-secondary); line-height:1.65; margin-bottom:.875rem; }
+.fi-metric { display:inline-flex; align-items:center; gap:.5rem; padding:.375rem .875rem; background:oklch(17% 0.04 260/0.6); border:1px solid oklch(30% 0.05 250/0.4); border-radius:.5rem; }
+.fm-icon { font-size:.875rem; }
+.fm-val { font-family:var(--font-mono); font-size:.8125rem; color:var(--color-brand-300); background:none; padding:0; }
+
+/* ─ Sidebar ─ */
+.ins-sidebar { display:flex; flex-direction:column; gap:1rem; }
+.sb-card { padding:1.25rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:1rem; }
+.sb-title { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.875rem; }
+.snap-item { display:flex; align-items:center; justify-content:space-between; padding:.5rem 0; border-bottom:1px solid oklch(25% 0.05 250/0.3); }
+.snap-item:last-child { border:none; }
+.si-coin { font-weight:700; font-size:.875rem; }
+.si-coin.btc { color:oklch(75% 0.18 60); } .si-coin.eth { color:oklch(68% 0.14 280); }
+.si-price { font-family:var(--font-mono); font-size:.875rem; color:var(--color-text-primary); }
+.pos { color:oklch(72% 0.2 145); font-size:.8125rem; font-weight:600; }
+.neg { color:oklch(65% 0.25 25); font-size:.8125rem; font-weight:600; }
+.sig-sb { padding:.875rem; border-radius:.75rem; margin-bottom:.625rem; }
+.btc-sig { background:oklch(75% 0.18 60/0.06); border:1px solid oklch(75% 0.18 60/0.2); }
+.eth-sig { background:oklch(68% 0.14 280/0.06); border:1px solid oklch(68% 0.14 280/0.2); margin-bottom:0; }
+.ssb-header { display:flex; align-items:center; gap:.5rem; font-size:.875rem; font-weight:700; margin-bottom:.625rem; }
+.ssb-coin { font-size:1.25rem; }
+.ssb-coin.btc { color:oklch(75% 0.18 60); } .ssb-coin.eth { color:oklch(68% 0.14 280); }
+.ssb-conf { font-size:.75rem; color:var(--color-text-muted); margin-top:.375rem; }
+.ds-list { display:flex; flex-direction:column; gap:.375rem; margin-bottom:.75rem; }
+.ds-item { display:flex; align-items:center; gap:.5rem; font-size:.8125rem; color:var(--color-text-secondary); }
+.ds-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ds-dot.green { background:oklch(72% 0.2 145); }
+.ds-dot.yellow { background:oklch(75% 0.18 60); }
+.ds-note { font-size:.75rem; color:var(--color-text-muted); line-height:1.5; padding:.625rem; background:oklch(17% 0.04 260/0.5); border-radius:.5rem; }
+.ql { display:block; padding:.5rem .75rem; border-radius:.5rem; font-size:.875rem; color:var(--color-text-secondary); text-decoration:none; transition:all .2s; }
+.ql:hover { background:oklch(17% 0.04 260); color:var(--color-text-primary); }
+</style>

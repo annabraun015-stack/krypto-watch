@@ -1,0 +1,288 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SignalBadge from '../components/onchain/SignalBadge.astro';
+import ConfidenceMeter from '../components/onchain/ConfidenceMeter.astro';
+import { fetchPrices } from '../lib/onchain';
+import { buildLiveSignals, generateSignalHistory } from '../lib/signal-engine';
+
+const prices     = await fetchPrices();
+const { btcSignal, ethSignal } = buildLiveSignals(prices);
+const btcHistory = generateSignalHistory('BTC', 30);
+const ethHistory = generateSignalHistory('ETH', 30);
+
+const btcAccuracy = btcHistory.filter(h => h.accuracy).length;
+const ethAccuracy = ethHistory.filter(h => h.accuracy).length;
+
+function fmtUsd(n: number) {
+  if (n >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return '$' + (n/1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(0);
+}
+---
+
+<BaseLayout
+  title="On-Chain Signal Engine — BTC & ETH Market Signals | KryptoWatch"
+  description="Live multi-factor on-chain signals for Bitcoin and Ethereum. Confidence-scored bullish/bearish/neutral signals based on exchange flows, whale activity, reserves, and smart money."
+  canonical="https://kryptowatch.de/signals/"
+  locale="de"
+  altPath="/en/signals/"
+  breadcrumbs={[{ name: 'Home', url: 'https://kryptowatch.de/' }, { name: 'Signals', url: 'https://kryptowatch.de/signals/' }]}
+>
+  <section class="sig-hero">
+    <div class="container">
+      <div class="sig-badge">⚡ Multi-Factor Signal Engine</div>
+      <h1 class="sig-title">On-Chain Signal Engine</h1>
+      <p class="sig-sub">
+        Automatisierte Marktsignale aus <strong>4 Faktoren</strong>: Exchange Flows · Reserve-Trends · Whale-Akkumulation · Smart Money.
+        Kein Rauschen — nur <strong>handlungsrelevante Insights</strong>.
+      </p>
+    </div>
+  </section>
+
+  <section class="sig-main">
+    <div class="container">
+      <!-- Live Signals -->
+      <h2 class="sh">Aktuelle Marktsignale</h2>
+      <div class="sig-cards">
+        <!-- BTC -->
+        <div class={`sig-card sig-card--${btcSignal.signal}`}>
+          <div class="sc-header">
+            <div class="sc-coin">
+              <span class="sci btc">₿</span>
+              <div>
+                <div class="scn">Bitcoin</div>
+                <div class="scp">{fmtUsd(prices.btc)} <span class={prices.btcChange24h >= 0 ? 'pos' : 'neg'}>{prices.btcChange24h >= 0 ? '▲' : '▼'}{Math.abs(prices.btcChange24h).toFixed(2)}%</span></div>
+              </div>
+            </div>
+            <ConfidenceMeter score={btcSignal.confidence} size="lg" />
+          </div>
+
+          <div class="sc-signal-row">
+            <SignalBadge signal={btcSignal.signal} size="lg" />
+            <div class="sc-updated">Aktualisiert: {new Date(btcSignal.generatedAt * 1000).toLocaleTimeString('de-DE')}</div>
+          </div>
+
+          <p class="sc-summary">{btcSignal.summary}</p>
+
+          <!-- Factor breakdown -->
+          <div class="sc-factors">
+            <div class="sf-title">Signal-Faktoren</div>
+            {btcSignal.factors.map(f => (
+              <div class="sf-item">
+                <div class="sf-row">
+                  <span class="sf-name">{f.name}</span>
+                  <span class={`sf-impact sf--${f.impact}`}>{f.impact}</span>
+                  <span class="sf-w">×{(f.weight*100).toFixed(0)}%</span>
+                </div>
+                <div class="sf-bar-bg">
+                  <div class={`sf-bar sf-bar--${f.impact}`} style={`width:${Math.abs(f.score)*100}%;margin-left:${f.score < 0 ? 'auto' : '0'}`}></div>
+                </div>
+                <div class="sf-desc">{f.description}</div>
+              </div>
+            ))}
+          </div>
+
+          <div class="sc-history-row">
+            <span>30-Tage Signal-Genauigkeit:</span>
+            <strong class="acc-val">{((btcAccuracy / btcHistory.length) * 100).toFixed(0)}%</strong>
+          </div>
+        </div>
+
+        <!-- ETH -->
+        <div class={`sig-card sig-card--${ethSignal.signal}`}>
+          <div class="sc-header">
+            <div class="sc-coin">
+              <span class="sci eth">Ξ</span>
+              <div>
+                <div class="scn">Ethereum</div>
+                <div class="scp">{fmtUsd(prices.eth)} <span class={prices.ethChange24h >= 0 ? 'pos' : 'neg'}>{prices.ethChange24h >= 0 ? '▲' : '▼'}{Math.abs(prices.ethChange24h).toFixed(2)}%</span></div>
+              </div>
+            </div>
+            <ConfidenceMeter score={ethSignal.confidence} size="lg" />
+          </div>
+
+          <div class="sc-signal-row">
+            <SignalBadge signal={ethSignal.signal} size="lg" />
+            <div class="sc-updated">Aktualisiert: {new Date(ethSignal.generatedAt * 1000).toLocaleTimeString('de-DE')}</div>
+          </div>
+
+          <p class="sc-summary">{ethSignal.summary}</p>
+
+          <div class="sc-factors">
+            <div class="sf-title">Signal-Faktoren</div>
+            {ethSignal.factors.map(f => (
+              <div class="sf-item">
+                <div class="sf-row">
+                  <span class="sf-name">{f.name}</span>
+                  <span class={`sf-impact sf--${f.impact}`}>{f.impact}</span>
+                  <span class="sf-w">×{(f.weight*100).toFixed(0)}%</span>
+                </div>
+                <div class="sf-bar-bg">
+                  <div class={`sf-bar sf-bar--${f.impact}`} style={`width:${Math.abs(f.score)*100}%;margin-left:${f.score < 0 ? 'auto' : '0'}`}></div>
+                </div>
+                <div class="sf-desc">{f.description}</div>
+              </div>
+            ))}
+          </div>
+
+          <div class="sc-history-row">
+            <span>30-Tage Signal-Genauigkeit:</span>
+            <strong class="acc-val">{((ethAccuracy / ethHistory.length) * 100).toFixed(0)}%</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historical Timeline -->
+      <div class="hist-section">
+        <h2 class="sh">Signal-Verlauf (30 Tage)</h2>
+        <div class="hist-grid">
+          <div class="hist-col">
+            <div class="hist-lbl">₿ Bitcoin Signals</div>
+            <div class="hist-timeline">
+              {btcHistory.slice().reverse().map(h => (
+                <div class={`ht-item ht--${h.signal}`} title={`${h.date}: ${h.signal} (${h.confidence}%) — ${h.accuracy ? '✅ Correct' : '❌ Wrong'}`}>
+                  <div class="ht-date">{h.date.slice(5)}</div>
+                  <div class={`ht-dot ht-dot--${h.signal} ${h.accuracy ? 'correct' : 'wrong'}`}></div>
+                  <div class="ht-conf">{h.confidence}%</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="hist-col">
+            <div class="hist-lbl">Ξ Ethereum Signals</div>
+            <div class="hist-timeline">
+              {ethHistory.slice().reverse().map(h => (
+                <div class={`ht-item ht--${h.signal}`} title={`${h.date}: ${h.signal} (${h.confidence}%) — ${h.accuracy ? '✅ Correct' : '❌ Wrong'}`}>
+                  <div class="ht-date">{h.date.slice(5)}</div>
+                  <div class={`ht-dot ht-dot--${h.signal} ${h.accuracy ? 'correct' : 'wrong'}`}></div>
+                  <div class="ht-conf">{h.confidence}%</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="hist-legend">
+          <span class="hl bull">● Bullish</span>
+          <span class="hl bear">● Bearish</span>
+          <span class="hl neut">● Neutral</span>
+          <span class="hl-note">Ring = Correct prediction | Filled = Wrong</span>
+        </div>
+      </div>
+
+      <!-- Methodology -->
+      <div class="meth-box">
+        <h3>⚙️ Signal-Berechnung</h3>
+        <div class="meth-grid">
+          <div class="meth-item"><strong>Exchange Flow Ratio</strong><span class="mw">30%</span><p>Inflow/Outflow-Verhältnis der letzten 24h. Hoher Outflow = bullish.</p></div>
+          <div class="meth-item"><strong>Reserve-Trend</strong><span class="mw">25%</span><p>7-Tage Veränderung der Exchange-Bestände. Sinkende Reserves = bullish.</p></div>
+          <div class="meth-item"><strong>Whale-Akkumulation</strong><span class="mw">25%</span><p>Netto-Kaufverhalten in Transaktionen über $1M.</p></div>
+          <div class="meth-item"><strong>Smart Money</strong><span class="mw">20%</span><p>Positionierung historisch profitabler Wallets.</p></div>
+        </div>
+      </div>
+
+      <div class="rel-links">
+        <h3>Weitere Analytics</h3>
+        <div class="rlg">
+          <a href="/insights/" class="rlc"><span>💡</span><div><strong>AI Insights</strong><em>Automatisierte Insights</em></div></a>
+          <a href="/alerts/" class="rlc"><span>🔔</span><div><strong>Alerts</strong><em>Echtzeit-Benachrichtigungen</em></div></a>
+          <a href="/bitcoin-whale-tracker/" class="rlc"><span>₿</span><div><strong>BTC Whale Tracker</strong><em>Einzelne Transaktionen</em></div></a>
+          <a href="/exchange-flows/" class="rlc"><span>⇄</span><div><strong>Exchange Flows</strong><em>Inflow / Outflow</em></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.sig-hero { padding:3.5rem 0 2rem; background:radial-gradient(ellipse 70% 50% at 50% -10%, oklch(80% 0.2 300/0.08) 0%, transparent 60%); }
+.sig-badge { display:inline-block; padding:.375rem .875rem; background:oklch(80% 0.2 300/0.12); border:1px solid oklch(80% 0.2 300/0.3); border-radius:100px; font-size:.75rem; font-weight:700; color:oklch(80% 0.2 300); text-transform:uppercase; letter-spacing:.08em; margin-bottom:1.25rem; }
+.sig-title { font-family:var(--font-display); font-size:clamp(1.875rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:1rem; }
+.sig-sub { font-size:1.0625rem; color:var(--color-text-secondary); max-width:640px; line-height:1.7; }
+.sig-main { padding:2rem 0 4rem; }
+.sig-main .container { display:flex; flex-direction:column; gap:2.5rem; }
+.sh { font-family:var(--font-display); font-size:1.375rem; font-weight:700; }
+
+.sig-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:1.5rem; }
+
+.sig-card { padding:1.75rem; border-radius:1.25rem; border:1px solid oklch(28% 0.05 250/0.4); background:oklch(13% 0.03 260/0.8); }
+.sig-card--bullish { border-color:oklch(72% 0.2 145/0.35); box-shadow:0 0 30px -10px oklch(72% 0.2 145/0.15); }
+.sig-card--bearish { border-color:oklch(65% 0.25 25/0.35); box-shadow:0 0 30px -10px oklch(65% 0.25 25/0.15); }
+.sig-card--neutral { }
+
+.sc-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; }
+.sc-coin { display:flex; align-items:center; gap:.875rem; }
+.sci { font-size:2.25rem; font-weight:900; }
+.btc { color:oklch(75% 0.18 60); } .eth { color:oklch(68% 0.14 280); }
+.scn { font-family:var(--font-display); font-size:1.125rem; font-weight:700; }
+.scp { font-size:.875rem; color:var(--color-text-muted); }
+.scp .pos { color:oklch(72% 0.2 145); } .scp .neg { color:oklch(65% 0.25 25); }
+
+.sc-signal-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+.sc-updated { font-size:.75rem; color:var(--color-text-muted); }
+
+.sc-summary { font-size:.9375rem; color:var(--color-text-secondary); line-height:1.7; padding:1rem; background:oklch(17% 0.04 260/0.5); border-radius:.75rem; margin-bottom:1.25rem; border-left:3px solid oklch(53% 0.26 195/0.5); }
+
+.sc-factors { display:flex; flex-direction:column; gap:.875rem; margin-bottom:1.25rem; }
+.sf-title { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.25rem; }
+.sf-item { }
+.sf-row { display:flex; align-items:center; gap:.5rem; margin-bottom:.3rem; }
+.sf-name { font-size:.8125rem; font-weight:600; color:var(--color-text-primary); flex:1; }
+.sf-impact { font-size:.6875rem; font-weight:700; padding:.15rem .5rem; border-radius:100px; text-transform:uppercase; }
+.sf--bullish { background:oklch(72% 0.2 145/0.15); color:oklch(72% 0.2 145); }
+.sf--bearish { background:oklch(65% 0.25 25/0.15); color:oklch(65% 0.25 25); }
+.sf--neutral { background:oklch(80% 0.05 195/0.1); color:var(--color-text-muted); }
+.sf-w { font-size:.75rem; color:var(--color-text-muted); white-space:nowrap; }
+.sf-bar-bg { width:100%; height:5px; background:oklch(25% 0.05 250/0.4); border-radius:3px; overflow:hidden; margin-bottom:.3rem; }
+.sf-bar { height:100%; border-radius:3px; max-width:100%; transition:width .6s; }
+.sf-bar--bullish { background:oklch(72% 0.2 145); }
+.sf-bar--bearish { background:oklch(65% 0.25 25); }
+.sf-bar--neutral { background:oklch(53% 0.26 195/0.5); }
+.sf-desc { font-size:.775rem; color:var(--color-text-muted); line-height:1.5; }
+
+.sc-history-row { display:flex; align-items:center; justify-content:space-between; padding:.75rem 1rem; background:oklch(17% 0.04 260/0.4); border-radius:.625rem; font-size:.8125rem; color:var(--color-text-muted); }
+.acc-val { color:oklch(72% 0.2 145); font-size:1rem; }
+
+/* ─ History Timeline ─ */
+.hist-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+@media(max-width:640px) { .hist-grid { grid-template-columns:1fr; } }
+.hist-col { }
+.hist-lbl { font-size:.8125rem; font-weight:700; color:var(--color-text-muted); margin-bottom:.875rem; letter-spacing:.04em; }
+.hist-timeline { display:flex; flex-wrap:wrap; gap:.25rem; }
+.ht-item { display:flex; flex-direction:column; align-items:center; gap:.2rem; cursor:default; }
+.ht-date { font-size:.55rem; color:var(--color-text-muted); font-family:var(--font-mono); }
+.ht-dot { width:12px; height:12px; border-radius:50%; border:2px solid transparent; transition:transform .2s; }
+.ht-dot:hover { transform:scale(1.5); }
+.ht-dot--bullish { background:oklch(72% 0.2 145); }
+.ht-dot--bearish { background:oklch(65% 0.25 25); }
+.ht-dot--neutral { background:oklch(60% 0.04 195/0.6); }
+.ht-dot.wrong { background:transparent !important; border-color:currentColor; }
+.ht-dot--bullish.wrong { border-color:oklch(72% 0.2 145); }
+.ht-dot--bearish.wrong { border-color:oklch(65% 0.25 25); }
+.ht-dot--neutral.wrong { border-color:oklch(60% 0.04 195); }
+.ht-conf { font-size:.5rem; color:var(--color-text-muted); }
+.hist-legend { display:flex; flex-wrap:wrap; gap:1.25rem; margin-top:1rem; font-size:.8125rem; }
+.hl { font-weight:600; }
+.hl.bull { color:oklch(72% 0.2 145); }
+.hl.bear { color:oklch(65% 0.25 25); }
+.hl.neut { color:var(--color-text-muted); }
+.hl-note { color:var(--color-text-muted); font-size:.75rem; }
+
+/* ─ Methodology ─ */
+.meth-box { padding:1.75rem; background:oklch(14% 0.03 260/0.6); border:1px solid oklch(28% 0.05 250/0.4); border-radius:1rem; }
+.meth-box h3 { font-size:1rem; font-weight:700; margin-bottom:1rem; }
+.meth-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; }
+.meth-item { padding:1rem; background:oklch(17% 0.04 260/0.5); border:1px solid oklch(28% 0.05 250/0.3); border-radius:.75rem; font-size:.875rem; line-height:1.6; }
+.meth-item strong { display:block; margin-bottom:.25rem; color:var(--color-brand-300); font-size:.875rem; }
+.meth-item .mw { float:right; font-size:.75rem; color:oklch(80% 0.2 300); font-weight:700; }
+.meth-item p { color:var(--color-text-muted); margin:0; font-size:.8125rem; }
+
+/* ─ Related ─ */
+.rel-links h3 { font-size:1rem; font-weight:700; margin-bottom:1rem; }
+.rlg { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.75rem; }
+.rlc { display:flex; align-items:center; gap:.875rem; padding:1rem 1.25rem; background:oklch(14% 0.03 260/0.6); border:1px solid oklch(28% 0.05 250/0.35); border-radius:.75rem; text-decoration:none; transition:all .2s; }
+.rlc:hover { border-color:var(--color-brand-500); transform:translateY(-1px); }
+.rlc span { font-size:1.5rem; width:2.5rem; text-align:center; flex-shrink:0; }
+.rlc strong { display:block; font-size:.875rem; font-weight:700; color:var(--color-text-primary); }
+.rlc em { font-style:normal; font-size:.8125rem; color:var(--color-text-muted); }
+</style>

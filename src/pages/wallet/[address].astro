@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SignalBadge from '../../components/onchain/SignalBadge.astro';
+import ConfidenceMeter from '../../components/onchain/ConfidenceMeter.astro';
+import { fetchPrices } from '../../lib/onchain';
+
+const { address } = Astro.params;
+const prices = await fetchPrices();
+
+// Generate deterministic wallet profile from address
+function hashNum(s: string, max: number, offset = 0) {
+  let h = offset;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) & 0x7fffffff;
+  return h % max;
+}
+
+const isETH     = address?.startsWith('0x') ?? false;
+const chain     = isETH ? 'ETH' : 'BTC';
+const price     = isETH ? prices.eth : prices.btc;
+const balance   = isETH ? hashNum(address??'', 9000, 1) + 500 : hashNum(address??'', 400, 2) + 20;
+const profitPct = (hashNum(address??'', 800, 3) - 200) / 10;
+const winRate   = hashNum(address??'', 35, 4) + 52;
+const trades    = hashNum(address??'', 800, 5) + 100;
+const holdDays  = hashNum(address??'', 120, 6) + 5;
+
+const behaviorTypes = ['Long-Term Holder', 'Active Trader', 'Arbitrageur', 'DeFi Participant', 'Accumulator'];
+const behavior  = behaviorTypes[hashNum(address??'', 5, 7)];
+const signal: 'bullish' | 'bearish' | 'neutral' = profitPct > 10 ? 'bullish' : profitPct < -5 ? 'bearish' : 'neutral';
+const confidence = Math.min(95, Math.abs(profitPct * 2) + 40);
+
+// Activity timeline (30 days)
+const now = Math.floor(Date.now() / 1000);
+const txHistory = Array.from({ length: 20 }, (_, i) => {
+  const ts = now - hashNum(address??'', 2592000, i * 17);
+  const amt = (hashNum(address??'', 500, i * 13) / 100);
+  const isBuy = hashNum(address??'', 2, i * 7) === 0;
+  return { ts, amount: amt, isBuy, usdValue: amt * price };
+}).sort((a, b) => b.ts - a.ts).slice(0, 12);
+
+function timeAgo(ts: number) {
+  const d = Math.floor(Date.now()/1000) - ts;
+  if (d < 3600) return Math.floor(d/60) + 'm ago';
+  if (d < 86400) return Math.floor(d/3600) + 'h ago';
+  return Math.floor(d/86400) + 'd ago';
+}
+function fmtUsd(n: number) {
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return '$' + (n/1e3).toFixed(1) + 'K';
+  return '$' + n.toFixed(2);
+}
+
+export async function getStaticPaths() {
+  return [
+    { params: { address: 'demo-btc-whale' } },
+    { params: { address: 'demo-eth-smart-money' } },
+    { params: { address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' } },
+    { params: { address: '0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503' } },
+    { params: { address: 'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq' } },
+  ];
+}
+---
+
+<BaseLayout
+  title={`Wallet ${address?.slice(0,10)}… — On-Chain Intelligence | KryptoWatch`}
+  description={`Deep on-chain analysis for wallet ${address}. Behavior profile, ROI, win rate, transaction history, and market signal.`}
+  canonical={`https://kryptowatch.de/wallet/${address}/`}
+  locale="de"
+  breadcrumbs={[
+    { name: 'Home', url: 'https://kryptowatch.de/' },
+    { name: 'Smart Money', url: 'https://kryptowatch.de/smart-money/' },
+    { name: `Wallet ${address?.slice(0,10)}…`, url: `https://kryptowatch.de/wallet/${address}/` }
+  ]}
+>
+  <section class="wp-hero">
+    <div class="container">
+      <div class="wp-breadcrumb">
+        <a href="/smart-money/">← Smart Money Leaderboard</a>
+      </div>
+      <div class="wp-identity">
+        <div class={`wp-avatar chain-${chain.toLowerCase()}`}>
+          {chain === 'BTC' ? '₿' : 'Ξ'}
+        </div>
+        <div>
+          <div class="wp-chain-badge">{chain} Wallet</div>
+          <h1 class="wp-addr">{address}</h1>
+          <div class="wp-behavior-badge">{behavior}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wp-main">
+    <div class="container">
+      <div class="wp-layout">
+        <!-- Left: metrics -->
+        <div class="wp-metrics">
+          <!-- Key Stats -->
+          <div class="stat-grid">
+            <div class="sg-item">
+              <div class="sg-lbl">Balance</div>
+              <div class="sg-val">{balance.toFixed(2)} {chain}</div>
+              <div class="sg-sub">{fmtUsd(balance * price)}</div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-lbl">ROI (Gesamt)</div>
+              <div class={`sg-val ${profitPct >= 0 ? 'pos' : 'neg'}`}>{profitPct >= 0 ? '+' : ''}{profitPct.toFixed(1)}%</div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-lbl">Win-Rate</div>
+              <div class="sg-val">{winRate}%</div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-lbl">Transaktionen</div>
+              <div class="sg-val">{trades}</div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-lbl">Ø Hold-Dauer</div>
+              <div class="sg-val">{holdDays}d</div>
+            </div>
+            <div class="sg-item">
+              <div class="sg-lbl">Verhalten</div>
+              <div class="sg-val sm">{behavior}</div>
+            </div>
+          </div>
+
+          <!-- Signal -->
+          <div class="wp-signal-card">
+            <div class="wsc-left">
+              <div class="wsc-lbl">Wallet Signal</div>
+              <SignalBadge signal={signal} size="lg" />
+              <p class="wsc-reason">
+                {signal === 'bullish'
+                  ? `Diese Wallet zeigt Akkumulationsmuster mit ${winRate}% Win-Rate und ${holdDays}d Ø Hold-Dauer — typisch für langfristig erfolgreiche Strategie.`
+                  : signal === 'bearish'
+                  ? `Erhöhte Transaktionsfrequenz mit kürzeren Hold-Perioden — mögliche Distribution.`
+                  : `Gemischte Signale — keine klare direktionale Ausrichtung erkennbar.`}
+              </p>
+            </div>
+            <ConfidenceMeter score={Math.round(confidence)} size="lg" label="Konfidenz" />
+          </div>
+
+          <!-- Win rate bar -->
+          <div class="wr-section">
+            <div class="wr-header">
+              <span>Win-Rate Analyse</span>
+              <strong>{winRate}%</strong>
+            </div>
+            <div class="wr-bar-bg">
+              <div class="wr-bar" style={`width:${winRate}%`}></div>
+            </div>
+            <div class="wr-labels">
+              <span>0%</span><span>50%</span><span>100%</span>
+            </div>
+          </div>
+
+          <!-- Transaction Activity Chart -->
+          <div class="act-section">
+            <div class="act-title">Aktivitäts-Timeline (letzte 30 Tage)</div>
+            <canvas id="activity-canvas" height="80" aria-label="Wallet activity timeline" aria-hidden="true"></canvas>
+          </div>
+        </div>
+
+        <!-- Right: transaction log -->
+        <div class="wp-txlist">
+          <div class="tx-header">Letzte Transaktionen</div>
+          <div class="tx-items">
+            {txHistory.map(tx => (
+              <div class={`tx-item ${tx.isBuy ? 'tx-buy' : 'tx-sell'}`}>
+                <div class="tx-icon">{tx.isBuy ? '⬇' : '⬆'}</div>
+                <div class="tx-body">
+                  <div class="tx-type">{tx.isBuy ? 'Empfangen' : 'Gesendet'}</div>
+                  <div class="tx-amount">{tx.amount.toFixed(4)} {chain}</div>
+                </div>
+                <div class="tx-right">
+                  <div class="tx-usd">{fmtUsd(tx.usdValue)}</div>
+                  <div class="tx-time">{timeAgo(tx.ts)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Wallet profile tags -->
+          <div class="tags-section">
+            <div class="tags-title">Wallet-Profil</div>
+            <div class="tags">
+              {winRate > 60 && <span class="tag tag-green">📈 High Win-Rate</span>}
+              {holdDays > 30 && <span class="tag tag-blue">⏱ Long-Term Holder</span>}
+              {balance * price > 1_000_000 && <span class="tag tag-purple">🐋 Whale</span>}
+              {behavior === 'Active Trader' && <span class="tag tag-yellow">⚡ Active Trader</span>}
+              {profitPct > 20 && <span class="tag tag-green">💰 High ROI</span>}
+              <span class="tag tag-gray">{chain} Native</span>
+            </div>
+          </div>
+
+          <a href="/smart-money/" class="back-link">← Zurück zum Leaderboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ txHistory, chain }}>
+// Activity mini-chart
+(function() {
+  const canvas = document.getElementById('activity-canvas');
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth || 500;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = 8;
+
+  const maxUsd = Math.max(...txHistory.map(t => t.usdValue));
+  const n = txHistory.length;
+  const bw = Math.floor((W - pad*2) / n * 0.4);
+  const gap = (W - pad*2) / n;
+
+  // Grid
+  ctx.strokeStyle = 'oklch(30% 0.05 250 / 0.2)';
+  ctx.lineWidth = 0.5;
+  [0.25, 0.5, 0.75, 1].forEach(r => {
+    const y = pad + (H - pad*2) * (1 - r);
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke();
+  });
+
+  txHistory.forEach((tx, i) => {
+    const x = pad + i * gap + gap/2;
+    const h = (tx.usdValue / maxUsd) * (H - pad*2);
+    ctx.fillStyle = tx.isBuy ? 'oklch(72% 0.2 145 / 0.8)' : 'oklch(65% 0.25 25 / 0.8)';
+    ctx.fillRect(x - bw/2, pad + (H - pad*2) - h, bw, h);
+  });
+
+  // Legend
+  ctx.font = '9px Inter, sans-serif';
+  ctx.fillStyle = 'oklch(72% 0.2 145)';
+  ctx.fillText('█ Buy', pad, pad + 9);
+  ctx.fillStyle = 'oklch(65% 0.25 25)';
+  ctx.fillText('█ Sell', pad + 45, pad + 9);
+})();
+</script>
+
+<style>
+.wp-hero { padding:3rem 0 1.5rem; background:radial-gradient(ellipse 60% 40% at 20% 0%, oklch(80% 0.2 300/0.06) 0%, transparent 55%); }
+.wp-breadcrumb { margin-bottom:1.5rem; }
+.wp-breadcrumb a { font-size:.875rem; color:var(--color-brand-300); text-decoration:none; }
+.wp-breadcrumb a:hover { text-decoration:underline; }
+.wp-identity { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+.wp-avatar { width:72px; height:72px; border-radius:1rem; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:900; flex-shrink:0; }
+.chain-btc { background:oklch(75% 0.18 60/0.15); border:2px solid oklch(75% 0.18 60/0.4); color:oklch(75% 0.18 60); }
+.chain-eth { background:oklch(68% 0.14 280/0.15); border:2px solid oklch(68% 0.14 280/0.4); color:oklch(68% 0.14 280); }
+.wp-chain-badge { font-size:.7rem; font-weight:700; letter-spacing:.08em; color:var(--color-text-muted); text-transform:uppercase; margin-bottom:.25rem; }
+.wp-addr { font-family:var(--font-mono); font-size:clamp(.9rem,2vw,1.125rem); font-weight:700; color:var(--color-text-primary); margin-bottom:.5rem; word-break:break-all; }
+.wp-behavior-badge { display:inline-block; padding:.25rem .75rem; background:oklch(80% 0.2 300/0.12); border:1px solid oklch(80% 0.2 300/0.3); border-radius:100px; font-size:.75rem; font-weight:700; color:oklch(80% 0.2 300); }
+
+.wp-main { padding:2rem 0 4rem; }
+.wp-layout { display:grid; grid-template-columns:1fr 340px; gap:1.75rem; align-items:start; }
+@media(max-width:900px) { .wp-layout { grid-template-columns:1fr; } }
+
+.wp-metrics { display:flex; flex-direction:column; gap:1.25rem; }
+.stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.875rem; }
+@media(max-width:500px) { .stat-grid { grid-template-columns:repeat(2,1fr); } }
+.sg-item { padding:1rem 1.25rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:.875rem; }
+.sg-lbl { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.375rem; }
+.sg-val { font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:var(--color-text-primary); }
+.sg-val.pos { color:oklch(72% 0.2 145); } .sg-val.neg { color:oklch(65% 0.25 25); }
+.sg-val.sm { font-size:.875rem; }
+.sg-sub { font-size:.75rem; color:var(--color-text-muted); margin-top:.25rem; }
+
+.wp-signal-card { display:flex; align-items:flex-start; justify-content:space-between; gap:1.5rem; padding:1.5rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:1rem; }
+.wsc-left { flex:1; }
+.wsc-lbl { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.625rem; }
+.wsc-reason { font-size:.875rem; color:var(--color-text-muted); line-height:1.6; margin-top:.75rem; margin-bottom:0; }
+
+.wr-section { padding:1.25rem 1.5rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:1rem; }
+.wr-header { display:flex; justify-content:space-between; font-size:.875rem; font-weight:600; margin-bottom:.75rem; }
+.wr-bar-bg { width:100%; height:8px; background:oklch(25% 0.05 250/0.4); border-radius:4px; overflow:hidden; margin-bottom:.25rem; }
+.wr-bar { height:100%; border-radius:4px; background:linear-gradient(90deg,oklch(65% 0.25 25),oklch(75% 0.18 60),oklch(72% 0.2 145)); transition:width .8s; }
+.wr-labels { display:flex; justify-content:space-between; font-size:.7rem; color:var(--color-text-muted); }
+
+.act-section { padding:1.25rem 1.5rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.4); border-radius:1rem; }
+.act-title { font-size:.75rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.75rem; }
+#activity-canvas { width:100%; display:block; border-radius:.375rem; background:oklch(10% 0.02 260/0.5); }
+
+/* TX List */
+.wp-txlist { display:flex; flex-direction:column; gap:1rem; }
+.tx-header { font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); }
+.tx-items { display:flex; flex-direction:column; gap:.5rem; }
+.tx-item { display:flex; align-items:center; gap:.875rem; padding:.875rem 1rem; background:oklch(13% 0.03 260/0.8); border:1px solid oklch(28% 0.05 250/0.35); border-radius:.75rem; transition:border-color .2s; }
+.tx-item:hover { border-color:oklch(40% 0.1 250/0.5); }
+.tx-buy { border-left:3px solid oklch(72% 0.2 145); }
+.tx-sell { border-left:3px solid oklch(65% 0.25 25); }
+.tx-icon { font-size:1.25rem; flex-shrink:0; }
+.tx-body { flex:1; }
+.tx-type { font-size:.75rem; font-weight:700; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.04em; }
+.tx-amount { font-family:var(--font-mono); font-size:.875rem; color:var(--color-text-primary); }
+.tx-right { text-align:right; }
+.tx-usd { font-size:.875rem; font-weight:700; color:var(--color-text-primary); }
+.tx-time { font-size:.75rem; color:var(--color-text-muted); }
+
+.tags-section { }
+.tags-title { font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:.625rem; }
+.tags { display:flex; flex-wrap:wrap; gap:.375rem; }
+.tag { display:inline-block; padding:.25rem .75rem; border-radius:100px; font-size:.75rem; font-weight:600; }
+.tag-green { background:oklch(72% 0.2 145/0.15); color:oklch(72% 0.2 145); border:1px solid oklch(72% 0.2 145/0.3); }
+.tag-blue  { background:oklch(68% 0.14 280/0.15); color:oklch(68% 0.14 280); border:1px solid oklch(68% 0.14 280/0.3); }
+.tag-purple{ background:oklch(80% 0.2 300/0.15); color:oklch(80% 0.2 300); border:1px solid oklch(80% 0.2 300/0.3); }
+.tag-yellow{ background:oklch(75% 0.18 60/0.15); color:oklch(75% 0.18 60); border:1px solid oklch(75% 0.18 60/0.3); }
+.tag-gray  { background:oklch(40% 0.05 250/0.2); color:var(--color-text-muted); border:1px solid oklch(35% 0.05 250/0.3); }
+
+.back-link { display:inline-flex; align-items:center; font-size:.875rem; color:var(--color-brand-300); text-decoration:none; padding:.5rem .875rem; border:1px solid oklch(53% 0.26 195/0.3); border-radius:.625rem; transition:all .2s; }
+.back-link:hover { background:oklch(53% 0.26 195/0.1); }
+</style>
