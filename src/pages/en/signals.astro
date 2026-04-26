@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SignalBadge from '../../components/onchain/SignalBadge.astro';
+import ConfidenceMeter from '../../components/onchain/ConfidenceMeter.astro';
+import { fetchPrices } from '../../lib/onchain';
+import { buildLiveSignals, generateSignalHistory } from '../../lib/signal-engine';
+
+const prices = await fetchPrices();
+const { btcSignal, ethSignal } = buildLiveSignals(prices);
+const btcHistory = generateSignalHistory('BTC', 30);
+const ethHistory = generateSignalHistory('ETH', 30);
+const btcAcc = btcHistory.filter(h => h.accuracy).length;
+const ethAcc = ethHistory.filter(h => h.accuracy).length;
+function fmtUsd(n: number) { return n >= 1e6 ? '$'+(n/1e6).toFixed(2)+'M' : '$'+n.toLocaleString(); }
+---
+<BaseLayout
+  title="On-Chain Signal Engine — BTC & ETH Market Signals | KryptoWatch"
+  description="Live multi-factor on-chain signals for Bitcoin and Ethereum with confidence scores. Based on exchange flows, reserves, whale accumulation, and smart money."
+  canonical="https://kryptowatch.de/en/signals/"
+  locale="en" altPath="/signals/"
+  breadcrumbs={[{name:'Home',url:'https://kryptowatch.de/en/'},{name:'Signals',url:'https://kryptowatch.de/en/signals/'}]}
+>
+  <section class="sh">
+    <div class="container">
+      <div class="sb">⚡ Multi-Factor Signal Engine</div>
+      <h1 class="st">On-Chain Signal Engine</h1>
+      <p class="ss">Automated market signals from <strong>4 weighted factors</strong>: Exchange Flows · Reserve Trends · Whale Accumulation · Smart Money. Confidence-scored, data-backed.</p>
+    </div>
+  </section>
+  <section class="sm">
+    <div class="container">
+      <h2 class="sc">Current Market Signals</h2>
+      <div class="cards">
+        {[{sig:btcSignal,p:prices.btc,c:prices.btcChange24h,i:'₿',n:'Bitcoin',cl:'btc',acc:btcAcc,hist:btcHistory},{sig:ethSignal,p:prices.eth,c:prices.ethChange24h,i:'Ξ',n:'Ethereum',cl:'eth',acc:ethAcc,hist:ethHistory}].map(({sig,p,c,i,n,cl,acc,hist})=>(
+          <div class={`card card--${sig.signal}`}>
+            <div class="ch">
+              <div class="cc"><span class={`ci ${cl}`}>{i}</span><div><div class="cn">{n}</div><div class="cp">{fmtUsd(p)} <span class={c>=0?'pos':'neg'}>{c>=0?'▲':'▼'}{Math.abs(c).toFixed(2)}%</span></div></div></div>
+              <ConfidenceMeter score={sig.confidence} size="lg" />
+            </div>
+            <div class="csr"><SignalBadge signal={sig.signal} size="lg" /><div class="cu">Updated: {new Date(sig.generatedAt*1000).toLocaleTimeString('en-US')}</div></div>
+            <p class="csum">{sig.summary}</p>
+            <div class="factors">
+              <div class="ft">Signal Factors</div>
+              {sig.factors.map(f=>(
+                <div class="fi">
+                  <div class="fr"><span class="fn">{f.name}</span><span class={`fip fip--${f.impact}`}>{f.impact}</span><span class="fw">×{(f.weight*100).toFixed(0)}%</span></div>
+                  <div class="fb"><div class={`fbb fbb--${f.impact}`} style={`width:${Math.abs(f.score)*100}%`}></div></div>
+                  <div class="fd">{f.description}</div>
+                </div>
+              ))}
+            </div>
+            <div class="chr"><span>30-day accuracy:</span><strong class="av">{((acc/hist.length)*100).toFixed(0)}%</strong></div>
+          </div>
+        ))}
+      </div>
+      <div class="meth">
+        <h3>⚙️ Methodology</h3>
+        <div class="mg">
+          <div class="mi"><strong>Exchange Flow Ratio</strong><span class="mw">30%</span><p>24h inflow/outflow. High outflow = bullish.</p></div>
+          <div class="mi"><strong>Reserve Trend</strong><span class="mw">25%</span><p>7-day reserve change. Falling = bullish.</p></div>
+          <div class="mi"><strong>Whale Accumulation</strong><span class="mw">25%</span><p>Net buying in $1M+ transactions.</p></div>
+          <div class="mi"><strong>Smart Money</strong><span class="mw">20%</span><p>Historically profitable wallet positioning.</p></div>
+        </div>
+      </div>
+      <div class="rl"><div class="rg">
+        <a href="/en/insights/" class="rc"><span>💡</span><div><strong>AI Insights</strong><em>Automated insights feed</em></div></a>
+        <a href="/en/alerts/" class="rc"><span>🔔</span><div><strong>Alerts</strong><em>Real-time notifications</em></div></a>
+        <a href="/en/bitcoin-whale-tracker/" class="rc"><span>₿</span><div><strong>BTC Whale Tracker</strong><em>Individual transactions</em></div></a>
+        <a href="/en/exchange-flows/" class="rc"><span>⇄</span><div><strong>Exchange Flows</strong><em>24h flows</em></div></a>
+      </div></div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+.sh{padding:3.5rem 0 2rem;background:radial-gradient(ellipse 70% 50% at 50% -10%,oklch(80% 0.2 300/0.08) 0%,transparent 60%)}
+.sb{display:inline-block;padding:.375rem .875rem;background:oklch(80% 0.2 300/0.12);border:1px solid oklch(80% 0.2 300/0.3);border-radius:100px;font-size:.75rem;font-weight:700;color:oklch(80% 0.2 300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem}
+.st{font-family:var(--font-display);font-size:clamp(1.875rem,5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.ss{font-size:1.0625rem;color:var(--color-text-secondary);max-width:640px;line-height:1.7}
+.sm{padding:2rem 0 4rem}.sm .container{display:flex;flex-direction:column;gap:2.5rem}
+.sc{font-family:var(--font-display);font-size:1.375rem;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
+.card{padding:1.75rem;border-radius:1.25rem;border:1px solid oklch(28% 0.05 250/0.4);background:oklch(13% 0.03 260/0.8)}
+.card--bullish{border-color:oklch(72% 0.2 145/0.35);box-shadow:0 0 30px -10px oklch(72% 0.2 145/0.15)}
+.card--bearish{border-color:oklch(65% 0.25 25/0.35);box-shadow:0 0 30px -10px oklch(65% 0.25 25/0.15)}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.cc{display:flex;align-items:center;gap:.875rem}
+.ci{font-size:2.25rem;font-weight:900}.btc{color:oklch(75% 0.18 60)}.eth{color:oklch(68% 0.14 280)}
+.cn{font-family:var(--font-display);font-size:1.125rem;font-weight:700}.cp{font-size:.875rem;color:var(--color-text-muted)}
+.cp .pos{color:oklch(72% 0.2 145)}.cp .neg{color:oklch(65% 0.25 25)}
+.csr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.cu{font-size:.75rem;color:var(--color-text-muted)}
+.csum{font-size:.9375rem;color:var(--color-text-secondary);line-height:1.7;padding:1rem;background:oklch(17% 0.04 260/0.5);border-radius:.75rem;margin-bottom:1.25rem;border-left:3px solid oklch(53% 0.26 195/0.5)}
+.factors{display:flex;flex-direction:column;gap:.875rem;margin-bottom:1.25rem}
+.ft{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.25rem}
+.fr{display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem}
+.fn{font-size:.8125rem;font-weight:600;flex:1}
+.fip{font-size:.6875rem;font-weight:700;padding:.15rem .5rem;border-radius:100px;text-transform:uppercase}
+.fip--bullish{background:oklch(72% 0.2 145/0.15);color:oklch(72% 0.2 145)}
+.fip--bearish{background:oklch(65% 0.25 25/0.15);color:oklch(65% 0.25 25)}
+.fip--neutral{background:oklch(80% 0.05 195/0.1);color:var(--color-text-muted)}
+.fw{font-size:.75rem;color:var(--color-text-muted)}
+.fb{width:100%;height:5px;background:oklch(25% 0.05 250/0.4);border-radius:3px;overflow:hidden;margin-bottom:.3rem}
+.fbb{height:100%;border-radius:3px;max-width:100%}
+.fbb--bullish{background:oklch(72% 0.2 145)}.fbb--bearish{background:oklch(65% 0.25 25)}.fbb--neutral{background:oklch(53% 0.26 195/0.5)}
+.fd{font-size:.775rem;color:var(--color-text-muted);line-height:1.5}
+.chr{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:oklch(17% 0.04 260/0.4);border-radius:.625rem;font-size:.8125rem;color:var(--color-text-muted)}
+.av{color:oklch(72% 0.2 145);font-size:1rem}
+.meth{padding:1.75rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem}
+.meth h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.mi{padding:1rem;background:oklch(17% 0.04 260/0.5);border:1px solid oklch(28% 0.05 250/0.3);border-radius:.75rem;font-size:.875rem;line-height:1.6}
+.mi strong{display:block;margin-bottom:.25rem;color:var(--color-brand-300)}.mi .mw{float:right;font-size:.75rem;color:oklch(80% 0.2 300);font-weight:700}
+.mi p{color:var(--color-text-muted);margin:0;font-size:.8125rem}
+.rl h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}
+.rc{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.35);border-radius:.75rem;text-decoration:none;transition:all .2s}
+.rc:hover{border-color:var(--color-brand-500);transform:translateY(-1px)}
+.rc span{font-size:1.5rem;width:2.5rem;text-align:center;flex-shrink:0}
+.rc strong{display:block;font-size:.875rem;font-weight:700;color:var(--color-text-primary)}
+.rc em{font-style:normal;font-size:.8125rem;color:var(--color-text-muted)}
+</style>

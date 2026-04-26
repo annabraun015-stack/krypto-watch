@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WhaleTable from '../../components/onchain/WhaleTable.astro';
+import SignalBadge from '../../components/onchain/SignalBadge.astro';
+import { fetchPrices, fetchETHWhales, formatUsd } from '../../lib/onchain';
+
+const prices = await fetchPrices();
+const whales = await fetchETHWhales(prices.eth);
+const totalVolume = whales.reduce((s, w) => s + w.usdValue, 0);
+const megaCount   = whales.filter(w => w.size === 'mega' || w.size === 'gigantic').length;
+const inflowCount = whales.filter(w => w.label === 'exchange-inflow').length;
+const signal = inflowCount > whales.length * 0.5 ? 'bearish' : inflowCount < whales.length * 0.3 ? 'bullish' : 'neutral';
+---
+
+<BaseLayout
+  title="Ethereum Whale Tracker — Track Large ETH Transactions Live | KryptoWatch"
+  description="Track large Ethereum transactions in real time from $100K+. Exchange inflows, outflows, and DeFi whale movements with automated market signals."
+  canonical="https://kryptowatch.de/en/ethereum-whale-tracker/"
+  locale="en"
+  altPath="/ethereum-whale-tracker/"
+  breadcrumbs={[{ name: 'Home', url: 'https://kryptowatch.de/en/' }, { name: 'ETH Whale Tracker', url: 'https://kryptowatch.de/en/ethereum-whale-tracker/' }]}
+>
+  <section class="wh-hero">
+    <div class="container">
+      <div class="live-badge"><span class="ldot"></span> Live On-Chain Data</div>
+      <h1 class="wh-title"><span class="eth-icon">Ξ</span> Ethereum Whale Tracker</h1>
+      <p class="wh-sub">Ethereum large transactions classified with known exchange addresses: Binance, Coinbase, Kraken, OKX — plus automatic market signals.</p>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-lbl">ETH Price</div>
+          <div class="stat-val">{formatUsd(prices.eth)}</div>
+          <div class={`stat-chg ${prices.ethChange24h >= 0 ? 'pos' : 'neg'}`}>{prices.ethChange24h >= 0 ? '▲' : '▼'} {Math.abs(prices.ethChange24h).toFixed(2)}%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-lbl">Whale Volume</div>
+          <div class="stat-val">{formatUsd(totalVolume)}</div>
+          <div class="stat-sm">{whales.length} transactions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-lbl">Mega Whales ($1M+)</div>
+          <div class="stat-val accent">{megaCount}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-lbl">Market Signal</div>
+          <div style="margin-top:0.5rem"><SignalBadge signal={signal} size="lg" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-main">
+    <div class="container">
+      <h2 class="sec-title">Live ETH Whale Transactions</h2>
+      <p class="sec-sub">Includes known exchange wallets: Binance, Coinbase, Kraken, OKX</p>
+      <WhaleTable chain="ETH" locale="en" />
+
+      <div class="ctx-box">
+        <h3>🔍 Ethereum On-Chain Specifics</h3>
+        <div class="ctx-grid">
+          <div class="ctx-item"><strong>DeFi Smart Contracts</strong><p>Large ETH flows to smart contracts may indicate DeFi activity, liquidity providing, or staking.</p></div>
+          <div class="ctx-item"><strong>Known Exchange Wallets</strong><p>KryptoWatch automatically detects transactions to/from known exchange addresses and classifies them.</p></div>
+          <div class="ctx-item"><strong>Staking Flows</strong><p>ETH flows to the Ethereum Beacon Chain Deposit Contract are classified as staking.</p></div>
+        </div>
+      </div>
+
+      <div class="rel-links">
+        <h3>More Analytics</h3>
+        <div class="rl-grid">
+          <a href="/en/bitcoin-whale-tracker/" class="rl-card"><span>₿</span><div><strong>BTC Whale Tracker</strong><em>Large Bitcoin transactions</em></div></a>
+          <a href="/exchange-flows/" class="rl-card"><span>⇄</span><div><strong>Exchange Flows</strong><em>Inflow / Outflow</em></div></a>
+          <a href="/smart-money/" class="rl-card"><span>🧠</span><div><strong>Smart Money</strong><em>Top wallets by ROI</em></div></a>
+          <a href="/exchange-reserves/" class="rl-card"><span>🏦</span><div><strong>Exchange Reserves</strong><em>Historical holdings</em></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.wh-hero{padding:3.5rem 0 2.5rem;background:radial-gradient(ellipse 70% 50% at 10% -5%,oklch(68% 0.14 280/0.08) 0%,transparent 55%)}
+.live-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.375rem .875rem;background:oklch(68% 0.14 280/0.12);border:1px solid oklch(68% 0.14 280/0.3);border-radius:100px;font-size:.75rem;font-weight:700;color:oklch(68% 0.14 280);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem}
+.ldot{width:7px;height:7px;border-radius:50%;background:oklch(72% 0.2 145);box-shadow:0 0 6px oklch(72% 0.2 145);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.wh-title{font-family:var(--font-display);font-size:clamp(1.875rem,5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.eth-icon{background:linear-gradient(135deg,oklch(68% 0.14 280),oklch(72% 0.18 275));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.wh-sub{font-size:1.0625rem;color:var(--color-text-secondary);max-width:600px;line-height:1.7;margin-bottom:2rem}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem}
+.stat-card{padding:1.25rem 1.5rem;background:oklch(14% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:.875rem}
+.stat-lbl{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.4rem}
+.stat-val{font-family:var(--font-display);font-size:1.625rem;font-weight:800;color:var(--color-text-primary)}.stat-val.accent{color:oklch(80% 0.2 300)}
+.stat-chg.pos{color:oklch(72% 0.2 145);font-size:.875rem;font-weight:600}.stat-chg.neg{color:oklch(65% 0.25 25);font-size:.875rem;font-weight:600}
+.stat-sm{font-size:.8125rem;color:var(--color-text-muted);margin-top:.25rem}
+.wh-main{padding:2rem 0 4rem}
+.sec-title{font-family:var(--font-display);font-size:1.375rem;font-weight:700;color:var(--color-text-primary);margin-bottom:.25rem}
+.sec-sub{font-size:.875rem;color:var(--color-text-muted);margin-bottom:1.5rem}
+.ctx-box{margin-top:2.5rem;padding:1.75rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem}
+.ctx-box h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.ctx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+.ctx-item{padding:1rem 1.25rem;background:oklch(17% 0.04 260/0.5);border:1px solid oklch(28% 0.05 250/0.3);border-radius:.75rem;font-size:.875rem;line-height:1.6}
+.ctx-item strong{display:block;margin-bottom:.3rem;font-size:.9rem;color:oklch(68% 0.14 280)}
+.ctx-item p{color:var(--color-text-muted);margin:0}
+.rel-links{margin-top:2.5rem}.rel-links h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.rl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.75rem}
+.rl-card{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.35);border-radius:.75rem;text-decoration:none;transition:all .2s}
+.rl-card:hover{border-color:var(--color-brand-500);transform:translateY(-1px)}
+.rl-card span{font-size:1.5rem;width:2.5rem;text-align:center;flex-shrink:0}
+.rl-card strong{display:block;font-size:.875rem;font-weight:700;color:var(--color-text-primary)}
+.rl-card em{font-style:normal;font-size:.8125rem;color:var(--color-text-muted)}
+</style>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SignalBadge from '../../components/onchain/SignalBadge.astro';
+import { fetchPrices, fetchExchangeFlows, formatUsd } from '../../lib/onchain';
+
+const prices = await fetchPrices();
+const flows  = await fetchExchangeFlows(prices);
+const btcFlow = flows.find(f => f.token === 'BTC')!;
+const ethFlow = flows.find(f => f.token === 'ETH')!;
+---
+
+<BaseLayout
+  title="Exchange Flows — BTC & ETH Inflow/Outflow Dashboard | KryptoWatch"
+  description="Track Bitcoin and Ethereum exchange inflows and outflows. Bullish/bearish signals based on accumulation patterns and sell pressure indicators."
+  canonical="https://kryptowatch.de/en/exchange-flows/"
+  locale="en"
+  altPath="/exchange-flows/"
+  breadcrumbs={[{ name: 'Home', url: 'https://kryptowatch.de/en/' }, { name: 'Exchange Flows', url: 'https://kryptowatch.de/en/exchange-flows/' }]}
+>
+  <section class="ef-hero">
+    <div class="container">
+      <div class="ef-badge"><span class="ldot"></span> 24h Rolling Data</div>
+      <h1 class="ef-title">Exchange Flow Dashboard</h1>
+      <p class="ef-sub">Real-time overview of coin movements in and out of exchanges. High inflow = potential sell pressure. High outflow = accumulation signal.</p>
+    </div>
+  </section>
+
+  <section class="ef-main">
+    <div class="container">
+      {[btcFlow, ethFlow].map((flow) => (
+        <div class="flow-card">
+          <div class="flow-header">
+            <div class="flow-coin">
+              <span class={`coin-icon ${flow.token === 'BTC' ? 'btc-color' : 'eth-color'}`}>{flow.token === 'BTC' ? '₿' : 'Ξ'}</span>
+              <div>
+                <div class="coin-name">{flow.token === 'BTC' ? 'Bitcoin' : 'Ethereum'}</div>
+                <div class="coin-price">{formatUsd(flow.token === 'BTC' ? prices.btc : prices.eth)}</div>
+              </div>
+            </div>
+            <SignalBadge signal={flow.signal} size="md" reason={flow.signalReason} />
+          </div>
+          <div class="flow-metrics">
+            <div class="metric inflow-m">
+              <div class="metric-lbl">⬇ Exchange Inflow (24h)</div>
+              <div class="metric-val">{formatUsd(flow.inflow24h)}</div>
+            </div>
+            <div class="metric outflow-m">
+              <div class="metric-lbl">⬆ Exchange Outflow (24h)</div>
+              <div class="metric-val">{formatUsd(flow.outflow24h)}</div>
+            </div>
+            <div class="metric netflow-m">
+              <div class="metric-lbl">⇄ Net Flow (24h)</div>
+              <div class={`metric-val ${flow.netFlow24h > 0 ? 'neg-val' : 'pos-val'}`}>{flow.netFlow24h > 0 ? '+' : ''}{formatUsd(flow.netFlow24h)}</div>
+              <div class="metric-note">{flow.netFlow24h > 0 ? 'Net Inflow — bearish' : 'Net Outflow — bullish'}</div>
+            </div>
+          </div>
+          <div class="signal-reason"><span>💡</span>{flow.signalReason}</div>
+        </div>
+      ))}
+
+      <div class="ef-guide">
+        <h3>📖 How to Read Exchange Flows</h3>
+        <div class="guide-grid">
+          <div class="guide-item"><strong>High Inflow → Bearish</strong><p>Coins moving to exchanges often signals sell intent. Holders sending coins to exchanges to sell.</p></div>
+          <div class="guide-item"><strong>High Outflow → Bullish</strong><p>Coins leaving exchanges to private wallets indicate long-term accumulation. HODLers withdrawing.</p></div>
+          <div class="guide-item"><strong>Combined with Price</strong><p>Outflow + rising price = strong bullish signal. Inflow + falling price = possible capitulation.</p></div>
+        </div>
+      </div>
+
+      <div class="rel-links">
+        <h3>More Analytics</h3>
+        <div class="rl-grid">
+          <a href="/en/bitcoin-whale-tracker/" class="rl-card"><span>₿</span><div><strong>BTC Whale Tracker</strong><em>Individual large transactions</em></div></a>
+          <a href="/en/ethereum-whale-tracker/" class="rl-card"><span>Ξ</span><div><strong>ETH Whale Tracker</strong><em>Individual large transactions</em></div></a>
+          <a href="/en/smart-money/" class="rl-card"><span>🧠</span><div><strong>Smart Money</strong><em>Top wallets by ROI</em></div></a>
+          <a href="/en/exchange-reserves/" class="rl-card"><span>🏦</span><div><strong>Exchange Reserves</strong><em>Historical holdings</em></div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.ef-hero{padding:3.5rem 0 2rem;background:radial-gradient(ellipse 70% 50% at 50% -10%,oklch(53% 0.26 195/0.08) 0%,transparent 60%)}
+.ef-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.375rem .875rem;background:oklch(53% 0.26 195/0.12);border:1px solid oklch(53% 0.26 195/0.3);border-radius:100px;font-size:.75rem;font-weight:700;color:var(--color-brand-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem}
+.ldot{width:7px;height:7px;border-radius:50%;background:oklch(72% 0.2 145);box-shadow:0 0 6px oklch(72% 0.2 145);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.ef-title{font-family:var(--font-display);font-size:clamp(1.875rem,5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.ef-sub{font-size:1.0625rem;color:var(--color-text-secondary);max-width:640px;line-height:1.7}
+.ef-main{padding:2rem 0 4rem}.ef-main .container{display:flex;flex-direction:column;gap:1.75rem}
+.flow-card{padding:1.75rem;background:oklch(13% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1.25rem}
+.flow-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+.flow-coin{display:flex;align-items:center;gap:1rem}
+.coin-icon{font-size:2rem;font-weight:900}.btc-color{color:oklch(75% 0.18 60)}.eth-color{color:oklch(68% 0.14 280)}
+.coin-name{font-family:var(--font-display);font-size:1.125rem;font-weight:700}
+.coin-price{font-size:.875rem;color:var(--color-text-muted)}
+.flow-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.25rem}
+.metric{padding:1rem 1.25rem;border-radius:.875rem}
+.inflow-m{background:oklch(65% 0.25 25/0.07);border:1px solid oklch(65% 0.25 25/0.2)}
+.outflow-m{background:oklch(72% 0.2 145/0.07);border:1px solid oklch(72% 0.2 145/0.2)}
+.netflow-m{background:oklch(53% 0.26 195/0.07);border:1px solid oklch(53% 0.26 195/0.2)}
+.metric-lbl{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:.5rem}
+.metric-val{font-family:var(--font-display);font-size:1.375rem;font-weight:800;color:var(--color-text-primary)}
+.metric-val.neg-val{color:oklch(65% 0.25 25)}.metric-val.pos-val{color:oklch(72% 0.2 145)}
+.metric-note{font-size:.75rem;color:var(--color-text-muted);margin-top:.25rem}
+.signal-reason{display:flex;align-items:flex-start;gap:.625rem;padding:.875rem 1rem;background:oklch(17% 0.04 260/0.5);border-radius:.75rem;font-size:.875rem;color:var(--color-text-secondary);line-height:1.5}
+.ef-guide{padding:1.75rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem}
+.ef-guide h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem}
+.guide-item{padding:1rem 1.25rem;background:oklch(17% 0.04 260/0.5);border:1px solid oklch(28% 0.05 250/0.3);border-radius:.75rem;font-size:.875rem;line-height:1.6}
+.guide-item strong{display:block;margin-bottom:.3rem;font-size:.9rem;color:var(--color-brand-300)}.guide-item p{color:var(--color-text-muted);margin:0}
+.rel-links h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.rl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.75rem}
+.rl-card{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.35);border-radius:.75rem;text-decoration:none;transition:all .2s}
+.rl-card:hover{border-color:var(--color-brand-500);transform:translateY(-1px)}
+.rl-card span{font-size:1.5rem;width:2.5rem;text-align:center;flex-shrink:0}
+.rl-card strong{display:block;font-size:.875rem;font-weight:700;color:var(--color-text-primary)}
+.rl-card em{font-style:normal;font-size:.8125rem;color:var(--color-text-muted)}
+</style>

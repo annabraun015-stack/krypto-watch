@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ALERT_TEMPLATES } from '../../lib/insights';
+---
+
+<BaseLayout
+  title="On-Chain Alert System — Whale & Signal Notifications | KryptoWatch"
+  description="Configure real-time notifications for whale transactions, exchange inflows, reserve changes, and smart money activity. Browser push notifications included."
+  canonical="https://kryptowatch.de/en/alerts/"
+  locale="en" altPath="/alerts/"
+  breadcrumbs={[{name:'Home',url:'https://kryptowatch.de/en/'},{name:'Alerts',url:'https://kryptowatch.de/en/alerts/'}]}
+>
+  <section class="ah">
+    <div class="container">
+      <div class="ab">🔔 Real-Time Alert System</div>
+      <h1 class="at">On-Chain Alert Center</h1>
+      <p class="as">Predefined and custom alerts for whale transactions, exchange flows, and signal events. Browser push notifications included — no app needed.</p>
+    </div>
+  </section>
+
+  <section class="am">
+    <div class="container">
+      <!-- Push setup -->
+      <div class="push-card">
+        <div class="pi">🔔</div>
+        <div class="pc">
+          <h2 class="pt">Enable Browser Push Notifications</h2>
+          <p class="ps">Get instant alerts for whale events and signal changes — directly in your browser, no app required.</p>
+        </div>
+        <button id="push-btn" class="btn btn-primary">Enable Push</button>
+        <div id="push-status" class="push-status" style="display:none"></div>
+      </div>
+
+      <!-- Templates -->
+      <div class="asec">
+        <h2 class="ath">⚡ Quick Setup: Alert Templates</h2>
+        <p class="ats">Click a template to activate it instantly</p>
+        <div class="tg" id="template-grid">
+          {ALERT_TEMPLATES.map((t, i) => (
+            <div class={`tc ${t.enabled?'tc--on':''}`} data-idx={i} data-type={t.type} data-token={t.token}>
+              <div class="tch">
+                <div class="tn">{t.name}</div>
+                <div class="tg-tog" data-idx={i}>
+                  <div class={`tt ${t.enabled?'on':''}`}><div class="tth"></div></div>
+                </div>
+              </div>
+              <div class="td">
+                <span class={`tok tok--${t.token.toLowerCase()}`}>{t.token}</span>
+                <span class="ttype">{t.type.replace(/_/g,' ')}</span>
+                <span class="ttr">{t.type==='whale_tx'?`$${(t.threshold/1e6).toFixed(1)}M+`:t.type==='smart_money'?`Score ${t.threshold}+`:`${t.threshold}%+`}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Custom builder -->
+      <div class="asec">
+        <h2 class="ath">🔧 Create Custom Alert</h2>
+        <div class="bc">
+          <form id="alert-form" class="af">
+            <div class="fr">
+              <div class="fg"><label class="fl">Alert Name</label><input type="text" id="al-name" class="form-input" placeholder="e.g. BTC Mega Whale Alert" required /></div>
+              <div class="fg"><label class="fl">Token</label><select id="al-token" class="form-input"><option value="BTC">Bitcoin (BTC)</option><option value="ETH">Ethereum (ETH)</option><option value="ALL">All Tokens</option></select></div>
+            </div>
+            <div class="fr">
+              <div class="fg"><label class="fl">Alert Type</label><select id="al-type" class="form-input"><option value="whale_tx">🐋 Whale Transaction</option><option value="inflow_spike">⬇ Exchange Inflow Spike</option><option value="outflow_spike">⬆ Exchange Outflow Spike</option><option value="reserve_change">🏦 Reserve Change</option><option value="smart_money">🧠 Smart Money Activity</option></select></div>
+              <div class="fg"><label class="fl" id="tl">Threshold (USD)</label><input type="number" id="al-thresh" class="form-input" value="1000000" min="0" /></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Alert</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Active alerts -->
+      <div class="asec">
+        <h2 class="ath">📋 My Alerts</h2>
+        <div id="active-alerts" class="aa"><div class="es"><div class="ei">🔕</div><div>No alerts configured yet. Choose a template or create a custom alert.</div></div></div>
+      </div>
+
+      <!-- Log -->
+      <div class="asec">
+        <h2 class="ath">📜 Alert Log (Demo)</h2>
+        <div class="log">
+          <div class="li li--c"><div class="lic">🐋</div><div class="lib"><div class="lit">BTC Mega Whale: 500 BTC → Binance</div><div class="lid">Transaction worth $47.2M detected. Exchange inflow — bearish signal.</div></div><div class="lim"><span class="lt">12m ago</span><span class="ls ls--c">⚠ Critical</span></div></div>
+          <div class="li li--w"><div class="lic">⇄</div><div class="lib"><div class="lit">ETH Outflow Spike +23%</div><div class="lid">Ethereum outflows rose 23% in 1h. Accumulation signal detected.</div></div><div class="lim"><span class="lt">28m ago</span><span class="ls ls--w">⚡ Warning</span></div></div>
+          <div class="li li--i"><div class="lic">🧠</div><div class="lib"><div class="lit">Smart Money BTC Buy Signal</div><div class="lid">3 top wallets accumulated BTC. Total volume: 45 BTC.</div></div><div class="lim"><span class="lt">1h ago</span><span class="ls ls--i">ℹ Info</span></div></div>
+        </div>
+      </div>
+
+      <div class="rl"><div class="rg">
+        <a href="/en/signals/" class="rc"><span>⚡</span><div><strong>Signal Engine</strong><em>Multi-factor signals</em></div></a>
+        <a href="/en/insights/" class="rc"><span>💡</span><div><strong>AI Insights</strong><em>Automated insights</em></div></a>
+        <a href="/en/bitcoin-whale-tracker/" class="rc"><span>🐋</span><div><strong>BTC Whale Tracker</strong><em>Live transactions</em></div></a>
+      </div></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+const pushBtn = document.getElementById('push-btn') as HTMLButtonElement;
+const pushSt  = document.getElementById('push-status') as HTMLElement;
+pushBtn?.addEventListener('click', async () => {
+  if (!('Notification' in window)) { pushSt.textContent = '❌ Browser does not support push notifications.'; pushSt.style.display=''; return; }
+  const p = await Notification.requestPermission();
+  if (p === 'granted') {
+    pushSt.innerHTML = '✅ <strong>Push notifications enabled!</strong> You will receive alerts for important on-chain events.';
+    pushSt.style.display=''; pushBtn.textContent='✓ Enabled'; pushBtn.disabled=true;
+    setTimeout(() => new Notification('KryptoWatch Alert', { body: '🐋 Whale Alert: 120 BTC moved ($11.3M) — Exchange outflow detected!', icon: '/favicon.svg' }), 1500);
+  } else { pushSt.textContent = '❌ Permission denied. Please check browser settings.'; pushSt.style.display=''; }
+});
+
+interface AL { id:string; name:string; token:string; type:string; threshold:number; enabled:boolean; createdAt:number; }
+function load(): AL[] { try { return JSON.parse(localStorage.getItem('kw_alerts')||'[]'); } catch { return []; } }
+function save(a:AL[]) { localStorage.setItem('kw_alerts',JSON.stringify(a)); }
+function render() {
+  const a=load(), c=document.getElementById('active-alerts')!;
+  if(!a.length){c.innerHTML='<div class="es"><div class="ei">🔕</div><div>No alerts configured yet.</div></div>';return;}
+  c.innerHTML=a.map(x=>`<div class="ar" data-id="${x.id}"><div class="ari"><span class="arn">${x.name}</span><span class="art">${x.type.replace(/_/g,' ')} · ${x.token}</span></div><div class="arth">${x.threshold>=1e6?'$'+(x.threshold/1e6).toFixed(1)+'M+':'$'+(x.threshold/1e3).toFixed(0)+'K+'}</div><button class="ard" data-id="${x.id}">✕</button></div>`).join('');
+  c.querySelectorAll('.ard').forEach(b=>b.addEventListener('click',()=>{ save(load().filter(x=>x.id!==b.getAttribute('data-id'))); render(); }));
+}
+const form=document.getElementById('alert-form') as HTMLFormElement;
+const typeEl=document.getElementById('al-type') as HTMLSelectElement;
+typeEl?.addEventListener('change',()=>{
+  const tl=document.getElementById('tl')!,th=document.getElementById('al-thresh') as HTMLInputElement;
+  tl.textContent=typeEl.value==='whale_tx'?'Threshold (USD)':typeEl.value==='smart_money'?'Score (0-1)':'Spike %';
+  th.value=typeEl.value==='whale_tx'?'1000000':typeEl.value==='smart_money'?'0.6':'20';
+});
+form?.addEventListener('submit',e=>{ e.preventDefault();
+  const n=(document.getElementById('al-name') as HTMLInputElement).value.trim();
+  if(!n)return;
+  const a=load(); a.push({id:`a-${Date.now()}`,name:n,token:(document.getElementById('al-token') as HTMLSelectElement).value,type:typeEl.value,threshold:parseFloat((document.getElementById('al-thresh') as HTMLInputElement).value),enabled:true,createdAt:Date.now()});
+  save(a); render(); form.reset();
+});
+document.querySelectorAll('.tg-tog').forEach(tog=>tog.addEventListener('click',()=>{
+  const card=tog.closest('.tc')!,track=card.querySelector('.tt')!,isOn=track.classList.contains('on');
+  track.classList.toggle('on'); card.classList.toggle('tc--on');
+  if(!isOn){const a=load();a.push({id:`tpl-${Date.now()}`,name:card.querySelector('.tn')!.textContent!,token:(card as HTMLElement).dataset.token!,type:(card as HTMLElement).dataset.type!,threshold:1000000,enabled:true,createdAt:Date.now()});save(a);}
+  else{save(load().filter(x=>x.name!==card.querySelector('.tn')!.textContent));}
+  render();
+}));
+render();
+</script>
+
+<style>
+.ah{padding:3.5rem 0 2rem;background:radial-gradient(ellipse 60% 50% at 50% -10%,oklch(75% 0.18 60/0.07) 0%,transparent 60%)}
+.ab{display:inline-block;padding:.375rem .875rem;background:oklch(75% 0.18 60/0.12);border:1px solid oklch(75% 0.18 60/0.3);border-radius:100px;font-size:.75rem;font-weight:700;color:oklch(75% 0.18 60);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem}
+.at{font-family:var(--font-display);font-size:clamp(1.875rem,5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.as{font-size:1.0625rem;color:var(--color-text-secondary);max-width:640px;line-height:1.7}
+.am{padding:2rem 0 4rem}.am .container{display:flex;flex-direction:column;gap:2.5rem}
+.push-card{display:flex;align-items:center;flex-wrap:wrap;gap:1.25rem;padding:1.5rem 1.75rem;background:oklch(53% 0.26 195/0.07);border:1px solid oklch(53% 0.26 195/0.3);border-radius:1rem}
+.pi{font-size:2rem;flex-shrink:0}.pc{flex:1;min-width:200px}
+.pt{font-family:var(--font-display);font-size:1.125rem;font-weight:700;margin-bottom:.25rem}
+.ps{font-size:.875rem;color:var(--color-text-muted);margin:0}
+.push-status{font-size:.875rem;color:oklch(72% 0.2 145);padding:.5rem .875rem;background:oklch(72% 0.2 145/0.1);border-radius:.5rem;border:1px solid oklch(72% 0.2 145/0.2);width:100%}
+.asec{}.ath{font-family:var(--font-display);font-size:1.25rem;font-weight:700;margin-bottom:.375rem}.ats{font-size:.875rem;color:var(--color-text-muted);margin-bottom:1.25rem}
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.tc{padding:1.25rem;background:oklch(13% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem;transition:all .2s}.tc--on{border-color:oklch(75% 0.18 60/0.5);background:oklch(75% 0.18 60/0.04)}
+.tch{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}.tn{font-size:.9rem;font-weight:700}
+.tt{width:38px;height:21px;background:oklch(25% 0.05 250/0.6);border-radius:100px;position:relative;transition:background .2s;cursor:pointer}.tt.on{background:oklch(75% 0.18 60)}
+.tth{width:15px;height:15px;background:white;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .2s}.tt.on .tth{transform:translateX(17px)}
+.td{display:flex;flex-wrap:wrap;gap:.375rem}
+.tok{font-size:.7rem;font-weight:700;padding:.15rem .5rem;border-radius:100px}
+.tok--btc{background:oklch(75% 0.18 60/0.15);color:oklch(75% 0.18 60);border:1px solid oklch(75% 0.18 60/0.3)}
+.tok--eth{background:oklch(68% 0.14 280/0.15);color:oklch(68% 0.14 280);border:1px solid oklch(68% 0.14 280/0.3)}
+.tok--all{background:oklch(53% 0.26 195/0.15);color:var(--color-brand-300);border:1px solid oklch(53% 0.26 195/0.3)}
+.ttype,.ttr{font-size:.75rem;color:var(--color-text-muted)}
+.bc{padding:1.75rem;background:oklch(13% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:1rem}
+.af{display:flex;flex-direction:column;gap:1.25rem}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.fr{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:.5rem}.fl{font-size:.8125rem;font-weight:600;color:var(--color-text-secondary)}
+.aa{display:flex;flex-direction:column;gap:.75rem}
+.es{padding:2.5rem;text-align:center;background:oklch(13% 0.03 260/0.6);border:1px dashed oklch(28% 0.05 250/0.5);border-radius:1rem;font-size:.875rem;color:var(--color-text-muted)}
+.ei{font-size:2rem;margin-bottom:.5rem}
+.ar{display:flex;align-items:center;gap:1rem;padding:.875rem 1.25rem;background:oklch(14% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:.75rem}
+.ari{flex:1}.arn{display:block;font-size:.9rem;font-weight:700}.art{font-size:.75rem;color:var(--color-text-muted)}
+.arth{font-family:var(--font-mono);font-size:.8125rem;color:var(--color-brand-300)}
+.ard{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:oklch(65% 0.25 25/0.1);border:1px solid oklch(65% 0.25 25/0.2);color:oklch(65% 0.25 25);border-radius:.5rem;cursor:pointer;font-size:.875rem;transition:all .2s}
+.log{display:flex;flex-direction:column;gap:.75rem}
+.li{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:oklch(13% 0.03 260/0.8);border:1px solid oklch(28% 0.05 250/0.4);border-radius:.875rem;border-left:3px solid transparent}
+.li--c{border-left-color:oklch(65% 0.25 25)}.li--w{border-left-color:oklch(75% 0.18 60)}.li--i{border-left-color:oklch(53% 0.26 195/0.6)}
+.lic{font-size:1.5rem;flex-shrink:0}.lib{flex:1}
+.lit{font-size:.9rem;font-weight:700;margin-bottom:.25rem}.lid{font-size:.8125rem;color:var(--color-text-muted);line-height:1.5}
+.lim{display:flex;flex-direction:column;align-items:flex-end;gap:.25rem;flex-shrink:0}
+.lt{font-size:.75rem;color:var(--color-text-muted)}
+.ls{font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:100px;text-transform:uppercase}
+.ls--c{background:oklch(65% 0.25 25/0.15);color:oklch(65% 0.25 25)}
+.ls--w{background:oklch(75% 0.18 60/0.15);color:oklch(75% 0.18 60)}
+.ls--i{background:oklch(53% 0.26 195/0.15);color:var(--color-brand-300)}
+.rl h3{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}
+.rc{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;background:oklch(14% 0.03 260/0.6);border:1px solid oklch(28% 0.05 250/0.35);border-radius:.75rem;text-decoration:none;transition:all .2s}
+.rc:hover{border-color:var(--color-brand-500);transform:translateY(-1px)}
+.rc span{font-size:1.5rem;width:2.5rem;text-align:center;flex-shrink:0}
+.rc strong{display:block;font-size:.875rem;font-weight:700;color:var(--color-text-primary)}
+.rc em{font-style:normal;font-size:.8125rem;color:var(--color-text-muted)}
+</style>
