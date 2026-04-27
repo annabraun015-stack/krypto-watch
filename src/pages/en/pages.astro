@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { siteConfig } from '../config/site';
+import { siteConfig } from '../../config/site';
 
 const dePosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'de');
 const enPosts = await getCollection('blog', (p) => !p.data.draft && p.data.locale === 'en');
@@ -10,7 +10,7 @@ dePosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).g
 enPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const staticPages = [
-  { url: '/', label: 'Startseite (DE)', lang: 'de' },
+  { url: '/', label: 'Homepage (DE)', lang: 'de' },
   { url: '/en/', label: 'Homepage (EN)', lang: 'en' },
   { url: '/blog/', label: 'Blog (DE)', lang: 'de' },
   { url: '/en/blog/', label: 'Blog (EN)', lang: 'en' },
@@ -18,31 +18,31 @@ const staticPages = [
   { url: '/en/token-unlocks/', label: 'Token Unlocks (EN)', lang: 'en' },
   { url: '/rsi/', label: 'RSI Analyzer (DE)', lang: 'de' },
   { url: '/en/rsi/', label: 'RSI Analyzer (EN)', lang: 'en' },
-  { url: '/sentiment/', label: 'Markt-Sentiment (DE)', lang: 'de' },
+  { url: '/sentiment/', label: 'Market Sentiment (DE)', lang: 'de' },
   { url: '/en/sentiment/', label: 'Market Sentiment (EN)', lang: 'en' },
-  { url: '/about-us/', label: 'Über uns (DE)', lang: 'de' },
+  { url: '/about-us/', label: 'About Us (DE)', lang: 'de' },
   { url: '/en/about-us/', label: 'About Us (EN)', lang: 'en' },
-  { url: '/contact-us/', label: 'Kontakt (DE)', lang: 'de' },
+  { url: '/contact-us/', label: 'Contact (DE)', lang: 'de' },
   { url: '/en/contact-us/', label: 'Contact (EN)', lang: 'en' },
-  { url: '/privacy/', label: 'Datenschutz (DE)', lang: 'de' },
+  { url: '/privacy/', label: 'Privacy (DE)', lang: 'de' },
   { url: '/en/privacy/', label: 'Privacy (EN)', lang: 'en' },
-  { url: '/terms/', label: 'AGB (DE)', lang: 'de' },
+  { url: '/terms/', label: 'Terms (DE)', lang: 'de' },
   { url: '/en/terms/', label: 'Terms (EN)', lang: 'en' },
-  { url: '/impressum/', label: 'Impressum (DE)', lang: 'de' },
+  { url: '/impressum/', label: 'Imprint (DE)', lang: 'de' },
   { url: '/en/impressum/', label: 'Imprint (EN)', lang: 'en' },
 ];
 ---
 
 <BaseLayout
-  title="Sitemap – KryptoWatch"
-  description="Vollständige Sitemap von KryptoWatch mit allen Seiten und Blog-Artikeln."
-  locale="de"
+  title="Site Structure – KryptoWatch"
+  description="Overview of all pages and articles available on KryptoWatch."
+  locale="en"
   robots="index, follow"
 >
-  <section class="page-hero" aria-labelledby="sitemap-title">
+  <section class="page-hero" aria-labelledby="pages-title">
     <div class="container">
-      <h1 id="sitemap-title" class="page-hero-title">Sitemap</h1>
-      <p class="page-hero-subtitle">Alle Seiten und Artikel im Überblick</p>
+      <h1 id="pages-title" class="page-hero-title">Site Structure</h1>
+      <p class="page-hero-subtitle">Overview of all content</p>
     </div>
   </section>
 
@@ -51,7 +51,7 @@ const staticPages = [
 
       <!-- Static pages -->
       <div class="sitemap-section">
-        <h2 class="sitemap-heading">📄 Seiten</h2>
+        <h2 class="sitemap-heading">📄 Pages</h2>
         <ul class="sitemap-list" role="list">
           {staticPages.map((p) => (
             <li role="listitem">
@@ -61,26 +61,6 @@ const staticPages = [
               </a>
             </li>
           ))}
-        </ul>
-      </div>
-
-      <!-- DE Blog posts -->
-      <div class="sitemap-section">
-        <h2 class="sitemap-heading">📝 Blog-Artikel (Deutsch)</h2>
-        <ul class="sitemap-list" role="list">
-          {dePosts.map((post) => {
-            const slug = post.id.replace(/^de\//, '').replace(/\.mdx?$/, '');
-            const date = new Intl.DateTimeFormat('de-DE', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(post.data.date));
-            return (
-              <li role="listitem">
-                <a href={`/blog/${slug}/`} class="sitemap-link">
-                  <span class="lang-chip">DE</span>
-                  <span class="sitemap-post-title">{post.data.title}</span>
-                  <span class="sitemap-date">{date}</span>
-                </a>
-              </li>
-            );
-          })}
         </ul>
       </div>
 
@@ -95,6 +75,26 @@ const staticPages = [
               <li role="listitem">
                 <a href={`/en/blog/${slug}/`} class="sitemap-link">
                   <span class="lang-chip">EN</span>
+                  <span class="sitemap-post-title">{post.data.title}</span>
+                  <span class="sitemap-date">{date}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <!-- DE Blog posts -->
+      <div class="sitemap-section">
+        <h2 class="sitemap-heading">📝 Blog-Artikel (Deutsch)</h2>
+        <ul class="sitemap-list" role="list">
+          {dePosts.map((post) => {
+            const slug = post.id.replace(/^de\//, '').replace(/\.mdx?$/, '');
+            const date = new Intl.DateTimeFormat('de-DE', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(post.data.date));
+            return (
+              <li role="listitem">
+                <a href={`/blog/${slug}/`} class="sitemap-link">
+                  <span class="lang-chip">DE</span>
                   <span class="sitemap-post-title">{post.data.title}</span>
                   <span class="sitemap-date">{date}</span>
                 </a>

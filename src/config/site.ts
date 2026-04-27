@@ -46,7 +46,7 @@ export const footerLinks = {
     { label: 'AGB', href: '/terms/' },
     { label: 'Editorial Guidelines', href: '/editorial-guidelines/' },
     { label: 'Kontakt', href: '/contact-us/' },
-    { label: 'Sitemap', href: '/sitemap/' },
+    { label: 'Sitemap', href: '/pages/' },
     { label: 'Über uns', href: '/about-us/' },
     { label: 'Token Unlocks', href: '/token-unlocks/' },
   ],
@@ -56,9 +56,10 @@ export const footerLinks = {
     { label: 'Terms', href: '/en/terms/' },
     { label: 'Editorial Guidelines', href: '/en/editorial-guidelines/' },
     { label: 'Contact', href: '/en/contact-us/' },
-    { label: 'Sitemap', href: '/en/sitemap/' },
+    { label: 'Sitemap', href: '/en/pages/' },
     { label: 'About Us', href: '/en/about-us/' },
     { label: 'Token Unlocks', href: '/en/token-unlocks/' },
+
   ],
 } as const;
 
