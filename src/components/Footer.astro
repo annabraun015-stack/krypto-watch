@@ -89,11 +89,11 @@ const currentYear = new Date().getFullYear();
       <div class="footer-col">
         <h3 class="footer-col-title">{locale === 'de' ? 'Kategorien' : 'Categories'}</h3>
         <ul class="footer-links" role="list">
-          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=bitcoin' : '/en/blog/?cat=bitcoin'} class="footer-link">₿ Bitcoin</a></li>
-          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=ethereum' : '/en/blog/?cat=ethereum'} class="footer-link">Ξ Ethereum</a></li>
-          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=defi' : '/en/blog/?cat=defi'} class="footer-link">🔗 DeFi</a></li>
-          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=altcoins' : '/en/blog/?cat=altcoins'} class="footer-link">🪙 Altcoins</a></li>
-          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=regulation' : '/en/blog/?cat=regulation'} class="footer-link">⚖️ {locale === 'de' ? 'Regulierung' : 'Regulation'}</a></li>
+          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=bitcoin' : '/en/blog/?cat=bitcoin'} class="footer-link"><span aria-hidden="true">₿</span> Bitcoin</a></li>
+          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=ethereum' : '/en/blog/?cat=ethereum'} class="footer-link"><span aria-hidden="true">Ξ</span> Ethereum</a></li>
+          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=defi' : '/en/blog/?cat=defi'} class="footer-link"><span aria-hidden="true">🔗</span> DeFi</a></li>
+          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=altcoins' : '/en/blog/?cat=altcoins'} class="footer-link"><span aria-hidden="true">🪙</span> Altcoins</a></li>
+          <li role="listitem"><a href={locale === 'de' ? '/blog/?cat=regulation' : '/en/blog/?cat=regulation'} class="footer-link"><span aria-hidden="true">⚖️</span> {locale === 'de' ? 'Regulierung' : 'Regulation'}</a></li>
         </ul>
       </div>
 
@@ -116,7 +116,7 @@ const currentYear = new Date().getFullYear();
               aria-label={locale === 'de' ? 'E-Mail-Adresse' : 'Email Address'}
             />
             <button type="submit" class="btn btn-primary newsletter-btn" aria-label={locale === 'de' ? 'Abonnieren' : 'Subscribe'}>
-              →
+              {locale === 'de' ? 'Abonnieren' : 'Subscribe'}
             </button>
           </div>
         </form>
@@ -327,7 +327,7 @@ const currentYear = new Date().getFullYear();
       btn.textContent = '✓';
       btn.disabled = true;
       input.value = '';
-      setTimeout(() => { btn.textContent = '→'; btn.disabled = false; }, 3000);
+      setTimeout(() => { btn.textContent = btn.getAttribute('aria-label') === 'Subscribe' ? 'Subscribe' : 'Abonnieren'; btn.disabled = false; }, 3000);
     });
   }
 </script>

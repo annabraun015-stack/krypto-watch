@@ -74,6 +74,30 @@ const homepageSchema = [
     <div class="hero-vignette"></div>
   </section>
 
+  <!-- ══ TRUST SIGNALS ══ -->
+  <section class="trust-bar" aria-label="Site Statistics">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-number">50+</div>
+          <div class="trust-label">{locale === 'de' ? 'Krypto-Artikel' : 'Crypto Articles'}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">2</div>
+          <div class="trust-label">{locale === 'de' ? 'Sprachen' : 'Languages'}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">15+</div>
+          <div class="trust-label">{locale === 'de' ? 'Live-Daten Tools' : 'Live Data Tools'}</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-number">100%</div>
+          <div class="trust-label">{locale === 'de' ? 'Kostenlos' : 'Free Access'}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ MARKET DATA ══ -->
   <section class="section market-section" aria-labelledby="market-heading">
     <div class="container">
@@ -279,6 +303,45 @@ const homepageSchema = [
     background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: 1;
+  }
+
+  /* Trust bar */
+  .trust-bar {
+    background: oklch(10% 0.025 260);
+    border-top: 1px solid oklch(22% 0.05 195 / 0.3);
+    border-bottom: 1px solid oklch(22% 0.05 195 / 0.3);
+    padding-block: 1.5rem;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+  @media (min-width: 640px) { .trust-grid { grid-template-columns: repeat(4, 1fr); } }
+  .trust-item {
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: oklch(14% 0.03 260 / 0.5);
+    border: 1px solid oklch(25% 0.05 195 / 0.25);
+    transition: border-color 0.2s;
+  }
+  .trust-item:hover { border-color: var(--color-brand-400); }
+  .trust-number {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-brand-400), var(--color-accent-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+  .trust-label {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+    font-weight: 500;
   }
 
   /* Market section */

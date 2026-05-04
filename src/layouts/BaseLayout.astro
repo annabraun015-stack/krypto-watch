@@ -108,14 +108,26 @@ const allSchemas = [
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BB2M5GPVTG"></script>
+    <!-- Google tag (gtag.js) — loaded after consent -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'G-BB2M5GPVTG');
+      // Default to denied until consent given
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        wait_for_update: 500
+      });
+      // Load GA only if consent was previously given
+      if (localStorage.getItem('kw_cookie_consent') === 'accepted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BB2M5GPVTG';
+        document.head.appendChild(s);
+        gtag('config', 'G-BB2M5GPVTG');
+      }
     </script>
 
     <!-- Primary Meta -->
@@ -178,6 +190,8 @@ const allSchemas = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Ensure font-display: swap for FOIT prevention -->
+    <style is:inline>@font-face{font-display:swap}</style>
 
   </head>
   <body>
@@ -191,5 +205,87 @@ const allSchemas = [
     </main>
 
     <Footer locale={locale} />
+
+    <!-- GDPR Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-label="Cookie Einstellungen" style="display:none">
+      <div class="cookie-banner-inner">
+        <div class="cookie-banner-text">
+          <strong>{locale === 'de' ? '🍪 Cookie-Einstellungen' : '🍪 Cookie Settings'}</strong>
+          <p>{locale === 'de'
+            ? 'Wir verwenden Analytics-Cookies, um unsere Website zu verbessern. Sie können Ihre Einwilligung jederzeit widerrufen.'
+            : 'We use analytics cookies to improve our website. You can withdraw your consent at any time.'}
+          </p>
+        </div>
+        <div class="cookie-banner-actions">
+          <button id="cookie-reject" class="btn btn-ghost cookie-btn-reject">
+            {locale === 'de' ? 'Ablehnen' : 'Reject'}
+          </button>
+          <button id="cookie-accept" class="btn btn-primary cookie-btn-accept">
+            {locale === 'de' ? 'Akzeptieren' : 'Accept'}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <style is:inline>
+      .cookie-banner {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(calc(100vw - 2rem), 680px);
+        background: oklch(14% 0.04 260);
+        border: 1px solid oklch(35% 0.12 195 / 0.5);
+        border-radius: 1rem;
+        padding: 1.25rem 1.5rem;
+        z-index: 9999;
+        box-shadow: 0 8px 40px -4px oklch(5% 0.05 260 / 0.9);
+        animation: slideUp 0.4s cubic-bezier(0.4,0,0.2,1);
+      }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      }
+      .cookie-banner-inner {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .cookie-banner-text { flex: 1; min-width: 200px; }
+      .cookie-banner-text strong { display: block; color: #fff; font-size: 0.9375rem; margin-bottom: 0.25rem; }
+      .cookie-banner-text p { font-size: 0.8125rem; color: oklch(70% 0.05 195); margin: 0; line-height: 1.5; }
+      .cookie-banner-actions { display: flex; gap: 0.75rem; flex-shrink: 0; }
+      .cookie-btn-reject { font-size: 0.875rem; padding: 0.5rem 1rem; }
+      .cookie-btn-accept { font-size: 0.875rem; padding: 0.5rem 1rem; }
+    </style>
+
+    <script is:inline>
+      (function() {
+        var consent = localStorage.getItem('kw_cookie_consent');
+        if (!consent) {
+          var banner = document.getElementById('cookie-banner');
+          if (banner) banner.style.display = 'block';
+        }
+        var acceptBtn = document.getElementById('cookie-accept');
+        var rejectBtn = document.getElementById('cookie-reject');
+        if (acceptBtn) acceptBtn.addEventListener('click', function() {
+          localStorage.setItem('kw_cookie_consent', 'accepted');
+          document.getElementById('cookie-banner').style.display = 'none';
+          // Load GA after accept
+          if (typeof gtag === 'function') {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+          }
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-BB2M5GPVTG';
+          document.head.appendChild(s);
+        });
+        if (rejectBtn) rejectBtn.addEventListener('click', function() {
+          localStorage.setItem('kw_cookie_consent', 'rejected');
+          document.getElementById('cookie-banner').style.display = 'none';
+        });
+      })();
+    </script>
   </body>
 </html>

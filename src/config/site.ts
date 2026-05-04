@@ -31,10 +31,10 @@ export const navLinks = {
   en: [
     { label: 'RSI', href: '/en/rsi/btc/' },
     { label: 'Sentiment', href: '/en/sentiment/' },
-    { label: 'On-Chain', href: '/bitcoin-whale-tracker/' },
-    { label: 'Signals', href: '/signals/' },
-    { label: 'Insights', href: '/insights/' },
-    { label: 'Alerts', href: '/alerts/' },
+    { label: 'On-Chain', href: '/en/bitcoin-whale-tracker/' },
+    { label: 'Signals', href: '/en/signals/' },
+    { label: 'Insights', href: '/en/insights/' },
+    { label: 'Alerts', href: '/en/alerts/' },
     { label: 'Blog', href: '/en/blog/' },
   ],
 } as const;
