@@ -28,6 +28,16 @@ const description = tr.seo.rsiDesc.replace('{coin}', coinName);
 const rsiUrl = `${siteConfig.url}/en/rsi/${coin}/`;
 const altPath = `/rsi/${coin}/`;
 
+// Full coin name map for richer H1 SEO context
+const coinNames: Record<string, string> = {
+  btc: 'Bitcoin', eth: 'Ethereum', bnb: 'BNB', sol: 'Solana',
+  xrp: 'XRP', ada: 'Cardano', avax: 'Avalanche', doge: 'Dogecoin',
+  trx: 'TRON', dot: 'Polkadot', link: 'Chainlink', matic: 'Polygon',
+  ton: 'TON', shib: 'Shiba Inu', ltc: 'Litecoin', bch: 'Bitcoin Cash',
+  near: 'NEAR Protocol', uni: 'Uniswap', apt: 'Aptos', arb: 'Arbitrum',
+};
+const fullCoinName = coinNames[coin] || coinName;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -52,8 +62,13 @@ const schema = {
   altPath={altPath}
   schema={schema}
   canonical={rsiUrl}
+  robots="index, follow"
 >
   <div class="container">
+    <!-- SEO H1 – fixes "Missing H1" audit issue -->
+    <h1 class="rsi-page-h1">
+      {fullCoinName} ({coinName}) RSI Indicator &ndash; Live Analysis
+    </h1>
     <!-- RSI HERO SECTION -->
     <RSIHero symbol={coin} locale={locale} />
 
@@ -231,5 +246,21 @@ const schema = {
     letter-spacing: 0.2em;
     margin-bottom: 1.5rem;
     text-align: center;
+  }
+
+  /* H1 – fixes Missing H1 audit issue while fitting the design */
+  .rsi-page-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 1.5rem;
+    padding-top: 2rem;
+    line-height: 1.2;
+    background: linear-gradient(135deg, var(--color-text-primary) 60%, var(--color-brand-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 </style>

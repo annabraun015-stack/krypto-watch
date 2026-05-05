@@ -81,11 +81,22 @@ const blogPostSchema = {
 const formattedDate = new Intl.DateTimeFormat('de-DE', {
   year: 'numeric', month: 'long', day: 'numeric',
 }).format(new Date(date));
+
+// Truncate meta description to ≤155 chars (fixes "Description Too Long" audit issue)
+const metaDescription = description.length > 155
+  ? description.slice(0, 152) + '...'
+  : description;
+
+// Truncate image alt to ≤100 chars (fixes "Alt Over 100 Characters" audit issue)
+const safeImageAlt = imageAlt
+  ? (imageAlt.length > 100 ? imageAlt.slice(0, 97) + '...' : imageAlt)
+  : (title.length > 100 ? title.slice(0, 97) + '...' : title);
+
 ---
 
 <BaseLayout
   title={`${title} | KryptoWatch`}
-  description={description}
+  description={metaDescription}
   locale="de"
   altPath={altPath}
   schema={blogPostSchema}
@@ -167,11 +178,11 @@ const formattedDate = new Intl.DateTimeFormat('de-DE', {
 
     <!-- Featured image -->
     {image && (
-      <div class="post-featured-image" role="img" aria-label={imageAlt ?? title}>
+      <div class="post-featured-image" role="img" aria-label={safeImageAlt}>
         <div class="container">
           <img
             src={image}
-            alt={imageAlt ?? title}
+            alt={safeImageAlt}
             width="1200"
             height="630"
             class="featured-img"

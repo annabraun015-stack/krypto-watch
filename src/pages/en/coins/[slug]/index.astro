@@ -1,0 +1,16 @@
+---
+// Redirect /en/coins/[slug]/ to /en/coins/[slug]/token-unlock/
+import fs from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const dataPath = path.resolve(process.cwd(), 'src/data/unlocks-master.json');
+  const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  return masterData.map((coin: any) => ({
+    params: { slug: coin.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+return Astro.redirect(`/en/coins/${slug}/token-unlock/`, 301);
+---

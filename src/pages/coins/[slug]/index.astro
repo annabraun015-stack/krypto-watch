@@ -1,0 +1,17 @@
+---
+// Redirect /coins/[slug]/ to /coins/[slug]/token-unlock/
+// This fixes orphan links from narrative pages that link to /coins/[slug]/
+import fs from 'fs';
+import path from 'path';
+
+export async function getStaticPaths() {
+  const dataPath = path.resolve(process.cwd(), 'src/data/unlocks-master.json');
+  const masterData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  return masterData.map((coin: any) => ({
+    params: { slug: coin.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+return Astro.redirect(`/coins/${slug}/token-unlock/`, 301);
+---

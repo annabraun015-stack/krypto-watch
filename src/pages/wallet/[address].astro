@@ -62,13 +62,14 @@ export async function getStaticPaths() {
 
 <BaseLayout
   title={`Wallet ${address?.slice(0,10)}… — On-Chain Intelligence | KryptoWatch`}
-  description={`Deep on-chain analysis for wallet ${address}. Behavior profile, ROI, win rate, transaction history, and market signal.`}
-  canonical={`https://kryptowatch.de/wallet/${address}/`}
+  description={`Deep on-chain analysis for wallet ${address?.slice(0,12)}… Behavior profile, ROI, win rate, transaction history and market signal.`}
+  canonical={`https://kryptowatch.de/wallet/${address?.toLowerCase()}/`}
   locale="de"
+  robots="noindex, follow"
   breadcrumbs={[
     { name: 'Home', url: 'https://kryptowatch.de/' },
     { name: 'Smart Money', url: 'https://kryptowatch.de/smart-money/' },
-    { name: `Wallet ${address?.slice(0,10)}…`, url: `https://kryptowatch.de/wallet/${address}/` }
+    { name: `Wallet ${address?.slice(0,10)}…`, url: `https://kryptowatch.de/wallet/${address?.toLowerCase()}/` }
   ]}
 >
   <section class="wp-hero">
