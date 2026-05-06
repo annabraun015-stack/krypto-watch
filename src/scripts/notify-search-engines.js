@@ -56,10 +56,6 @@ async function notifySearchEngines() {
   }
 
     console.log('ℹ️ Note: Google and Bing sitemap ping endpoints are officially deprecated (returning 404/410). Please ensure your sitemap is submitted in Google Search Console and Bing Webmaster Tools once. IndexNow will handle subsequent updates.');
-    
-  } catch (error) {
-    console.error('❌ Error in notification process:', error);
-  }
 }
 
 notifySearchEngines();
