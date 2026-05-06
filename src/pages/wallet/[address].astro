@@ -65,7 +65,7 @@ export async function getStaticPaths() {
   description={`Deep on-chain analysis for wallet ${address?.slice(0,12)}… Behavior profile, ROI, win rate, transaction history and market signal.`}
   canonical={`https://kryptowatch.de/wallet/${address?.toLowerCase()}/`}
   locale="de"
-  robots="noindex, follow"
+  robots="index, follow"
   breadcrumbs={[
     { name: 'Home', url: 'https://kryptowatch.de/' },
     { name: 'Smart Money', url: 'https://kryptowatch.de/smart-money/' },

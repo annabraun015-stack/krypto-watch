@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node src/scripts/notify-search-engines.js",
     "preview": "astro preview",
     "astro": "astro",
     "ingest": "tsx src/scripts/ingest-unlocks.ts"
