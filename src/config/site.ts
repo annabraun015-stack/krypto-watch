@@ -71,6 +71,7 @@ export const socialLinks = [
 ] as const;
 
 export const cryptoCategories = [
+  { slug: 'news', emoji: '📰', color: '#ff4500' },
   { slug: 'bitcoin', emoji: '₿', color: '#f7931a' },
   { slug: 'ethereum', emoji: 'Ξ', color: '#627eea' },
   { slug: 'defi', emoji: '🔗', color: '#00d395' },

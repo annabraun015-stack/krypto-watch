@@ -99,6 +99,7 @@
     }
   ],
   "categories": {
+    "news": "News",
     "bitcoin": "Bitcoin",
     "ethereum": "Ethereum",
     "defi": "DeFi",

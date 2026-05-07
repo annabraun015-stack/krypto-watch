@@ -18,10 +18,28 @@ async function notifySearchEngines() {
   // 1. Submit to IndexNow (Bing, Yandex, Seznam, Naver)
   try {
     const sitemapPath = path.join(distDir, 'sitemap-0.xml');
+    const newsSitemapPath = path.join(distDir, 'news-sitemap.xml');
+    
+    let allUrls = [];
+
     if (fs.existsSync(sitemapPath)) {
       const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
       const urlMatches = [...sitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)];
-      const urls = urlMatches.map(m => m[1]);
+      allUrls.push(...urlMatches.map(m => m[1]));
+    } else {
+      console.warn(`⚠️ sitemap-0.xml not found at ${sitemapPath}.`);
+    }
+
+    if (fs.existsSync(newsSitemapPath)) {
+      const newsSitemapContent = fs.readFileSync(newsSitemapPath, 'utf-8');
+      const newsUrlMatches = [...newsSitemapContent.matchAll(/<loc>(.*?)<\/loc>/g)];
+      allUrls.push(...newsUrlMatches.map(m => m[1]));
+    } else {
+      console.warn(`⚠️ news-sitemap.xml not found at ${newsSitemapPath}.`);
+    }
+
+    // Remove duplicates
+    const urls = [...new Set(allUrls)];
 
       if (urls.length > 0) {
         console.log(`📡 Sending ${urls.length} URLs to IndexNow...`);
@@ -46,11 +64,8 @@ async function notifySearchEngines() {
           console.error(text);
         }
       } else {
-        console.warn('⚠️ No URLs found in sitemap-0.xml');
+        console.warn('⚠️ No URLs found in sitemaps to submit to IndexNow');
       }
-    } else {
-      console.warn(`⚠️ sitemap-0.xml not found at ${sitemapPath}. Have you built the project?`);
-    }
   } catch (error) {
     console.error('❌ Error notifying IndexNow:', error);
   }
