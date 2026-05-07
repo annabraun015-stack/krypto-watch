@@ -43,7 +43,7 @@ const postUrl = `${siteConfig.url}/blog/${Astro.params.slug}/`;
 
 const blogPostSchema = {
   '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
+  '@type': category === 'news' ? 'NewsArticle' : 'BlogPosting',
   headline: title,
   description,
   url: postUrl,
@@ -107,7 +107,7 @@ const safeImageAlt = imageAlt
     { name: title, url: postUrl },
   ]}
 >
-  <article class="post-page" itemscope itemtype="https://schema.org/BlogPosting">
+  <article class="post-page" itemscope itemtype={category === 'news' ? "https://schema.org/NewsArticle" : "https://schema.org/BlogPosting"}>
 
     <!-- Breadcrumb visual -->
     <div class="post-breadcrumb" aria-label="Breadcrumb">
