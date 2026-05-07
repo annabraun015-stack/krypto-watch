@@ -131,10 +131,14 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
+    <!-- Site Disclaimer -->
+    <div class="site-disclaimer">
+      <span aria-hidden="true">⚠️</span> <strong>Disclaimer:</strong> {tr.footer.disclaimer}
+    </div>
+
     <!-- Bottom bar -->
     <div class="footer-bottom">
       <p class="footer-copyright">{tr.footer.copyright.replace('2025', String(currentYear))}</p>
-      <p class="footer-disclaimer">{tr.footer.disclaimer}</p>
     </div>
   </div>
 </footer>
@@ -310,7 +314,27 @@ const currentYear = new Date().getFullYear();
     justify-content: space-between;
   }
 
-  .footer-copyright, .footer-disclaimer {
+  /* Site Disclaimer Banner */
+  .site-disclaimer {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    background: oklch(72% 0.22 75 / 0.07);
+    border: 1px solid oklch(72% 0.22 75 / 0.2);
+    border-radius: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .site-disclaimer strong {
+    color: var(--color-text-primary);
+  }
+
+  .footer-copyright {
     font-size: 0.8125rem;
     color: var(--color-text-muted);
   }
